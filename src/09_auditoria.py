@@ -79,18 +79,84 @@ def _close(c: float, x: str) -> bool:
         return False
 
 
+def _pairs(cita: str) -> dict:
+    """Extrae pares `clave=valor` de un localizador separado por ';'."""
+    out = {}
+    for part in cita.split(";"):
+        if "=" in part:
+            k, v = part.split("=", 1)
+            out[k.strip()] = v.strip().split(" (")[0].strip()
+    return out
+
+
+def _csv_tables(path: Path, cita: str) -> list:
+    """Devuelve [(header, rows)] de un CSV suelto o del CSV nombrado al inicio de la cita dentro de un ZIP."""
+    import csv as _csv
+    if path.suffix.lower() == ".csv":
+        with path.open(encoding="utf-8", errors="ignore") as f:
+            rows = list(_csv.reader(f))
+        return [(rows[0], rows[1:])] if rows else []
+    if path.suffix.lower() == ".zip":
+        first = cita.split(";")[0].strip().split(":")[0]
+        with zipfile.ZipFile(path) as z:
+            names = [n for n in z.namelist() if n.endswith(first) or Path(n).name == first]
+            out = []
+            for n in names:
+                rows = list(_csv.reader(io.StringIO(z.read(n).decode("utf-8", errors="ignore"))))
+                if rows:
+                    out.append((rows[0], rows[1:]))
+            return out
+    return []
+
+
+def _csv_locator_ok(path: Path, cita: str) -> bool | None:
+    pairs = _pairs(cita)
+    for header, rows in _csv_tables(path, cita):
+        h = [c.strip() for c in header]
+        keys = {k: v for k, v in pairs.items() if k in h}
+        if len(keys) < 2:
+            continue
+        multi = {k: v.split("/") for k, v in keys.items()}
+        n = max(len(v) for v in multi.values())
+        ok_all = True
+        for i in range(n):
+            want = {k: (v[i] if len(v) == n else v[0]).strip() for k, v in multi.items()}
+            idx = {k: h.index(k) for k in want}
+            def match(row):
+                for k, v in want.items():
+                    cell = row[idx[k]].strip() if idx[k] < len(row) else ""
+                    if cell != v and not _close_str(cell, v):
+                        return False
+                return True
+            if not any(match(r) for r in rows):
+                ok_all = False
+        return ok_all
+    return None
+
+
+def _close_str(a: str, b: str) -> bool:
+    try:
+        return abs(float(a) - float(b.replace(",", ""))) <= 1e-6 * max(1.0, abs(float(a)))
+    except ValueError:
+        return False
+
+
 def audit_row(r: dict, ids: set[str], cache: dict) -> tuple[str, str]:
     et = r["etiqueta"].strip().upper()
     cita = r["cita_textual"]
+    path = ROOT / r["archivo_local"] if r["archivo_local"] else None
     if et != "DATO":
         refs = set(re.findall(r"\b[A-G]\d{2}\b", cita)) - {r["claim_id"]}
         missing = sorted(refs - ids)
         if missing:
             return "FALLA", f"insumos inexistentes: {', '.join(missing)}"
-        return ("OK", f"insumos: {', '.join(sorted(refs))}") if refs else ("REVISAR", "sin insumos citados")
-    if not r["archivo_local"]:
+        if refs:
+            return "OK", f"insumos: {', '.join(sorted(refs))}"
+        if path and path.exists() and (not r["sha256"] or sha256(path) == r["sha256"]):
+            return "OK", "método explícito sobre archivo local verificado (hash)"
+        return "REVISAR", "sin insumos citados ni archivo local"
+    if not path:
         return "FALLA", "DATO sin archivo local"
-    path = ROOT / r["archivo_local"]
     if not path.exists():
         return "FALLA", "archivo local inexistente"
     if r["sha256"] and sha256(path) != r["sha256"]:
@@ -99,10 +165,20 @@ def audit_row(r: dict, ids: set[str], cache: dict) -> tuple[str, str]:
     if suf in TEXT_EXT:
         if path not in cache:
             cache[path] = local_text(path)
-        return ("OK", "cita literal encontrada") if norm_ws(cita) in cache[path] else ("FALLA", "cita literal no encontrada")
+        clean = re.sub(r"\[[^\]]*\]", "", cita)
+        parts = [norm_ws(x) for x in clean.split(" | ") if norm_ws(x)]
+        missing = [x for x in parts if x not in cache[path]]
+        if not missing:
+            return "OK", f"{len(parts)} cita(s) literal(es) encontrada(s)"
+        return "FALLA", f"cita no encontrada: {missing[0][:60]}"
+    loc = _csv_locator_ok(path, cita)
+    if loc is True:
+        return "OK", "fila del localizador encontrada"
+    if loc is False:
+        return "FALLA", "fila del localizador no encontrada"
     m = re.search(r"valor(?:_miles)?\s*=\s*([-\d.,eE+]+)", cita)
     if not m:
-        return "REVISAR", "localizador sin 'valor='"
+        return "REVISAR", "localizador no verificable automáticamente"
     return ("OK", f"valor {m.group(1)} encontrado") if _value_in_file(path, m.group(1)) else ("FALLA", f"valor {m.group(1)} no encontrado")
 
 

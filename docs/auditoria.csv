@@ -1,24 +1,67 @@
 claim_id,modulo,etiqueta,estado,nota
-A01,A,DATO,OK,cita literal encontrada
-A02,A,DATO,OK,cita literal encontrada
-A03,A,DATO,OK,cita literal encontrada
-A04,A,DATO,OK,cita literal encontrada
-A05,A,DATO,OK,cita literal encontrada
-A06,A,DATO,OK,cita literal encontrada
-A07,A,DATO,OK,cita literal encontrada
-A08,A,DATO,OK,cita literal encontrada
-A09,A,DATO,OK,cita literal encontrada
-A10,A,DATO,OK,cita literal encontrada
-A11,A,DATO,OK,cita literal encontrada
-A12,A,DATO,OK,cita literal encontrada
-A13,A,DATO,OK,cita literal encontrada
-A14,A,DATO,OK,cita literal encontrada
-A15,A,DATO,OK,cita literal encontrada
-A16,A,DATO,OK,cita literal encontrada
-A17,A,DATO,OK,cita literal encontrada
-A18,A,DATO,OK,cita literal encontrada
-A19,A,DATO,OK,cita literal encontrada
-A20,A,DATO,OK,cita literal encontrada
+A01,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A02,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A03,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A04,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A05,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A06,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A07,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A08,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A09,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A10,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A11,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A12,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A13,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A14,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A15,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A16,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A17,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A18,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A19,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+A20,A,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B01,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B02,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B03,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B04,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B05,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B06,B,ESTIMACIÓN,OK,"insumos: A01, A05, B02"
+B07,B,ESTIMACIÓN,OK,"insumos: A01, A05, B03"
+B08,B,ESTIMACIÓN,OK,"insumos: A01, A05, B04"
+B09,B,ESTIMACIÓN,OK,"insumos: A01, A05"
+B10,B,ESTIMACIÓN,OK,"insumos: A01, A05"
+B11,B,ESTIMACIÓN,OK,"insumos: A01, A05"
+B12,B,DATO,OK,fila del localizador encontrada
+B13,B,DATO,OK,fila del localizador encontrada
+B14,B,DATO,OK,fila del localizador encontrada
+B15,B,ESTIMACIÓN,OK,"insumos: B12, B14"
+B16,B,DATO,OK,fila del localizador encontrada
+B17,B,DATO,REVISAR,localizador no verificable automáticamente
+B18,B,ESTIMACIÓN,OK,"insumos: A01, B12, B13, B14"
+B19,B,DATO,OK,fila del localizador encontrada
+B20,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B21,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B22,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B23,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B24,B,DATO,OK,2 cita(s) literal(es) encontrada(s)
+B25,B,DATO,OK,2 cita(s) literal(es) encontrada(s)
+B26,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B27,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B28,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B29,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B30,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B31,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B32,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B33,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B34,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B35,B,DATO,OK,1 cita(s) literal(es) encontrada(s)
+B36,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B37,B,DATO,OK,fila del localizador encontrada
+B38,B,ESTIMACIÓN,OK,insumos: B36
+B39,B,ESTIMACIÓN,OK,insumos: B36
+B40,B,ESTIMACIÓN,OK,"insumos: B20, B24, B31, B36"
+B41,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B42,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+B43,B,ESTIMACIÓN,OK,insumos: B36
 G01,G,DATO,OK,valor 46092.0 encontrado
 G02,G,DATO,OK,valor 12125 encontrado
 G03,G,DATO,OK,valor 147929693.6 encontrado

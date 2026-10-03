@@ -56,11 +56,13 @@ def raw_path(name: str, ext: str, date: str | None = None) -> Path:
 def download(url: str, name: str, ext: str, force: bool = False, **kw) -> Path:
     """Descarga `url` a data/raw con fecha en el nombre. Reutiliza la copia del día si existe."""
     RAW.mkdir(parents=True, exist_ok=True)
-    existing = sorted(RAW.glob(f"{name}_*.{ext.lstrip('.')}"))
+    existing = [p for p in sorted(RAW.glob(f"{name}_*.{ext.lstrip('.')}")) if p.stat().st_size > 0]
     if existing and not force:
         return existing[-1]
     r = get(url, **kw)
     r.raise_for_status()
+    if not r.content:
+        raise ValueError(f"Respuesta vacía (HTTP {r.status_code}) para {url}: no se guarda un archivo de 0 bytes")
     p = raw_path(name, ext)
     p.write_bytes(r.content)
     return p
