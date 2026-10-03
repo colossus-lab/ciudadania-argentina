@@ -3,7 +3,7 @@ Afghanistan,AF,0,0
 Albania,AL,0,0
 Algeria,DZ,0,0
 American Samoa,AS,0,0
-Andorra,AD,0,100
+Andorra,AD,0,0
 Angola,AO,0,0
 Anguilla,AI,0,0
 Antarctica,AQ,0,0
@@ -11,7 +11,7 @@ Antigua & Barbuda,AG,0,0
 Argentina,AR,19,81
 Armenia,AM,0,0
 Aruba,AW,0,0
-Australia,AU,0,100
+Australia,AU,0,0
 Austria,AT,0,0
 Azerbaijan,AZ,0,0
 Bahamas,BS,0,0
@@ -24,7 +24,7 @@ Belize,BZ,0,0
 Benin,BJ,0,0
 Bermuda,BM,0,0
 Bhutan,BT,0,0
-Bolivia,BO,0,100
+Bolivia,BO,0,0
 Bosnia & Herzegovina,BA,0,0
 Botswana,BW,0,0
 Bouvet Island,BV,0,0
@@ -47,25 +47,25 @@ Chile,CL,13,87
 China,CN,0,0
 Christmas Island,CX,0,0
 Cocos (Keeling) Islands,CC,0,0
-Colombia,CO,21,79
+Colombia,CO,22,78
 Comoros,KM,0,0
 Congo - Brazzaville,CG,0,0
 Congo - Kinshasa,CD,0,0
 Cook Islands,CK,0,0
-Costa Rica,CR,0,100
+Costa Rica,CR,0,0
 Croatia,HR,0,0
 Cuba,CU,0,0
 Curaçao,CW,0,0
 Cyprus,CY,0,0
 Czechia,CZ,0,0
 Côte d’Ivoire,CI,0,0
-Denmark,DK,0,100
+Denmark,DK,0,0
 Djibouti,DJ,0,0
 Dominica,DM,0,0
-Dominican Republic,DO,0,100
-Ecuador,EC,0,100
+Dominican Republic,DO,0,0
+Ecuador,EC,0,0
 Egypt,EG,0,0
-El Salvador,SV,0,100
+El Salvador,SV,0,0
 Equatorial Guinea,GQ,0,0
 Eritrea,ER,0,0
 Estonia,EE,0,0
@@ -101,16 +101,16 @@ Honduras,HN,0,0
 Hong Kong,HK,0,0
 Hungary,HU,0,0
 Iceland,IS,0,0
-India,IN,0,100
-Indonesia,ID,0,100
+India,IN,0,0
+Indonesia,ID,0,0
 Iran,IR,0,0
 Iraq,IQ,0,0
-Ireland,IE,0,100
+Ireland,IE,0,0
 Isle of Man,IM,0,0
-Israel,IL,29,71
+Israel,IL,28,72
 Italy,IT,23,77
 Jamaica,JM,0,0
-Japan,JP,0,100
+Japan,JP,0,0
 Jersey,JE,0,0
 Jordan,JO,0,0
 Kazakhstan,KZ,0,0
@@ -140,7 +140,7 @@ Martinique,MQ,0,0
 Mauritania,MR,0,0
 Mauritius,MU,0,0
 Mayotte,YT,0,0
-Mexico,MX,13,87
+Mexico,MX,12,88
 Micronesia,FM,0,0
 Moldova,MD,0,0
 Monaco,MC,0,0
@@ -153,9 +153,9 @@ Myanmar (Burma),MM,0,0
 Namibia,NA,0,0
 Nauru,NR,0,0
 Nepal,NP,0,0
-Netherlands,NL,0,100
+Netherlands,NL,0,0
 New Caledonia,NC,0,0
-New Zealand,NZ,0,100
+New Zealand,NZ,0,0
 Nicaragua,NI,0,0
 Niger,NE,0,0
 Nigeria,NG,0,0
@@ -169,14 +169,14 @@ Oman,OM,0,0
 Pakistan,PK,0,0
 Palau,PW,0,0
 Palestine,PS,0,0
-Panama,PA,0,100
+Panama,PA,0,0
 Papua New Guinea,PG,0,0
-Paraguay,PY,1,99
+Paraguay,PY,0,0
 Peru,PE,16,84
 Philippines,PH,0,0
 Pitcairn Islands,PN,0,0
-Poland,PL,0,100
-Portugal,PT,0,100
+Poland,PL,0,0
+Portugal,PT,0,0
 Puerto Rico,PR,0,0
 Qatar,QA,0,0
 Romania,RO,0,0
@@ -198,7 +198,7 @@ Solomon Islands,SB,0,0
 Somalia,SO,0,0
 South Africa,ZA,0,0
 South Georgia & South Sandwich Islands,GS,0,0
-South Korea,KR,0,100
+South Korea,KR,0,0
 South Sudan,SS,0,0
 Spain,ES,8,92
 Sri Lanka,LK,0,0
@@ -237,12 +237,12 @@ Ukraine,UA,0,0
 United Arab Emirates,AE,0,0
 United Kingdom,GB,13,87
 United States,US,25,75
-Uruguay,UY,19,81
+Uruguay,UY,18,82
 Uzbekistan,UZ,0,0
 Vanuatu,VU,0,0
 Vatican City,VA,0,0
-Venezuela,VE,37,63
-Vietnam,VN,0,100
+Venezuela,VE,38,62
+Vietnam,VN,0,0
 Wallis & Futuna,WF,0,0
 Western Sahara,EH,0,0
 Yemen,YE,0,0

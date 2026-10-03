@@ -8,7 +8,7 @@ Angola,AO,0
 Anguilla,AI,0
 Antarctica,AQ,0
 Antigua & Barbuda,AG,0
-Argentina,AR,48
+Argentina,AR,33
 Armenia,AM,0
 Aruba,AW,0
 Australia,AU,0
@@ -28,7 +28,7 @@ Bolivia,BO,0
 Bosnia & Herzegovina,BA,0
 Botswana,BW,0
 Bouvet Island,BV,0
-Brazil,BR,77
+Brazil,BR,66
 British Indian Ocean Territory,IO,0
 British Virgin Islands,VG,0
 Brunei,BN,0
@@ -37,7 +37,7 @@ Burkina Faso,BF,0
 Burundi,BI,0
 Cambodia,KH,0
 Cameroon,CM,0
-Canada,CA,8
+Canada,CA,0
 Cape Verde,CV,0
 Caribbean Netherlands,BQ,0
 Cayman Islands,KY,0
@@ -82,7 +82,7 @@ French Southern Territories,TF,0
 Gabon,GA,0
 Gambia,GM,0
 Georgia,GE,0
-Germany,DE,5
+Germany,DE,0
 Ghana,GH,0
 Gibraltar,GI,0
 Greece,GR,0
@@ -101,7 +101,7 @@ Honduras,HN,0
 Hong Kong,HK,0
 Hungary,HU,0
 Iceland,IS,0
-India,IN,2
+India,IN,0
 Indonesia,ID,0
 Iran,IR,0
 Iraq,IQ,0
@@ -198,7 +198,7 @@ Solomon Islands,SB,0
 Somalia,SO,0
 South Africa,ZA,0
 South Georgia & South Sandwich Islands,GS,0
-South Korea,KR,20
+South Korea,KR,0
 South Sudan,SS,0
 Spain,ES,0
 Sri Lanka,LK,100
@@ -235,8 +235,8 @@ U.S. Virgin Islands,VI,0
 Uganda,UG,0
 Ukraine,UA,0
 United Arab Emirates,AE,0
-United Kingdom,GB,6
-United States,US,9
+United Kingdom,GB,0
+United States,US,0
 Uruguay,UY,0
 Uzbekistan,UZ,0
 Vanuatu,VU,0

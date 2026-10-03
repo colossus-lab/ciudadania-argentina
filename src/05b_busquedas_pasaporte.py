@@ -62,7 +62,7 @@ def fetch(qid: str, q: dict) -> tuple[pd.DataFrame | None, str]:
             if q["kind"] == "time":
                 df = tr.interest_over_time()
             elif q["kind"] == "region":
-                df = tr.interest_by_region(resolution="COUNTRY", inc_low_vol=True, inc_geo_code=True)
+                df = tr.interest_by_region(resolution="COUNTRY", inc_low_vol=False, inc_geo_code=True)
             else:
                 rel = tr.related_queries()[q["kw"][0]]
                 parts = [d.assign(tipo=t) for t, d in rel.items() if d is not None and not d.empty]
@@ -166,7 +166,7 @@ def analyze(res: dict) -> None:
             top3 = ", ".join(f"{r.pais} ({r.indice})" for r in g.head(3).itertuples())
             qid = g["consulta"].iloc[0]
             first = g.iloc[0]
-            add(f"E{57 + i}", "DATO", f"Mundo, 12 meses: países con mayor interés relativo por '{term}' (índice 0–100, normalizado por población de internautas)",
+            add(f"E{57 + i}", "DATO", f"Mundo, 12 meses: países con mayor interés relativo por '{term}' (índice 0–100, normalizado por búsquedas totales del país; excluye países de bajo volumen)",
                 top3, qid, f"geoName={first.pais}; {term}={first.indice}")
         chart_paises(rk)
 
@@ -186,7 +186,7 @@ def analyze(res: dict) -> None:
         d = d.drop(columns=[c for c in d.columns if c == "isPartial"])
         last52 = d.tail(52).mean().round(1)
         last52.to_csv(PROCESSED / "E2_us_vs_cbi_52sem.csv")
-        add("E63", "ESTIMACIÓN", "EE.UU., últimas 52 semanas: interés medio relativo 'argentina citizenship' vs. programas CBI/golden visa",
+        add("E70", "ESTIMACIÓN", "EE.UU., últimas 52 semanas: interés medio relativo 'argentina citizenship' vs. programas CBI/golden visa",
             "; ".join(f"{k}: {v}" for k, v in last52.items()), "Q7", "media de las últimas 52 filas semanales de Q7 por término")
 
     write_ledger("E2", ledger)
