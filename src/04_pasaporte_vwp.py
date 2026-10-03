@@ -72,6 +72,11 @@ SOURCES = {
                 "D_dhs_overstay_report_FY2024", "pdf", "DHS/CBP, Entry/Exit Overstay Report FY2024 (16/07/2025)", "P"),
     "ov_fy23": ("https://www.dhs.gov/sites/default/files/2024-10/24_1011_CBP-Entry-Exit-Overstay-Report-FY23-Data.pdf",
                 "D_dhs_overstay_report_FY2023", "pdf", "DHS/CBP, Entry/Exit Overstay Report FY2023 (incluye FY2022 en anexo)", "P"),
+    "fincen2014": ("https://www.fincen.gov/resources/advisories/fincen-advisory-fin-2014-a004", "D_fincen_FIN-2014-A004",
+                   "html", "FinCEN (Tesoro de EE.UU.), Advisory FIN-2014-A004 sobre el CBI de St. Kitts y Nevis (20/05/2014; rescindido 24/02/2026)", "P"),
+    "uk_hc1715": ("https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1184544/E02946704_-__HC_1715__-_EXPLANATORY_MEMORANDUM__Web_Accessible_.pdf",
+                  "D_uk_hc1715_explanatory_memorandum", "pdf",
+                  "UK Home Office, Explanatory Memorandum to the Statement of Changes in Immigration Rules HC 1715 (19/07/2023)", "P"),
     "ircc": ("https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/entry-requirements-country.html",
              "D_ircc_entry_requirements", "html", "IRCC (Gobierno de Canadá), Entry requirements by country/territory", "P"),
 }
@@ -96,7 +101,7 @@ def wayback_lookup(url: str, name: str, ts_hints: list[str]) -> dict | None:
             return snap
     for ts in ts_hints:
         try:
-            r = get(WB_AVAIL.format(url=url.replace("https://", ""), ts=ts), timeout=40)
+            r = get(WB_AVAIL.format(url=url.replace("https://", ""), ts=ts), timeout=40, retries=2)
             j = r.json()
         except Exception:  # noqa: BLE001
             continue
@@ -105,6 +110,20 @@ def wayback_lookup(url: str, name: str, ts_hints: list[str]) -> dict | None:
             raw_path(f"{name}_wbavail", "json").write_text(json.dumps(j, indent=1))
             return snap
     return None
+
+
+_WB_STATE: dict[str, bool] = {}
+
+
+def wayback_up() -> bool:
+    """Una sola prueba de conectividad a web.archive.org por corrida (evita reintentos largos si está caído)."""
+    if "up" not in _WB_STATE:
+        try:
+            _WB_STATE["up"] = get("https://web.archive.org/", retries=1, timeout=25).status_code < 500
+        except Exception:  # noqa: BLE001
+            _WB_STATE["up"] = False
+        print(f"  web.archive.org {'responde' if _WB_STATE['up'] else 'NO responde'}")
+    return _WB_STATE["up"]
 
 
 def wayback_download(url: str, name: str, ext: str, ts_hints: list[str]) -> tuple[Path | None, str, str]:
@@ -120,8 +139,13 @@ def wayback_download(url: str, name: str, ext: str, ts_hints: list[str]) -> tupl
     existing = sorted(RAW.glob(f"{name}_*.{ext}"))
     if existing:
         return existing[-1], cap, ts
+    if not wayback_up():
+        fail(f"Wayback: {name}", cap, "ConnectionResetError (web.archive.org)",
+             "web.archive.org resetea la conexión TCP desde este entorno (archive.org responde)",
+             "Año sin dato; re-correr el script cuando web.archive.org responda (la URL de captura ya está registrada)")
+        return None, cap, ts
     try:
-        p = download(cap, name, ext, timeout=90)
+        p = download(cap, name, ext, timeout=90, retries=2)
     except Exception as e:  # noqa: BLE001
         fail(f"Wayback: {name}", cap, f"{type(e).__name__}: {str(e)[:90]}",
              "web.archive.org resetea la conexión (TCP reset) desde este entorno", "Reintentar más tarde; el año queda vacío")
@@ -203,7 +227,7 @@ def niv_series() -> list[dict]:
             p, cap, ts = wayback_download(url, name, ext, [f"{fy + 1}1231", "2026"])
             if p:
                 got = (p, cap, ts, url)
-                break
+            break  # hay captura para esta extensión: no se prueba la otra
         if not got:
             continue
         p, cap, ts, url = got
@@ -271,8 +295,8 @@ def chart_passports(counts: list[dict]) -> None:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     c = sorted(counts, key=lambda r: r["destinos_sin_visa"])
-    fig, ax = plt.subplots(figsize=(8, 4.2))
-    fig.subplots_adjust(left=0.14, right=0.95, top=0.78, bottom=0.17)
+    fig, ax = plt.subplots(figsize=(9, 4.4))
+    fig.subplots_adjust(left=0.12, right=0.95, top=0.78, bottom=0.17)
     _style(ax)
     ax.grid(axis="y", visible=False)
     ax.grid(axis="x", color=GRID, linewidth=0.8)
@@ -287,7 +311,7 @@ def chart_passports(counts: list[dict]) -> None:
     ax.set_xlim(0, max(r["destinos_sin_visa"] for r in c) * 1.18)
     ax.set_xlabel("Destinos sin visa previa (sin visa, visa a la llegada o ETA), de 198", fontsize=9, color=INK2)
     by = {r["pasaporte"]: r["destinos_sin_visa"] for r in counts}
-    title = ("Argentina y Chile empatan en destinos sin visa: la diferencia está en EE.UU. y Canadá"
+    title = ("Argentina empata con Chile en destinos sin visa; los separan EE.UU. y Canadá"
              if by["ARG"] == by["CHL"] else "Destinos sin visa: Argentina frente a sus comparables")
     fig.suptitle(title,
                  x=0.01, ha="left", fontsize=12.5, color=INK, fontweight="bold")
@@ -404,6 +428,17 @@ CLAIMS = [
      "CHILE 390,806 1,280 10,309 11,589 2.97% 2.64%"),
     ("D40", "DATO", "Overstay total de países VWP (visitantes de negocios/turismo) FY2024", "0,49%", "ov_fy24",
      "The Fiscal Year 2024 Visa Waiver Program countries’ total overstay rate is 0.49 percent"),
+    ("D70", "DATO", "FinCEN (2014): el CBI de St. Kitts y Nevis atraía a actores ilícitos por controles laxos sobre quién recibía la ciudadanía",
+     "20/05/2014", "fincen2014",
+     "the SKN program is attractive to illicit actors because the program, as administered, maintains lax controls as to who may be granted citizenship"),
+    ("D71", "DATO", "FinCEN (2014): pasaportes CBI usados para ocultar identidad y origen geográfico y evadir sanciones",
+     "20/05/2014", "fincen2014",
+     "illicit actors are abusing this program to acquire SKN citizenship in order to mask their identity and geographic background for the purpose of evading U.S. or international sanctions"),
+    ("D72", "DATO", "Contrapeso: FinCEN rescindió ese advisory el 24/02/2026", "24/02/2026", "fincen2014",
+     "UPDATE [2/24/2026]: This Advisory has been rescinded."),
+    ("D73", "DATO", "Reino Unido (2023) impuso visa a Dominica y Vanuatu por abuso de sus programas CBI",
+     "19/07/2023", "uk_hc1715",
+     "Careful consideration of Dominica’s and Vanuatu’s operation of a citizenship by investment scheme has shown clear and evident abuse of the scheme, including the granting of citizenship to individuals known to pose a risk to the UK"),
     ("D41", "DATO", "Canadá: Argentina es país con visa requerida; algunos ciudadanos pueden usar eTA si cumplen requisitos",
      "Visa / eTA condicional", "ircc",
      "Argentina (Some citizens of Argentina may be eligible for an eTA if they meet certain requirements .)"),
@@ -477,7 +512,13 @@ def chart_refusal(rows: list[dict]) -> None:
     ax.set_ylabel("Tasa ajustada de rechazo de visas B (%)", fontsize=9, color=INK2)
     ax.set_xlabel("Año fiscal de EE.UU.", fontsize=9, color=INK2)
     ax.legend(frameon=False, fontsize=8.5, loc="upper right", bbox_to_anchor=(1.18, 1.0))
-    fig.suptitle("Chile entró al VWP tras bajar del 3%; Argentina sigue por encima del umbral",
+    ar = sorted((r["fy"], r["tasa_rechazo_ajustada_B"]) for r in rows if r["pais"] == "Argentina")
+    if ar:
+        estado = "por debajo" if ar[-1][1] < 3.0 else "por encima"
+        title = f"Argentina está {estado} del umbral del 3% del VWP en FY{ar[-1][0]} ({str(ar[-1][1]).replace('.', ',')}%)"
+    else:
+        title = "Tasa de rechazo de visas B: Chile vs. el umbral del 3% del VWP"
+    fig.suptitle(title,
                  x=0.01, ha="left", fontsize=12.5, color=INK, fontweight="bold")
     fig.text(0.01, 0.905, "Tasa ajustada de rechazo de visas de turismo/negocios (B) por nacionalidad, FY2006–FY2025",
              fontsize=9, color=INK2)
@@ -500,13 +541,12 @@ def chart_overstay() -> None:
         ax.bar(xs, vals, width=w - 0.04, color=SERIES[c], label=f"{c} ({'VWP' if c == 'Chile' else 'con visa B'})")
         for x, v in zip(xs, vals):
             ax.text(x, v + 0.05, f"{v:.2f}%".replace(".", ","), ha="center", fontsize=8.5, color=INK)
-    ax.axhline(2.0, color=INK2, lw=1, ls=(0, (4, 3)))
-    ax.text(2021.55, 2.03, "2%: umbral DHS de campaña pública (países VWP)", fontsize=8, color=INK2, va="bottom")
+    ax.axhline(2.0, color=INK2, lw=1, ls=(0, (4, 3)), label="2%: umbral DHS de campaña pública (países VWP)")
     ax.set_xticks(years)
     ax.set_xticklabels([f"FY{y}" for y in years])
     ax.set_ylabel("Overstay total (%)", fontsize=9, color=INK2)
-    ax.set_ylim(0, 3.5)
-    ax.legend(frameon=False, fontsize=8.5, loc="upper right")
+    ax.set_ylim(0, 3.9)
+    ax.legend(frameon=False, fontsize=8.5, loc="upper right", ncols=1)
     fig.suptitle("Los argentinos exceden su estadía en EE.UU. menos que los chilenos",
                  x=0.01, ha="left", fontsize=12.5, color=INK, fontweight="bold")
     fig.text(0.01, 0.875, "Tasa de overstay de visitantes de negocios/turismo llegados por aire o mar", fontsize=9,

@@ -1,0 +1,65 @@
+pais,id_no,nombre,categoria,inscripto,transfronterizo
+ARG,1681,"ESMA Museum and Site of Memory – Former Clandestine Centre of Detention, Torture and Extermination",Cultural,2023,False
+ARG,1526,Los Alerces National Park,Natural,2017,False
+ARG,1321,"The Architectural Work of Le Corbusier, an Outstanding Contribution to the Modern Movement",Cultural,2016,True
+ARG,1459,"Qhapaq Ñan, Andean Road System",Cultural,2014,True
+ARG,1116,Quebrada de Humahuaca,Cultural,2003,False
+ARG,966,Ischigualasto / Talampaya Natural Parks,Natural,2000,False
+ARG,995,Jesuit Block and Estancias of Córdoba,Cultural,2000,False
+ARG,937,Península Valdés,Natural,1999,False
+ARG,936,"Cueva de las Manos, Río Pinturas",Cultural,1999,False
+ARG,303,Iguazu National Park,Natural,1984,False
+ARG,275,"Jesuit Missions of the Guaranis: San Ignacio Mini, Santa Ana, Nuestra Señora de Loreto and Santa Maria Mayor (Argentina), Ruins of Sao Miguel das Missoes (Brazil)",Cultural,1983,True
+ARG,145,Los Glaciares National Park,Natural,1981,False
+NZL,877,New Zealand Sub-Antarctic Islands,Natural,1998,False
+NZL,551,Te Wahipounamu – South West New Zealand,Natural,1990,False
+NZL,421,Tongariro National Park,Mixed,1990,False
+URY,1612,The work of engineer Eladio Dieste: Church of Atlántida,Cultural,2021,False
+URY,1464,Fray Bentos Industrial Landscape,Cultural,2015,False
+URY,747,Historic Quarter of the City of Colonia del Sacramento,Cultural,1995,False
+CHL,1634,Settlement and Artificial Mummification of the Chinchorro Culture in the Arica and Parinacota Region,Cultural,2021,False
+CHL,1459,"Qhapaq Ñan, Andean Road System",Cultural,2014,True
+CHL,1214,Sewell Mining Town,Cultural,2006,False
+CHL,1178,Humberstone and Santa Laura Saltpeter Works,Cultural,2005,False
+CHL,959,Historic Quarter of the Seaport City of Valparaíso,Cultural,2003,False
+CHL,971,Churches of Chiloé,Cultural,2000,False
+CHL,715,Rapa Nui National Park,Cultural,1995,False
+PRT,1590,Sanctuary of Bom Jesus do Monte in Braga,Cultural,2019,False
+PRT,1573,"Royal Building of <i>Mafra</i> – Palace, Basilica, Convent, <i>Cerco</i> Garden and Hunting Park (<i>Tapada</i>)",Cultural,2019,False
+PRT,1387,University of Coimbra – Alta and Sofia,Cultural,2013,False
+PRT,1367,Garrison Border Town of Elvas and its Fortifications,Cultural,2012,False
+PRT,1117,Landscape of the Pico Island Vineyard Culture,Cultural,2004,False
+PRT,1046,Alto Douro Wine Region,Cultural,2001,False
+PRT,1031,Historic Centre of Guimarães and Couros Zone,Cultural,2001,False
+PRT,934,Laurisilva of Madeira,Natural,1999,False
+PRT,866,Prehistoric Rock Art Sites in the Côa Valley and Siega Verde,Cultural,1998,True
+PRT,755,"Historic Centre of Oporto, Luiz I Bridge and Monastery of Serra do Pilar",Cultural,1996,False
+PRT,723,Cultural Landscape of Sintra,Cultural,1995,False
+PRT,505,Monastery of Alcobaça,Cultural,1989,False
+PRT,361,Historic Centre of Évora,Cultural,1986,False
+PRT,206,Central Zone of the Town of Angra do Heroismo in the Azores,Cultural,1983,False
+PRT,264,Monastery of Batalha,Cultural,1983,False
+PRT,265,Convent of Christ in Tomar,Cultural,1983,False
+PRT,263,Monastery of the Hieronymites and Tower of Belém in Lisbon,Cultural,1983,False
+CAN,1686,Anticosti,Natural,2023,False
+CAN,1564,Tr’ondëk-Klondike,Cultural,2023,False
+CAN,1597,Writing-on-Stone / Áísínai’pi,Cultural,2019,False
+CAN,1415,Pimachiowin Aki,Mixed,2018,False
+CAN,1497,Mistaken Point,Natural,2016,False
+CAN,1412,Red Bay Basque Whaling Station,Cultural,2013,False
+CAN,1404,Landscape of Grand Pré,Cultural,2012,False
+CAN,1285,Joggins Fossil Cliffs,Natural,2008,False
+CAN,1221,Rideau Canal,Cultural,2007,False
+CAN,686,Miguasha National Park,Natural,1999,False
+CAN,741,Old Town Lunenburg,Cultural,1995,False
+CAN,354,Waterton Glacier International Peace Park,Natural,1995,True
+CAN,419,Gros Morne National Park,Natural,1987,False
+CAN,300,Historic District of Old Québec,Cultural,1985,False
+CAN,304,Canadian Rocky Mountain Parks,Natural,1984,False
+CAN,256,Wood Buffalo National Park,Natural,1983,False
+CAN,157,S<U>G</U>ang Gwaay,Cultural,1981,False
+CAN,158,Head-Smashed-In Buffalo Jump,Cultural,1981,False
+CAN,72,Kluane / Wrangell-St. Elias / Glacier Bay / Tatshenshini-Alsek,Natural,1979,True
+CAN,71,Dinosaur Provincial Park,Natural,1979,False
+CAN,4,L’Anse aux Meadows National Historic Site,Cultural,1978,False
+CAN,24,Nahanni National Park,Natural,1978,False

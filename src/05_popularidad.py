@@ -583,7 +583,7 @@ def turismo_mensual(t: dict, itcrm: pd.DataFrame) -> pd.DataFrame:
 def turismo_modelo(tm: pd.DataFrame) -> pd.DataFrame:
     rows = []
     d = tm.copy()
-    d["y"] = np.log(d["dnm_eeuu_can_total"])
+    d["y"] = np.log(d["dnm_eeuu_can_total"].where(d["dnm_eeuu_can_total"] > 0))
     d["log_itcrb_eeuu_l1"] = np.log(d["itcrb_eeuu"]).shift(1)
     d["log_itcrm_l1"] = np.log(d["itcrm"]).shift(1)
     d["log_ntto_sa"] = np.log(d["ntto_us_a_sudamerica"])
@@ -630,3 +630,472 @@ def indec_rows(t: dict) -> pd.DataFrame:
                          gasto_total_musd=gasto_musd, gasto_total_var_ia=vals[7],
                          cita=quote(txt, "Estados Unidos y Canadá" + m.group(1)), archivo=p, url=url))
     return pd.DataFrame(rows).set_index("trimestre")
+
+
+def gtrends_analisis(g: pd.DataFrame) -> pd.DataFrame:
+    """Cociente Argentina / promedio de controles (Chile, Uruguay, Colombia), mensual, EE.UU., desde 2016
+    (Google Trends cambió su recolección el 01/01/2016 y el 01/01/2022; ver limitaciones)."""
+    g = g.copy()
+    g = g[g.index < pd.Timestamp(TODAY[:7] + "-01")]   # se descarta el mes en curso (parcial)
+    g["ctrl"] = g[["Chile", "Uruguay", "Colombia"]].mean(axis=1)
+    g["ratio_ar_ctrl"] = g["Argentina"] / g["ctrl"]
+    rows = []
+    torneo_meses = set()
+    for a, b in TORNEOS.values():
+        torneo_meses |= set(pd.date_range(pd.Timestamp(a).to_period("M").to_timestamp(), b, freq="MS"))
+    torneo_meses |= {pd.Timestamp("2022-11-01"), pd.Timestamp("2022-12-01")}
+    for lab, a, b in VENTANAS:
+        sel = g.loc[a:b]
+        sel = sel[~sel.index.isin(torneo_meses)]
+        rows.append(dict(ventana=lab, meses=len(sel), argentina_media=sel["Argentina"].mean(),
+                         controles_media=sel["ctrl"].mean(), ratio_medio=sel["ratio_ar_ctrl"].mean()))
+    t = pd.DataFrame(rows).set_index("ventana")
+    t["ratio_vs_base_pct"] = 100 * (t["ratio_medio"] / t.loc["Base pre-Qatar (ene–oct 2022)", "ratio_medio"] - 1)
+    return g, t
+
+
+# ----------------------------------------------------------------------------------------------------
+# Gráficos (matplotlib, fondo blanco, PNG 150 dpi + SVG, fuente al pie)
+# ----------------------------------------------------------------------------------------------------
+INK, INK2, GRID = "#0b0b0b", "#52514e", "#e4e3df"
+C1, C2, C3, CGRAY = "#2a78d6", "#eb6834", "#1baf7a", "#9a9993"
+EV_PLOT = ["qatar", "messi", "balotaje", "copa24", "cepo", "mundial26"]
+
+
+def _style():
+    import matplotlib as mpl
+    mpl.rcParams.update({
+        "figure.facecolor": "white", "axes.facecolor": "white", "savefig.facecolor": "white",
+        "axes.edgecolor": GRID, "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK2,
+        "axes.grid": True, "grid.color": GRID, "grid.linewidth": 0.8, "grid.linestyle": "-",
+        "axes.spines.top": False, "axes.spines.right": False, "font.size": 9, "axes.titlesize": 10,
+        "lines.linewidth": 1.6, "lines.solid_capstyle": "round", "legend.frameon": False,
+        "svg.fonttype": "none", "font.family": "DejaVu Sans"})
+
+
+def _events(ax, keys=EV_PLOT, ymax_frac=0.98):
+    import matplotlib.transforms as mt
+    tr = mt.blended_transform_factory(ax.transData, ax.transAxes)
+    lab = {e[0]: e[2] for e in EVENTOS}
+    for i, k in enumerate(keys):
+        ax.axvline(EV[k], color="#b9b8b2", lw=0.8, zorder=0)
+        ax.text(EV[k], ymax_frac - 0.07 * (i % 2), " " + lab[k], transform=tr, fontsize=7, color=INK2, va="top", ha="left")
+
+
+def _save(fig, name, fuente):
+    fig.text(0.01, 0.01, f"Fuente: {fuente}. Elaboración: Colossus Lab.", fontsize=7, color=INK2, ha="left", va="bottom")
+    CHARTS.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "svg"):
+        fig.savefig(CHARTS / f"E_{name}.{ext}", dpi=150)
+    import matplotlib.pyplot as plt
+    plt.close(fig)
+
+
+def charts(pv, dd, gt, tm, acs, ohss, its):
+    import matplotlib.pyplot as plt
+    import matplotlib.dates as mdates
+    _style()
+    WM = "Wikimedia Pageviews API (agent=user)"
+    # 1. Artículo Argentina en/es/de, media diaria mensual (escala log)
+    mo = pv.resample("MS").mean()
+    fig, ax = plt.subplots(figsize=(10, 5.2))
+    for k, c, lab in (("ar_en", C1, "en: Argentina"), ("ar_es", C2, "es: Argentina"), ("ar_de", C3, "de: Argentinien")):
+        ax.plot(mo.index, mo[k], color=c, label=lab)
+        ax.text(mo.index[-1], mo[k].iloc[-1], f"  {lab}", color=INK, fontsize=8, va="center")
+    ax.set_yscale("log")
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:,.0f}".replace(",", ".")))
+    ax.set_ylabel("Vistas diarias promedio del mes (escala log)")
+    _events(ax)
+    ax.legend(loc="lower left", fontsize=8)
+    ax.set_xlim(mo.index[0], mo.index[-1] + pd.Timedelta(days=500))
+    ax.set_title("El artículo 'Argentina' tiene picos en cada torneo y vuelve a su nivel: en 2026 está por debajo de 2022",
+                 loc="left", color=INK)
+    fig.subplots_adjust(bottom=0.12, top=0.92, left=0.08, right=0.97)
+    _save(fig, "pageviews_argentina_eventos", WM)
+
+    # 2. Argentina relativo a controles (índice base pre-Qatar = 100), mensual, sin días de torneo
+    tmask = torneo_mask(dd.index)
+    rel_ = dd[["D_en", "D_es", "D_de"]].copy()
+    rel_[tmask.values] = np.nan
+    rm = rel_.resample("MS").mean()
+    base = rel_.loc["2022-01-01":"2022-10-31"].mean()
+    idx = 100 * np.exp(rm - base)
+    fig, ax = plt.subplots(figsize=(10, 5.2))
+    for k, c, lab in (("D_en", C1, "en (vs Chile, Uruguay, Brazil, Colombia)"), ("D_es", C2, "es (vs mismos países)"),
+                      ("D_de", C3, "de (vs mismos países)")):
+        ax.plot(idx.index, idx[k], color=c, label=lab)
+    ax.axhline(100, color=INK2, lw=0.8)
+    ax.set_ylabel("Índice: vistas de 'Argentina' / media geométrica de controles\n(ene–oct 2022 = 100; sin días de torneo)")
+    _events(ax)
+    ax.legend(loc="upper left", fontsize=8)
+    ax.set_title("Frente a sus vecinos, la atención relativa a Argentina subió tras Qatar y en 2025–26 volvió cerca de la base",
+                 loc="left", color=INK)
+    fig.subplots_adjust(bottom=0.12, top=0.92, left=0.09, right=0.97)
+    _save(fig, "argentina_vs_controles", WM + "; controles en/es/de")
+
+    # 3. Temas: Messi, Milei, Buenos Aires, Patagonia (small multiples)
+    fig, axs = plt.subplots(2, 2, figsize=(10, 6), sharex=True)
+    for ax, (k, lab) in zip(axs.flat, (("messi_en", "Lionel Messi (en)"), ("milei_en", "Javier Milei (en)"),
+                                        ("bsas_en", "Buenos Aires (en)"), ("patagonia_en", "Patagonia (en)"))):
+        ax.plot(mo.index, mo[k], color=C1)
+        ax.set_yscale("log")
+        ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:,.0f}".replace(",", ".")))
+        ax.yaxis.set_minor_formatter(plt.NullFormatter())
+        ax.set_title(lab, loc="left", fontsize=9, color=INK)
+        for e in EV_PLOT:
+            ax.axvline(EV[e], color="#b9b8b2", lw=0.8, zorder=0)
+    fig.suptitle("Messi y Milei concentran la atención en sus propios artículos; Buenos Aires y Patagonia no despegan",
+                 x=0.01, ha="left", color=INK, fontsize=10)
+    fig.text(0.01, 0.035, "Líneas verticales: final Qatar, Messi-Miami, balotaje, Copa América 2024, fin del cepo (PH), Mundial 2026. "
+             "Vistas diarias promedio del mes, escala log.", fontsize=7, color=INK2)
+    fig.subplots_adjust(bottom=0.12, top=0.9, left=0.07, right=0.98, hspace=0.3)
+    _save(fig, "pageviews_temas", WM)
+
+    # 4. Google Trends EE.UU.
+    if gt is not None:
+        fig, ax = plt.subplots(figsize=(10, 4.8))
+        g = gt.loc["2016-01-01":]
+        ax.plot(g.index, g["ratio_ar_ctrl"], color=C1)
+        ax.axhline(1, color=INK2, lw=0.8)
+        ax.set_ylabel("Interés de búsqueda 'Argentina' / promedio\n(Chile, Uruguay, Colombia), EE.UU.")
+        _events(ax)
+        ax.set_title("En Google (EE.UU.), fuera de los torneos el interés relativo por Argentina sube sólo un escalón moderado",
+                     loc="left", color=INK)
+        fig.subplots_adjust(bottom=0.13, top=0.9, left=0.09, right=0.97)
+        _save(fig, "google_trends_eeuu", "Google Trends (pytrends), geo=US, mensual, índice 0–100")
+
+    # 5. Turismo: dos paneles (sin doble eje)
+    t12 = tm[["dnm_eeuu_can_total", "ntto_us_a_sudamerica"]].rolling(12, min_periods=12).sum()
+    b19 = t12.loc["2019-12-01"]
+    ti = 100 * t12 / b19
+    fig, (a1, a2) = plt.subplots(2, 1, figsize=(10, 7), sharex=True, gridspec_kw={"height_ratios": [3, 2]})
+    a1.plot(ti.index, ti["dnm_eeuu_can_total"], color=C1, label="Llegadas a Argentina de residentes de EE.UU. y Canadá (DNM, todas las vías)")
+    a1.plot(ti.index, ti["ntto_us_a_sudamerica"], color=CGRAY, label="Salidas aéreas de ciudadanos de EE.UU. a Sudamérica (NTTO)")
+    a1.axhline(100, color=INK2, lw=0.8)
+    a1.set_ylabel("Suma móvil 12 meses\n(año 2019 = 100)")
+    a1.legend(loc="lower left", fontsize=8)
+    _events(a1)
+    yr = tm[["dnm_eeuu_can_total", "ntto_us_a_sudamerica"]].resample("YE").sum(min_count=12)
+    g_ar = 100 * (yr.loc["2025-12-31", "dnm_eeuu_can_total"] / yr.loc["2019-12-31", "dnm_eeuu_can_total"] - 1)
+    g_sa = 100 * (yr.loc["2025-12-31", "ntto_us_a_sudamerica"] / yr.loc["2019-12-31", "ntto_us_a_sudamerica"] - 1)
+    a1.set_title(f"Turismo de EE.UU.+Canadá a Argentina: {pct(g_ar, 0)} vs 2019 en 2025, contra {pct(g_sa, 0)} del viaje de EE.UU. a Sudamérica",
+                 loc="left", color=INK, fontsize=9.5)
+    a2.plot(tm.index, tm["itcrb_eeuu"], color=C2)
+    a2.set_ylabel("ITCR bilateral EE.UU.\n(17-12-15 = 100; más alto = AR más barata)")
+    for e in EV_PLOT:
+        a2.axvline(EV[e], color="#b9b8b2", lw=0.8, zorder=0)
+    a2.set_xlim(pd.Timestamp("2015-01-01"), tm.index[-1])
+    fig.subplots_adjust(bottom=0.09, top=0.94, left=0.1, right=0.93, hspace=0.12)
+    _save(fig, "turismo_eeuu_itcrm", "datos.yvera.gob.ar (DNM/INDEC), NTTO trade.gov, BCRA ITCRM")
+
+    # 6. Diáspora y migración
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 4.6))
+    a = acs.copy()
+    a1.errorbar(a.index, a["argentina_est"] / 1000, yerr=a["argentina_moe"] / 1000, fmt="o", color=C1, ms=5,
+                ecolor=CGRAY, elinewidth=1, capsize=0, mec="white", mew=1.5)
+    a1.set_title("Nacidos en Argentina residentes en EE.UU. (miles)", loc="left", fontsize=9, color=INK)
+    a1.set_xticks([2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024])
+    a1.text(2020, a["argentina_est"].min() / 1000, "2020: sin ACS 1 año", fontsize=7, color=INK2, ha="center")
+    if ohss is not None:
+        a2.plot(ohss.index, ohss["lpr_nacidos_argentina"], color=C1, marker="o", ms=4, label="Residencias permanentes (LPR)")
+        a2.plot(ohss.index, ohss["naturalizaciones_nacidos_argentina"], color=C2, marker="o", ms=4, label="Naturalizaciones")
+        a2.legend(loc="upper left", fontsize=8)
+        a2.set_title("Nacidos en Argentina: LPR y naturalizaciones (año fiscal)", loc="left", fontsize=9, color=INK)
+    fig.suptitle("La diáspora argentina en EE.UU. crece despacio; las green cards a argentinos subieron en FY2023–24",
+                 x=0.01, ha="left", color=INK, fontsize=10)
+    fig.subplots_adjust(bottom=0.14, top=0.84, left=0.07, right=0.98, wspace=0.25)
+    _save(fig, "diaspora_eeuu", "Census ACS 1 año B05006 (Summary File; barras = MOE 90%); DHS OHSS Yearbook FY2024 tablas 3 y 22")
+
+    # 7. Coeficientes ITS (modelo multievento)
+    m2 = its[(its["modelo"] == "M2_multievento") & its["termino"].str.startswith("nivel_")]
+    fig, ax = plt.subplots(figsize=(9, 4.6))
+    terms = ["nivel_qatar", "nivel_messi", "nivel_balotaje", "nivel_cepo"]
+    names = {"nivel_qatar": "Post final Qatar", "nivel_messi": "Post Messi-Miami", "nivel_balotaje": "Post balotaje (Milei)",
+             "nivel_cepo": "Post fin del cepo (PH)"}
+    off = {"D_en": -0.2, "D_es": 0.0, "D_de": 0.2}
+    col = {"D_en": C1, "D_es": C2, "D_de": C3}
+    for s_, o in off.items():
+        sub = m2[m2["serie"] == s_].set_index("termino").loc[terms]
+        y = np.arange(len(terms)) + o
+        ax.errorbar(sub["efecto_pct"], y, xerr=[sub["efecto_pct"] - sub["efecto_pct_inf"], sub["efecto_pct_sup"] - sub["efecto_pct"]],
+                    fmt="o", color=col[s_], ecolor=col[s_], elinewidth=1.2, ms=5, mec="white", mew=1.5,
+                    label={"D_en": "en", "D_es": "es", "D_de": "de"}[s_] + " (relativo a controles)")
+    ax.axvline(0, color=INK2, lw=0.8)
+    ax.set_yticks(range(len(terms)))
+    ax.set_yticklabels([names[t] for t in terms])
+    ax.invert_yaxis()
+    ax.set_xlabel("Cambio de nivel estimado (%), IC 95% HAC Newey-West — ESTIMACIÓN")
+    ax.legend(loc="lower right", fontsize=8)
+    ax.set_title("Sólo Qatar deja un escalón positivo; los eventos posteriores lo erosionan", loc="left", color=INK)
+    fig.subplots_adjust(bottom=0.16, top=0.9, left=0.22, right=0.97)
+    _save(fig, "its_coeficientes", WM + "; regresión segmentada propia")
+
+
+# ----------------------------------------------------------------------------------------------------
+# main
+# ----------------------------------------------------------------------------------------------------
+def fmt(x: float, d: int = 0) -> str:
+    s = f"{x:,.{d}f}"
+    return s.replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def pct(x: float, d: int = 1) -> str:
+    return ("+" if x >= 0 else "") + fmt(x, d) + "%"
+
+
+def main() -> None:
+    PROCESSED.mkdir(parents=True, exist_ok=True)
+    claims: list[dict] = []
+
+    def add(cid, etq, afirm, valor, fuente, tipo, url, archivo, cita):
+        p = Path(archivo) if archivo else None
+        claims.append(dict(claim_id=cid, etiqueta=etq, afirmacion=afirm, valor=valor, fuente=fuente, tipo_fuente=tipo, url=url,
+                           archivo_local=rel(p) if p and p.is_absolute() else (archivo or ""),
+                           sha256=sha256(p if p.is_absolute() else ROOT / p) if p else "", cita_textual=cita))
+
+    # --- Datos ---
+    pv = load_pageviews()
+    gt_raw = load_gtrends()
+    t = load_turismo()
+    itcrm, p_itcrm = load_itcrm()
+    acs = load_acs()
+    ohss = load_ohss()
+    p_a8226 = download(URL_A8226, "E_bcra_com_A8226", "pdf")
+    ok("BCRA Comunicación A 8226", URL_A8226, rel(p_a8226))
+
+    # --- Atención ---
+    dd = build_daily(pv)
+    pv.to_csv(PROCESSED / "E_pageviews_diarias.csv")
+    pv.resample("MS").mean().round(1).to_csv(PROCESSED / "E_pageviews_mensuales.csv")
+    dd.round(5).to_csv(PROCESSED / "E_atencion_relativa_diaria.csv")
+    vt = ventanas_table(pv, dd)
+    vt.round(3).to_csv(PROCESSED / "E_atencion_ventanas.csv")
+    its = its_all(dd)
+    its.to_csv(PROCESSED / "E_its_resultados.csv", index=False)
+    qb = quiebres(dd)
+    qb.to_csv(PROCESSED / "E_quiebres.csv", index=False)
+    pd.DataFrame([dict(id=e[0], fecha=e[1], etiqueta=e[2], descripcion=e[3], fuente_estado=e[4]) for e in EVENTOS]).to_csv(
+        PROCESSED / "E_eventos.csv", index=False)
+
+    gt, gtw = (None, None)
+    if gt_raw is not None:
+        gt, gtw = gtrends_analisis(gt_raw)
+        gt.round(4).to_csv(PROCESSED / "E_google_trends_eeuu.csv")
+        gtw.round(4).to_csv(PROCESSED / "E_google_trends_ventanas.csv")
+
+    # --- Turismo ---
+    tm = turismo_mensual(t, itcrm)
+    tm.to_csv(PROCESSED / "E_turismo_mensual.csv")
+    tmod = turismo_modelo(tm)
+    tmod.to_csv(PROCESSED / "E_turismo_modelo.csv", index=False)
+    ind = indec_rows(t)
+    ind.drop(columns=["archivo"]).to_csv(PROCESSED / "E_indec_eti_eeuu_canada_trimestral.csv")
+    anual = tm.resample("YE").sum(min_count=12)[["dnm_eeuu_can_total", "dnm_eeuu_can_aerea", "dnm_total_no_residentes",
+                                                  "eti_eze_aep_eeuu_can_turistas", "ntto_us_a_sudamerica"]]
+    anual.index = anual.index.year
+    for c in ["dnm_eeuu_can_total", "dnm_eeuu_can_aerea", "ntto_us_a_sudamerica", "dnm_total_no_residentes"]:
+        anual[f"{c}_vs2019_pct"] = 100 * (anual[c] / anual.loc[2019, c] - 1)
+    anual.round(2).to_csv(PROCESSED / "E_turismo_anual.csv")
+    jan_aug = {y: tm.loc[f"{y}-01-01":f"{y}-08-01", "dnm_eeuu_can_total"].sum() for y in (2019, 2024, 2025, 2026)}
+
+    # --- Diáspora ---
+    acs.drop(columns=[c for c in acs.columns if c.endswith("_loc")]).to_csv(PROCESSED / "E_diaspora_acs_b05006.csv")
+    if ohss is not None:
+        ohss.to_csv(PROCESSED / "E_dhs_lpr_naturalizaciones.csv")
+
+    # --- Gráficos ---
+    charts(pv, dd, gt, tm, acs, ohss, its)
+
+    # =========================== CLAIMS ===========================
+    WMF = "Wikimedia Pageviews API, agent=user, all-access, diaria"
+    fpv = lambda proj, a: sorted(RAW.glob(f"E_wikimedia_pv_{proj}_{a}_*.json"))[-1]  # noqa: E731
+    url_pv = lambda proj, a: PV_URL.format(p=proj, a=a)  # noqa: E731
+    v = int(pv.loc["2022-12-18", "ar_en"])
+    add("E01", "DATO", "Pico diario de vistas del artículo 'Argentina' (Wikipedia en inglés): día de la final de Qatar", fmt(v),
+        WMF, "P", url_pv("en", "Argentina"), fpv("en", "Argentina"), f"items[timestamp=2022121800].views; valor={v}")
+    v2 = int(pv.loc["2026-07-19", "ar_en"])
+    add("E02", "DATO", "Vistas del artículo 'Argentina' (en) el 19/07/2026, día de la final del Mundial 2026 (2.º mayor registro diario de la serie)",
+        fmt(v2), WMF, "P", url_pv("en", "Argentina"), fpv("en", "Argentina"), f"items[timestamp=2026071900].views; valor={v2}")
+    b = "Base pre-Qatar (ene–oct 2022)"
+    r25, r26 = vt.loc["2025", "gm_ar_en_vs_base_pct"], vt.loc["2026 ago–sep (post-Mundial)", "gm_ar_en_vs_base_pct"]
+    add("E03", "ESTIMACIÓN", "Vistas diarias del artículo 'Argentina' (en), media geométrica sin días de torneo, frente a ene–oct 2022",
+        f"2023 {pct(vt.loc['2023 (sin dic-22)', 'gm_ar_en_vs_base_pct'])}; 2025 {pct(r25)}; ago–sep 2026 {pct(r26)}",
+        WMF, "P", url_pv("en", "Argentina"), "data/processed/E_atencion_ventanas.csv",
+        "exp(mean(log(vistas))) por ventana / misma métrica en ene–oct 2022 − 1; insumo E01 (misma serie); ventanas en E_atencion_ventanas.csv")
+    ctrl25 = np.mean([vt.loc["2025", f"gm_{k}_vs_base_pct"] for k in CTRL["en"]])
+    add("E04", "ESTIMACIÓN", "Los artículos de control (Chile, Uruguay, Brazil, Colombia, en) también caen: promedio simple de sus variaciones 2025 vs ene–oct 2022",
+        pct(ctrl25), WMF, "P", url_pv("en", "Chile"), "data/processed/E_atencion_ventanas.csv",
+        "promedio de gm_{cl,uy,br,co}_en_vs_base_pct, fila 2025")
+    add("E05", "ESTIMACIÓN", "Atención relativa a 'Argentina' (en) vs controles, índice ene–oct 2022 = 100",
+        f"2023 {pct(vt.loc['2023 (sin dic-22)', 'relativo_en_vs_base_pct'])}; 2024 {pct(vt.loc['2024 (sin Copa América)', 'relativo_en_vs_base_pct'])}; "
+        f"2025 {pct(vt.loc['2025', 'relativo_en_vs_base_pct'])}; ago–sep 2026 {pct(vt.loc['2026 ago–sep (post-Mundial)', 'relativo_en_vs_base_pct'])}",
+        WMF, "P", url_pv("en", "Argentina"), "data/processed/E_atencion_ventanas.csv",
+        "exp(mean(D_en)) por ventana / base − 1, con D_en = log(vistas Argentina) − media(log vistas controles); sin días de torneo")
+    add("E06", "ESTIMACIÓN", "Atención relativa 2025 vs ene–oct 2022 en otros idiomas (es: vs Chile/Uruguay/Brasil/Colombia; de: ídem)",
+        f"es {pct(vt.loc['2025', 'relativo_es_vs_base_pct'])}; de {pct(vt.loc['2025', 'relativo_de_vs_base_pct'])}",
+        WMF, "P", url_pv("es", "Argentina"), "data/processed/E_atencion_ventanas.csv", "Ídem E05 con D_es y D_de")
+    r = its[(its.serie == "D_en") & (its.modelo == "M1_segmentada_Qatar")].set_index("termino")
+    lvl, slo = r.loc["nivel_qatar"], r.loc["pendiente_qatar"]
+    t_zero = EV["qatar"] + pd.Timedelta(days=float(-lvl.coef / slo.coef * 365.25))
+    add("E07", "ESTIMACIÓN", "ITS segmentada (D_en): salto de nivel tras la final de Qatar y cambio de pendiente posterior; fecha en que el efecto se anula",
+        f"nivel {pct(lvl.efecto_pct)} [IC95 {pct(lvl.efecto_pct_inf)}; {pct(lvl.efecto_pct_sup)}]; pendiente {fmt(slo.coef * 100, 1)} pp log/año "
+        f"(p={lvl.p:.3f}/{slo.p:.3f}); efecto neto ≈ 0 hacia {t_zero:%m/%Y}",
+        "Regresión propia sobre " + WMF, "P", url_pv("en", "Argentina"), "data/processed/E_its_resultados.csv",
+        "OLS D_en ~ tendencia + nivel_qatar + pendiente_qatar + pulsos de torneos + dummies mes y día; HAC Newey-West 30 rezagos; "
+        "fecha cero = 18/12/2022 + (−nivel/pendiente) años")
+    m2 = its[(its.serie == "D_en") & (its.modelo == "M2_multievento")].set_index("termino")
+    add("E08", "ESTIMACIÓN", "ITS multievento (D_en): cambios de nivel acumulativos por evento",
+        "; ".join(f"{k.replace('nivel_', '')} {pct(m2.loc[k, 'efecto_pct'])} (p={m2.loc[k, 'p']:.2f})"
+                  for k in ["nivel_qatar", "nivel_messi", "nivel_balotaje", "nivel_cepo"]),
+        "Regresión propia sobre " + WMF, "P", url_pv("en", "Argentina"), "data/processed/E_its_resultados.csv",
+        "OLS D_en ~ tendencia + escalones (qatar 18/12/22, messi 15/07/23, balotaje 19/11/23, cepo 14/04/25) + pulsos + mes + día; HAC 30")
+    cc = its[(its.modelo == "M2_multievento") & its.termino.isin(["nivel_qatar", "nivel_cepo"]) & its.serie.isin(["D_en", "D_es", "D_de"])]
+    add("E09", "ESTIMACIÓN", "Robustez por idioma (M2): escalón Qatar y escalón post-cepo en en/es/de",
+        "; ".join(f"{row.serie} {row.termino.replace('nivel_', '')} {pct(row.efecto_pct)}" for row in cc.itertuples()),
+        "Regresión propia sobre " + WMF, "P", url_pv("de", "Argentinien"), "data/processed/E_its_resultados.csv", "Ídem E08 para D_es y D_de")
+    qe = qb[qb.serie == "D_en"]
+    add("E10", "ESTIMACIÓN", "Quiebres estructurales sin fecha a priori (Binseg l2 + BIC, semanal, D_en sin semanas de torneo)",
+        "; ".join(f"{r_.fecha_quiebre} ({pct(r_.cambio_pct)}, evento más cercano: {r_.evento_mas_cercano} a {r_.dias_al_evento} d)"
+                  for r_ in qe.itertuples()),
+        "Cálculo propio sobre " + WMF, "P", url_pv("en", "Argentina"), "data/processed/E_quiebres.csv",
+        "ruptures.Binseg(model='l2', min_size=12); K = argmin n·ln(RSS/n) + (2K+1)·ln(n), K≤10")
+    if gt is not None:
+        pg = sorted(RAW.glob("E_gtrends_us_*.csv"))[-1]
+        add("E11", "DATO", "Google Trends EE.UU.: interés en 'Argentina' (índice 0–100 relativo al máximo del período 2004–2026)",
+            f"dic-2022 = {int(gt_raw.loc['2022-12-01', 'Argentina'])}; jul-2026 = {int(gt_raw.loc['2026-07-01', 'Argentina'])}; "
+            f"sep-2026 = {int(gt_raw.loc['2026-09-01', 'Argentina'])}", "Google Trends vía pytrends (geo=US, date=all)", "R", GT_URL, pg,
+            f"date=2022-12-01/2026-07-01/2026-09-01; Argentina={int(gt_raw.loc['2022-12-01', 'Argentina'])}/"
+            f"{int(gt_raw.loc['2026-07-01', 'Argentina'])}/{int(gt_raw.loc['2026-09-01', 'Argentina'])}")
+        add("E12", "ESTIMACIÓN", "Google Trends EE.UU.: cociente Argentina / promedio(Chile, Uruguay, Colombia) sin meses de torneo, vs ene–oct 2022",
+            "; ".join(f"{k} {pct(gtw.loc[k, 'ratio_vs_base_pct'])}" for k in ["2023 (sin dic-22)", "2024 (sin Copa América)", "2025",
+                                                                               "2026 ago–sep (post-Mundial)"]),
+            "Cálculo propio sobre Google Trends", "R", GT_URL, "data/processed/E_google_trends_ventanas.csv",
+            "media mensual de Argentina/mean(Chile,Uruguay,Colombia) por ventana / base − 1; insumo E11")
+    pdnm = rel(t["dnm_path"])
+    add("E13", "ESTIMACIÓN", "Llegadas de turistas residentes en EE.UU. y Canadá, total país (DNM, todas las vías), suma anual",
+        f"2019 {fmt(anual.loc[2019, 'dnm_eeuu_can_total'])}; 2023 {fmt(anual.loc[2023, 'dnm_eeuu_can_total'])}; "
+        f"2024 {fmt(anual.loc[2024, 'dnm_eeuu_can_total'])}; 2025 {fmt(anual.loc[2025, 'dnm_eeuu_can_total'])} "
+        f"({pct(100 * (anual.loc[2025, 'dnm_eeuu_can_total'] / anual.loc[2024, 'dnm_eeuu_can_total'] - 1))} vs 2024)",
+        "datos.yvera.gob.ar — Turismo internacional total país (DNM)", "P", URL_DNM, pdnm,
+        "suma de viajes_de_turistas_no_residentes con pais_origen='EE.UU. y Canadá' (3 medios), por año calendario")
+    add("E14", "ESTIMACIÓN", "Llegadas EE.UU.+Canadá ene–ago 2026 vs ene–ago 2025 (2025–26 = dato provisorio)",
+        f"{fmt(jan_aug[2026])} vs {fmt(jan_aug[2025])} ({pct(100 * (jan_aug[2026] / jan_aug[2025] - 1))}); ene–ago 2019: {fmt(jan_aug[2019])}",
+        "datos.yvera.gob.ar — DNM", "P", URL_DNM, pdnm, "suma ene–ago por año; insumo E13")
+    add("E15", "ESTIMACIÓN", "Recuperación vs 2019: llegadas EE.UU.+Canadá a Argentina vs salidas aéreas de ciudadanos de EE.UU. a Sudamérica (NTTO)",
+        f"Argentina 2023 {pct(anual.loc[2023, 'dnm_eeuu_can_total_vs2019_pct'])}, 2025 {pct(anual.loc[2025, 'dnm_eeuu_can_total_vs2019_pct'])}; "
+        f"EE.UU.→Sudamérica 2023 {pct(anual.loc[2023, 'ntto_us_a_sudamerica_vs2019_pct'])}, 2025 {pct(anual.loc[2025, 'ntto_us_a_sudamerica_vs2019_pct'])}",
+        "DNM (yvera) y NTTO trade.gov", "P", URL_NTTO, rel(t["ntto_path"]),
+        "suma anual / suma 2019 − 1 para cada serie; NTTO: primera fila 'South America' de cada hoja anual; insumo E13")
+    v = tm.loc["2026-08-01", "dnm_eeuu_can_aerea"]
+    add("E16", "DATO", "Llegadas por vía aérea de residentes en EE.UU. y Canadá, agosto 2026, total país (dato provisorio)", fmt(v),
+        "datos.yvera.gob.ar — DNM", "P", URL_DNM, pdnm,
+        f"indice_tiempo=2026-08-01; medio_de_transporte=Aérea; pais_origen=EE.UU. y Canadá; viajes_de_turistas_no_residentes={int(v)}")
+    for cid, q in zip(["E17", "E18", "E19", "E20"], ["2025T1", "2025T3", "2026T1", "2026T2"]):
+        rr = ind.loc[q]
+        add(cid, "DATO", f"INDEC ETI {q}, Ezeiza y Aeroparque, turismo receptivo de residentes en EE.UU. y Canadá: turistas (miles), var. i.a., "
+            "estadía, gasto diario, gasto total", f"{fmt(rr.turistas_miles, 1)} mil ({pct(rr.turistas_var_ia)}); estadía {fmt(rr.estadia_noches, 1)} n; "
+            f"gasto diario USD {fmt(rr.gasto_diario_usd, 1)}; gasto total USD {fmt(rr.gasto_total_musd, 1)} M ({pct(rr.gasto_total_var_ia)})",
+            f"INDEC, Estadísticas de turismo internacional ({q})", "P", rr.url, rr.archivo, rr.cita)
+    if "caba" in t:
+        pc, uc = t["caba"]
+        tc = local_text(pc)
+        add("E21", "DATO", "Ente de Turismo CABA: llegadas de turistas estadounidenses a la Ciudad en 2025 (puesto #3) y variación interanual",
+            "284.609 (−11% i.a.)", "Ente de Turismo de la Ciudad de Buenos Aires, Perfil de mercado EE.UU. 2025", "P", uc, pc,
+            quote(tc, "284.609") + " | " + quote(tc, "(-11% i.a.)") + " | " + quote(tc, "LLEGADAS DE TURISTAS ESTADOUNIDENSE EN 2025"))
+    add("E22", "DATO", "Tipo de cambio real bilateral con EE.UU. (BCRA, prom. mensual, base 17-12-15=100; más alto = Argentina más barata)",
+        f"dic-2022 {fmt(itcrm.loc['2022-12-01', 'itcrb_eeuu'], 1)}; ene-2024 {fmt(itcrm.loc['2024-01-01', 'itcrb_eeuu'], 1)}; "
+        f"abr-2025 {fmt(itcrm.loc['2025-04-01', 'itcrb_eeuu'], 1)}; sep-2026 {fmt(itcrm.loc['2026-09-01', 'itcrb_eeuu'], 1)}",
+        "BCRA, ITCRMSerie.xlsx, hoja 'ITCRM y bilaterales prom. mens.'", "P", URL_ITCRM, p_itcrm,
+        f"hoja 'ITCRM y bilaterales prom. mens.'; columna 'ITCRB Estados Unidos'; período 2024-01-31; valor={float(itcrm.loc['2024-01-01', 'itcrb_eeuu'])!r}; "
+        f"período 2026-09-30 -> {float(itcrm.loc['2026-09-01', 'itcrb_eeuu'])!r}")
+    tt = tmod.set_index(["modelo", "termino"])
+    e1 = tt.loc[("T1_itcrb_eeuu", "log_itcrb_eeuu_l1")]
+    q1, q3 = tt.loc[("T1_itcrb_eeuu", "post_qatar")], tt.loc[("T3_itcrb_eeuu+demanda_NTTO", "post_qatar")]
+    add("E23", "ESTIMACIÓN", "Modelo de turismo: elasticidad de llegadas EE.UU.+Canadá al ITCR bilateral (t−1) y escalón post-Qatar",
+        f"elasticidad {fmt(e1.coef, 2)} [IC95 {fmt(e1.ic95_inf, 2)}; {fmt(e1.ic95_sup, 2)}]; post-Qatar {pct(q1.efecto_pct)} (p={q1.p:.2f}); "
+        f"con control de demanda NTTO: {pct(q3.efecto_pct)} (p={q3.p:.2f})",
+        "Regresión propia (DNM, BCRA, NTTO)", "P", URL_DNM, "data/processed/E_turismo_modelo.csv",
+        "OLS log(llegadas) ~ log(ITCRB_EEUU t−1) + tendencia + post_qatar(2023-01) + post_milei(2023-12) + post_cepo(2025-04) + mundial26 + mes; "
+        "2014-01..2026-08 sin 2020-03..2022-03; HAC 12; insumos E13, E22")
+    loc19, loc24 = acs.loc[2019, "argentina_loc"], acs.loc[2024, "argentina_loc"]
+    add("E24", "DATO", "Población nacida en Argentina residente en EE.UU. (ACS 1 año, B05006), estimación ± MOE 90%",
+        f"2010 {fmt(acs.loc[2010, 'argentina_est'])} ± {fmt(acs.loc[2010, 'argentina_moe'])}; 2019 {fmt(acs.loc[2019, 'argentina_est'])} ± "
+        f"{fmt(acs.loc[2019, 'argentina_moe'])}; 2024 {fmt(acs.loc[2024, 'argentina_est'])} ± {fmt(acs.loc[2024, 'argentina_moe'])}",
+        "U.S. Census Bureau, ACS 1-year Summary File, tabla B05006", "P", acs.loc[2024, "url"], loc24.split(" ::")[0],
+        f"{loc24}; valor={int(acs.loc[2024, 'argentina_est'])}; 2019: {loc19}; valor={int(acs.loc[2019, 'argentina_est'])}")
+    se = lambda y: acs.loc[y, "argentina_moe"] / 1.645  # noqa: E731
+    z = (acs.loc[2024, "argentina_est"] - acs.loc[2022, "argentina_est"]) / np.sqrt(se(2024) ** 2 + se(2022) ** 2)
+    add("E25", "ESTIMACIÓN", "Cambio de la población nacida en Argentina 2022→2024 (ACS) y su significancia",
+        f"{pct(100 * (acs.loc[2024, 'argentina_est'] / acs.loc[2022, 'argentina_est'] - 1))} (z = {z:.2f}; |z|<1,96: no significativo)",
+        "Cálculo propio sobre ACS B05006", "P", acs.loc[2024, "url"], "data/processed/E_diaspora_acs_b05006.csv",
+        "z = (est2024 − est2022) / sqrt(SE2024² + SE2022²), SE = MOE/1,645; insumo E24")
+    if ohss is not None:
+        pl, pn = ohss.attrs["paths"]
+        add("E26", "DATO", "Residencias permanentes (LPR) otorgadas a nacidos en Argentina, por año fiscal (DHS, Tabla 3)",
+            f"FY2019 {fmt(ohss.loc[2019, 'lpr_nacidos_argentina'])}; FY2022 {fmt(ohss.loc[2022, 'lpr_nacidos_argentina'])}; "
+            f"FY2023 {fmt(ohss.loc[2023, 'lpr_nacidos_argentina'])}; FY2024 {fmt(ohss.loc[2024, 'lpr_nacidos_argentina'])}",
+            "DHS OHSS, Yearbook of Immigration Statistics FY2024, LPR Tabla 3", "P", URL_OHSS_LPR, pl,
+            "hoja 'Table 3'; fila 'Argentina'; columnas 2019/2022/2023/2024 -> "
+            + "/".join(str(int(ohss.loc[y, 'lpr_nacidos_argentina'])) for y in (2019, 2022, 2023, 2024))
+            + f"; valor={int(ohss.loc[2024, 'lpr_nacidos_argentina'])}")
+        add("E27", "DATO", "Naturalizaciones de nacidos en Argentina, por año fiscal (DHS, Tabla 22)",
+            f"FY2019 {fmt(ohss.loc[2019, 'naturalizaciones_nacidos_argentina'])}; FY2024 {fmt(ohss.loc[2024, 'naturalizaciones_nacidos_argentina'])}",
+            "DHS OHSS, Yearbook FY2024, Naturalizations Tabla 22", "P", URL_OHSS_NATZ, pn,
+            "hoja 'Table 22'; fila 'Argentina'; columnas 2019/2024 -> "
+            + "/".join(str(int(ohss.loc[y, 'naturalizaciones_nacidos_argentina'])) for y in (2019, 2024))
+            + f"; valor={int(ohss.loc[2024, 'naturalizaciones_nacidos_argentina'])}")
+    ta = pdf_to_text(p_a8226)
+    add("E28", "DATO", "Salida (parcial) del cepo: la Com. BCRA \"A\" 8226 del 11/04/2025 rige desde el 14/04/2025 y habilita a personas humanas "
+        "a comprar moneda extranjera sin conformidad previa", "14/04/2025", "BCRA, Comunicación \"A\" 8226", "P", URL_A8226, p_a8226,
+        quote(ta, "COMUNICACIÓN “A” 8226 11/04/2025") + " | " + quote(ta, "con vigencia a partir del 14/04/25") + " | "
+        + quote(ta, "las entidades podrán dar acceso al mercado de cambios a las personas humanas residentes, sin conformidad previa"))
+    ti = local_text(t["i92_path"])
+    add("E29", "DATO", "NTTO: el detalle I-92/APIS por país de destino es de pago (no hay serie pública EE.UU.→Argentina)",
+        "USD 150 a USD 5.795", "NTTO / trade.gov, página del programa I-92", "P", URL_NTTO_I92, t["i92_path"],
+        quote(ti, "The prices range from $150, for a single monthly print-file issue to $5,795 for an annual subscription"))
+    pe = rel(t["eti_path"])
+    est = tm.loc["2019-01-01":"2019-12-01", "eti_eze_aep_eeuu_can_estadia"].mean(), tm.loc["2025-01-01":"2025-12-01", "eti_eze_aep_eeuu_can_estadia"].mean()
+    add("E30", "ESTIMACIÓN", "Estadía media de residentes de EE.UU. y Canadá en Ezeiza+Aeroparque (promedio simple de los 12 meses)",
+        f"2019 {fmt(est[0], 1)} noches; 2025 {fmt(est[1], 1)} noches", "datos.yvera.gob.ar — INDEC ETI mensual", "P", URL_ETI_M, pe,
+        "promedio de estadia_media_no_residentes, pais_de_residencia='EE.UU y Canadá', ene–dic de cada año")
+
+    sh = 100 * anual["dnm_eeuu_can_total"] / anual["dnm_total_no_residentes"]
+    add("E33", "ESTIMACIÓN", "Participación de EE.UU.+Canadá en el total de turistas no residentes (DNM, total país) — el mercado norteamericano "
+        "resistió mejor que el total, que cayó por Brasil/Chile/limítrofes",
+        f"2019 {fmt(sh[2019], 1)}%; 2023 {fmt(sh[2023], 1)}%; 2025 {fmt(sh[2025], 1)}% (total no residentes 2025 "
+        f"{pct(anual.loc[2025, 'dnm_total_no_residentes_vs2019_pct'])} vs 2019)",
+        "datos.yvera.gob.ar — DNM", "P", URL_DNM, pdnm, "suma anual EE.UU. y Canadá / suma anual de todos los orígenes; insumo E13")
+    li = np.log(itcrm["itcrb_eeuu"]).shift(1)
+    dlog = li.loc["2025-01-01":"2025-12-01"].mean() - li.loc["2024-01-01":"2024-12-01"].mean()
+    obs = np.log(anual.loc[2025, "dnm_eeuu_can_total"] / anual.loc[2024, "dnm_eeuu_can_total"])
+    add("E31", "ESTIMACIÓN", "Parte de la caída 2025 de llegadas EE.UU.+Canadá atribuible a la apreciación real del peso (elasticidad del modelo T1)",
+        f"Δlog ITCRB EE.UU. (t−1) 2025 vs 2024 = {fmt(dlog, 3)} → efecto {pct(100 * (np.exp(e1.coef * dlog) - 1))} vs caída observada "
+        f"{pct(100 * (np.exp(obs) - 1))}", "Cálculo propio (BCRA, DNM)", "P", URL_ITCRM, "data/processed/E_turismo_modelo.csv",
+        "exp(elasticidad_T1 × (media 2025 − media 2024 de log ITCRB_EEUU t−1)) − 1; insumos E22, E23, E13")
+    rel26 = vt.loc["2026 ago–sep (post-Mundial)", "relativo_en_vs_base_pct"]
+    gt25 = gtw.loc["2025", "ratio_vs_base_pct"] if gtw is not None else float("nan")
+    add("E32", "HIPÓTESIS", "Veredicto sobre la tesis 'Argentina es más popular desde Qatar 2022'",
+        f"SE SOSTIENE PARCIALMENTE. A favor: escalón post-Qatar en la atención relativa (E07–E09) e interés relativo en Google EE.UU. "
+        f"todavía {pct(gt25, 0)} sobre la base en 2025 (E12). En contra: en Wikipedia (en) la atención relativa volvió a la base "
+        f"({pct(rel26)} en ago–sep 2026, E05) y en valores absolutos está por debajo de 2022 (E03); el turismo EE.UU.+Canadá creció "
+        f"{pct(anual.loc[2025, 'dnm_eeuu_can_total_vs2019_pct'], 0)} vs 2019 contra {pct(anual.loc[2025, 'ntto_us_a_sudamerica_vs2019_pct'], 0)} "
+        f"del viaje de EE.UU. a Sudamérica (E15) y cayó en 2025 (E13, E21)",
+        "Síntesis de E03–E31", "—", "", "", "Síntesis de E03, E05, E07, E08, E09, E10, E12, E13, E15, E21, E23, E31, E33; "
+        "ver docs/modulos/E_popularidad.md, sección Veredicto")
+    write_ledger(MODULO, claims)
+
+    # --- Estado de fuentes ---
+    pd.DataFrame(ESTADO).to_csv(PROCESSED / "E_fuentes_estado.csv", index=False)
+    pd.DataFrame(FALLAS, columns=["fecha", "fuente", "url", "error", "causa", "accion"]).to_csv(PROCESSED / "E_fuentes_fallidas.csv", index=False)
+
+    # --- Resumen en consola ---
+    print(f"{len(claims)} afirmaciones -> docs/claims/claims_{MODULO}.csv")
+    for c in claims:
+        print(f"{c['claim_id']} [{c['etiqueta']}] {c['afirmacion'][:90]} => {c['valor']}")
+    print("Fallas:", len(FALLAS))
+    for f in FALLAS:
+        print("  -", f["fuente"], "|", f["error"][:80])
+
+
+if __name__ == "__main__":
+    main()

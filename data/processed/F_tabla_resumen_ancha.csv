@@ -1,0 +1,18 @@
+dimension,indicador,ARG,NZL,URY,CHL,PRT,CAN
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),1.922,1.343,1.754,1.826,1.427,1.525
+1 Paz y gobernanza,WGI Control of Corruption (estimación),-0.39,1.89,1.56,1.1,0.77,1.59
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),0.28,1.87,0.86,1.04,1.02,1.76
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),0.16,1.18,1.3,0.17,0.7,0.81
+1 Paz y gobernanza,WGI Rule of Law (estimación),-0.1,1.66,0.94,0.68,1.05,1.48
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),267.0,53.0,169.0,40.0,19.0,185.0
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",100.0,59.0,81.0,54.0,57.0,82.0
+3 Energía,Importaciones netas de energía (% del uso),0.4,31.6,46.2,62.3,77.2,-89.6
+4 Litio,Producción minera de litio 2025e (t de Li),23000.0,0.0,0.0,56000.0,380.0,5600.0
+4 Litio,Reservas de litio (t de Li contenido),4400000.0,0.0,0.0,9200000.0,60000.0,1600000.0
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),12.0,3.0,3.0,7.0,17.0,22.0
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,5.0,3.0,0.0,0.0,1.0,12.0
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",9.7,,,,,
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",47.0,0.0,9.0,18.0,1.0,0.0
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",219.9,2.9,4.8,4.3,2.4,2.4
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",41.9,2.8,4.7,4.2,2.3,2.1
+6 Contrapesos,WJP Rule of Law Index (0–1),0.54,0.83,0.72,0.66,0.67,0.79
