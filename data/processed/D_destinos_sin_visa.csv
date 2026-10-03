@@ -1,0 +1,6 @@
+pasaporte,nombre,destinos_sin_visa,puesto,pasaportes_totales,localizador
+ARG,Argentina,148,45,199,"Passport=ARG; Requirement ∈ {número de días, 'visa free', 'visa on arrival', 'eta'}; count=148; puesto=1+#(pasaportes con count mayor)"
+CHL,Chile,148,45,199,"Passport=CHL; Requirement ∈ {número de días, 'visa free', 'visa on arrival', 'eta'}; count=148; puesto=1+#(pasaportes con count mayor)"
+URY,Uruguay,137,53,199,"Passport=URY; Requirement ∈ {número de días, 'visa free', 'visa on arrival', 'eta'}; count=137; puesto=1+#(pasaportes con count mayor)"
+BRA,Brasil,149,44,199,"Passport=BRA; Requirement ∈ {número de días, 'visa free', 'visa on arrival', 'eta'}; count=149; puesto=1+#(pasaportes con count mayor)"
+MEX,México,136,54,199,"Passport=MEX; Requirement ∈ {número de días, 'visa free', 'visa on arrival', 'eta'}; count=136; puesto=1+#(pasaportes con count mayor)"
