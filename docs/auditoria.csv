@@ -1,0 +1,26 @@
+claim_id,modulo,etiqueta,estado,nota
+A01,A,DATO,OK,cita literal encontrada
+A02,A,DATO,OK,cita literal encontrada
+A03,A,DATO,OK,cita literal encontrada
+A04,A,DATO,OK,cita literal encontrada
+A05,A,DATO,OK,cita literal encontrada
+A06,A,DATO,OK,cita literal encontrada
+A07,A,DATO,OK,cita literal encontrada
+A08,A,DATO,OK,cita literal encontrada
+A09,A,DATO,OK,cita literal encontrada
+A10,A,DATO,OK,cita literal encontrada
+A11,A,DATO,OK,cita literal encontrada
+A12,A,DATO,OK,cita literal encontrada
+A13,A,DATO,OK,cita literal encontrada
+A14,A,DATO,OK,cita literal encontrada
+A15,A,DATO,OK,cita literal encontrada
+A16,A,DATO,OK,cita literal encontrada
+A17,A,DATO,OK,cita literal encontrada
+A18,A,DATO,OK,cita literal encontrada
+A19,A,DATO,OK,cita literal encontrada
+A20,A,DATO,OK,cita literal encontrada
+G01,G,DATO,OK,valor 46092.0 encontrado
+G02,G,DATO,OK,valor 12125 encontrado
+G03,G,DATO,OK,valor 147929693.6 encontrado
+G04,G,ESCENARIO,OK,"insumos: A01, A04, G01, G02"
+G05,G,ESCENARIO,OK,"insumos: A01, A04, G02"
