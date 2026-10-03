@@ -756,6 +756,18 @@ def main() -> None:
             fuente="Cálculo propio sobre FMI Article IV + DataMapper", tipo_fuente="", url="",
             archivo_local="data/processed/C_recaudacion_cbi.csv", sha256="",
             cita_textual=f"recaudación USD / NGDPD; insumos {top['claim_ids']}; C{70 + k}"))
+    car = [r for r in fis if r["iso3"] in ("DMA", "KNA", "ATG", "GRD", "LCA") and r["concepto"] == "ingreso fiscal"
+           and 2020 <= r["anio"] <= 2024]
+    tot_car = sum(r["recaudacion_usd_m"] for r in car)
+    led_est.append(dict(
+        claim_id="C90", etiqueta="ESTIMACIÓN",
+        afirmacion="Los cinco programas caribeños recaudaron en conjunto ≈ USD "
+                   f"{tot_car / 1000:.2f} mil M de ingreso fiscal CBI en 2020–2024 (≈ USD {tot_car / 5:.0f} M por año), "
+                   f"equivalente a ≈ {tot_car / 5 / 0.35:.0f} aportes argentinos de USD 350.000 por año",
+        valor=f"{tot_car:.0f} M USD (2020–2024); {tot_car / 5:.0f} M USD/año; {tot_car / 5 / 0.35:.0f} aportes/año",
+        fuente="Cálculo propio sobre FMI Article IV", tipo_fuente="", url="", archivo_local="data/processed/C_recaudacion_cbi.csv",
+        sha256="", cita_textual="suma de recaudacion_usd_m (ingreso fiscal, 2020–2024) de DMA, KNA, ATG, GRD, LCA; insumos C84, C85, "
+                                "C86, C87, C88, A01"))
     write_csv(PROCESSED / "C_fuentes_fallidas.csv",
               [dict(fecha="2026-10-03", fuente=a, url=b, error=c, causa=d, accion=e) for a, b, c, d, e in FAILED])
 
