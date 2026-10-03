@@ -68,3 +68,70 @@ def download(url: str, name: str, ext: str, force: bool = False, **kw) -> Path:
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+
+
+# --- Extracción de texto y registro de afirmaciones (claims ledger) ---------------------------------
+
+import csv
+import html as _html
+import re as _re
+
+LEDGER = DOCS / "claims_ledger.csv"
+CLAIMS_DIR = DOCS / "claims"
+LEDGER_FIELDS = ["claim_id", "modulo", "etiqueta", "afirmacion", "valor", "fuente", "tipo_fuente", "url",
+                 "archivo_local", "sha256", "cita_textual", "fecha_acceso"]
+
+
+def html_to_text(path: Path) -> str:
+    s = path.read_text(encoding="utf-8", errors="ignore")
+    s = _re.sub(r"(?is)<(script|style).*?</\1>", "", s)
+    s = _re.sub(r"(?i)<br\s*/?>|</p>|</div>|</li>|</tr>", "\n", s)
+    t = _html.unescape(_re.sub(r"<[^>]+>", " ", s))
+    return norm_ws(t)
+
+
+def pdf_to_text(path: Path) -> str:
+    import pdfplumber
+    with pdfplumber.open(path) as pdf:
+        return norm_ws("\n".join((p.extract_text() or "") for p in pdf.pages))
+
+
+def norm_ws(t: str) -> str:
+    return _re.sub(r"\s+", " ", t.replace(" ", " ")).strip()
+
+
+def local_text(path: Path) -> str:
+    return pdf_to_text(path) if path.suffix.lower() == ".pdf" else html_to_text(path)
+
+
+def quote(text: str, needle: str) -> str:
+    """Devuelve `needle` si aparece literalmente (normalizando espacios) en `text`; si no, error."""
+    n = norm_ws(needle)
+    if n not in text:
+        raise ValueError(f"Cita no encontrada en la fuente: {n[:80]}…")
+    return n
+
+
+def write_ledger(module: str, rows: list[dict]) -> None:
+    """Escribe docs/claims/claims_{module}.csv (un archivo por módulo, para poder correr módulos en paralelo)
+    y reconstruye docs/claims_ledger.csv uniendo todos los módulos."""
+    for r in rows:
+        r.setdefault("fecha_acceso", TODAY)
+        r["modulo"] = module
+    CLAIMS_DIR.mkdir(parents=True, exist_ok=True)
+    with (CLAIMS_DIR / f"claims_{module}.csv").open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=LEDGER_FIELDS)
+        w.writeheader()
+        w.writerows(rows)
+    merge_ledger()
+
+
+def merge_ledger() -> None:
+    allrows = []
+    for p in sorted(CLAIMS_DIR.glob("claims_*.csv")):
+        with p.open(encoding="utf-8") as f:
+            allrows += list(csv.DictReader(f))
+    with LEDGER.open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=LEDGER_FIELDS)
+        w.writeheader()
+        w.writerows(sorted(allrows, key=lambda r: r["claim_id"]))
