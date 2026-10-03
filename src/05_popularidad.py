@@ -165,7 +165,6 @@ def load_gtrends() -> pd.DataFrame | None:
             df = tr.interest_over_time()
             if df is None or df.empty:
                 raise RuntimeError("respuesta vacía")
-            df = df.drop(columns=[c for c in df.columns if c == "isPartial"])
             out = raw_path("E_gtrends_us", "csv")
             df.reset_index().to_csv(out, index=False)
             ok("Google Trends EE.UU. (pytrends)", GT_URL, rel(out))
@@ -419,3 +418,215 @@ def load_ohss() -> pd.DataFrame | None:
     df.index.name = "anio_fiscal"
     df.attrs["paths"] = (pl, pn)
     return df
+
+
+# ====================================================================================================
+# ANÁLISIS
+# ====================================================================================================
+import statsmodels.api as sm  # noqa: E402
+
+HAC_LAGS_D = 30   # rezagos Newey-West, datos diarios
+HAC_LAGS_M = 12   # rezagos Newey-West, datos mensuales
+CTRL = {"en": ["cl_en", "uy_en", "br_en", "co_en"], "es": ["cl_es", "uy_es", "br_es", "co_es"],
+        "de": ["cl_de", "uy_de", "br_de", "co_de"]}
+VENTANAS = [  # ventanas descriptivas (sin torneos)
+    ("2019 (pre-pandemia)", "2019-01-01", "2019-12-31"),
+    ("Base pre-Qatar (ene–oct 2022)", "2022-01-01", "2022-10-31"),
+    ("2023 (sin dic-22)", "2023-01-01", "2023-12-31"),
+    ("2024 (sin Copa América)", "2024-01-01", "2024-12-31"),
+    ("2025", "2025-01-01", "2025-12-31"),
+    ("2026 ene–may (pre-Mundial)", "2026-01-01", "2026-05-31"),
+    ("2026 ago–sep (post-Mundial)", "2026-08-01", "2026-09-30"),
+]
+
+
+def torneo_mask(idx: pd.DatetimeIndex) -> pd.Series:
+    m = pd.Series(False, index=idx)
+    for a, b in TORNEOS.values():
+        m |= (idx >= pd.Timestamp(a)) & (idx <= pd.Timestamp(b))
+    return m
+
+
+def build_daily(pv: pd.DataFrame) -> pd.DataFrame:
+    lg = np.log(pv.where(pv > 0))
+    out = pd.DataFrame(index=pv.index)
+    out["log_ar_en"] = lg["ar_en"]
+    for lang, art in (("en", "ar_en"), ("es", "ar_es"), ("de", "ar_de")):
+        out[f"ctrl_{lang}"] = lg[CTRL[lang]].mean(axis=1)
+        out[f"D_{lang}"] = lg[art] - out[f"ctrl_{lang}"]
+    return out
+
+
+def ventanas_table(pv: pd.DataFrame, dd: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    tm = torneo_mask(pv.index)
+    for lab, a, b in VENTANAS:
+        sel = (pv.index >= a) & (pv.index <= b) & ~tm.values
+        r = dict(ventana=lab, desde=a, hasta=b, dias=int(sel.sum()))
+        for k in ["ar_en", "ar_es", "ar_de", "bsas_en", "messi_en", "milei_en", "patagonia_en"] + CTRL["en"]:
+            r[f"gm_{k}"] = float(np.exp(np.log(pv.loc[sel, k].where(pv.loc[sel, k] > 0)).mean()))
+        for lang in ("en", "es", "de"):
+            r[f"relativo_{lang}"] = float(np.exp(dd.loc[sel, f"D_{lang}"].mean()))
+        rows.append(r)
+    t = pd.DataFrame(rows).set_index("ventana")
+    base = t.loc["Base pre-Qatar (ene–oct 2022)"]
+    for c in [c for c in t.columns if c.startswith(("gm_", "relativo_"))]:
+        t[f"{c}_vs_base_pct"] = 100 * (t[c] / base[c] - 1)
+    return t
+
+
+def design_daily(idx: pd.DatetimeIndex, steps: list[str], slope_at: str | None = None) -> pd.DataFrame:
+    X = pd.DataFrame(index=idx)
+    t = (idx - idx[0]).days.values / 365.25
+    X["const"] = 1.0
+    X["tendencia_anual"] = t
+    for s in steps:
+        X[f"nivel_{s}"] = (idx >= EV[s]).astype(float)
+    if slope_at:
+        X[f"pendiente_{slope_at}"] = np.where(idx >= EV[slope_at], (idx - EV[slope_at]).days / 365.25, 0.0)
+    for k, (a, b) in TORNEOS.items():
+        X[f"pulso_{k}"] = ((idx >= pd.Timestamp(a)) & (idx <= pd.Timestamp(b))).astype(float)
+    X["pulso_anuncio_cbi"] = (idx >= EV["cbi"]).astype(float)
+    for mth in range(2, 13):
+        X[f"mes_{mth}"] = (idx.month == mth).astype(float)
+    for d in range(1, 7):
+        X[f"dow_{d}"] = (idx.dayofweek == d).astype(float)
+    return X
+
+
+def fit_its(y: pd.Series, steps: list[str], slope_at: str | None, lags: int) -> sm.regression.linear_model.RegressionResultsWrapper:
+    y = y.dropna()
+    X = design_daily(y.index, steps, slope_at)
+    X = X.loc[:, X.abs().sum() > 0]
+    return sm.OLS(y, X).fit(cov_type="HAC", cov_kwds={"maxlags": lags})
+
+
+def its_all(dd: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    specs = [
+        ("M1_segmentada_Qatar", ["qatar"], "qatar"),
+        ("M2_multievento", ["qatar", "messi", "balotaje", "cepo"], None),
+    ]
+    for yname in ["D_en", "D_es", "D_de", "log_ar_en"]:
+        for mname, steps, slope in specs:
+            res = fit_its(dd[yname], steps, slope, HAC_LAGS_D)
+            ci = res.conf_int()
+            for term in [c for c in res.params.index if c.startswith(("nivel_", "pendiente_", "tendencia", "pulso_wc2022"))]:
+                b = res.params[term]
+                rows.append(dict(serie=yname, modelo=mname, termino=term, coef=b, se_hac=res.bse[term], p=res.pvalues[term],
+                                 ic95_inf=ci.loc[term, 0], ic95_sup=ci.loc[term, 1], efecto_pct=100 * (np.exp(b) - 1),
+                                 efecto_pct_inf=100 * (np.exp(ci.loc[term, 0]) - 1), efecto_pct_sup=100 * (np.exp(ci.loc[term, 1]) - 1),
+                                 n=int(res.nobs), r2=res.rsquared, hac_lags=HAC_LAGS_D,
+                                 muestra=f"{res.model.data.row_labels[0].date()}..{res.model.data.row_labels[-1].date()}"))
+    return pd.DataFrame(rows)
+
+
+def quiebres(dd: pd.DataFrame, kmax: int = 10) -> pd.DataFrame:
+    """Binseg (costo l2) sobre la media semanal, sin las semanas de torneos y sin fijar fechas a priori.
+    El número de quiebres K se elige por BIC: n·ln(RSS_K/n) + (2K+1)·ln(n). Se informa además el orden en que
+    Binseg detecta cada quiebre (1 = el más fuerte)."""
+    import ruptures as rpt
+    rows = []
+    for yname in ["D_en", "D_es", "D_de", "log_ar_en"]:
+        s = dd[yname].copy()
+        s[torneo_mask(s.index).values] = np.nan
+        w = s.resample("W-SUN").mean().dropna()
+        x = w.values.reshape(-1, 1)
+        n = len(x)
+        algo = rpt.Binseg(model="l2", min_size=12).fit(x)
+        bic, sets, orden = {}, {}, {}
+        prev: set = set()
+        for k in range(0, kmax + 1):
+            bks = algo.predict(n_bkps=k) if k else [n]
+            segs = zip([0] + bks[:-1], bks)
+            rss = sum(float(((x[a:b] - x[a:b].mean()) ** 2).sum()) for a, b in segs)
+            bic[k] = n * np.log(rss / n) + (2 * k + 1) * np.log(n)
+            sets[k] = bks
+            for b in set(bks[:-1]) - prev:
+                orden.setdefault(b, k)
+            prev = set(bks[:-1])
+        kbest = min(bic, key=bic.get)
+        bks = sets[kbest]
+        starts = [0] + bks[:-1]
+        for j, b in enumerate(bks[:-1]):
+            fecha = w.index[b]
+            dist = {k: (fecha - v).days for k, v in EV.items()}
+            near = min(dist, key=lambda k: abs(dist[k]))
+            rows.append(dict(serie=yname, metodo="Binseg l2 + BIC", k_bic=kbest, orden_deteccion=orden.get(b),
+                             fecha_quiebre=fecha.date(), media_antes=float(x[starts[j]:b].mean()),
+                             media_despues=float(x[b:bks[j + 1]].mean()),
+                             cambio_pct=100 * (np.exp(float(x[b:bks[j + 1]].mean() - x[starts[j]:b].mean())) - 1),
+                             evento_mas_cercano=near, dias_al_evento=dist[near], n_semanas=n))
+    return pd.DataFrame(rows)
+
+
+# ----------------------------------------------------------------------------------------------------
+# Turismo
+# ----------------------------------------------------------------------------------------------------
+def turismo_mensual(t: dict, itcrm: pd.DataFrame) -> pd.DataFrame:
+    d = t["dnm_raw"]
+    us = d[d["pais_origen"] == "EE.UU. y Canadá"]
+    tot = us.groupby("indice_tiempo")["viajes_de_turistas_no_residentes"].sum().rename("dnm_eeuu_can_total")
+    aer = us[us["medio_de_transporte"] == "Aérea"].set_index("indice_tiempo")["viajes_de_turistas_no_residentes"].rename("dnm_eeuu_can_aerea")
+    all_ = d.groupby("indice_tiempo")["viajes_de_turistas_no_residentes"].sum().rename("dnm_total_no_residentes")
+    prov = us.groupby("indice_tiempo")["observaciones"].apply(lambda s: (s == "Dato provisorio").any()).rename("dnm_provisorio")
+    e = t["eti_raw"]
+    eu = e[e["pais_de_residencia"].str.startswith("EE.UU")].set_index("indice_tiempo")
+    df = pd.concat([tot, aer, all_, prov,
+                    eu["turistas_no_residentes"].rename("eti_eze_aep_eeuu_can_turistas"),
+                    eu["estadia_media_no_residentes"].rename("eti_eze_aep_eeuu_can_estadia"),
+                    ntto_south_america(t["ntto_path"]), itcrm], axis=1)
+    df.index.name = "mes"
+    return df.loc["2010-01-01":"2026-09-01"]
+
+
+def turismo_modelo(tm: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    d = tm.copy()
+    d["y"] = np.log(d["dnm_eeuu_can_total"])
+    d["log_itcrb_eeuu_l1"] = np.log(d["itcrb_eeuu"]).shift(1)
+    d["log_itcrm_l1"] = np.log(d["itcrm"]).shift(1)
+    d["log_ntto_sa"] = np.log(d["ntto_us_a_sudamerica"])
+    d = d.loc["2014-01-01":"2026-08-01"]
+    d = d[~((d.index >= "2020-03-01") & (d.index <= "2022-03-01"))]   # cierre de fronteras y reapertura gradual
+    d["tendencia"] = (d.index.year - 2014) + (d.index.month - 1) / 12
+    d["post_qatar"] = (d.index >= "2023-01-01").astype(float)
+    d["post_milei"] = (d.index >= "2023-12-01").astype(float)
+    d["post_cepo"] = (d.index >= "2025-04-01").astype(float)
+    d["mundial26"] = d.index.isin(pd.to_datetime(["2026-06-01", "2026-07-01"])).astype(float)
+    for m in range(2, 13):
+        d[f"mes_{m}"] = (d.index.month == m).astype(float)
+    base = ["tendencia", "post_qatar", "post_milei", "post_cepo", "mundial26"] + [f"mes_{m}" for m in range(2, 13)]
+    specs = {
+        "T1_itcrb_eeuu": ["log_itcrb_eeuu_l1"] + base,
+        "T2_itcrm": ["log_itcrm_l1"] + base,
+        "T3_itcrb_eeuu+demanda_NTTO": ["log_itcrb_eeuu_l1", "log_ntto_sa"] + base,
+    }
+    for name, cols in specs.items():
+        dd = d.dropna(subset=["y"] + cols)
+        res = sm.OLS(dd["y"], sm.add_constant(dd[cols])).fit(cov_type="HAC", cov_kwds={"maxlags": HAC_LAGS_M})
+        ci = res.conf_int()
+        for term in [c for c in cols if not c.startswith("mes_")]:
+            b = res.params[term]
+            rows.append(dict(modelo=name, termino=term, coef=b, se_hac=res.bse[term], p=res.pvalues[term],
+                             ic95_inf=ci.loc[term, 0], ic95_sup=ci.loc[term, 1],
+                             efecto_pct=(100 * (np.exp(b) - 1)) if not term.startswith(("log_", "tendencia")) else np.nan,
+                             n=int(res.nobs), r2=res.rsquared, muestra=f"{dd.index[0].date()}..{dd.index[-1].date()} (excl. 2020-03..2022-03)"))
+    return pd.DataFrame(rows)
+
+
+def indec_rows(t: dict) -> pd.DataFrame:
+    rows = []
+    pat = re.compile(r"Estados Unidos y Canadá((?: -?[\d.]+,\d(?:\(\d\))?){8})")
+    for q, (p, url) in t["indec"].items():
+        txt = pdf_to_text(p)
+        anchor = re.search(r"Turismo receptivo\. Cantidad de turistas, estadía promedio, gasto diario promedio y gasto total "
+                           r"por país de residencia habitual\. Aeropuerto Internacional de Ezeiza y Aeroparque", txt)
+        m = pat.search(txt, anchor.end())
+        vals = [float(re.sub(r"\(\d\)", "", v).replace(".", "").replace(",", ".")) for v in m.group(1).split()]
+        gasto_musd = vals[6] / 1000 if vals[6] > 5000 else vals[6]   # 2025: miles de USD; 2026: millones de USD
+        rows.append(dict(trimestre=q, turistas_miles=vals[0], turistas_var_ia=vals[1], estadia_noches=vals[2],
+                         estadia_var_ia=vals[3], gasto_diario_usd=vals[4], gasto_diario_var_ia=vals[5],
+                         gasto_total_musd=gasto_musd, gasto_total_var_ia=vals[7],
+                         cita=quote(txt, "Estados Unidos y Canadá" + m.group(1)), archivo=p, url=url))
+    return pd.DataFrame(rows).set_index("trimestre")
