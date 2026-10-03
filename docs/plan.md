@@ -4,56 +4,23 @@
 
 ---
 
-## 0. Bloqueo actual: el contenedor no tiene salida a internet hacia las fuentes
+## 0. Disponibilidad de fuentes (actualizado 2026-10-03, red habilitada)
 
-Se corrió `src/00_probe_fuentes.py` contra 53 URLs de 40 dominios (resultado crudo en `docs/probe_fuentes.csv`).
+El primer probe dio 0/53 por la política de red del entorno. Con la red habilitada y URLs corregidas,
+`src/00_probe_fuentes.py` da **48/55 fuentes OK** (detalle en `docs/probe_fuentes.csv`).
 
-| Resultado | Cantidad |
+| Fallas que persisten | Alternativa |
 |---|---|
-| Responden 2xx | **0 / 53** |
-| Rechazo del proxy de salida del entorno (HTTP 403 al `CONNECT`) | 52 |
-| 403 del propio proxy (datos.energia.gob.ar, por HTTP plano) | 1 |
+| travel.state.gov (403 anti-bots): tasas de rechazo B y Report of the Visa Office | Copias Wayback del mismo PDF oficial |
+| whc.unesco.org (403) | Copia Wayback del XML |
+| imf.org páginas de país (403) | API DataMapper (OK) + PDFs Article IV |
+| FAOSTAT API (401, exige token) | Descarga masiva bulks-faostat (OK) |
+| imm.gov.gd (Granada, caído) | Otra fuente oficial o FMI |
 
-**No es una caída de las fuentes:** el proxy de salida del entorno de ejecución solo deja pasar registros de paquetes
-(pypi, npm) y GitHub. La herramienta de lectura web alternativa (WebFetch) también está bloqueada por la misma
-política (`EGRESS_BLOCKED` en argentina.gob.ar y boletinoficial.gob.ar). Solo funciona un buscador web que devuelve
-fragmentos de prensa, **que según las reglas del proyecto no puede ser fuente de cifras**.
+Cambios de URL: BCRA API pasó de v3.0 (410) a v4.0; rutas nuevas para HCDN, Senado, Finanzas (deuda) y NTTO I-92.
 
-Por lo tanto, **ningún dato del informe puede descargarse ni verificarse hasta habilitar la red.** No se completó
-nada "a ojo". Todo queda documentado en `docs/fuentes_fallidas.md`.
-
-### Qué hay que cambiar
-
-En la configuración del entorno cloud (menú del entorno en la barra de título de la sesión → *Edit* → *Network access*):
-
-- **Opción simple:** nivel de acceso *Full*.
-- **Opción restringida:** *Custom*, conservando la lista por defecto de gestores de paquetes y agregando estos dominios:
-
-```
-# Normativa argentina
-www.boletinoficial.gob.ar  www.argentina.gob.ar  servicios.infoleg.gob.ar  www.saij.gob.ar
-www.hcdn.gob.ar  www.senado.gob.ar  www.cancilleria.gob.ar  www.csjn.gov.ar  www.cij.gov.ar
-# Estadística y economía argentina
-www.indec.gob.ar  www.bcra.gob.ar  api.bcra.gob.ar  apis.datos.gob.ar  datos.gob.ar
-datos.yvera.gob.ar  www.yvera.tur.ar  datos.energia.gob.ar  www.economia.gob.ar
-turismo.buenosaires.gob.ar  www.estadisticaciudad.gob.ar  sib.gob.ar  www.parquesnacionales.gob.ar
-# EE.UU.
-www.federalreserve.gov  travel.state.gov  www.state.gov  www.dhs.gov  ohss.dhs.gov  www.cbp.gov
-uscode.house.gov  www.law.cornell.edu  www.govinfo.gov  www.federalregister.gov
-api.census.gov  www.trade.gov  pubs.usgs.gov  www.usgs.gov
-# Multilaterales e índices
-api.worldbank.org  www.imf.org  faostatservices.fao.org  bulks-faostat.fao.org  whc.unesco.org
-worldjusticeproject.org  www.visionofhumanity.org  www.economicsandpeace.org
-wikimedia.org  trends.google.com
-# Riqueza y pasaportes
-www.ubs.com  www.knightfrank.com  altrata.com  www.henleyglobal.com  api.henleypassportindex.com
-# UE y programas CBI (fuentes gubernamentales)
-eur-lex.europa.eu  curia.europa.eu  home-affairs.ec.europa.eu  www.consilium.europa.eu  ec.europa.eu
-cbiu.gov.dm  ciu.gov.kn  cip.gov.ag  www.imm.gov.gd  www.cipsaintlucia.com  citizenship.gov.vu
-komunita.gov.mt  aima.gov.pt  www.boe.es  www.gov.uk  www.irishimmigration.ie
-```
-
-Si el entorno se cambia, re-correr `python src/00_probe_fuentes.py` y este plan se actualiza con el resultado real.
+Nota de proceso: el brief original (`prompt ciudadania inversion claude code.md`) no está en el repo; las reglas se
+siguen tal como quedaron plasmadas en este plan.
 
 ---
 
@@ -178,6 +145,6 @@ Etiquetas obligatorias en el texto: **DATO**, **ESTIMACIÓN**, **HIPÓTESIS**, *
 
 ## 3. Orden de ejecución propuesto
 
-1. Habilitar red → re-correr el probe → actualizar este plan.
+1. ~~Habilitar red → re-correr el probe → actualizar este plan.~~ Hecho (48/55).
 2. Módulos A → G en orden, con resumen de 5 líneas al cierre de cada uno.
 3. Informe → auditoría de `claims_ledger.csv` contra las copias locales → README con `make all`.

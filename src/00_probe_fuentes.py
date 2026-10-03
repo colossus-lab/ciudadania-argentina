@@ -18,8 +18,8 @@ SOURCES = [
     ("A", "bo_dec285_2026", "Decreto 285/2026 (BO, PDF)", "https://www.boletinoficial.gob.ar/pdf/aviso/primera/341227/20260428"),
     ("A", "bo_dec366_2025", "DNU 366/2025 (BO)", "https://www.boletinoficial.gob.ar/detalleAviso/primera/326096/20250529"),
     ("A", "infoleg_dec366", "DNU 366/2025 texto (argentina.gob.ar/normativa)", "https://www.argentina.gob.ar/normativa/nacional/decreto-366-2025-413297/texto"),
-    ("A", "hcdn_bicameral", "HCDN Bicameral Trámite Legislativo", "https://www.hcdn.gob.ar/comisiones/especiales/cbtramite/"),
-    ("A", "senado_bicameral", "Senado - Comisiones bicamerales", "https://www.senado.gob.ar/parlamentario/comisiones/bicamerales"),
+    ("A", "hcdn_bicameral", "HCDN Bicameral Trámite Legislativo", "https://www.hcdn.gob.ar/comisiones/especiales/"),
+    ("A", "senado_comisiones", "Senado - Comisiones", "https://www.senado.gob.ar/parlamentario/comisiones/"),
     # B
     ("B", "fed_dfa_zip", "Fed DFA descarga CSV", "https://www.federalreserve.gov/releases/z1/dataviz/download/zips/dfa.zip"),
     ("B", "fed_scf2022_summary", "SCF 2022 summary extract (Stata)", "https://www.federalreserve.gov/econres/files/scfp2022s.zip"),
@@ -51,10 +51,10 @@ SOURCES = [
     ("E", "google_trends", "Google Trends (explore)", "https://trends.google.com/trends/api/explore?hl=en-US&tz=0&req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22Argentina%22%2C%22geo%22%3A%22US%22%2C%22time%22%3A%22all%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D"),
     ("E", "yvera_datos", "datos.yvera.gob.ar (CKAN API)", "https://datos.yvera.gob.ar/api/3/action/package_search?q=eti"),
     ("E", "indec_eti", "INDEC ETI", "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-13-56"),
-    ("E", "ntto_i92", "NTTO (trade.gov) outbound", "https://www.trade.gov/us-international-air-travel-statistics-i-92-data-program"),
+    ("E", "ntto_i92", "NTTO (trade.gov) outbound", "https://www.trade.gov/us-international-air-travel-statistics-i-92-data"),
     ("E", "ntto_outbound", "NTTO outbound overview", "https://www.trade.gov/travel-and-tourism-research"),
     ("E", "bcra_itcrm", "BCRA ITCRM serie (xlsx)", "https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xlsx"),
-    ("E", "bcra_api", "BCRA API estadísticas v3", "https://api.bcra.gob.ar/estadisticas/v3.0/monetarias"),
+    ("E", "bcra_api", "BCRA API estadísticas v4", "https://api.bcra.gob.ar/estadisticas/v4.0/monetarias"),
     ("E", "census_api", "Census ACS API B05006", "https://api.census.gov/data/2023/acs/acs1?get=NAME,group(B05006)&for=us:1"),
     ("E", "dhs_yearbook", "DHS OHSS Yearbook", "https://ohss.dhs.gov/topics/immigration/yearbook"),
     # F
@@ -63,15 +63,18 @@ SOURCES = [
     ("F", "iep_gpi", "Global Peace Index (Vision of Humanity)", "https://www.visionofhumanity.org/maps/"),
     ("F", "faostat_api", "FAOSTAT API", "https://faostatservices.fao.org/api/v1/en/definitions/domain"),
     ("F", "faostat_bulk", "FAOSTAT bulk (Food Balance)", "https://bulks-faostat.fao.org/production/FoodBalanceSheets_E_All_Data_(Normalized).zip"),
-    ("F", "energia_datos", "datos.energia.gob.ar CKAN", "http://datos.energia.gob.ar/api/3/action/package_search?q=produccion"),
+    ("F", "energia_datos", "datos.energia.gob.ar CKAN", "https://datos.energia.gob.ar/api/3/action/package_search?q=produccion"),
     ("F", "usgs_lithium", "USGS MCS Lithium 2026", "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf"),
     ("F", "unesco_whc", "UNESCO WHC list XML", "https://whc.unesco.org/en/list/xml/"),
     ("F", "wjp", "WJP Rule of Law Index", "https://worldjusticeproject.org/rule-of-law-index/"),
     ("F", "datos_gob_series", "API Series de Tiempo (datos.gob.ar)", "https://apis.datos.gob.ar/series/api/series/?ids=148.3_INIVELNAL_DICI_M_26&limit=5"),
     ("F", "indec_ipc", "INDEC IPC", "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31"),
     # G
-    ("G", "bcra_reservas", "BCRA API variables (reservas)", "https://api.bcra.gob.ar/estadisticas/v3.0/monetarias/1?limit=5"),
-    ("G", "finanzas_deuda", "Sec. Finanzas - deuda pública", "https://www.argentina.gob.ar/economia/finanzas/deudapublica"),
+    ("G", "bcra_reservas", "BCRA API variables (reservas)", "https://api.bcra.gob.ar/estadisticas/v4.0/monetarias/1?limit=5"),
+    ("G", "finanzas_deuda", "Sec. Finanzas - deuda pública", "https://www.argentina.gob.ar/economia/finanzas/deuda-publica"),
+    # Copias de archivo (Wayback Machine) para fuentes primarias que bloquean clientes automatizados (403)
+    ("D", "wb_dos_refusal_fy25", "Wayback: DoS refusal rate B FY25", "https://archive.org/wayback/available?url=travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/RefusalRates/FY25.pdf"),
+    ("F", "wb_unesco_whc", "Wayback: UNESCO WHC list XML", "https://archive.org/wayback/available?url=whc.unesco.org/en/list/xml/"),
 ]
 
 
