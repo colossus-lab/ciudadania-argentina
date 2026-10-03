@@ -177,9 +177,14 @@ def audit_row(r: dict, ids: set[str], cache: dict) -> tuple[str, str]:
     if suf in TEXT_EXT:
         if path not in cache:
             cache[path] = local_text(path)
-        clean = re.sub(r"\[[^\]]*\]", "", cita)
-        parts = [norm_ws(x) for x in clean.split(" | ") if norm_ws(x)]
-        missing = [x for x in parts if x not in cache[path]]
+        def _missing(text: str) -> list:
+            parts = [norm_ws(x) for x in text.split(" | ") if norm_ws(x)]
+            return [x for x in parts if x not in cache[path]], len(parts)
+        # Primero la cita completa; si falla, sin las notas entre corchetes del autor del claim.
+        missing, nparts = _missing(cita)
+        if missing:
+            missing, nparts = _missing(re.sub(r"\[[^\]]*\]", "", cita))
+        parts = range(nparts)
         if not missing:
             return "OK", f"{len(parts)} cita(s) literal(es) encontrada(s)"
         return "FALLA", f"cita no encontrada: {missing[0][:60]}"
