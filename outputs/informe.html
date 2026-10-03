@@ -1,0 +1,100 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ciudadanía por Inversión — Colossus Lab</title><style>
+@page { size: A4; margin: 18mm 16mm; @bottom-right { content: counter(page); font-size: 8pt; color: #52514e; } }
+html, body { background: #ffffff; color: #0b0b0b; }
+body { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 10pt; line-height: 1.45; max-width: 900px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 20pt; margin-bottom: 4px; } h2 { font-size: 14pt; border-bottom: 1px solid #c3c2b7; padding-bottom: 3px; margin-top: 28px; page-break-after: avoid; }
+h3 { font-size: 11.5pt; page-break-after: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 8.5pt; margin: 8px 0; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d9d8d3; padding: 3px 5px; vertical-align: top; text-align: left; word-break: break-word; }
+th { background: #f0efec; }
+img { max-width: 100%; height: auto; display: block; margin: 10px 0; page-break-inside: avoid; }
+code { font-size: 8.5pt; background: #f4f4f2; padding: 0 2px; word-break: break-all; }
+.meta { color: #52514e; font-size: 9pt; }
+.modulo { page-break-before: always; }
+</style></head><body><h1>Ciudadanía por Inversión y el "momento Argentina"</h1>
+<p class="meta">Colossus Lab · Informe generado el 2026-10-03 · Etiquetas: <b>DATO</b> (fuente directa) · <b>ESTIMACIÓN</b> (cálculo propio) · <b>HIPÓTESIS</b> (interpretación) · <b>ESCENARIO</b> (proyección condicional). Cada DATO tiene su cita literal en <code>docs/claims_ledger.csv</code>, auditada contra la copia local (<code>docs/auditoria.csv</code>).</p>
+
+<div class="modulo"></div>
+
+<h2>Módulo A — Marco normativo</h2>
+<p><strong>Resumen (5 líneas)</strong>
+1. <strong>DATO:</strong> El anuncio del 02/10/2026 fija USD 350.000 de aporte no reembolsable al Tesoro, o USD 800.000 en un título público específico; USD 100.000 por cónyuge e hijos de 18–25 años, y USD 25.000 por menor. Total para una familia tipo: USD 500.000. Las solicitudes se reciben desde el 4T-2026 (A01–A06).
+2. <strong>DATO:</strong> La base legal es el DNU 366/2025 (art. 37 → Ley 346 art. 2 inc. 2: "inversión relevante", sin requisito de residencia). <strong>El DNU no fija ningún monto</strong>: delega en el Ministerio de Economía (art. 2 bis). La cifra de "USD 500.000" que citó la prensa <strong>no figura</strong> en el texto del DNU (A09–A10).
+3. <strong>DATO:</strong> A la fecha de consulta (03/10/2026), InfoLEG no registra ninguna resolución del Ministerio de Economía que fije los montos anunciados. Los montos hoy constan solo en un anuncio, no en una norma (A17).
+4. <strong>DATO — riesgo jurídico central:</strong> la Cámara Nacional Electoral declaró <strong>nulo</strong> el DNU 366/2025 el 30/06/2026 (causa "Yang"). Sostuvo que la ciudadanía es materia electoral vedada a los DNU (art. 99 inc. 3 CN). El Juzgado Federal de Esquel declaró inconstitucional, para el caso, el art. 37 (que crea la vía por inversión) (A18–A20).
+5. <strong>HIPÓTESIS:</strong> el control de constitucionalidad en Argentina tiene efecto para el caso. Por eso el programa puede operar, pero cada carta de ciudadanía por inversión queda expuesta a impugnación judicial hasta que haya ley del Congreso o fallo de la Corte Suprema. No se encontró rechazo del DNU en ninguna cámara del Congreso, ni sentencia de la CSJN (búsqueda en prensa; pendiente de verificar en fuente primaria).</p>
+<h3>Lo que no se pudo verificar en fuente primaria</h3>
+<ul>
+<li>Dictamen de la Comisión Bicameral Permanente sobre el DNU 366/2025: el sitio de HCDN no expone un listado accesible. La prensa (Infobae, 05/01/2026; Parlamentario, 04/07/2026) indica que no hubo dictamen. Esto queda como <strong>S</strong> (solo para fechar).</li>
+<li>Si la causa "Yang" fue llevada a la CSJN por recurso extraordinario: no hay evidencia pública.</li>
+<li>La copia de las sentencias proviene de un enlace publicado por <em>Palabras del Derecho</em>. Los PDF llevan firma digital del PJN (fecha de firma y firmantes visibles); conviene contrastarlos con el sistema de consulta del PJN.</li>
+</ul>
+<h3>Archivos</h3>
+<ul>
+<li><code>src/01_normativa.py</code> → <code>data/processed/A_cronologia.csv</code>, <code>docs/claims/claims_A.csv</code></li>
+</ul>
+<div class="modulo"></div>
+
+<h2>Módulo G — Escenarios fiscales</h2>
+<p><strong>Resumen (5 líneas)</strong>
+1. <strong>ESCENARIO:</strong> con 1.000 solicitantes principales por año (70% aporte / 30% bono), los aportes al Tesoro suman ≈ USD 345 M/año. Eso es el 2,9% de los vencimientos de capital de deuda externa de 2027 y el 0,75% de las reservas brutas (G04).
+2. <strong>ESCENARIO:</strong> el techo del rango analizado es 3.000 solicitantes/año, todos por aporte: USD 1.350 M/año, el 11% de los vencimientos de capital externo de 2027 (G05). Para ubicar esa cifra, ver los volúmenes que logran otros programas en el Módulo C.
+3. <strong>DATO:</strong> reservas brutas del BCRA de USD 46.092 M al 30/09/2026 (G01); vencimientos de capital de la deuda externa de la Administración Central en 2027: USD 12.125 M (G02). Servicios totales de la deuda (todas las monedas) entre jul-2026 y jun-2027: USD 147.930 M (G03).
+4. <strong>HIPÓTESIS:</strong> el bono de USD 800.000 no es ingreso, es financiamiento. Su valor fiscal neto depende de la tasa y el plazo, que no se publicaron. Solo los aportes (y los de los dependientes) son recursos no reembolsables.
+5. <strong>HIPÓTESIS:</strong> el programa puede ser relevante como señal o como fuente de divisas marginal, pero no cambia por sí solo la ecuación de deuda. Además, su flujo está expuesto al riesgo judicial del DNU 366/2025 (Módulo A).</p>
+<p><img alt="G_escenarios" src="charts/G_escenarios.png" /></p>
+<h3>Supuestos (todos de ESCENARIO, editables en <code>src/07_escenarios.py</code>)</h3>
+<ul>
+<li>Solicitantes principales aprobados por año: 100 / 500 / 1.000 / 3.000.</li>
+<li>Canal: 100% aporte; 70/30; 50/50 entre aporte (USD 350.000) y bono (USD 800.000).</li>
+<li>Dependientes promedio por solicitante: 0,6 cónyuges, 0,2 hijos de 18 a 25 y 0,8 menores, lo que da USD 100.000 de aportes de dependientes por solicitante. Se asume que los dependientes aportan en efectivo aunque el principal elija el bono: el anuncio dice que deben realizar "los aportes previstos para cada categoría".</li>
+<li>No se incluyen tasas administrativas ni de debida diligencia (no fueron anunciadas).</li>
+</ul>
+<h3>Tabla completa</h3>
+<p><code>data/processed/G_escenarios.csv</code> (ingreso al Tesoro, financiamiento vía bono y % sobre cada base).</p>
+<h3>Fuentes</h3>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Tipo</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BCRA, API Estadísticas v4.0, variable 1 (reservas internacionales)</td>
+<td>P</td>
+<td>https://api.bcra.gob.ar/estadisticas/v4.0/monetarias/1</td>
+</tr>
+<tr>
+<td>Secretaría de Finanzas, Deuda pública al 30/06/2026 (hojas A.3.1 y A.4.6)</td>
+<td>P</td>
+<td>https://www.argentina.gob.ar/sites/default/files/deuda_publica_30-06-2026_0.xlsx</td>
+</tr>
+</tbody>
+</table>
+<h3>Fuentes fallidas</h3>
+<table>
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Fuente</th>
+<th>Error</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-10-03</td>
+<td>api.bcra.gob.ar v3.0</td>
+<td>410 Gone</td>
+<td>Se usó la v4.0</td>
+</tr>
+</tbody>
+</table>
+<h3>Limitaciones</h3>
+<ul>
+<li>No hay ningún dato de demanda: el programa no estaba operativo. Los escenarios no son pronósticos.</li>
+<li>Los servicios totales de la deuda (G03) incluyen deuda en pesos convertida a USD. Para medir presión cambiaria, la base relevante es G02.</li>
+</ul></body></html>
