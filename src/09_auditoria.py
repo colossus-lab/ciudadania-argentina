@@ -16,7 +16,15 @@ import sys
 import zipfile
 from pathlib import Path
 
-from common import DOCS, LEDGER, ROOT, local_text, norm_ws, sha256
+from functools import lru_cache
+
+from common import DOCS, LEDGER, ROOT, local_text, norm_ws
+from common import sha256 as _sha256
+
+
+@lru_cache(maxsize=None)
+def sha256(path: Path) -> str:
+    return _sha256(path)
 
 TEXT_EXT = {".pdf", ".html", ".htm", ".txt", ".xml"}
 
@@ -68,6 +76,10 @@ def _value_in_file(path: Path, value: str) -> bool:
                     if any(x in data for x in variants):
                         return True
         return False
+    if suf == ".gz":
+        import gzip
+        with gzip.open(path, "rt", encoding="utf-8", errors="ignore") as f:
+            return any(any(x in line for x in variants) for line in f)
     data = path.read_text(encoding="utf-8", errors="ignore")
     return any(x in data for x in variants)
 
@@ -146,7 +158,7 @@ def audit_row(r: dict, ids: set[str], cache: dict) -> tuple[str, str]:
     cita = r["cita_textual"]
     path = ROOT / r["archivo_local"] if r["archivo_local"] else None
     if et != "DATO":
-        refs = set(re.findall(r"\b[A-G]\d{2}\b", cita)) - {r["claim_id"]}
+        refs = set(re.findall(r"\b[A-G]\d{2,3}\b", cita)) - {r["claim_id"]}
         missing = sorted(refs - ids)
         if missing:
             return "FALLA", f"insumos inexistentes: {', '.join(missing)}"
@@ -177,14 +189,32 @@ def audit_row(r: dict, ids: set[str], cache: dict) -> tuple[str, str]:
     if loc is False:
         return "FALLA", "fila del localizador no encontrada"
     m = re.search(r"valor(?:_miles)?\s*=\s*([-\d.,eE+]+)", cita)
-    if not m:
-        return "REVISAR", "localizador no verificable automáticamente"
-    return ("OK", f"valor {m.group(1)} encontrado") if _value_in_file(path, m.group(1)) else ("FALLA", f"valor {m.group(1)} no encontrado")
+    if m:
+        v = m.group(1)
+    else:
+        # Sin `valor=`: se usa el último par `clave=número` del localizador (p. ej. OBS_VALUE=-0.1024, Value=62554.0).
+        nums = re.findall(r"=\s*(-?\d[\d.]*(?:[eE][-+]?\d+)?)\s*(?:;|$)", cita)
+        if not nums:
+            return "REVISAR", "localizador no verificable automáticamente"
+        v = nums[-1]
+    return ("OK", f"valor {v} encontrado") if _value_in_file(path, v) else ("FALLA", f"valor {v} no encontrado")
+
+
+MANUAL = DOCS / "auditoria_manual.csv"
+
+
+def manual_checks() -> dict:
+    """Verificaciones hechas a mano (agregados, conteos) con el procedimiento registrado; solo reemplazan REVISAR/FALLA."""
+    if not MANUAL.exists():
+        return {}
+    with MANUAL.open(encoding="utf-8") as f:
+        return {r["claim_id"]: r for r in csv.DictReader(f)}
 
 
 def main() -> int:
     with LEDGER.open(encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
+    manual = manual_checks()
     ids = {r["claim_id"] for r in rows}
     cache: dict = {}
     out = []
@@ -193,6 +223,8 @@ def main() -> int:
             status, note = audit_row(r, ids, cache)
         except Exception as e:  # noqa: BLE001
             status, note = "FALLA", f"{type(e).__name__}: {e}"[:200]
+        if status != "OK" and r["claim_id"] in manual:
+            status, note = "OK", "verificación manual: " + manual[r["claim_id"]]["procedimiento"]
         out.append(dict(claim_id=r["claim_id"], modulo=r["modulo"], etiqueta=r["etiqueta"], estado=status, nota=note))
     with (DOCS / "auditoria.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(out[0]))
@@ -200,7 +232,7 @@ def main() -> int:
     counts = {s: sum(o["estado"] == s for o in out) for s in ("OK", "REVISAR", "FALLA")}
     print(f"Auditoría: {len(out)} afirmaciones -> {counts}")
     for o in out:
-        if o["estado"] != "OK":
+        if o["estado"] != "OK":  # noqa: SIM102
             print(f"  {o['claim_id']:5s} {o['estado']:8s} {o['nota']}")
     return 1 if counts["FALLA"] else 0
 

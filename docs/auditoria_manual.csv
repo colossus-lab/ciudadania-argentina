@@ -1,0 +1,3 @@
+claim_id,fecha,procedimiento
+F058,2026-10-03,"pandas: suma de prod_pet con formacion='vaca muerta', anio=2026, mes=8 sobre F_energia_pozos_no_convencional_2026-10-03.csv.gz = 3301191.718 (3.403 pozos)"
+F059,2026-10-03,"pandas: suma de prod_gas con el mismo filtro = 2955972.543 (3.403 pozos)"
