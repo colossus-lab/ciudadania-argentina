@@ -12,5 +12,23 @@
 - Si la causa "Yang" fue llevada a la CSJN por recurso extraordinario: no hay evidencia pública.
 - La copia de las sentencias proviene de un enlace publicado por *Palabras del Derecho*. Los PDF llevan firma digital del PJN (fecha de firma y firmantes visibles); conviene contrastarlos con el sistema de consulta del PJN.
 
+## Fuentes
+| Fuente | Tipo | URL |
+|---|---|---|
+| Ministerio de Economía, anuncio 02/10/2026 | P | https://www.argentina.gob.ar/noticias/luis-caputo-anuncio-la-puesta-en-marcha-del-programa-de-ciudadania-por-inversion-de |
+| DNU 366/2025, Boletín Oficial 29/05/2025 | P | https://www.boletinoficial.gob.ar/detalleAviso/primera/326096/20250529 |
+| InfoLEG: normas que modifican/complementan el DNU 366/2025 | P | https://www.argentina.gob.ar/normativa/nacional/norma-413297/normas-modifican |
+| Decreto 524/2025, BO 31/07/2025 | P | https://www.boletinoficial.gob.ar/detalleAviso/primera/329061/20250731 |
+| Decreto 285/2026, BO 28/04/2026 | P | https://www.boletinoficial.gob.ar/pdf/aviso/primera/341227/20260428 |
+| CNE, "Yang, Liping", Expte. 8843/2023/CA1, 30/06/2026 (copia vía Palabras del Derecho) | P | https://drive.google.com/file/d/1xWgM2IK8QeBFwmNogXJqYmY9RNC7z6gn |
+| Juzgado Federal de Esquel, Expte. 10640/2025, 12/08/2026 (copia vía Palabras del Derecho) | P | https://drive.google.com/file/d/1m8JzZS80fcB-ENA-lI-0gr5Ii01sURig |
+| Palabras del Derecho, notas del 30/06/2026 y 26/08/2026 | S | palabrasdelderecho.com.ar/articulo/6845 y /6940 |
+
+## Fuentes fallidas
+| Fecha | Fuente | URL | Error | Causa | Acción |
+|---|---|---|---|---|---|
+| 2026-10-03 | HCDN, Comisión Bicameral Permanente | https://www.hcdn.gob.ar/comisiones/especiales/ | La página no lista los dictámenes (contenido dinámico) | Sitio | Prensa (tipo S) solo para fechar; queda "no verificado" |
+| 2026-10-03 | InfoLEG, buscador de normas | https://www.argentina.gob.ar/normativa/buscar | La búsqueda por texto no devuelve resultados al pedido automatizado | Sitio | Se usó la ficha "normas que modifican" del DNU 366/2025 |
+
 ## Archivos
 - `src/01_normativa.py` → `data/processed/A_cronologia.csv`, `docs/claims/claims_A.csv`

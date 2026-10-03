@@ -62,6 +62,80 @@ B40,B,ESTIMACIÓN,OK,"insumos: B20, B24, B31, B36"
 B41,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 B42,B,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 B43,B,ESTIMACIÓN,OK,insumos: B36
+C01,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C02,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C03,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C04,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C05,C,DATO,REVISAR,sin cita literal (lectura visual de un escaneo u otra fuente no textual)
+C06,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C07,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C09,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C10,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C11,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C14,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C15,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C16,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C17,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C18,C,DATO,OK,3 cita(s) literal(es) encontrada(s)
+C19,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C20,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C21,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C22,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C23,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C24,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C25,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C26,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C27,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C30,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C31,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C32,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C33,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C34,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C35,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C36,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C37,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C38,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C39,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C40,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C41,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C42,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C43,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C44,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C45,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C46,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C47,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C48,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C49,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C50,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C51,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C52,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C53,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C54,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C55,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C56,C,DATO,OK,3 cita(s) literal(es) encontrada(s)
+C57,C,DATO,OK,3 cita(s) literal(es) encontrada(s)
+C58,C,DATO,OK,1 cita(s) literal(es) encontrada(s)
+C59,C,DATO,OK,3 cita(s) literal(es) encontrada(s)
+C60,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C61,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C62,C,DATO,OK,2 cita(s) literal(es) encontrada(s)
+C70,C,DATO,OK,valor 0.689 encontrado
+C71,C,DATO,OK,valor 1.051 encontrado
+C72,C,DATO,OK,valor 2.162 encontrado
+C73,C,DATO,OK,valor 1.351 encontrado
+C74,C,DATO,OK,valor 2.574 encontrado
+C75,C,DATO,OK,valor 1.265 encontrado
+C80,C,ESTIMACIÓN,OK,"insumos: A01, C01, C04, C07, C10"
+C81,C,ESTIMACIÓN,OK,"insumos: A05, C01, C04, C07, C10"
+C82,C,ESTIMACIÓN,OK,insumos: B36
+C83,C,ESTIMACIÓN,OK,"insumos: A01, B36, C01, C04, C07, C10, C16, C82"
+C84,C,ESTIMACIÓN,OK,"insumos: C31, C32, C70"
+C85,C,ESTIMACIÓN,OK,"insumos: C36, C37, C42, C71"
+C86,C,ESTIMACIÓN,OK,"insumos: C40, C41, C42, C72"
+C87,C,ESTIMACIÓN,OK,"insumos: C42, C43, C45, C73"
+C88,C,ESTIMACIÓN,OK,"insumos: C42, C46, C47, C74"
+C89,C,ESTIMACIÓN,OK,"insumos: C48, C49, C75"
+C90,C,ESTIMACIÓN,OK,"insumos: A01, C84, C85, C86, C87, C88"
 D01,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
 D02,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
 D03,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
@@ -117,7 +191,7 @@ D67,D,DATO,OK,fila del localizador encontrada
 D68,D,DATO,OK,fila del localizador encontrada
 D70,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
 D71,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
-D72,D,DATO,FALLA,cita no encontrada: UPDATE : This Advisory has been rescinded.
+D72,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
 D73,D,DATO,OK,1 cita(s) literal(es) encontrada(s)
 E01,E,DATO,OK,valor 564280 encontrado
 E02,E,DATO,OK,valor 218272 encontrado
@@ -152,6 +226,20 @@ E30,E,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 E31,E,ESTIMACIÓN,OK,"insumos: E13, E22, E23"
 E32,E,HIPÓTESIS,OK,"insumos: E03, E05, E07, E08, E09, E10, E12, E13, E15, E21, E23, E31, E33"
 E33,E,ESTIMACIÓN,OK,insumos: E13
+E50,E2,DATO,OK,fila del localizador encontrada
+E51,E2,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+E52,E2,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+E53,E2,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+E54,E2,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+E57,E2,DATO,OK,fila del localizador encontrada
+E58,E2,DATO,OK,fila del localizador encontrada
+E59,E2,DATO,OK,fila del localizador encontrada
+E60,E2,DATO,OK,fila del localizador encontrada
+E61,E2,DATO,OK,fila del localizador encontrada
+E62,E2,DATO,OK,fila del localizador encontrada
+E63,E2,DATO,OK,fila del localizador encontrada
+E64,E2,DATO,OK,fila del localizador encontrada
+E70,E2,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 F001,F,DATO,OK,valor -0.102398 encontrado
 F002,F,DATO,OK,valor 1.656025 encontrado
 F003,F,DATO,OK,valor 0.939498 encontrado
@@ -187,7 +275,7 @@ F032,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F033,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F034,F,DATO,OK,valor 62554.0 encontrado
 F035,F,DATO,OK,valor 29265.0 encontrado
-F036,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+F036,F,ESTIMACIÓN,OK,"insumos: F034, F035"
 F037,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 F038,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 F039,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
@@ -208,12 +296,12 @@ F053,F,DATO,OK,valor -89.626081 encontrado
 F054,F,DATO,OK,valor 95386.83234436161 encontrado
 F055,F,DATO,OK,valor 84237.29976139872 encontrado
 F056,F,DATO,OK,valor -12059.80998 encontrado
-F057,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
-F058,F,DATO,FALLA,valor 3301191.718 no encontrado
-F059,F,DATO,FALLA,valor 2955972.543 no encontrado
+F057,F,ESTIMACIÓN,OK,"insumos: F054, F055"
+F058,F,DATO,OK,"verificación manual: pandas: suma de prod_pet con formacion='vaca muerta', anio=2026, mes=8 sobre F_energia_pozos_no_convencional_2026-10-03.csv.gz = 3301191.718 (3.403 pozos)"
+F059,F,DATO,OK,verificación manual: pandas: suma de prod_gas con el mismo filtro = 2955972.543 (3.403 pozos)
 F060,F,DATO,OK,fila del localizador encontrada
 F061,F,DATO,OK,fila del localizador encontrada
-F062,F,ESTIMACIÓN,REVISAR,sin insumos citados ni archivo local
+F062,F,ESTIMACIÓN,OK,"insumos: F058, F059, F060, F061"
 F063,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
 F064,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F065,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
@@ -223,7 +311,7 @@ F068,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F069,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F070,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F071,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
-F072,F,ESTIMACIÓN,OK,método explícito sobre archivo local verificado (hash)
+F072,F,ESTIMACIÓN,OK,"insumos: F064, F070"
 F073,F,DATO,OK,valor 5 encontrado
 F074,F,DATO,OK,valor 3 encontrado
 F075,F,DATO,OK,valor 0 encontrado
@@ -263,7 +351,7 @@ F108,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F109,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F110,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F111,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
-F112,F,ESTIMACIÓN,REVISAR,sin insumos citados ni archivo local
+F112,F,ESTIMACIÓN,OK,"insumos: F105, F106, F107, F110"
 F113,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F114,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
 F115,F,DATO,OK,1 cita(s) literal(es) encontrada(s)
@@ -279,3 +367,4 @@ G02,G,DATO,OK,valor 12125 encontrado
 G03,G,DATO,OK,valor 147929693.6 encontrado
 G04,G,ESCENARIO,OK,"insumos: A01, A04, G01, G02"
 G05,G,ESCENARIO,OK,"insumos: A01, A04, G02"
+G06,G,ESCENARIO,OK,"insumos: A01, A03, A04, C90"

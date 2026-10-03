@@ -12,7 +12,7 @@ import markdown
 from common import CHARTS, DOCS, ROOT, TODAY
 
 OUT = ROOT / "outputs"
-ORDER = "ABCDEFG"
+ORDER = ["A", "B", "C", "D", "E", "E2", "F", "G"]
 
 CSS = """
 @page { size: A4; margin: 18mm 16mm; @bottom-right { content: counter(page); font-size: 8pt; color: #52514e; } }
@@ -28,6 +28,33 @@ code { font-size: 8.5pt; background: #f4f4f2; padding: 0 2px; word-break: break-
 .meta { color: #52514e; font-size: 9pt; }
 .modulo { page-break-before: always; }
 """
+
+
+def section(md: str, title_re: str) -> str:
+    """Devuelve el cuerpo de la sección '## <título>' (hasta el próximo '## ')."""
+    m = re.search(rf"^## {title_re}\s*$(.*?)(?=^## |\Z)", md, flags=re.M | re.S)
+    return m.group(1).strip() if m else ""
+
+
+def consolidate_sources() -> None:
+    fu = ["# Fuentes", "", "Tipos: **P** primaria · **R** referencia privada con metodología pública · **S** secundaria (solo para fechar).",
+          "Copias locales en `data/raw/` con fecha; hash SHA-256 en `docs/claims_ledger.csv`. Generado por `src/08_informe.py`.", ""]
+    ff = ["# Fuentes fallidas", "", "Fuentes que no pudieron descargarse o verificarse, con causa y acción. Generado por `src/08_informe.py`.", "",
+          "## General (probe de fuentes)", "",
+          "| Fecha | Fuente | Error | Causa | Acción |", "|---|---|---|---|---|",
+          "| 2026-10-03 | 52 URLs de 39 dominios (primer probe) | ProxyError 403 al CONNECT | Política de red del primer entorno | Resuelto: red habilitada; probe 48/55 OK |",
+          "| 2026-10-03 | web.archive.org | Conexión reseteada por el proxy de egreso (ws_closed_mid_exchange) durante toda la sesión | Red del entorno | Afecta a D (serie de tasas de rechazo) y a fallbacks de C y F; reintentar con `python src/04_pasaporte_vwp.py` |",
+          "| 2026-10-03 | api.census.gov | El probe lo marcó OK pero redirige a missing_key.html | La API exige key con registro | E usó el ACS Summary File oficial |", ""]
+    for m, path in module_docs():
+        md = path.read_text(encoding="utf-8")
+        title = md.splitlines()[0].lstrip("# ").strip()
+        a, b = section(md, r"Fuentes"), section(md, r"Fuentes fallidas")
+        if a:
+            fu += [f"## {title}", "", a, ""]
+        if b:
+            ff += [f"## {title}", "", b, ""]
+    (DOCS / "fuentes.md").write_text("\n".join(fu), encoding="utf-8")
+    (DOCS / "fuentes_fallidas.md").write_text("\n".join(ff), encoding="utf-8")
 
 
 def module_docs() -> list:
@@ -72,6 +99,7 @@ def build_md() -> str:
 
 
 def main() -> None:
+    consolidate_sources()
     md = build_md()
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "informe.md").write_text(md, encoding="utf-8")

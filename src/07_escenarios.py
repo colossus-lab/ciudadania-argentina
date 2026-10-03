@@ -100,6 +100,9 @@ def ar(x: float, dec: int = 0) -> str:
     return f"{x:,.{dec}f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
+CARIBE_MUSD_ANIO = 492  # C90: ingreso fiscal CBI de los 5 programas caribeños, promedio 2020–2024 (ESTIMACIÓN del Módulo C)
+
+
 def chart(rows: list[dict], b: dict) -> None:
     base = [r for r in rows if r["canal"] == "70% aporte / 30% bono"]
     fig, ax = plt.subplots(figsize=(8, 5), dpi=150)
@@ -111,6 +114,9 @@ def chart(rows: list[dict], b: dict) -> None:
         ax.annotate(f"USD {ar(r['ingreso_tesoro_musd'])} M\n{ar(r['pct_venc_capital_externo_2027'], 1)}% de venc. ext. 2027",
                     (rect.get_x() + rect.get_width() / 2, rect.get_height()), xytext=(0, 4),
                     textcoords="offset points", ha="center", va="bottom", fontsize=8, color="#0b0b0b")
+    ax.axhline(CARIBE_MUSD_ANIO, color="#eb6834", lw=1.4, ls="--", zorder=3)
+    ax.text(-0.4, CARIBE_MUSD_ANIO + 18, f"5 programas del Caribe juntos: ≈ USD {CARIBE_MUSD_ANIO} M/año (2020–24)",
+            fontsize=7.5, color="#0b0b0b", ha="left")
     ax.set_ylim(0, max(ys) * 1.35)
     ax.set_xlabel("Solicitantes principales aprobados por año (supuesto)", fontsize=9, color="#52514e")
     ax.set_ylabel("Ingreso al Tesoro por aportes (USD M)", fontsize=9, color="#52514e")
@@ -159,6 +165,12 @@ def main() -> None:
              fuente="Cálculo propio", tipo_fuente="", url="", archivo_local="data/processed/G_escenarios.csv", sha256="",
              cita_textual="ingreso = 3000·350k + 3000·100k; insumos A01–A04, G02"),
     ]
+    eq = round(CARIBE_MUSD_ANIO * 1e6 / (0.7 * APORTE_PRINCIPAL + APORTE_DEPENDIENTES))
+    ledger.append(dict(claim_id="G06", etiqueta="ESCENARIO",
+                       afirmacion="Solicitantes argentinos/año (mezcla 70/30) necesarios para igualar lo que recaudan juntos los 5 programas del Caribe",
+                       valor=f"≈ {eq:,}".replace(",", "."), fuente="Cálculo propio", tipo_fuente="", url="",
+                       archivo_local="data/processed/G_escenarios.csv", sha256="",
+                       cita_textual="N = 492 M / (0,7·350k + 100k); insumos C90, A01, A03, A04"))
     write_ledger("G", ledger)
     chart(rows, b)
     for r in rows:

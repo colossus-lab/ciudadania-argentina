@@ -184,6 +184,8 @@ def audit_row(r: dict, ids: set[str], cache: dict) -> tuple[str, str]:
         missing, nparts = _missing(cita)
         if missing:
             missing, nparts = _missing(re.sub(r"\[[^\]]*\]", "", cita))
+        if nparts == 0:
+            return "REVISAR", "sin cita literal (lectura visual de un escaneo u otra fuente no textual)"
         parts = range(nparts)
         if not missing:
             return "OK", f"{len(parts)} cita(s) literal(es) encontrada(s)"
