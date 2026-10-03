@@ -479,7 +479,7 @@ CASOS = [
       "Since its inception, the Programme has approved investment of almost €1.252bn"]),
     ("C18", "Malta", "2025-07-24", "Malta (Act XXI de 2025, sancionada el 24/7/2025) eliminó la definición de 'individual investor programme' de su ley de ciudadanía",
      "Act XXI 2025", "mlt_act21",
-     ["24th July, 2025 ACT No. XXI of 2025", "the definition \"individual investor programme\" shall be deleted"]),
+     ["24th July, 2025 ACT No. XXI of 2025", "In article 2 of the principal Act the definition \"individual", "investor programme\" shall be deleted."]),
     ("C19", "Malta", "2025-07-24", "La nueva redacción del art. 10(9) habilita la naturalización 'por mérito' (servicios o contribuciones excepcionales) en lugar de la vía por inversión",
      "Art. 10(9) nuevo", "mlt_act21",
      ["the Minister may grant a certificate of naturalisation as a citizen of Malta by merit to an alien or stateless person"]),
@@ -565,7 +565,7 @@ def chart_montos(rows_plot):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     rows_plot = sorted(rows_plot, key=lambda r: r[2])
-    fig, ax = plt.subplots(figsize=(9, 6.4), facecolor="white")
+    fig, ax = plt.subplots(figsize=(9.5, 6.6), facecolor="white")
     y = range(len(rows_plot))
     cols = [ORANGE if r[0] == "Argentina" else (BLUE if r[3] == "don" else NEUTRAL) for r in rows_plot]
     ax.barh(list(y), [r[2] / 1000 for r in rows_plot], color=cols, height=0.62, edgecolor="white", linewidth=2)
@@ -586,9 +586,9 @@ def chart_montos(rows_plot):
     fig.suptitle("El aporte argentino (USD 350.000) es 40–50% más caro que la donación\nmínima del Caribe y el bono (USD 800.000) el umbral más alto",
                  x=0.02, ha="left", fontsize=12.5, color=INK, fontweight="bold")
     fig.text(0.02, 0.012, "Fuente: CIU St Kitts y Nevis (SRO 20 y 43/2024), CIU Antigua y Barbuda, Granada SRO 15/2024, CIU Santa Lucía (S.I. 106/2024), "
-             "Turquía (Reglamento 2010/139, mevzuat.gov.tr),\nNauru ECRCP, MECON (Argentina). Dominica, Vanuatu, Egipto y Jordania: sin fuente gubernamental accesible; "
+             "\nTurquía (Reglamento 2010/139, mevzuat.gov.tr), Nauru ECRCP, MECON (Argentina).\nDominica, Vanuatu, Egipto y Jordania: sin fuente gubernamental accesible; "
              "Malta: programa derogado (2025). Elaboración: Colossus Lab.", fontsize=7, color=MUTED, ha="left")
-    fig.tight_layout(rect=(0, 0.05, 1, 0.92))
+    fig.tight_layout(rect=(0, 0.075, 1, 0.94))
     CHARTS.mkdir(parents=True, exist_ok=True)
     for ext in ("png", "svg"):
         fig.savefig(CHARTS / f"C_montos_minimos.{ext}", dpi=150, facecolor="white")
@@ -625,15 +625,15 @@ def chart_recaudacion(rev):
     from matplotlib.patches import Patch
     fig.legend(handles=[Patch(color=BLUE, label="Dato del FMI (convertido a USD / PBI DataMapper)"),
                         Patch(color=NEUTRAL, label="Último año: estimación del FMI")],
-               loc="upper right", bbox_to_anchor=(0.99, 0.93), fontsize=8, frameon=False, ncol=2)
-    fig.suptitle("Dominica y St Kitts llegaron a financiar 25–37% del PBI con CBI; tras la presión de la UE,\n"
-                 "St Kitts cayó a 8% en 2024 y Vanuatu de 14% a 5%",
+               loc="upper right", bbox_to_anchor=(0.99, 0.915), fontsize=8, frameon=False, ncol=2)
+    fig.suptitle("El CBI llegó a recaudar 38% del PBI en Dominica y 26% en St Kitts; con más controles\n"
+                 "St Kitts cayó a 9% en 2024, y Vanuatu, sin exención Schengen, de 12% a 3%",
                  x=0.02, ha="left", fontsize=12.5, color=INK, fontweight="bold")
     fig.text(0.02, 0.012, "Fuente: FMI, Article IV (Dominica CR 22/40 y 25/130; St Kitts CR 22/351 y 25/107; Antigua CR 25/96; Granada CR 25/39; "
              "Santa Lucía CR 25/65; Vanuatu CR 24/278); PBI: FMI DataMapper (NGDPD).\nIngreso fiscal CBI (Vanuatu: ingresos ECP en balanza de pagos). "
              "Dominica y Santa Lucía: año fiscal. Granada: la donación al NTF se registraba como 'grants' hasta 2022. Elaboración: Colossus Lab.",
              fontsize=7, color=MUTED, ha="left")
-    fig.tight_layout(rect=(0, 0.06, 1, 0.88))
+    fig.tight_layout(rect=(0, 0.06, 1, 0.885))
     for ext in ("png", "svg"):
         fig.savefig(CHARTS / f"C_recaudacion_pbi.{ext}", dpi=150, facecolor="white")
     plt.close(fig)
