@@ -2,8 +2,8 @@ consulta,terminos,periodo,geo,estado
 Q1,argentina passport | argentina citizenship | argentine citizenship | pasaporte argentino | ciudadania argentina,today 5-y,US,cache
 Q2,argentina citizenship | argentina passport | argentina citizenship by investment | argentina golden passport,now 7-d,US,cache
 Q3,argentina citizenship | argentina passport | ciudadania argentina | pasaporte argentino,now 7-d,mundo,cache
-Q4,argentina citizenship | argentina passport,today 12-m,mundo,ok
-Q5,ciudadania argentina | pasaporte argentino,today 12-m,mundo,ok
-Q6,cidadania argentina,today 12-m,mundo,ok
+Q4,argentina citizenship | argentina passport,today 12-m,mundo,cache
+Q5,ciudadania argentina | pasaporte argentino,today 12-m,mundo,cache
+Q6,cidadania argentina,today 12-m,mundo,cache
 Q7,argentina citizenship | portugal golden visa | dominica citizenship | st kitts citizenship | turkey citizenship by investment,today 5-y,US,cache
 Q8,argentina citizenship,now 7-d,mundo,cache

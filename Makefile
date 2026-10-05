@@ -17,6 +17,7 @@ modulos:
 	cd $(SRC) && $(PY) 03_benchmark.py
 	cd $(SRC) && $(PY) 04_pasaporte_vwp.py
 	cd $(SRC) && $(PY) 05_popularidad.py
+	cd $(SRC) && $(PY) 05b_busquedas_pasaporte.py
 	cd $(SRC) && $(PY) 06_refugio.py
 	cd $(SRC) && $(PY) 07_escenarios.py
 

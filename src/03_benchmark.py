@@ -28,6 +28,8 @@ from common import (CHARTS, PROCESSED, RAW, ROOT, download, local_text, norm_ws,
 
 MODULO = "C"
 UA_IMF = "https://www.imf.org/-/media/Files/Publications/CR/{y}/English/{f}"
+IMF26 = "https://www.imf.org/-/media/files/publications/cr/2026/english/{}"
+JOD_PER_USD = 0.709  # paridad del dinar jordano (claim C98)
 CELLAR = "https://publications.europa.eu/resource/celex/{}"
 CELLAR_H = {"Accept": "application/xhtml+xml", "Accept-Language": "eng"}
 EC_PER_USD = 2.70  # paridad fija del dólar del Caribe Oriental (claim C42)
@@ -71,6 +73,32 @@ SOURCES: dict[str, tuple] = {
                    "Nauru, ECRCP Factsheet (marzo 2025, ecrcp.gov.nr)", "P", None),
     "mlt_act21": ("https://legislation.mt/eli/act/2025/21/eng/pdf", "C_mlt_act_XXI_2025", "pdf",
                   "Malta, Act No. XXI of 2025 (Maltese Citizenship (Amendment) Act, 2025), legislation.mt", "P", None),
+    # ---- Montos agregados el 2026-10-04 (sitios antes bloqueados) ----
+    "dma_edf": ("https://www.cbiu.gov.dm/investment-options/economic-diversification-fund/", "C_dma_cbiu_edf", "html",
+                "Dominica, Citizenship by Investment Unit: Economic Diversification Fund (cbiu.gov.dm)", "P", None),
+    "dma_re": ("https://www.cbiu.gov.dm/investment-options/real-estate/", "C_dma_cbiu_real_estate", "html",
+               "Dominica, Citizenship by Investment Unit: Real Estate Investment (cbiu.gov.dm)", "P", None),
+    "dma_sro8": ("https://www.cbiu.gov.dm/wp-content/uploads/2024/07/SRO-No.-8-of-2024.-Commonwealth-of-Dominica-Citizenship-By-Investment-AmdNo.2-Reg.-2024-1.pdf",
+                 "C_dma_sro8_2024", "pdf",
+                 "Dominica, S.R.O. No. 8 of 2024 (Commonwealth of Dominica Citizenship by Investment Regulations, 2024; publicado en cbiu.gov.dm)", "P", None),
+    "dma_sro46": ("https://www.cbiu.gov.dm/wp-content/uploads/2025/12/CBI-Amendment-Regulation-2025.pdf", "C_dma_sro46_2025", "pdf",
+                  "Dominica, S.R.O. No. 46 of 2025 (CBI (Amendment) Regulations, 2025; PDF escaneado, cbiu.gov.dm)", "P", None),
+    "vut_fees": ("https://vancitizenship.gov.vu/index.php/citizenship/fees-and-charges", "C_vut_citizenship_fees", "html",
+                 "Vanuatu, Citizenship Office and Commission: Fees and Charges (vancitizenship.gov.vu)", "P", None),
+    "vut_dsp_dir": ("https://vancitizenship.gov.vu/images/DSP_Prescribed_Fees.pdf", "C_vut_dsp_prescribed_fees", "pdf",
+                    "Vanuatu, Citizenship Office and Commission: 'Enforcement of Government Prescribed Fees' (DSP + VCP, 30/4/2020; PDF escaneado)", "P", None),
+    "jor_2025": ("https://web.archive.org/web/20251008223025id_/https://moin.gov.jo/ebv4.0/root_storage/ar/eb_list_page/"
+                 "%D8%A7%D8%B3%D8%B3_%D9%85%D9%86%D8%AD_%D8%A7%D9%84%D8%AC%D9%86%D8%B3%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D8%A7%D9%82%D8%A7%D9%85%D8%A9_"
+                 "%D8%B9%D9%86_%D8%B7%D8%B1%D9%8A%D9%82_%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AB%D9%85%D8%A7%D8%B1____2025.pdf",
+                 "C_jor_moin_mecanismo_4375_2025", "pdf",
+                 "Jordania, Ministerio de Inversión: mecanismo de aplicación de la decisión del Consejo de Ministros n.º 4375 (2/7/2025) sobre "
+                 "nacionalidad o residencia para inversores (moin.gov.jo, copia Wayback 08/10/2025)", "P", None),
+    "jor_peg": ("https://web.archive.org/web/20250711035218id_/https://www.cbj.gov.jo/EBV4.0/Root_Storage/AR/The_Case_of_a_Hard-Pegged_Exchange_Rate_Regime.pdf",
+                "C_jor_cbj_wp_peg", "pdf",
+                "Banco Central de Jordania, Working Paper 'Inflation at Risk (IaR): The Case of a Hard-Pegged Exchange Rate Regime' (cbj.gov.jo, copia Wayback 11/07/2025)", "P", None),
+    "ec_vsm8": ("https://ec.europa.eu/commission/presscorner/api/documents?reference=IP/25/3061&language=en", "C_ec_ip25_3061_vsm8", "txt",
+                "Comisión Europea, comunicado IP/25/3061 (19/12/2025) sobre el octavo informe del mecanismo de suspensión de visados "
+                "(press corner, respuesta JSON de la API; página: ec.europa.eu/commission/presscorner/detail/en/ip_25_3061)", "P", None),
     # ---- FMI: Article IV ----
     "imf_dma25": (UA_IMF.format(y=2025, f="1dmaea2025001-print-pdf.ashx"), "C_imf_dma_cr25-130", "pdf",
                   "FMI, Dominica: 2025 Article IV (Country Report 25/130)", "P", None),
@@ -88,6 +116,19 @@ SOURCES: dict[str, tuple] = {
                   "FMI, Santa Lucía: 2024 Article IV (Country Report 25/65)", "P", None),
     "imf_vut24": (UA_IMF.format(y=2024, f="1vutea2024001-print-pdf.ashx"), "C_imf_vut_cr24-278", "pdf",
                   "FMI, Vanuatu: 2024 Article IV (Country Report 24/278)", "P", None),
+    # Article IV publicados entre enero y junio de 2026 (patrón -/media/files/…/2026/english/…-source-pdf.pdf)
+    "imf_kna26": (IMF26.format("1knaea2026001-source-pdf.pdf"), "C_imf_kna_cr26-93", "pdf",
+                  "FMI, St Kitts y Nevis: 2026 Article IV (Country Report 26/93, mayo 2026)", "P", None),
+    "imf_dma26": (IMF26.format("1dmaea2026001.pdf"), "C_imf_dma_cr26-117", "pdf",
+                  "FMI, Dominica: 2026 Article IV (Country Report 26/117, junio 2026)", "P", None),
+    "imf_atg26": (IMF26.format("1atgea2026001-source-pdf.pdf"), "C_imf_atg_cr26-97", "pdf",
+                  "FMI, Antigua y Barbuda: 2026 Article IV (Country Report 26/97, mayo 2026)", "P", None),
+    "imf_grd26": (IMF26.format("1grdea2026001-source-pdf.pdf"), "C_imf_grd_cr26-9", "pdf",
+                  "FMI, Granada: 2025 Article IV (Country Report 26/9, enero 2026)", "P", None),
+    "imf_lca26": (IMF26.format("1lcaea2026001-source-pdf.pdf"), "C_imf_lca_cr26-3", "pdf",
+                  "FMI, Santa Lucía: 2025 Article IV (Country Report 26/3, enero 2026)", "P", None),
+    "imf_vut25": ("https://www.imf.org/-/media/files/publications/cr/2025/english/1vutea2025001-source-pdf.pdf", "C_imf_vut_cr25-277", "pdf",
+                  "FMI, Vanuatu: 2025 Article IV (Country Report 25/277, septiembre 2025)", "P", None),
     "imf_dm": ("https://www.imf.org/external/datamapper/api/v1/NGDPD/DMA/KNA/ATG/GRD/LCA/VUT",
                "C_imf_datamapper_NGDPD", "json", "FMI, API DataMapper, serie NGDPD (PBI nominal, miles de millones de USD)", "P", None),
     # ---- Casos regulatorios ----
@@ -119,38 +160,41 @@ SOURCES: dict[str, tuple] = {
                 "A_anuncio_mecon", "html", "Ministerio de Economía, anuncio del 02/10/2026 (copia del Módulo A)", "P", None),
 }
 
-# Fuentes que fallaron (intentos registrados el 2026-10-03). Se escriben a data/processed/C_fuentes_fallidas.csv.
+# Fuentes que fallaron (intentos del 2026-10-03, revisados el 2026-10-04). Se escriben a data/processed/C_fuentes_fallidas.csv.
+# Resueltas el 2026-10-04 y retiradas de la lista: Dominica (cbiu.gov.dm ya responde: C91–C94), Vanuatu (vancitizenship.gov.vu: C95–C96),
+# Jordania (moin.gov.jo vía Wayback: C97–C99), FMI Article IV 2026 (PDF en imf.org/-/media/files/…/2026/english/…: C63–C69, C76).
 FAILED = [
-    ("Dominica — CBIU (montos y SRO 8/2024)", "https://www.cbiu.gov.dm/investment-options/",
-     "HTTP 202 + redirección a /.well-known/sgcaptcha/", "Captcha anti-bots (SiteGround) en todo el sitio, incluidos los PDF",
-     "Wayback: web.archive.org inaccesible (conexión reiniciada por el proxy); fila de Dominica queda 'no verificado'"),
-    ("Dominica — Gobierno (S.R.O. 1 y 8 de 2024)", "https://www.dominica.gov.dm/laws/2024/commonwealth_of_dominica_citizenship_by_investment_regulations_sro_8_of_2024.pdf",
-     "502 Bad Gateway (CONNECT) / connection reset", "Host caído o bloqueado", "Sin alternativa gubernamental; se usa solo el piso regional del MoA (FMI) como contexto"),
-    ("Wayback Machine (copias de sitios bloqueados)", "https://web.archive.org/web/20260916071416id_/https://www.cbiu.gov.dm/investment-options/",
-     "Connection reset (ws_closed_mid_exchange)", "El túnel al host web.archive.org se corta; archive.org/wayback/available sí responde",
-     "Se registra la captura existente (20260916071416) pero no se pudo descargar"),
+    ("Dominica — Gobierno (dominica.gov.dm, S.R.O. 8/2024)", "https://www.dominica.gov.dm/laws/2024/commonwealth_of_dominica_citizenship_by_investment_regulations_sro_8_of_2024.pdf",
+     "502 Bad Gateway (CONNECT) / connection reset", "Host caído o bloqueado",
+     "Resuelto por otra vía: la misma S.R.O. 8/2024 se descargó de cbiu.gov.dm (C92)"),
+    ("Dominica — S.R.O. 46/2025 (enmienda)", "https://www.cbiu.gov.dm/wp-content/uploads/2025/12/CBI-Amendment-Regulation-2025.pdf",
+     "Descarga OK; PDF escaneado sin capa de texto", "Escaneo (Xerox)", "Lectura visual (C94); solo enmienda el párrafo 3(1) del Schedule 1, no los montos"),
     ("Granada — imm.gov.gd", "https://www.imm.gov.gd/", "502 Bad Gateway (CONNECT)", "Host caído",
      "Se usó laws.gov.gd (SRO 15/2024, texto oficial)"),
     ("Granada — Investment Migration Agency (imagrenada.gd)", "https://imagrenada.gd/wp-content/uploads/2024/07/S.R.O.-15-of-2024-Grenada-Citizenship-by-Investment-Amendment-No.-2-Regulations.pdf",
      "HTTP 202 + sgcaptcha", "Captcha anti-bots", "Se usó la misma SRO desde laws.gov.gd"),
-    ("Vanuatu — legislación CBI (PacLII)", "https://www.paclii.org/vu/legis/num_reg/", "HTTP 403", "Bloqueo anti-bots",
-     "Monto mínimo de Vanuatu queda 'no verificado' (la prensa no se usa)"),
-    ("Vanuatu — Citizenship Office", "https://citizenship.gov.vu/", "502 Bad Gateway (CONNECT)", "Host caído o inexistente",
-     "Idem; se usa el FMI (Article IV 2024) solo para la recaudación ECP"),
-    ("Jordania — Jordan Investment Commission", "https://www.jic.gov.jo/en/", "Connection reset by peer", "Host inaccesible",
-     "moin.gov.jo redirige todo a la portada árabe; monto de Jordania 'no verificado'"),
+    ("Vanuatu — PacLII / citizenship.gov.vu", "https://www.paclii.org/vu/legis/num_reg/", "HTTP 403 / 502; citizenship.gov.vu sin capturas en Wayback",
+     "Anti-bots / dominio inexistente", "El dominio oficial es vancitizenship.gov.vu (responde 200): montos en C95–C96. La Order 33/2019 (DSP) es un escaneo y no se usó"),
+    ("Jordania — Jordan Investment Commission / moin.gov.jo", "https://www.jic.gov.jo/en/", "Connection reset / timeout (2026-10-04)", "Host inaccesible",
+     "Mecanismo 2025 del Ministerio de Inversión vía Wayback (captura 20251008223025): C97"),
     ("Egipto — decreto del Primer Ministro 876/2023", "https://www.state.gov/reports/2024-investment-climate-statements/egypt/",
-     "HTTP 403 (state.gov); no se halló el Boletín Oficial egipcio en línea", "Anti-bots / fuente no publicada en abierto",
-     "Monto de Egipto 'no verificado'"),
-    ("FMI — Article IV 2026 (St Kitts CR 26/93, Dominica CR 26/117)", "https://www.imf.org/en/publications/cr/issues/2026/05/07/st-575691",
-     "HTTP 403 (páginas imf.org); eLibrary devuelve 202 vacío", "Anti-bots; los PDF 2026 no siguen el patrón -/media/…ashx",
-     "Serie de recaudación cortada en 2024 (estimación de los Article IV 2025)"),
+     "HTTP 403 (state.gov); no se halló el decreto ni el Boletín Oficial egipcio en línea", "Anti-bots / fuente no publicada en abierto",
+     "GAFI (gafi.gov.eg, Wayback 2026) describe la unidad pero no publica montos; SIS (sis.gov.eg) solo reproduce una nota de Ahram Online (S, solo para fechar). Monto de Egipto 'no verificado'"),
+    ("FMI — eLibrary (Article IV 2026)", "https://www.elibrary.imf.org/view/journals/002/2026/093/002.2026.issue-093-en.xml",
+     "HTTP 403 (vista) y 202 vacío (PDF)", "Anti-bots (CloudFront)", "Resuelto por otra vía: PDF oficiales en imf.org/-/media/files/publications/cr/2026/english/"),
+    ("FMI — Vanuatu Article IV 2026", "https://www.imf.org/-/media/files/publications/cr/2026/english/1vutea2026001-source-pdf.pdf",
+     "HTTP 404", "No publicado (o con otro nombre de archivo)", "Se usa el Article IV 2025 (CR 25/277) para el ingreso fiscal ECP 2021–2025 (C76)"),
     ("FMI — Antigua 2022 Article IV (CR 23/184), tablas fiscales", "https://www.imf.org/-/media/Files/Publications/CR/2023/English/1ATGEA2023001.ashx",
-     "Descarga OK; tablas como imagen", "Sin capa de texto en las tablas", "Antigua solo 2020–2024"),
+     "Descarga OK; tablas como imagen", "Sin capa de texto en las tablas", "Antigua desde 2020 (CR 25/96) y 2021–2025 (CR 26/97); sin OCR"),
+    ("Comisión Europea — carta del 25/06/2026 a los cinco caribeños", "https://ec.europa.eu/commission/presscorner/api/search?language=en&text=citizenship%20by%20investment",
+     "Sin resultados: la búsqueda del press corner (2026-10-04: 'citizenship by investment', 'investor citizenship', 'Eastern Caribbean', 'Saint Kitts', "
+     "'Antigua', 'Dominica', 'Grenada', 'golden passports') no devuelve la carta ni un comunicado sobre ella", "Carta no publicada",
+     "Queda como S (prensa, solo para fechar). Se agrega como DATO el octavo informe del mecanismo de suspensión (IP/25/3061, C28)"),
     ("EUR-Lex (HTML de reglamentos)", "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2441",
-     "HTTP 202 con cuerpo vacío", "Desafío anti-bots (WAF)", "Mismo texto oficial vía Oficina de Publicaciones (publications.europa.eu/resource/celex/…)"),
+     "HTTP 202 con cuerpo vacío (2026-10-03); timeout (2026-10-04)", "Desafío anti-bots (WAF) / conexión inestable",
+     "Mismo texto oficial vía Oficina de Publicaciones (publications.europa.eu/resource/celex/…)"),
     ("Curia (TJUE)", "https://curia.europa.eu/juris/liste.jsf?num=C-181/23&language=en",
-     "200, pero redirige a infocuria (aplicación JavaScript)", "Contenido renderizado en el navegador", "Sentencia oficial vía Oficina de Publicaciones (CELEX 62023CJ0181)"),
+     "200/301, redirige a infocuria (aplicación JavaScript)", "Contenido renderizado en el navegador", "Sentencia oficial vía Oficina de Publicaciones (CELEX 62023CJ0181)"),
     ("Portugal — Diário da República", "https://diariodarepublica.pt/dr/detalhe/lei/56-2023-221792115",
      "200 con 2 KB (aplicación JavaScript)", "Contenido renderizado en el navegador", "Texto consolidado de la AT (Portal das Finanças)"),
     ("Turquía — Resmî Gazete 13/05/2022 (C.K. 5554)", "https://www.resmigazete.gov.tr/eskiler/2022/05/20220513-20.pdf",
@@ -221,7 +265,7 @@ def table_row(path: Path, page: int, label: str, n: int, occurrence: int = 1) ->
 
 
 def rel(p: Path) -> str:
-    return str(p.relative_to(ROOT))
+    return p.relative_to(ROOT).as_posix()
 
 
 # --------------------------------------------------------------------------------------------------
@@ -265,18 +309,46 @@ MONTOS = [
       "USD 90,000 for a Principal Applicant (limited time offer available until 31 December 2026)"]),
     ("C17", "Nauru", "ECRCP — monto regular", "Donación a fondo", 105000, None, "Factsheet oficial, marzo 2025", "nru_fact25",
      ["starting at USD 105,000 for a single Principal Applicant."]),
+    # ---- Agregados el 2026-10-04 ----
+    ("C91", "Dominica", "Economic Diversification Fund (EDF)", "Donación a fondo", 200000, 250000,
+     "S.R.O. 8/2024 (gaceta 28/6/2024); S.R.O. 46/2025 no cambia montos", "dma_edf",
+     ["US$200,000 (two hundred thousand United States dollars) for the main applicant; US$250,000 (two hundred and fifty thousand "
+      "United States dollars) for the main applicant and up to three qualifying dependants;"]),
+    ("C92", "Dominica", "EDF — texto reglamentario (S.R.O. 8/2024, Schedule 1)", "Donación a fondo", 200000, 250000,
+     "S.R.O. 8/2024 (gaceta 28/6/2024)", "dma_sro8",
+     ["(Gazetted 28th June, 2024.)", "(i) two hundred thousand United States dollars for the main applicant;",
+      "(ii) two hundred and fifty thousand United States dollars for a main applicant and up to three qualifying dependants;",
+      "(1) The minimum investment required is two hundred thousand United States dollars for each main applicant."]),
+    ("C93", "Dominica", "Inmueble en proyecto aprobado (+ tasa de gobierno desde USD 75.000)", "Inmobiliario", 200000, None,
+     "S.R.O. 8/2024, Schedule 1, párr. 2", "dma_re",
+     ["an applicant must purchase a unit from an Approved Project for at least US$200,000.",
+      "US$75,000 (seventy-five thousand United States dollars) for the main applicant;"]),
+    ("C95", "Vanuatu", "Development Support Program (DSP) — tasas mandadas por el Gobierno", "Donación a fondo", 130000, 180000,
+     "Regulation Order 33/2019 (DSP); web oficial (consulta 04/10/2026)", "vut_fees",
+     ["Government Mandated Fees FIU Diligence Fee USD 5,000",
+      "Single Applicant USD 130,000 Married Couple USD 150,000 Married Couple + 1 Child USD 165,000 Married Couple + 2 Children USD 180,000"]),
+]
+
+# Jordania (decisión del Consejo de Ministros 4375 del 2/7/2025): el PDF árabe se extrae con el orden de caracteres invertido,
+# por eso la cita combina una LECTURA VISUAL (entre corchetes) con fragmentos literales del texto extraído (verificados con quote()).
+JOR_FRAG = {
+    "fecha": "خيراةةت )4375( دةةقر رقوةةملا ءارزوةةلا سةةلجم رارةةق",
+    "700": "يةةيدرأ راةةييد فلأ )700( نع رمثتسملل",
+    "500": "يةةيدرأ راةةييد فةةلأ )500( نع رمثتسملل",
+    "1M": "نوةةيلم )1,000,000( داةةعت دةةيدجلا كيرةةشلا صةةصح",
+    "350": ".ييدرأ راييد فلأ نيسمصو ةئامثلاث )350,000( نع",
+}
+JOR_RUTAS = [  # (vía, tipo, JOD, condición)
+    ("Proyecto productivo nuevo fuera de Amán (10 empleos; pasaporte temporal 3 años)", "Inversión (proyecto)", 500000,
+     "Mecanismo de la decisión 4375 (2/7/2025), punto Segundo 1.1.2"),
+    ("Acciones nuevas en empresas jordanas (3 años sin vender)", "Inversión (acciones)", 1000000,
+     "Mecanismo de la decisión 4375 (2/7/2025), punto Primero"),
 ]
 
 # Filas de la tabla final (país, vía, tipo, USD principal, familia tipo, vigencia, estado, claim_ids)
 TABLA_EXTRA = [
-    ("Dominica", "Economic Diversification Fund", "Donación a fondo", None, None, "—",
-     "NO VERIFICADO: cbiu.gov.dm con captcha anti-bots y dominica.gov.dm caído; piso regional MoA 03/2024 = USD 200.000 (C20)", "C20"),
-    ("Vanuatu", "Development Support Program", "Donación a fondo", None, None, "—",
-     "NO VERIFICADO: sin fuente gubernamental accesible (PacLII 403; sitio oficial caído)", ""),
     ("Egipto", "Decreto PM 876/2023", "Donación / inmueble / depósito", None, None, "—",
-     "NO VERIFICADO: decreto no disponible en abierto; state.gov 403", ""),
-    ("Jordania", "Criterios del Consejo de Ministros", "Depósito / bonos / inversión", None, None, "—",
-     "NO VERIFICADO: jic.gov.jo inaccesible; moin.gov.jo redirige a portada", ""),
+     "NO VERIFICADO: decreto no disponible en abierto; state.gov 403; GAFI no publica montos", ""),
     ("Malta", "MEIN (naturalización por inversión directa)", "Donación + inmueble", None, None, "Derogado (Act XXI 2025, 24/7/2025)",
      "SIN PROGRAMA: tras C-181/23 la vía por inversión fue sustituida por naturalización 'por mérito'", "C18; C19; C56"),
 ]
@@ -313,6 +385,59 @@ def montos(files, texts) -> tuple[list[dict], list[dict]]:
                      "Thirty Thousand (US$230,000.00) dollars'; reg. 7(2): 'until the 31st July 2024 at 11:59 p.m. after which this limited "
                      "time offer shall cease'; p. 9: 'MADE this 25th day of July, 2024'; 'Passed by Resolution of the House of "
                      "Representatives this 18th day of July 2024']"))
+    # Escaneos sin capa de texto (Dominica S.R.O. 46/2025; Vanuatu, directiva DSP 2020) -> lectura visual.
+    for cid, sid, afirm, valor, lectura in (
+        ("C94", "dma_sro46",
+         "Dominica: la S.R.O. 46/2025 (gaceta 27/11/2025) solo enmienda el párrafo 3(1) del Schedule 1 de la S.R.O. 8/2024 (registro posterior de hijos); "
+         "no modifica los montos del EDF ni de la vía inmobiliaria",
+         "Montos de la S.R.O. 8/2024 vigentes",
+         "p. 1: 'STATUTORY RULES AND ORDERS NO. 46 OF 2025'; '(Gazetted 27th November, 2025.)'; '3. Schedule 1 to the Principal Regulations is amended "
+         "in paragraph 3 (1) by deleting the words \"not more than five years after the main applicant obtained citizenship\"'; 'Made this 26th day of November, 2025.'"),
+        ("C96", "vut_dsp_dir",
+         "Vanuatu: la Oficina de Ciudadanía fijó para el DSP y el VCP (Regulation Orders 33 y 34 del 24/4/2019) una contribución mínima al Gobierno de USD 80.000 "
+         "y un precio mínimo de venta de USD 130.000 para un solicitante (USD 180.000 para matrimonio con 2 hijos)",
+         "Contribución mínima USD 80.000; precio mínimo USD 130.000 (familia de 4: 130.000 / 180.000)",
+         "p. 1, 30/4/2020, 'Enforcement of Government Prescribed Fees': tabla 'Regulation Order 33 & 34 dated 24 April 2019'; 'Single Applicant 80,000 130,000'; "
+         "'Married + 2 Children 130,000 180,000' (columnas 'Government Minimum Contribution' y 'Government Minimum Selling (Retail) Price', USD)"),
+    ):
+        f = files[sid]
+        assert not "".join(pages(f)).strip(), f"{sid} ahora tiene texto: reemplazar la lectura visual por quote()"
+        url, _n, _e, desc, tipo_f, _h = SOURCES[sid]
+        ledger.append(dict(claim_id=cid, etiqueta="DATO", afirmacion=afirm, valor=valor, fuente=desc, tipo_fuente=tipo_f, url=url,
+                           archivo_local=rel(f), sha256=sha256(f),
+                           cita_textual=f"[LECTURA VISUAL — PDF escaneado sin capa de texto; no verificable con quote(). {lectura}]"))
+    # Jordania (C97 DATO en JOD; C98 paridad; C99 ESTIMACIÓN en USD)
+    f = files["jor_2025"]
+    frags = [f"[p. {find_page(f, v)}] " + quote(texts["jor_2025"], v) for v in JOR_FRAG.values()]
+    url, _n, _e, desc, tipo_f, _h = SOURCES["jor_2025"]
+    ledger.append(dict(
+        claim_id="C97", etiqueta="DATO",
+        afirmacion="Jordania: el mecanismo de la decisión del Consejo de Ministros 4375 (2/7/2025) da la nacionalidad por acciones nuevas en empresas jordanas "
+                   "por JOD 1.000.000, o (tras un pasaporte temporal de 3 años) por un proyecto productivo nuevo de JOD 700.000 en Amán (20 empleos) "
+                   "o JOD 500.000 fuera de Amán (10 empleos); los inversores ya establecidos califican desde JOD 700.000 / 350.000",
+        valor="JOD 1.000.000 (acciones); JOD 700.000 / 500.000 (proyecto nuevo); JOD 700.000 / 350.000 (inversión existente)",
+        fuente=desc, tipo_fuente=tipo_f, url=url, archivo_local=rel(f), sha256=sha256(f),
+        cita_textual="[LECTURA VISUAL (el texto árabe se extrae con el orden de caracteres invertido): p. 1 'آلية تنفيذ قرار مجلس الوزراء رقم (4375) تاريخ 2025/7/02'; "
+                     "p. 2 'أولاً: الحصول على الجنسية الاردنية من خلال شراء جديد لأسهم في الشركات الأردنية بمبلغ لا يقل عن (1,000,000) مليون دينار أردني'; "
+                     "p. 3 '1.1.1 ... لا يقل حجم الاستثمار ... عن (700) ألف دينار أردني' y '1.1.2 ... عن (500) ألف دينار أردني'; "
+                     "p. 5 '... لا تقل عن (350,000) ثلاثمائة وخمسين ألف دينار أردني'. Siguen fragmentos literales del texto extraído] | " + " | ".join(frags)))
+    f = files["jor_peg"]
+    nd = "Jordan adopts a de-facto fixed exchange rate regime since 1995, at a mid-rate of JD 0.709 per USD"
+    url, _n, _e, desc, tipo_f, _h = SOURCES["jor_peg"]
+    ledger.append(dict(claim_id="C98", etiqueta="DATO", afirmacion="El dinar jordano está fijado de hecho desde 1995 a JOD 0,709 por USD",
+                       valor="0,709 JOD/USD", fuente=desc, tipo_fuente=tipo_f, url=url, archivo_local=rel(f), sha256=sha256(f),
+                       cita_textual=f"[p. {find_page(f, nd)}] " + quote(texts["jor_peg"], nd)))
+    jor_usd = [(via, tipo, jod, round(jod / JOD_PER_USD, -3), vig) for via, tipo, jod, vig in JOR_RUTAS]
+    ledger.append(dict(
+        claim_id="C99", etiqueta="ESTIMACIÓN",
+        afirmacion="Jordania en USD: el umbral más bajo para un inversor nuevo (proyecto fuera de Amán, JOD 500.000) equivale a ≈ USD "
+                   f"{ar(jor_usd[0][3])}, y la vía directa por acciones (JOD 1.000.000) a ≈ USD {ar(jor_usd[1][3])}",
+        valor="; ".join(f"JOD {ar(j)} ≈ USD {ar(u)}" for _v, _t, j, u, _g in jor_usd), fuente="Cálculo propio", tipo_fuente="", url="",
+        archivo_local="", sha256="", cita_textual=f"JOD / {JOD_PER_USD}; insumos C97, C98"))
+    for via, tipo, jod, usd, vig in jor_usd:
+        rows.append(dict(pais="Jordania", via=via, tipo_aporte=tipo, monto_min_principal_usd=int(usd), monto_familia_tipo_usd="",
+                         vigencia=vig, estado=f"verificado en JOD ({ar(jod)}); USD = ESTIMACIÓN a {JOD_PER_USD} JOD/USD",
+                         claim_id="C97; C98; C99", fuente=SOURCES["jor_2025"][3], url=SOURCES["jor_2025"][0]))
     for pais, via, tipo, usd, fam, vig, estado, cids in TABLA_EXTRA:
         rows.append(dict(pais=pais, via=via, tipo_aporte=tipo, monto_min_principal_usd="", monto_familia_tipo_usd="",
                          vigencia=vig, estado=estado, claim_id=cids, fuente="", url=""))
@@ -343,12 +468,41 @@ SERIES = [
     ("C47", "LCA", "imf_lca25", 28, "Nominal GDP fiscal year (EC$ millions)", list(range(2020, 2025)), "gdp_ecd_m", "pib", 1),
     ("C48", "VUT", "imf_vut24", 32, "ECP Revenues", list(range(2020, 2025)), "pct", "bdp", 1),
     ("C49", "VUT", "imf_vut24", 32, "Nominal GDP (in millions of U.S. dollars)", list(range(2020, 2025)), "gdp_usd_m", "pib", 1),
+    # Article IV 2026 (y Vanuatu 2025): agregan 2025 y revisan 2021–2024 (agregados el 2026-10-04)
+    ("C63", "DMA", "imf_dma26", 35, "Citizenship By Investment, fiscal year (U.S. million dollars)", list(range(2021, 2026)), "usd_m", "fiscal", 1),
+    ("C64", "KNA", "imf_kna26", 37, "o/w CBI revenue", list(range(2021, 2026)), "pct", "fiscal", 1),
+    ("C65", "KNA", "imf_kna26", 37, "Nominal GDP at market prices (in millions of EC$)", list(range(2021, 2026)), "gdp_ecd_m", "pib", 1),
+    ("C66", "ATG", "imf_atg26", 30, "o/w CIP revenue", list(range(2021, 2026)), "ecd_m", "fiscal", 1),
+    ("C67", "GRD", "imf_grd26", 33, "Government CBI revenue (millions of EC$)", list(range(2020, 2026)), "ecd_m", "fiscal", 1),
+    ("C68", "LCA", "imf_lca26", 33, "o.w. Citizen by Investment Program (CIP)", list(range(2020, 2026)), "pct", "fiscal", 1),
+    ("C69", "LCA", "imf_lca26", 33, "Nominal GDP fiscal year (EC$ millions)", list(range(2020, 2026)), "gdp_ecd_m", "pib", 1),
+    ("C76", "VUT", "imf_vut25", 32, "Of which: Economic citizenship programs", list(range(2021, 2026)), "pct", "fiscal", 1),
 ]
+VINTAGE26 = {"DMA": "imf_dma26", "KNA": "imf_kna26", "ATG": "imf_atg26", "GRD": "imf_grd26", "LCA": "imf_lca26"}
 NOMBRE = {"DMA": "Dominica", "KNA": "St Kitts y Nevis", "ATG": "Antigua y Barbuda", "GRD": "Granada",
           "LCA": "Santa Lucía", "VUT": "Vanuatu"}
 AÑO_FISCAL = {"DMA": "jul–jun (año = inicio del ejercicio)", "LCA": "abr–mar (año = inicio del ejercicio)"}
 # Último año de cada informe que el FMI rotula como estimación/preliminar (encabezados 'Est.'/'Prel.')
-ULTIMO_EST = {"imf_dma25": 2024, "imf_kna25": 2024, "imf_atg25": 2024, "imf_grd25": 2024, "imf_lca25": 2024, "imf_vut24": 2024}
+ULTIMO_EST = {"imf_dma25": 2024, "imf_kna25": 2024, "imf_atg25": 2024, "imf_grd25": 2024, "imf_lca25": 2024, "imf_vut24": 2024,
+              # Informes 2026: Dominica y Santa Lucía rotulan 'Est.' el ejercicio 2024 y proyectan 2025; St Kitts, Antigua y Granada estiman 2025;
+              # Vanuatu (CR 25/277) rotula 'Estimate' 2023 y 'Forecast' desde 2024.
+              "imf_dma26": 2024, "imf_kna26": 2025, "imf_atg26": 2025, "imf_grd26": 2025, "imf_lca26": 2024, "imf_vut25": 2023}
+PROYECCION_2025 = {"DMA", "LCA"}  # 2025 es proyección (no estimación) del FMI
+
+
+def usd_2026(data, iso, years) -> dict:
+    """Ingreso fiscal CBI en millones de USD según el Article IV 2026 (ESTIMACIÓN salvo la fila en USD de Dominica)."""
+    sid = VINTAGE26[iso]
+    g = lambda unit, conc: data.get((iso, unit, conc, sid), {})  # noqa: E731
+    out = {}
+    for y in years:
+        if iso == "DMA":
+            out[y] = g("usd_m", "fiscal")[y]
+        elif iso in ("KNA", "LCA"):
+            out[y] = g("pct", "fiscal")[y] / 100 * g("gdp_ecd_m", "pib")[y] / EC_PER_USD
+        else:
+            out[y] = g("ecd_m", "fiscal")[y] / EC_PER_USD
+    return out
 
 
 def recaudacion(files) -> tuple[dict, list[dict]]:
@@ -419,6 +573,21 @@ def build_revenue(data, gdp_dm) -> list[dict]:
     pct = g("VUT", "pct", "bdp", "imf_vut24"); gdp = g("VUT", "gdp_usd_m", "pib", "imf_vut24")
     for y in sorted(pct):
         add("VUT", y, "flujo BdP (ECP)", pct[y] / 100 * gdp[y], pct[y], "ESTIMACIÓN: % × PBI USD", "imf_vut24", "C48; C49")
+    # 2025 (Article IV 2026): se agrega solo el año nuevo; 2020–2024 siguen saliendo de los informes 2025 (claims C30–C49)
+    cids26 = {"DMA": "C63", "KNA": "C64; C65; C42", "ATG": "C66; C42", "GRD": "C67; C42", "LCA": "C68; C69; C42"}
+    met26 = {"DMA": "DATO: fila en USD del FMI", "KNA": "ESTIMACIÓN: % × PBI EC$ / 2,70", "ATG": "ESTIMACIÓN: EC$ / 2,70",
+             "GRD": "ESTIMACIÓN: EC$ / 2,70", "LCA": "ESTIMACIÓN: % × PBI EC$ (año fiscal) / 2,70"}
+    for iso, sid in VINTAGE26.items():
+        usd = usd_2026(data, iso, [2025])[2025]
+        pct = g(iso, "pct", "fiscal", sid).get(2025)
+        nota = " (proyección FMI)" if iso in PROYECCION_2025 else " (estimación FMI)"
+        add(iso, 2025, "ingreso fiscal", usd, pct, met26[iso] + nota + "; informe 2026", sid, cids26[iso])
+    # Vanuatu: ingreso fiscal del ECP (concepto distinto del flujo BdP de C48), 2021–2025, CR 25/277
+    pct = g("VUT", "pct", "fiscal", "imf_vut25")
+    for y in sorted(pct):
+        gdp_bn = gdp_dm.get("VUT", {}).get(str(y))
+        add("VUT", y, "ingreso fiscal (ECP)", pct[y] / 100 * gdp_bn * 1000 if gdp_bn else None, pct[y],
+            "ESTIMACIÓN: % × PBI USD (DataMapper)", "imf_vut25", "C76; C75")
     return out
 
 
@@ -483,6 +652,13 @@ CASOS = [
     ("C19", "Malta", "2025-07-24", "La nueva redacción del art. 10(9) habilita la naturalización 'por mérito' (servicios o contribuciones excepcionales) en lugar de la vía por inversión",
      "Art. 10(9) nuevo", "mlt_act21",
      ["the Minister may grant a certificate of naturalisation as a citizen of Malta by merit to an alien or stateless person"]),
+    ("C28", "UE — Caribe Oriental", "2025-12-19", "En su octavo informe del mecanismo de suspensión de visados, la Comisión señaló que los CBI de los cinco Estados del Caribe Oriental "
+     "siguen generando preocupación por sus altos volúmenes, plazos de tramitación cortos y bajas tasas de rechazo",
+     "IP/25/3061 (octavo informe VSM)", "ec_vsm8",
+     ["Commission reports on partner countries' compliance with visa-free travel requirements",
+      "the Commission adopted its eighth report under the Visa Suspension Mechanism",
+      "Schemes in five Eastern Caribbean states continue to raise concerns due to high volumes, short processing times and low rejection rates, "
+      "despite some steps taken to strengthen due diligence and information-sharing."]),
 ]
 
 
@@ -560,12 +736,12 @@ def ar(x, d=0):
     return s.replace(",", "X").replace(".", ",").replace("X", ".")
 
 
-def chart_montos(rows_plot):
+def chart_montos(rows_plot, title):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     rows_plot = sorted(rows_plot, key=lambda r: r[2])
-    fig, ax = plt.subplots(figsize=(9.5, 6.6), facecolor="white")
+    fig, ax = plt.subplots(figsize=(9.5, 7.8), facecolor="white")
     y = range(len(rows_plot))
     cols = [ORANGE if r[0] == "Argentina" else (BLUE if r[3] == "don" else NEUTRAL) for r in rows_plot]
     ax.barh(list(y), [r[2] / 1000 for r in rows_plot], color=cols, height=0.62, edgecolor="white", linewidth=2)
@@ -583,10 +759,11 @@ def chart_montos(rows_plot):
                        Patch(color=BLUE, label="Donación no reembolsable"),
                        Patch(color=NEUTRAL, label="Inversión recuperable (inmueble, bono, depósito)")],
               loc="lower right", fontsize=8.5, frameon=False)
-    fig.suptitle("El aporte argentino (USD 350.000) es 40–50% más caro que la donación\nmínima del Caribe y el bono (USD 800.000) el umbral más alto",
+    fig.suptitle(title,
                  x=0.02, ha="left", fontsize=12.5, color=INK, fontweight="bold")
     fig.text(0.02, 0.012, "Fuente: CIU St Kitts y Nevis (SRO 20 y 43/2024), CIU Antigua y Barbuda, Granada SRO 15/2024, CIU Santa Lucía (S.I. 106/2024), "
-             "\nTurquía (Reglamento 2010/139, mevzuat.gov.tr), Nauru ECRCP, MECON (Argentina).\nDominica, Vanuatu, Egipto y Jordania: sin fuente gubernamental accesible; "
+             "CBIU Dominica (S.R.O. 8/2024),\nCitizenship Office de Vanuatu, Turquía (Reglamento 2010/139), Nauru ECRCP, Ministerio de Inversión de Jordania "
+             "(decisión 4375/2025; JOD convertidos a 0,709 por USD),\nMECON (Argentina). Egipto: sin fuente gubernamental accesible; "
              "Malta: programa derogado (2025). Elaboración: Colossus Lab.", fontsize=7, color=MUTED, ha="left")
     fig.tight_layout(rect=(0, 0.075, 1, 0.94))
     CHARTS.mkdir(parents=True, exist_ok=True)
@@ -601,7 +778,7 @@ def chart_recaudacion(rev):
     import matplotlib.pyplot as plt
     order = ["DMA", "KNA", "GRD", "ATG", "LCA", "VUT"]
     fig, axes = plt.subplots(2, 3, figsize=(10.5, 6.2), sharey=True, facecolor="white")
-    years = list(range(2015, 2025))
+    years = list(range(2015, 2026))
     for ax, iso in zip(axes.ravel(), order):
         conc = "flujo BdP (ECP)" if iso == "VUT" else "ingreso fiscal"
         pts = {r["anio"]: r["pct_pib_datamapper"] for r in rev if r["iso3"] == iso and r["concepto"] == conc
@@ -616,7 +793,7 @@ def chart_recaudacion(rev):
             ax.text(xs[-1], pts[xs[-1]] + 0.8, f"{ar(pts[xs[-1]], 1)}%", ha="center", fontsize=8.5, color=INK2) if xs[-1] != ymax else None
         ax.set_title(NOMBRE[iso] + (" (ECP, BdP)" if iso == "VUT" else ""), fontsize=10, color=INK, loc="left")
         ax.set_xticks([2015, 2018, 2021, 2024])
-        ax.set_xlim(2014.4, 2024.6)
+        ax.set_xlim(2014.4, 2025.6)
         ax.yaxis.grid(True, color=GRID, linewidth=0.8)
         ax.set_axisbelow(True)
         _style(ax)
@@ -624,16 +801,18 @@ def chart_recaudacion(rev):
         ax.set_ylabel("% del PBI", fontsize=9, color=INK2)
     from matplotlib.patches import Patch
     fig.legend(handles=[Patch(color=BLUE, label="Dato del FMI (convertido a USD / PBI DataMapper)"),
-                        Patch(color=NEUTRAL, label="Último año: estimación del FMI")],
+                        Patch(color=NEUTRAL, label="Estimación o proyección del FMI (2024–2025)")],
                loc="upper right", bbox_to_anchor=(0.99, 0.915), fontsize=8, frameon=False, ncol=2)
+    kna = {r["anio"]: r["pct_pib_datamapper"] for r in rev if r["iso3"] == "KNA" and r["concepto"] == "ingreso fiscal"}
     fig.suptitle("El CBI llegó a recaudar 38% del PBI en Dominica y 26% en St Kitts; con más controles\n"
-                 "St Kitts cayó a 9% en 2024, y Vanuatu, sin exención Schengen, de 12% a 3%",
+                 f"St Kitts cayó a {ar(kna[max(kna)], 0)}% en {max(kna)}, y Vanuatu, sin exención Schengen, de 12% a 3%",
                  x=0.02, ha="left", fontsize=12.5, color=INK, fontweight="bold")
-    fig.text(0.02, 0.012, "Fuente: FMI, Article IV (Dominica CR 22/40 y 25/130; St Kitts CR 22/351 y 25/107; Antigua CR 25/96; Granada CR 25/39; "
-             "Santa Lucía CR 25/65; Vanuatu CR 24/278); PBI: FMI DataMapper (NGDPD).\nIngreso fiscal CBI (Vanuatu: ingresos ECP en balanza de pagos). "
-             "Dominica y Santa Lucía: año fiscal. Granada: la donación al NTF se registraba como 'grants' hasta 2022. Elaboración: Colossus Lab.",
+    fig.text(0.02, 0.012, "Fuente: FMI, Article IV (Dominica CR 22/40, 25/130 y 26/117; St Kitts CR 22/351, 25/107 y 26/93; Antigua CR 25/96 y 26/97; "
+             "Granada CR 25/39 y 26/9; Santa Lucía CR 25/65 y 26/3; Vanuatu CR 24/278);\nPBI: FMI DataMapper (NGDPD). 2025 sale de los informes 2026 "
+             "(Dominica y Santa Lucía: proyección). Ingreso fiscal CBI (Vanuatu: ingresos ECP en balanza de pagos). Dominica y Santa Lucía: año fiscal.\n"
+             "Granada: la donación al NTF se registraba como 'grants' hasta 2022. Elaboración: Colossus Lab.",
              fontsize=7, color=MUTED, ha="left")
-    fig.tight_layout(rect=(0, 0.06, 1, 0.885))
+    fig.tight_layout(rect=(0, 0.075, 1, 0.885))
     for ext in ("png", "svg"):
         fig.savefig(CHARTS / f"C_recaudacion_pbi.{ext}", dpi=150, facecolor="white")
     plt.close(fig)
@@ -718,28 +897,37 @@ def main() -> None:
     write_csv(PROCESSED / "C_posicionamiento.csv", pos)
 
     # Estimaciones derivadas
-    car_don = {p: v for p, v in don.items() if p in ("St Kitts y Nevis", "Antigua y Barbuda", "Granada", "Santa Lucía")}
+    upd = {r["iso3"]: r["usd_por_destino_sin_visa"] for r in pos if r["usd_por_destino_sin_visa"] != ""}
+    CAR5 = ("KNA", "ATG", "GRD", "LCA", "DMA")
+    car_don = {p: v for p, v in don.items() if p in ("St Kitts y Nevis", "Antigua y Barbuda", "Granada", "Santa Lucía", "Dominica")}
+    assert len(car_don) == 5, car_don
     cmin, cmax = min(car_don.values()), max(car_don.values())
     fam_car = {p: fam[p] for p in car_don if p in fam}
+    fmin, fmax = min(fam_car.values()), max(fam_car.values())
     led_est = [
         dict(claim_id="C80", etiqueta="ESTIMACIÓN",
-             afirmacion="El aporte argentino (USD 350.000) es entre 1,40 y 1,52 veces la donación mínima de los cuatro programas caribeños verificados",
-             valor=f"{350000 / cmax:.2f}–{350000 / cmin:.2f}×", fuente="Cálculo propio", tipo_fuente="", url="", archivo_local="", sha256="",
-             cita_textual=f"350.000 / [{cmin}, {cmax}]; insumos A01, C01, C04, C07, C10"),
+             afirmacion=f"El aporte argentino (USD 350.000) es entre {ar(350000 / cmax, 2)} y {ar(350000 / cmin, 2)} veces la donación mínima de los cinco "
+                        f"programas caribeños (USD {ar(cmin)}–{ar(cmax)}; Dominica es la más barata). Frente a Vanuatu (USD {ar(don['Vanuatu'])}) "
+                        f"es {ar(350000 / don['Vanuatu'], 1)} veces",
+             valor=f"{350000 / cmax:.2f}–{350000 / cmin:.2f}× (Caribe); {350000 / don['Vanuatu']:.2f}× (Vanuatu)", fuente="Cálculo propio",
+             tipo_fuente="", url="", archivo_local="", sha256="",
+             cita_textual=f"350.000 / [{cmin}, {cmax}]; insumos A01, C01, C04, C07, C10, C91, C95"),
         dict(claim_id="C81", etiqueta="ESTIMACIÓN",
-             afirmacion="Para una familia tipo (principal + cónyuge + 2 menores), Argentina pide USD 500.000, el doble o más que St Kitts, Antigua, Granada o Santa Lucía (USD 230.000–250.000, que cubren hasta 4 personas)",
-             valor=f"{500000 / max(fam_car.values()):.1f}–{500000 / min(fam_car.values()):.1f}×", fuente="Cálculo propio", tipo_fuente="",
-             url="", archivo_local="", sha256="", cita_textual="500.000 / familia tipo; insumos A05, C01, C04, C07, C10"),
+             afirmacion=f"Para una familia tipo (principal + cónyuge + 2 menores), Argentina pide USD 500.000, el doble o más que St Kitts, Antigua, Granada, "
+                        f"Santa Lucía o Dominica (USD {ar(fmin)}–{ar(fmax)}, que cubren hasta 4 personas); Vanuatu cobra USD {ar(fam['Vanuatu'])}",
+             valor=f"{500000 / fmax:.1f}–{500000 / fmin:.1f}× (Caribe); {500000 / fam['Vanuatu']:.1f}× (Vanuatu)", fuente="Cálculo propio", tipo_fuente="",
+             url="", archivo_local="", sha256="", cita_textual="500.000 / familia tipo; insumos A05, C01, C04, C07, C10, C91, C95"),
         dict(claim_id="C82", etiqueta="ESTIMACIÓN",
              afirmacion="El pasaporte argentino da acceso sin visa previa a más destinos que todos los programas del benchmark salvo Malta (148 vs 123–136 en el Caribe, 111 Turquía, 80 Vanuatu, 73 Nauru, 49 Jordania, 48 Egipto)",
              valor="; ".join(f"{iso}={pas.get(iso, 'NA')}" for iso in ISO.values()), fuente="Módulo B (Passport Index Data, R)",
              tipo_fuente="R", url="", archivo_local="data/processed/B_pasaportes_destinos.csv", sha256="",
              cita_textual="Conteo de destinos sin visa por pasaporte del Módulo B (B36); data/processed/B_pasaportes_destinos.csv"),
         dict(claim_id="C83", etiqueta="ESTIMACIÓN",
-             afirmacion="Costo de la donación mínima por destino sin visa: Argentina ~USD 2.365; Caribe ~USD 1.700–1.920; Nauru ~USD 1.230 (oferta 2026)",
+             afirmacion="Costo de la donación mínima por destino sin visa: Argentina ~USD {}; Caribe ~USD {}–{}; Vanuatu ~USD {}; Nauru ~USD {} (oferta 2026)".format(
+                 *(ar(x) for x in (upd["ARG"], min(upd[i] for i in CAR5), max(upd[i] for i in CAR5), upd["VUT"], upd["NRU"]))),
              valor="; ".join(f"{r['iso3']}={r['usd_por_destino_sin_visa']}" for r in pos if r["usd_por_destino_sin_visa"] != ""),
              fuente="Cálculo propio", tipo_fuente="", url="", archivo_local="", sha256="",
-             cita_textual="donación mínima / destinos sin visa; insumos A01, C01, C04, C07, C10, C16, C82, B36"),
+             cita_textual="donación mínima / destinos sin visa; insumos A01, C01, C04, C07, C10, C16, C91, C95, C82, B36"),
     ]
     # Picos de recaudación (ESTIMACIÓN sobre DataMapper)
     fis = [r for r in rev if r["concepto"] in ("ingreso fiscal", "flujo BdP (ECP)") and r["pct_pib_datamapper"] != ""]
@@ -768,6 +956,29 @@ def main() -> None:
         fuente="Cálculo propio sobre FMI Article IV", tipo_fuente="", url="", archivo_local="data/processed/C_recaudacion_cbi.csv",
         sha256="", cita_textual="suma de recaudacion_usd_m (ingreso fiscal, 2020–2024) de DMA, KNA, ATG, GRD, LCA; insumos C84, C85, "
                                 "C86, C87, C88, A01"))
+    c25 = {r["iso3"]: r["recaudacion_usd_m"] for r in rev if r["anio"] == 2025 and r["concepto"] == "ingreso fiscal"}
+    t25 = sum(c25.values())
+    led_est.append(dict(
+        claim_id="C77", etiqueta="ESTIMACIÓN",
+        afirmacion=f"Los cinco programas caribeños recaudarían ≈ USD {t25:.0f} M de ingreso fiscal CBI en 2025 según los Article IV 2026 "
+                   f"(estimación del FMI; proyección para el ejercicio 2025/26 de Dominica y Santa Lucía), ≈ {t25 / 0.35:.0f} aportes argentinos de USD 350.000",
+        valor="; ".join(f"{k}={v:g}" for k, v in c25.items()) + f"; total={t25:.0f} M USD; {t25 / 0.35:.0f} aportes",
+        fuente="Cálculo propio sobre FMI Article IV 2026", tipo_fuente="", url="", archivo_local="data/processed/C_recaudacion_cbi.csv", sha256="",
+        cita_textual="suma de recaudacion_usd_m (ingreso fiscal, 2025); insumos C63, C64, C65, C66, C67, C68, C69, C42, A01"))
+    v26 = {iso: usd_2026(data, iso, range(2021, 2026)) for iso in VINTAGE26}
+    t26 = sum(sum(d.values()) for d in v26.values())
+    t26_2124 = sum(v for d in v26.values() for y, v in d.items() if y <= 2024)
+    old_2124 = sum(r["recaudacion_usd_m"] for r in car if r["anio"] >= 2021)
+    led_est.append(dict(
+        claim_id="C78", etiqueta="ESTIMACIÓN",
+        afirmacion=f"Con las cifras revisadas de los Article IV 2026, los cinco caribeños suman ≈ USD {t26:.0f} M de ingreso fiscal CBI en 2021–2025 "
+                   f"(≈ USD {t26 / 5:.0f} M por año, ≈ {t26 / 5 / 0.35:.0f} aportes argentinos por año); para 2021–2024 los informes 2026 dan "
+                   f"≈ USD {t26_2124:.0f} M frente a ≈ USD {old_2124:.0f} M de los informes 2025 (revisión de {100 * (t26_2124 / old_2124 - 1):+.0f}%)",
+        valor=f"2021–2025={t26:.0f} M USD; {t26 / 5:.0f} M USD/año; {t26 / 5 / 0.35:.0f} aportes/año; 2021–2024: {t26_2124:.0f} (inf. 2026) vs "
+              f"{old_2124:.0f} (inf. 2025); " + "; ".join(f"{k}={sum(d.values()):.0f}" for k, d in v26.items()),
+        fuente="Cálculo propio sobre FMI Article IV 2026", tipo_fuente="", url="", archivo_local="data/processed/C_recaudacion_cbi.csv", sha256="",
+        cita_textual="suma 2021–2025 por país (DMA: fila en USD; KNA y LCA: % × PBI EC$ / 2,70; ATG y GRD: EC$ / 2,70); insumos C63, C64, C65, "
+                     "C66, C67, C68, C69, C42, C90, A01"))
     write_csv(PROCESSED / "C_fuentes_fallidas.csv",
               [dict(fecha="2026-10-03", fuente=a, url=b, error=c, causa=d, accion=e) for a, b, c, d, e in FAILED])
 
@@ -782,9 +993,16 @@ def main() -> None:
                      "Unidad en proyecto aprobado (cuota) / proyecto aprobado": "inmueble (cuota)",
                      "National Economic Fund (NEF)": "donación NEF", "Compra de inmueble (3 años sin vender)": "inmueble",
                      "Capital fijo, depósito bancario o bonos del Estado (3 años)": "depósito / bono / capital",
-                     "ECRCP — oferta por tiempo limitado": "donación (oferta 2026)", "ECRCP — monto regular": "donación (regular)"}[r["via"]]
+                     "ECRCP — oferta por tiempo limitado": "donación (oferta 2026)", "ECRCP — monto regular": "donación (regular)",
+                     "Economic Diversification Fund (EDF)": "donación EDF",
+                     "Inmueble en proyecto aprobado (+ tasa de gobierno desde USD 75.000)": "inmueble (+ tasa USD 75.000)",
+                     "Development Support Program (DSP) — tasas mandadas por el Gobierno": "contribución DSP",
+                     JOR_RUTAS[0][0]: "proyecto fuera de Amán (JOD 500.000)",
+                     JOR_RUTAS[1][0]: "acciones (JOD 1.000.000)"}[r["via"]]
             plot_rows.append((r["pais"], short, int(r["monto_min_principal_usd"]), "don" if "Donación" in r["tipo_aporte"] else "inv"))
-    chart_montos(plot_rows)
+    top = max((r for r in plot_rows if r[0] != "Argentina"), key=lambda r: r[2])
+    chart_montos(plot_rows, f"El aporte argentino (USD 350.000) cuesta {ar(350000 / cmax, 2)}–{ar(350000 / cmin, 2)} veces la donación caribeña;\n"
+                            f"solo {top[0]} ({top[1].split(' (')[0]}, ≈ USD {ar(top[2] / 1e6, 2)} M) supera al bono argentino (USD 800.000)")
     chart_recaudacion(rev)
 
     ledger = led_montos + led_txt + led_rev + led_dm + led_casos + led_est

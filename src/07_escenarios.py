@@ -60,7 +60,7 @@ def bases() -> tuple[dict, list[dict]]:
         "venc_capital_externo_2027_musd": ext["2027"],
         "servicios_deuda_jul26_jun27_musd": servicios_12m,
     }
-    rel = lambda p: str(p.relative_to(p.parents[2]))
+    rel = lambda p: p.relative_to(p.parents[2]).as_posix()
     ledger = [
         dict(claim_id="G01", etiqueta="DATO", afirmacion="Reservas internacionales brutas del BCRA (último dato)",
              valor=f"USD {ult['valor']:,.0f} M", fuente="BCRA, API Estadísticas v4.0, variable 1", tipo_fuente="P",

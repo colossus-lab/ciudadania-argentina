@@ -1,2 +1,3 @@
 fecha,fuente,url,error,causa,accion
-2026-10-03,Census API (api.census.gov) ACS B05006,"https://api.census.gov/data/2023/acs/acs1?get=NAME,B05006_001E&for=us:1",HTTP 302 -> missing_key.html,La API exige una key (requiere formulario de registro),"Se usa el ACS Summary File oficial (www2.census.gov), mismas estimaciones"
+2026-10-04,NTTO I-92 / APIS por país de destino,https://www.trade.gov/us-international-air-travel-statistics-i-92-data,Producto de pago (USD 150 a USD 5.795),Licencia comercial,Se usa el agregado gratuito 'South America' como control de demanda (E29)
+2026-10-04,Census API (api.census.gov) ACS B05006,"https://api.census.gov/data/2023/acs/acs1?get=NAME,B05006_001E&for=us:1",HTTP 302 -> missing_key.html,La API exige una key (requiere formulario de registro),"Se usa el ACS Summary File oficial (www2.census.gov), mismas estimaciones"

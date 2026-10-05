@@ -1,7 +1,9 @@
 """Módulo F — "Refugio austral": Argentina frente a Nueva Zelanda, Uruguay, Chile, Portugal y Canadá.
 
 Compara dimensiones a favor (paz, alimentos, energía, litio, patrimonio natural) y CONTRAPESOS (defaults, inflación,
-riesgo país, controles de capital, Estado de derecho) sin agregarlas en un índice compuesto.
+riesgo país, calificación soberana, controles de capital, Estado de derecho) sin agregarlas en un índice compuesto.
+Riesgo país: el EMBI (JP Morgan) es propietario; se usa la cifra que el BCRA cita textualmente en el IPOM (solo
+Argentina) y, como comparable para los seis, la calificación soberana publicada por cada gobierno/oficina de deuda.
 
 Salidas:
   data/processed/F_*.csv          series limpias y tabla resumen (un DATO/ESTIMACIÓN por celda, con año)
@@ -15,6 +17,7 @@ from __future__ import annotations
 import csv
 import gzip
 import json
+import re
 import shutil
 import zipfile
 from pathlib import Path
@@ -36,6 +39,7 @@ NOMBRE = {"ARG": "Argentina", "NZL": "Nueva Zelanda", "URY": "Uruguay", "CHL": "
 EN = {"ARG": "Argentina", "NZL": "New Zealand", "URY": "Uruguay", "CHL": "Chile", "PRT": "Portugal", "CAN": "Canada"}
 ISO2 = {"ARG": "ar", "NZL": "nz", "URY": "uy", "CHL": "cl", "PRT": "pt", "CAN": "ca"}
 ROOT = RAW.parents[1]
+FECHA_CORTE = "2026-10-03"  # fecha de corte del módulo (para afirmaciones de cálculo propio sin archivo local)
 
 D360 = "https://data360api.worldbank.org/data360/data"
 CKAN_RES = "https://datos.energia.gob.ar/dataset/c846e79c-026c-4040-897f-1ad3543b407c/resource/"
@@ -109,7 +113,40 @@ SRC = {
                     "Cancillería argentina, nota del 05/02/2026 sobre el Acuerdo de Comercio e Inversiones Recíprocos", "P"),
     "esf": ("https://home.treasury.gov/system/files/206/ESF-October-2025-FS_Trunc_Notes.pdf",
             "F_treasury_esf_oct2025", "pdf", "U.S. Treasury, Exchange Stabilization Fund, estados de octubre de 2025", "P"),
+    # --- pendientes cerrados el 2026-10-03 (riesgo país, calificaciones, controles de capital vigentes, MNNA)
+    "ipom": ("https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/informes/informe-politica-monetaria-2026-T2.pdf",
+             "F_bcra_ipom_2026t2", "pdf",
+             "BCRA, Informe de Política Monetaria, segundo trimestre de 2026 (publicado el 06/08/2026)", "P"),
+    "texord": ("https://www.bcra.gob.ar/archivos/Pdfs/Texord/t-excbio.pdf", "F_bcra_texord_exterior_cambios", "pdf",
+               "BCRA, Texto ordenado \"Exterior y Cambios\" al 14/09/2026 (última comunicación incorporada: A 8481)", "P"),
+    "bcra_nec": ("https://www.bcra.gob.ar/normativa-de-exterior-y-cambios/", "F_bcra_normativa_exterior_cambios", "html",
+                 "BCRA, página \"Normativa de Exterior y Cambios\" (puntos principales de la normativa vigente)", "P"),
+    "oecd_lt": ("https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_FINMARK,/"
+                "ARG+URY+NZL+CHL+PRT+CAN.M.IRLT......?startPeriod=2024-01&format=csvfile",
+                "F_oecd_irlt_mensual", "csv",
+                "OCDE, Financial market (DF_FINMARK), Long-term interest rates (IRLT, bonos del gobierno a ~10 años, % anual)", "P"),
+    "rt_nz": ("https://web.archive.org/web/20260409193619id_/https://debtmanagement.treasury.govt.nz/investor-resources/credit-ratings",
+              "F_nzdm_credit_ratings_wayback20260409", "html",
+              "New Zealand Debt Management (Treasury), \"Credit ratings\" (captura Wayback del 09/04/2026)", "P"),
+    "rt_uy": ("https://deuda.mef.gub.uy/6475/14/areas/calificacion-crediticia.html", "F_mef_uy_calificacion_crediticia", "html",
+              "MEF Uruguay, Unidad de Gestión de Deuda, \"Calificación Crediticia\"", "P"),
+    "rt_cl": ("https://www.hacienda.cl/areas-de-trabajo/finanzas-internacionales/oficina-de-la-deuda-publica/estadisticas/"
+              "ratings-historicos", "F_hacienda_cl_ratings_historicos", "html",
+              "Ministerio de Hacienda de Chile, Oficina de la Deuda Pública, \"Ratings históricos\"", "P"),
+    "rt_pt": ("https://www.igcp.pt/sites/default/files/2026-09/IGCP_Investor_Presentation.pdf", "F_igcp_investor_presentation_2026-09",
+              "pdf", "IGCP (agencia de deuda de Portugal), Investor Presentation, septiembre de 2026", "P"),
+    "rt_ca": ("https://www.canada.ca/en/department-finance/services/publications/debt-management-report/2024-2025.html",
+              "F_finance_canada_dmr_2024-25", "html", "Department of Finance Canada, Debt Management Report 2024–25", "P"),
+    "mnna": ("https://web.archive.org/web/20260924124444id_/https://www.state.gov/major-non-nato-ally-status",
+             "F_state_mnna_wayback20260924", "html",
+             "U.S. Department of State, \"Major Non-NATO Ally Status\" (captura Wayback del 24/09/2026)", "P"),
 }
+
+# Escala de calificaciones: escalones por debajo de AAA/Aaa (S&P y Fitch | Moody's)
+NOTCH_SP = ["AAA", "AA+", "AA", "AA-", "A+", "A", "A-", "BBB+", "BBB", "BBB-", "BB+", "BB", "BB-", "B+", "B", "B-",
+            "CCC+", "CCC", "CCC-"]
+NOTCH_MD = ["Aaa", "Aa1", "Aa2", "Aa3", "A1", "A2", "A3", "Baa1", "Baa2", "Baa3", "Ba1", "Ba2", "Ba3", "B1", "B2", "B3",
+            "Caa1", "Caa2", "Caa3"]
 
 FILES: dict[str, Path] = {}
 TEXTS: dict[str, str] = {}
@@ -148,17 +185,22 @@ def text(sid: str) -> str:
 
 
 def rel(p: Path) -> str:
-    return str(p.relative_to(ROOT))
+    return p.relative_to(ROOT).as_posix()
 
 
-def claim(cid, etiqueta, afirmacion, valor, sid, cita=None, needle=None):
+def claim(cid, etiqueta, afirmacion, valor, sid, cita=None, needle=None, needles=None):
     url, _n, _e, desc, tipo = SRC[sid] if sid else ("", "", "", "Cálculo propio (Colossus Lab)", "")
     if needle is not None:
         cita = quote(text(sid), needle)
+    if needles is not None:  # varias citas literales del mismo documento, separadas por " | " (formato de 09_auditoria)
+        cita = " | ".join(quote(text(sid), n) for n in needles)
     f = FILES.get(sid)
+    # fecha de acceso = fecha de la copia local (sufijo _YYYY-MM-DD); cálculos propios: fecha de corte del módulo
+    m = re.search(r"_(\d{4}-\d{2}-\d{2})\.", f.name) if f else None
     CLAIMS.append(dict(claim_id=cid, etiqueta=etiqueta, afirmacion=afirmacion, valor=valor, fuente=desc,
                        tipo_fuente=tipo, url=url, archivo_local=rel(f) if f else "",
-                       sha256=sha256(f) if f else "", cita_textual=cita))
+                       sha256=sha256(f) if f else "", cita_textual=cita,
+                       fecha_acceso=m.group(1) if m else FECHA_CORTE))
     return cid
 
 
@@ -494,10 +536,7 @@ def main() -> None:
     cell("6 Contrapesos", "Inflación 2025 (IPC, % promedio anual)", "ARG", round(avg25, 1), 2025, "%", "ESTIMACIÓN", c_a25,
          "menor", "INDEC vía datos.gob.ar; WB sin dato 2025")
 
-    # 6c. Riesgo país: sin fuente pública abierta (ver Fuentes fallidas)
-    for iso in ISO3:
-        cell("6 Contrapesos", "Riesgo país (EMBI)", iso, None, "", "pb", "s/d", "", "menor",
-             "sin fuente pública abierta (EMBI de JP Morgan es propietario)")
+    # 6c. Riesgo país y calificaciones: ver sección 8 (claims F123 en adelante, para no renumerar los existentes)
 
     # 6d. Controles de capital y corralito (normativa)
     cc = [
@@ -560,8 +599,127 @@ def main() -> None:
     claim(nid(), "DATO", "Detalle del swap ESF–BCRA de octubre de 2025", "USD 2.500 M", "esf",
           needle="the BCRA exchanged pesos for $2.5 billion")
 
+    # ===================================================================== 8. Pendientes cerrados (2026-10-03)
+    # 8a. Riesgo país de Argentina: no hay serie pública del EMBI, pero el BCRA lo cita textualmente en el IPOM
+    c_rp = claim(nid(), "DATO", "Riesgo país de Argentina (spread EMBI, citado por el BCRA): bajó de 556 a 434 p.b. en los tres "
+                 "meses hasta fines de julio de 2026", "434 p.b. (fines de jul-2026)", "ipom",
+                 needle="nuyó 122 p.b. en los últimos 3 meses hasta fines de julio (de 556 p.b. a 434 p.b.)")
+    c_rpb = claim(nid(), "DATO", "Prima de riesgo soberano promedio de los países con calificación B- (BCRA, IPOM)", "322 p.b.",
+                  "ipom", needle="aproximándose así a la prima de riesgo soberano que exhiben en promedio el resto de los "
+                                 "créditos con similar calificación crediticia (322 p.b.)")
+    c_rpl = claim(nid(), "DATO", "EMBI Latam (referencia regional, BCRA): en torno a 260 p.b. a fines de julio de 2026",
+                  "≈260 p.b.", "ipom",
+                  needle="el EMBI Latam se ubicó en torno a 260 puntos básicos (p.b.) a fines de julio")
+    claim(nid(), "DATO", "El riesgo país de Argentina alcanzó el nivel más bajo desde principios de 2018 (BCRA, IPOM 2T-2026)",
+          "mínimo desde 2018", "ipom", needle="riesgo país, que alcanzó el nivel más bajo desde principios de 2018")
+    cell("6 Contrapesos", "Riesgo país: spread EMBI (p.b.)", "ARG", 434, "jul-2026", "p.b.", "DATO", c_rp, "menor",
+         f"BCRA IPOM 2T-2026; promedio de soberanos B-: 322 p.b. ({c_rpb}); EMBI Latam ≈260 p.b. ({c_rpl})")
+    for iso in ISO3[1:]:
+        cell("6 Contrapesos", "Riesgo país: spread EMBI (p.b.)", iso, None, "", "p.b.", "s/d", "", "menor",
+             "sin fuente pública/oficial con el dato por país (EMBI de JP Morgan es propietario)")
+
+    # 8b. Calificación soberana de largo plazo en moneda extranjera (S&P / Moody's / Fitch), según cada gobierno
+    rating_src = {
+        "ARG": ("ipom", ("B-", "B3", "B-"), "jul-2026",
+                ["la agencia Fitch elevó la calificación de la deuda soberana argentina, pasando de CCC+ a B-, y "
+                 "aproximadamente un mes después la agencia Standard & Poor’s hizo lo propio (de CCC a B-)",
+                 "la agencia Moody’s llevó la calificación crediticia de Caa1 a B3"]),
+        "NZL": ("rt_nz", ("AA+", "Aaa", "AA+"), "abr-2026",
+                ["Moody's Investors Service Aaa (stable outlook) Aaa (stable outlook) 16 April 2024 S&P Global Ratings "
+                 "AAA (stable outlook) AA+ (stable outlook) 14 October 2025 Fitch Ratings AA+ (negative outlook) "
+                 "AA+ (negative outlook) 20 March 2026"]),
+        "URY": ("rt_uy", ("BBB+", "Baa1", "BBB"), "sep-2026",
+                ["Fitch Ratings BBB BBB Estable Setiembre 2026", "S&P BBB+ BBB+ Estable Noviembre 2025",
+                 "Baa1 Baa1 Estable Marzo 2024"]),
+        "CHL": ("rt_cl", ("A", "A2", "A-"), "última entrada: oct-2024",
+                ["16-10-2024 A Estable", "15-09-2022 A2 Estable", "15-10-2020 A− Estable"]),
+        "PRT": ("rt_pt", ("A+", "A3", "A+"), "sep-2026",
+                ["currently at A3 |Stable byMoody’s; A+ |Positive by S&P; A+ |Stableby Fitch"]),
+        "CAN": ("rt_ca", ("AAA", "Aaa", "AA+"), "31/03/2025",
+                ["These strengths are reflected in Canada's strong current credit ratings: Moody's (Aaa), S&P (AAA), "
+                 "Fitch (AA+), DBRS (AAA)."]),
+    }
+    rt_rows = []
+    for iso, (sid, (sp, md, fi), fecha, nds) in rating_src.items():
+        cid = claim(nid(), "DATO", f"Calificación soberana de largo plazo en moneda extranjera de {NOMBRE[iso]} "
+                    "(S&P / Moody's / Fitch), según fuente oficial", f"{sp} / {md} / {fi} ({fecha})", sid, needles=nds)
+        notches = [NOTCH_SP.index(sp), NOTCH_MD.index(md), NOTCH_SP.index(fi)]
+        avg = sum(notches) / 3
+        cid_e = claim(nid(), "ESTIMACIÓN", f"{NOMBRE[iso]}: escalones por debajo de AAA/Aaa, promedio de S&P, Moody's y Fitch "
+                      "(BBB-/Baa3 = 9 = último escalón de grado de inversión)", f"{avg:.1f}", "",
+                      cita=f"AAA/Aaa=0, AA+/Aa1=1, …, BBB-/Baa3=9, …, B-/B3=15; ({notches[0]}+{notches[1]}+{notches[2]})/3; "
+                           f"insumo {cid}")
+        cell("6 Contrapesos", "Calificación soberana LP m/e (S&P / Moody's / Fitch)", iso, f"{sp} / {md} / {fi}", fecha,
+             "letras", "DATO", cid, "mayor")
+        cell("6 Contrapesos", "Calificación soberana: escalones bajo AAA (prom. 3 agencias)", iso, round(avg, 1), fecha,
+             "escalones", "ESTIMACIÓN", cid_e, "menor", "grado de inversión ≤ 9")
+        rt_rows.append(dict(pais=iso, sp=sp, moodys=md, fitch=fi, fecha=fecha, escalones_sp=notches[0],
+                            escalones_moodys=notches[1], escalones_fitch=notches[2], escalones_prom=round(avg, 2),
+                            grado_inversion=avg <= 9, fuente=SRC[sid][3], claim_dato=cid, claim_estimacion=cid_e))
+    pd.DataFrame(rt_rows).to_csv(PROCESSED / "F_calificaciones_soberanas.csv", index=False)
+
+    # 8c. Rendimiento de bonos del gobierno a largo plazo (OCDE). Argentina y Uruguay no son miembros: sin serie.
+    lt = pd.read_csv(FILES["oecd_lt"], dtype=str)
+    lt["OBS_VALUE_f"] = pd.to_numeric(lt.OBS_VALUE, errors="coerce")
+    (lt[["REF_AREA", "TIME_PERIOD", "OBS_VALUE_f"]].rename(columns={"REF_AREA": "pais", "TIME_PERIOD": "mes",
+                                                                    "OBS_VALUE_f": "tasa_largo_plazo_pct"})
+     .sort_values(["pais", "mes"]).to_csv(PROCESSED / "F_oecd_tasa_largo_plazo.csv", index=False))
+    for iso in ISO3:
+        s = lt[(lt.REF_AREA == iso) & lt.OBS_VALUE_f.notna()].sort_values("TIME_PERIOD")
+        if len(s):
+            r = s.iloc[-1]
+            cid = claim(nid(), "DATO", f"OCDE: tasa de interés de largo plazo (bonos del gobierno ~10 años, moneda local) de "
+                        f"{NOMBRE[iso]}, {r.TIME_PERIOD}", f"{r.OBS_VALUE_f:.2f}% anual", "oecd_lt",
+                        cita=f"REF_AREA={iso}; MEASURE=IRLT; TIME_PERIOD={r.TIME_PERIOD}; OBS_VALUE={r.OBS_VALUE}")
+            cell("6 Contrapesos", "Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)", iso,
+                 round(r.OBS_VALUE_f, 2), r.TIME_PERIOD, "%", "DATO", cid, "menor", "no es un spread: incluye inflación esperada")
+        else:
+            cell("6 Contrapesos", "Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)", iso,
+                 None, "", "%", "s/d", "", "menor", "no es miembro de la OCDE: la consulta no devuelve serie")
+
+    # 8d. Controles de capital vigentes (texto ordenado al 14/09/2026; no hay circulares CAMEX posteriores hasta la A 8488)
+    c_to = claim(nid(), "DATO", "Texto ordenado de Exterior y Cambios vigente: al 14/09/2026, última comunicación incorporada A 8481",
+                 "14/09/2026", "texord", needle="-Última comunicación incorporada: A 8481- Texto ordenado al 14/09/2026")
+    c_pj = claim(nid(), "DATO", "Empresas (personas jurídicas): siguen necesitando conformidad previa del BCRA para formar activos "
+                 "externos (texto ordenado, punto 3.10)", "vigente al 14/09/2026", "texord",
+                 needle="El acceso al mercado de cambios por parte de personas jurídicas que no sean entidades autorizadas a operar "
+                        "en cambios, gobiernos locales, Fondos Comunes de Inversión, Fideicomisos y otras universalidades "
+                        "constituidas en el país, requerirá la conformidad previa del BCRA para la formación de activos externos")
+    c_div = claim(nid(), "DATO", "Dividendos: el acceso sigue limitado a utilidades de ejercicios iniciados desde el 01/01/2025 "
+                  "(salvo excepciones: BOPREAL, RIGI, aportes desde 17/01/2020, etc.; punto 3.4.4)", "vigente al 14/09/2026",
+                  "texord", needle="se trata de utilidades distribuibles obtenidas a partir de ganancias realizadas en estados "
+                                   "contables anuales regulares y auditados de ejercicios iniciados a partir del 01/01/25")
+    c_ph = claim(nid(), "DATO", "Personas humanas: acceso sin límite para comprar billetes o depósitos en moneda extranjera con "
+                 "débito en cuenta; las personas jurídicas requieren conformidad previa (BCRA)", "sin límite (personas)",
+                 "bcra_nec", needles=[
+                     "Las personas humanas residentes pueden acceder sin límite al mercado de cambios para formar activos "
+                     "externos en billetes o depósitos, siempre que la operación se realice mediante débito en cuenta en una "
+                     "entidad financiera local",
+                     "Las personas jurídicas, requieren la conformidad previa del BCRA para acceder al mercado de cambios con "
+                     "esos fines",
+                     "Las personas no residentes también deben contar con la conformidad previa del BCRA"])
+    c_90 = claim(nid(), "DATO", "Personas humanas: quien compra divisas se compromete a no operar títulos con liquidación en "
+                 "moneda extranjera por 90 días (restricción cruzada, punto 3.8.5); otras modalidades de formación de activos "
+                 "externos, tope de USD 200 mensuales (punto 3.9.1)", "90 días; USD 200", "texord", needles=[
+                     "compras de títulos valores con liquidación en moneda extranjera a partir del momento en que requiere el "
+                     "acceso y por los 90 (noventa) días corridos subsiguientes",
+                     "3.9.1. El cliente no supere, en el mes calendario en el conjunto de las entidades y por el conjunto de los "
+                     "conceptos señalados, el equivalente a USD 200"])
+    c_dvu = claim(nid(), "DATO", "La flexibilización cambiaria permitió a las empresas, tras seis años, girar dividendos por "
+                  "~USD 2.800 millones en el primer semestre de 2026 (BCRA, IPOM)", "USD 2.800 M (1S-2026)", "ipom",
+                  needle="permitió a las empresas, luego de seis años, comenzar a girar dividendos por aproximadamente "
+                         "USD 2.800 millones en el primer semestre del año")
+
+    # 8e. Geopolítica: estatus de aliado extra-OTAN (State Department, vía Wayback)
+    c_mnna = claim(nid(), "DATO", "Argentina (y Nueva Zelanda) figuran entre los 19 países designados por EE.UU. como "
+                   "Major Non-NATO Ally", "19 MNNA; incluye ARG y NZL", "mnna",
+                   needle="Currently 19 countries are designated as MNNAs under 22 U.S.C. §2321k and 10 U.S.C. §2350a "
+                          "Argentina, Australia, Bahrain, Brazil, Colombia, Egypt, Israel, Japan, Jordan, Kenya, Kuwait, "
+                          "Morocco, New Zealand")
+
     # ===================================================================== tabla resumen + gráficos
     tab = pd.DataFrame(table)
+    tab = tab.sort_values("dimension", kind="stable").reset_index(drop=True)
     tab.to_csv(PROCESSED / "F_tabla_resumen.csv", index=False)
     wide = tab.pivot_table(index=["dimension", "indicador"], columns="pais", values="valor", aggfunc="first")[ISO3]
     wide.to_csv(PROCESSED / "F_tabla_resumen_ancha.csv")
@@ -570,7 +728,8 @@ def main() -> None:
     write_ledger(MODULO, CLAIMS)
     print(f"{len(CLAIMS)} afirmaciones -> docs/claims/claims_F.csv; {len(tab)} celdas en F_tabla_resumen.csv")
     for k, v in dict(gpi_n=gpi_n, gpi_arg=gpi_arg, ben=c_ben, vm=c_vms, vmy=c_vmy, lsh=c_lsh, lr=c_lr, ipc=c_ipcm,
-                     a25=c_a25, cepo=c_cepo, geo1=c_geo1, geo2=c_geo2).items():
+                     a25=c_a25, cepo=c_cepo, geo1=c_geo1, geo2=c_geo2, rp=c_rp, rpb=c_rpb, rpl=c_rpl, to=c_to,
+                     pj=c_pj, div=c_div, ph=c_ph, d90=c_90, dvu=c_dvu, mnna=c_mnna).items():
         c = next(x for x in CLAIMS if x["claim_id"] == v)
         print(f"  {v} [{k}] {c['afirmacion'][:90]} = {c['valor']}")
 
@@ -613,6 +772,8 @@ def charts(tab, wgi_est, en, ipc, dfl):
         ("Inflación 2024 (IPC, % promedio anual)", "Inflación 2024, % (WB)", "menor"),
         ("Años con deuda soberana en default, 1960–2024 (de 65)", "Años en default 1960–2024 (BoC–BoE)", "menor"),
         ("WJP Rule of Law Index (0–1)", "WJP Rule of Law Index 2025 (0–1)", "mayor"),
+        ("Calificación soberana: escalones bajo AAA (prom. 3 agencias)",
+         "Calificación soberana: escalones bajo AAA\n(prom. S&P, Moody's, Fitch; grado de inversión ≤ 9)", "menor"),
     ]
     order = ISO3[::-1]
     fig, axes = plt.subplots(5, 3, figsize=(12, 13.5))
@@ -636,6 +797,7 @@ def charts(tab, wgi_est, en, ipc, dfl):
             ax.scatter([v], [y], s=46 if iso == "ARG" else 30, color=c, zorder=3, edgecolor="white", linewidth=1.5)
             dec = 2 if (vals.abs().max() < 10 and not (vals == vals.round()).all()) else 0
             dec = 1 if (dec == 0 and 0 < abs(v) < 1) else dec
+            dec = 1 if ind.startswith("Calificación") else dec
             lab = f"{v:,.{dec}f}".replace(",", "X").replace(".", ",").replace("X", ".")
             if ind.startswith("Reservas") and v == 0:
                 lab = "no figura"
@@ -650,22 +812,26 @@ def charts(tab, wgi_est, en, ipc, dfl):
         ax.set_xlim(lo - 0.05 * rng, vals.max() + 0.28 * rng)
         if lo < 0 < vals.max():
             ax.axvline(0, color="#c3c2b7", linewidth=0.8)
+        if ind.startswith("Calificación"):  # frontera del grado de inversión (BBB-/Baa3)
+            ax.axvline(9, color="#c3c2b7", linewidth=0.8, linestyle="--")
         _style(ax)
         ax.set_title(f"{title}\n{'mayor' if better == 'mayor' else 'menor'} = mejor para el refugio",
                      fontsize=8.5, color=INK, loc="left")
     for ax in axes[len(panels):]:
         ax.axis("off")
-    axes[-2].text(0, 0.9, "Riesgo país: sin fuente pública abierta\n(EMBI de JP Morgan es propietario).\n\n"
+    rp = tab[(tab.indicador.str.startswith("Riesgo país")) & (tab.pais == "ARG")].iloc[0]
+    inf25 = f"{tab[(tab.indicador.str.startswith('Inflación 2025')) & (tab.pais == 'ARG')].valor.iloc[0]:.1f}".replace(".", ",")
+    axes[-1].text(0, 0.9, f"Riesgo país Argentina (BCRA): {int(rp.valor)} p.b.\n({rp.anio}); promedio de soberanos B-: 322 p.b.\n"
+                  "Sin dato público por país para los otros cinco\n(el EMBI de JP Morgan es propietario).\n\n"
                   "Inflación 2025 Argentina (INDEC, ESTIMACIÓN):\n"
-                  f"{tab[(tab.indicador.str.startswith('Inflación 2025')) & (tab.pais == 'ARG')].valor.iloc[0]:.1f}".replace(".", ",")
-                  + "% promedio anual.\n\n"
+                  f"{inf25}% promedio anual.\n\n"
                   "Sin índice compuesto: cada panel es una dimensión.", fontsize=8.5, color=INK2, va="top",
-                  transform=axes[-2].transAxes)
+                  transform=axes[-1].transAxes)
     fig.suptitle("Argentina se destaca en alimentos, litio y energía, y queda última de las seis en paz, instituciones y estabilidad macro",
                  fontsize=12, color=INK, x=0.01, ha="left", y=0.995)
     fig.tight_layout(rect=(0, 0.02, 1, 0.985))
     _save(fig, "small_multiples", "Banco Mundial (WGI, WDI), IEP (GPI 2026), FAOSTAT FBS, USGS MCS 2026, UNESCO (whc001), "
-          "BoC–BoE Sovereign Default Database 2025, WJP 2025")
+          "BoC–BoE 2025, WJP 2025, BCRA (IPOM 2T-2026), oficinas de deuda (calificaciones)")
 
     # --- 2) WGI Rule of Law: serie 1996–2025
     fig, ax = plt.subplots(figsize=(9, 5))

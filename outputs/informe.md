@@ -1,6 +1,6 @@
 # Ciudadanía por Inversión y el "momento Argentina"
 
-<p class="meta">Colossus Lab · Informe generado el 2026-10-03 · Etiquetas: <b>DATO</b> (fuente directa) · <b>ESTIMACIÓN</b> (cálculo propio) · <b>HIPÓTESIS</b> (interpretación) · <b>ESCENARIO</b> (proyección condicional). Cada DATO tiene su cita literal en <code>docs/claims_ledger.csv</code>, auditada contra la copia local (<code>docs/auditoria.csv</code>).</p>
+<p class="meta">Colossus Lab · Informe generado el 2026-10-04 · Etiquetas: <b>DATO</b> (fuente directa) · <b>ESTIMACIÓN</b> (cálculo propio) · <b>HIPÓTESIS</b> (interpretación) · <b>ESCENARIO</b> (proyección condicional). Cada DATO tiene su cita literal en <code>docs/claims_ledger.csv</code>, auditada contra la copia local (<code>docs/auditoria.csv</code>).</p>
 
 
 ## Resumen ejecutivo
@@ -12,27 +12,28 @@ El 02/10/2026 el Ministerio de Economía anunció el Programa de Ciudadanía por
 | Pregunta | Respuesta | Etiqueta |
 |---|---|---|
 | ¿Cuánto cuesta? | USD 350.000 de aporte o USD 800.000 en un bono. Una familia tipo paga USD 500.000. Las solicitudes se reciben desde el 4T-2026 (A01–A06) | DATO |
-| ¿Tiene base legal firme? | **No.** El DNU 366/2025 no fija montos: delega en Economía qué inversión es "relevante". Al 03/10/2026 no hay ninguna norma publicada con los montos anunciados, y la Cámara Nacional Electoral declaró nulo el DNU el 30/06/2026 (A10, A17, A18, A20) | DATO |
-| ¿Es caro o barato? | Es el programa verificado más caro: 1,4–1,5 veces la donación caribeña, o 2,0–2,2 veces para una familia. A cambio ofrece un pasaporte con más destinos sin visa que cualquier programa caribeño (C80–C83) | ESTIMACIÓN |
-| ¿Quién podría comprarlo? | En EE.UU., 4,8 M de hogares superan USD 5 M de patrimonio, y para ellos el aporte es menos del 4% (B03–B07). Pero a un estadounidense el pasaporte argentino le abre solo 7 destinos nuevos. La ganancia de movilidad se concentra en China, India, Rusia y los países del Golfo (B31–B43) | ESTIMACIÓN / HIPÓTESIS |
-| ¿Cuánto recaudaría? | Con 1.000 solicitantes por año, unos USD 345 M (el 2,9% de los vencimientos externos de 2027). Para igualar a los cinco programas del Caribe juntos (USD 492 M/año) harían falta unos 1.430 solicitantes por año (G04–G06, C90) | ESCENARIO |
-| ¿Argentina está "de moda" desde Qatar? | **Parcialmente.** Hubo un escalón de atención que en Wikipedia ya se disipó y en Google persiste moderado. El turismo desde EE.UU. creció menos que el resto de Sudamérica (E07–E15, E32) | ESTIMACIÓN |
+| ¿Tiene base legal firme? | **No.** El DNU 366/2025 no fija montos: delega en Economía qué inversión es "relevante". Al 03/10/2026 no hay ninguna norma publicada con los montos anunciados: ni InfoLEG ni el Boletín Oficial del día del anuncio la registran. La Cámara Nacional Electoral declaró nulo el DNU el 30/06/2026. El Congreso no se pronunció: la Comisión Bicameral no emitió dictamen en 16 meses y los cuatro proyectos para anularlo o derogarlo no avanzaron (A10, A17, A18, A20, A21–A28) | DATO |
+| ¿Es caro o barato? | Es el programa por donación más caro del benchmark: 1,40–1,75 veces la donación caribeña (USD 200.000–250.000) y 2,7 veces la de Vanuatu, o 2,0–2,2 veces para una familia. Solo Jordania, por la vía de acciones (≈ USD 1,41 M, una inversión, no una donación), pide más que el bono argentino. A cambio ofrece un pasaporte con más destinos sin visa que cualquier programa caribeño (C80–C83, C91–C99) | ESTIMACIÓN |
+| ¿Quién podría comprarlo? | En EE.UU., 4,8 M de hogares superan USD 5 M de patrimonio, y para ellos el aporte es menos del 4% (B03–B07). Pero a un estadounidense el pasaporte argentino le abre solo 7 destinos nuevos. La ganancia de movilidad se concentra en China, India, Rusia y los países del Golfo (B31–B43). Pero China e India, que suman el 90,9% del índice de mercados, no admiten la doble nacionalidad: China no la reconoce e India retira la ciudadanía a quien adquiere otra. Para esos compradores el pasaporte argentino reemplaza al de origen; no se suma (B44–B47, B51) | ESTIMACIÓN / DATO |
+| ¿Cuánto recaudaría? | Con 1.000 solicitantes por año, unos USD 345 M (el 2,9% de los vencimientos externos de 2027). Para igualar a los cinco programas del Caribe juntos (USD 492 M/año en 2020–2024; ≈ USD 419 M en 2025) harían falta unos 1.430 solicitantes por año (G04–G06, C77, C90) | ESCENARIO |
+| ¿Argentina está "de moda" desde Qatar? | **Parcialmente.** Hubo un escalón de atención que en Wikipedia ya se disipó y en Google persiste moderado. La final del Mundial 2026 (Argentina subcampeón, 19/07/2026) repitió el pico, pero no el escalón. El turismo desde EE.UU. creció menos que el resto de Sudamérica (E07–E15, E32, E34) | ESTIMACIÓN |
 | ¿Se busca el pasaporte argentino? | **Sí, y cada vez más.** En EE.UU., "argentina passport" pasó de un índice promedio de 2 a 4 (2021–2024) a 32,5 en 2026. El anuncio generó un pico mundial inmediato, y "argentina citizenship by investment program" fue la búsqueda relacionada de mayor ascenso (+1.300%) (E50–E64) | DATO / ESTIMACIÓN |
-| ¿Es un "refugio austral"? | **Solo en recursos.** Argentina lidera en alimentos, litio y energía, pero queda última de seis comparables en todos los indicadores de instituciones, paz y estabilidad macro (F001–F122) | DATO / HIPÓTESIS |
-| ¿Ayuda a entrar sin visa a EE.UU.? | Hoy no: el pasaporte argentino necesita visa para EE.UU. En 2025 se firmó una declaración de intención para el reingreso al Visa Waiver Program (D28). La CBI puede jugar en contra, porque EE.UU. sacó a Argentina en 2002 cuestionando la integridad de sus documentos (D27) | DATO / HIPÓTESIS |
+| ¿Es un "refugio austral"? | **Solo en recursos.** Argentina lidera en alimentos, litio y energía, pero queda última de seis comparables en todos los indicadores de instituciones, paz y estabilidad macro. Es la única de las seis sin grado de inversión (B-/B3/B-), aunque su riesgo país bajó a 434 p.b., el mínimo desde 2018. El cepo sigue para empresas: necesitan conformidad previa del BCRA para formar activos externos (F001–F149) | DATO / HIPÓTESIS |
+| ¿Ayuda a entrar sin visa a EE.UU.? | **Hoy no, y no está cerca.** El Visa Waiver exige una tasa de rechazo de visas menor al 3%. Argentina la cumplió entre FY2011 y FY2021, pero hoy está en **7,47%** (FY2025), después de 8,21% y 8,90%. Tiene que bajar unos 4,5 puntos (D45–D46, D52, D58–D59, D76). En 2025 se firmó una declaración de intención para el reingreso (D28). La CBI puede jugar en contra, porque EE.UU. sacó a Argentina en 2002 cuestionando la integridad de sus documentos (D27), aunque Malta mantuvo el VWP con su programa (D75) | DATO / ESTIMACIÓN / HIPÓTESIS |
 
 ### Los tres riesgos que más pesan
 
-1. **Riesgo judicial (DATO).** La Cámara Nacional Electoral resolvió "declarar nulo el decreto de necesidad y urgencia N° 366/2025" porque la ciudadanía es materia electoral, vedada a los DNU (A18). El Juzgado Federal de Esquel declaró inconstitucional el art. 37, que es justamente el que crea la vía por inversión (A20). **HIPÓTESIS:** como el control judicial argentino vale para cada caso, cada carta de ciudadanía por inversión queda expuesta a impugnación hasta que haya una ley del Congreso o un fallo de la Corte Suprema.
+1. **Riesgo judicial (DATO).** La Cámara Nacional Electoral resolvió "declarar nulo el decreto de necesidad y urgencia N° 366/2025" porque la ciudadanía es materia electoral, vedada a los DNU (A18). El Juzgado Federal de Esquel declaró inconstitucional el art. 37, que es justamente el que crea la vía por inversión (A20). El Congreso no lo convalidó ni lo rechazó: la Bicameral no dictaminó (A21–A22). **HIPÓTESIS:** como el control judicial argentino vale para cada caso, cada carta de ciudadanía por inversión queda expuesta a impugnación hasta que haya una ley del Congreso o un fallo de la Corte Suprema.
 2. **Riesgo regulatorio externo (DATO).** El Reglamento (UE) 2025/2441 convirtió la CBI "sin vínculo genuino" en causal de suspensión de la exención de visa Schengen, y Argentina figura en el Anexo II (B32–B33). Vanuatu ya la perdió por ese motivo, y EE.UU. restringió la entrada de nacionales de Antigua y Dominica por su CBI sin residencia (C50–C57). Lo que estaría en juego es el acceso Schengen de **todos** los argentinos.
 3. **Riesgo de expectativas (ESCENARIO).** Ni el escenario más alto (3.000 solicitantes por año, USD 1.350 M) cubre más del 11% de los vencimientos de capital externo de 2027. Esa cifra es, además, más del doble de lo que recauda todo el Caribe junto.
 
 ### Qué no se pudo verificar
-- La tasa de rechazo de visas B de EE.UU. para Argentina en FY2025: la copia de archivo no fue accesible desde el entorno (Módulo D).
-- El dictamen de la Comisión Bicameral sobre el DNU 366/2025, y si la causa "Yang" llegó a la Corte Suprema.
-- El resultado de Argentina en el Mundial 2026: no se asume.
-- Si China e India permiten la doble nacionalidad, de lo que depende el ranking de mercados (Módulo B).
-- Los montos de Dominica, Vanuatu, Jordania y Egipto (Módulo C).
+Se cerraron los pendientes de la primera versión: la serie de rechazo de visas (D), el control parlamentario del DNU (A), la doble nacionalidad en China e India (B), los montos de Dominica, Vanuatu y Jordania (C), el resultado del Mundial 2026 (E) y el riesgo país y el cepo (F). Quedan:
+- Si la causa "Yang" llegó a la Corte Suprema, y la copia oficial de las dos sentencias: los sistemas de consulta del PJN, la CSJN, la CNE y el CIJ exigen captcha, y no se eludió (Módulo A).
+- El monto del programa de Egipto, y la carta de la Comisión Europea del 25/06/2026 a los cinco programas caribeños, que solo consta en prensa (Módulo C).
+- La doble nacionalidad en Arabia Saudita, Sudáfrica y Turquía (Módulo B).
+- El riesgo país (spread) de los cinco comparables: el EMBI es propietario y no hay fuente oficial; la comparación usa las calificaciones soberanas (Módulo F).
+- La tasa de rechazo de visas de FY2026 (cerró el 30/09/2026, sin publicar) y las visas emitidas en FY2025 (Módulo D). La encuesta SCF 2025 de la Fed tampoco se publicó todavía (Módulo B).
 
 ### Cómo leer este informe
 Cada afirmación lleva un código (A01, B31…) que remite a `docs/claims_ledger.csv`. Ahí figuran la fuente, el archivo local, su hash y la cita literal o el localizador. `src/09_auditoria.py` verifica cada cita contra la copia descargada; el resultado está en `docs/auditoria.csv`.
@@ -45,14 +46,34 @@ Cada afirmación lleva un código (A01, B31…) que remite a `docs/claims_ledger
 **Resumen (5 líneas)**
 1. **DATO:** El anuncio del 02/10/2026 fija USD 350.000 de aporte no reembolsable al Tesoro, o USD 800.000 en un título público específico; USD 100.000 por cónyuge e hijos de 18–25 años, y USD 25.000 por menor. Total para una familia tipo: USD 500.000. Las solicitudes se reciben desde el 4T-2026 (A01–A06).
 2. **DATO:** La base legal es el DNU 366/2025 (art. 37 → Ley 346 art. 2 inc. 2: "inversión relevante", sin requisito de residencia). **El DNU no fija ningún monto**: delega en el Ministerio de Economía (art. 2 bis). La cifra de "USD 500.000" que citó la prensa **no figura** en el texto del DNU (A09–A10).
-3. **DATO:** A la fecha de consulta (03/10/2026), InfoLEG no registra ninguna resolución del Ministerio de Economía que fije los montos anunciados. Los montos hoy constan solo en un anuncio, no en una norma (A17).
-4. **DATO — riesgo jurídico central:** la Cámara Nacional Electoral declaró **nulo** el DNU 366/2025 el 30/06/2026 (causa "Yang"). Sostuvo que la ciudadanía es materia electoral vedada a los DNU (art. 99 inc. 3 CN). El Juzgado Federal de Esquel declaró inconstitucional, para el caso, el art. 37 (que crea la vía por inversión) (A18–A20).
-5. **HIPÓTESIS:** el control de constitucionalidad en Argentina tiene efecto para el caso. Por eso el programa puede operar, pero cada carta de ciudadanía por inversión queda expuesta a impugnación judicial hasta que haya ley del Congreso o fallo de la Corte Suprema. No se encontró rechazo del DNU en ninguna cámara del Congreso, ni sentencia de la CSJN (búsqueda en prensa; pendiente de verificar en fuente primaria).
+3. **DATO:** Al 03/10/2026 ninguna norma publicada fija los montos anunciados. InfoLEG no registra ninguna resolución de Economía que complemente el DNU (A17). La primera sección del Boletín Oficial del 02/10/2026, que era la edición vigente el 03/10, no trae decretos ni normas sobre el programa (A28–A29). Los montos constan solo en un anuncio.
+4. **DATO — riesgo jurídico central:** la Cámara Nacional Electoral declaró **nulo** el DNU 366/2025 el 30/06/2026 (causa "Yang"). Sostuvo que la ciudadanía es materia electoral vedada a los DNU (art. 99 inc. 3 CN). El Juzgado Federal de Esquel declaró inconstitucional, para el caso, el art. 37, que crea la vía por inversión (A18–A20).
+5. **DATO:** el Congreso no se pronunció. El DNU está en la Comisión Bicameral desde el 10/06/2025 y no tiene dictamen (A21–A22). Hay 4 proyectos para anularlo, repudiarlo o prohibir la ciudadanía por inversión, todos sin dictamen (A23–A27). **HIPÓTESIS:** el control judicial tiene efecto para cada caso. Por eso cada carta de ciudadanía por inversión queda expuesta a impugnación hasta que haya ley o fallo de la Corte Suprema. No se pudo verificar si "Yang" llegó a la Corte, porque los sistemas de consulta piden captcha.
+
+### Control parlamentario del DNU 366/2025 (Ley 26.122)
+La Ley 26.122 deja vigente un DNU mientras ambas cámaras no lo rechacen expresamente. Por eso, que la Bicameral no haya dictaminado no afecta la vigencia del decreto.
+
+| Expediente | Tipo / autor | Fecha | Objeto | Estado al 03/10/2026 | Claim |
+|---|---|---|---|---|---|
+| 46/25 PE (Senado; Mensaje 52/25) | Comunicación del PEN | 10/06/2025 | Comunica el DNU 366/25 | Girado a la Bicameral Permanente de Trámite Legislativo; **sin dictamen** ("SIN FECHA") y sin fecha de egreso | A21, A22 |
+| 3176-D-2025 | Proyecto de ley (FIT-U) | 17/06/2025 | Anular el DNU 366/2025 | En Asuntos Constitucionales y Población; sin dictamen | A24 |
+| 4025-D-2025 | Proyecto de resolución (UxP) | 24/07/2025 | Repudio al DNU 366/2025 | Sin dictamen | A25 |
+| 3233-D-2026 | Proyecto de resolución (Coalición Cívica) | 02/07/2026 | Declarar la nulidad absoluta del DNU 366/2025 | En Asuntos Constitucionales y Población; sin dictamen | A26 |
+| 1441-S-2026 | Proyecto de ley (sen. Capitanich) | 20/08/2026 | Prohibir la ciudadanía por inversión, derogar los arts. 2 inc. 2, 2 bis y 6 bis–6 quater de la Ley 346, y disolver la Agencia | En Asuntos Constitucionales, Legislación General y Economía; sin dictamen | A27 |
+
+El buscador de proyectos de la HCDN (Diputados y Senado) devuelve solo esos 5 expedientes para "366/2025", y ninguno tiene dictamen ni sanción (A23). El buscador avanzado del Senado ("366/25", "decreto 366") tampoco muestra ninguna comunicación de la Bicameral con dictamen sobre el DNU 366/25. Esa consulta se hizo a mano y no está en el ledger.
 
 ### Lo que no se pudo verificar en fuente primaria
-- Dictamen de la Comisión Bicameral Permanente sobre el DNU 366/2025: el sitio de HCDN no expone un listado accesible. La prensa (Infobae, 05/01/2026; Parlamentario, 04/07/2026) indica que no hubo dictamen. Esto queda como **S** (solo para fechar).
-- Si la causa "Yang" fue llevada a la CSJN por recurso extraordinario: no hay evidencia pública.
-- La copia de las sentencias proviene de un enlace publicado por *Palabras del Derecho*. Los PDF llevan firma digital del PJN (fecha de firma y firmantes visibles); conviene contrastarlos con el sistema de consulta del PJN.
+- **Si la causa "Yang" (CNE 8843/2023/CA1) llegó a la CSJN por recurso extraordinario.** Los tres sistemas que podrían responderlo exigen captcha: la consulta de expedientes del PJN (que incluye la jurisdicción CSJ), la base de jurisprudencia de la CSJN y el registro de procesos colectivos. No se intentó eludirlos. **Sin evidencia en ningún sentido.**
+- **Copia oficial de las sentencias.** Siguen provenientes de *Palabras del Derecho* (A18–A20). No se consiguió una copia oficial:
+  - El buscador de fallos de la CNE (electoral.gob.ar) lista fallos del 30/06/2026, pero exige captcha.
+  - El buscador de sentencias del CIJ exige captcha.
+  - El buscador antiguo del CIJ solo cubre fallos de la CNE hasta 2009 y no encuentra "Yang".
+  - La Wayback Machine no tiene la sentencia "Yang" del recuperador de la CNE.
+  - Las capturas de la portada del CIJ del 12/08/2026 y del 15/08/2026 (20 sentencias del día cada una) no incluyen la de Esquel.
+
+  Los PDF tienen firma digital del PJN, con fecha y firmantes visibles. Contrastarlos sigue pendiente, a mano, con captcha resuelto por una persona.
+- **Votación de alguna cámara sobre el DNU (Ley 26.122, art. 22).** No hay registro de que alguna cámara lo haya tratado. La ausencia se infiere de la ficha del Senado y del buscador de la HCDN (A22–A23). No se encontró un listado oficial de "DNU rechazados" que permita confirmarlo en positivo.
 
 ### Fuentes
 | Fuente | Tipo | URL |
@@ -62,6 +83,10 @@ Cada afirmación lleva un código (A01, B31…) que remite a `docs/claims_ledger
 | InfoLEG: normas que modifican/complementan el DNU 366/2025 | P | https://www.argentina.gob.ar/normativa/nacional/norma-413297/normas-modifican |
 | Decreto 524/2025, BO 31/07/2025 | P | https://www.boletinoficial.gob.ar/detalleAviso/primera/329061/20250731 |
 | Decreto 285/2026, BO 28/04/2026 | P | https://www.boletinoficial.gob.ar/pdf/aviso/primera/341227/20260428 |
+| Senado, ficha del Expte. 46/25 PE (comunicación del DNU 366/25; trámite y giros) | P | https://www.senado.gob.ar/parlamentario/comisiones/verExp/46.25/PE/DC |
+| HCDN, buscador de proyectos, palabras "366/2025" (POST al formulario público) | P | https://www.hcdn.gob.ar/proyectos/resultado.html |
+| Boletín Oficial, primera sección, 02/10/2026 | P | https://www.boletinoficial.gob.ar/seccion/primera/20261002 |
+| Boletín Oficial, primera sección vigente (consulta 03/10/2026) | P | https://www.boletinoficial.gob.ar/seccion/primera |
 | CNE, "Yang, Liping", Expte. 8843/2023/CA1, 30/06/2026 (copia vía Palabras del Derecho) | P | https://drive.google.com/file/d/1xWgM2IK8QeBFwmNogXJqYmY9RNC7z6gn |
 | Juzgado Federal de Esquel, Expte. 10640/2025, 12/08/2026 (copia vía Palabras del Derecho) | P | https://drive.google.com/file/d/1m8JzZS80fcB-ENA-lI-0gr5Ii01sURig |
 | Palabras del Derecho, notas del 30/06/2026 y 26/08/2026 | S | palabrasdelderecho.com.ar/articulo/6845 y /6940 |
@@ -69,24 +94,35 @@ Cada afirmación lleva un código (A01, B31…) que remite a `docs/claims_ledger
 ### Fuentes fallidas
 | Fecha | Fuente | URL | Error | Causa | Acción |
 |---|---|---|---|---|---|
-| 2026-10-03 | HCDN, Comisión Bicameral Permanente | https://www.hcdn.gob.ar/comisiones/especiales/ | La página no lista los dictámenes (contenido dinámico) | Sitio | Prensa (tipo S) solo para fechar; queda "no verificado" |
+| 2026-10-03 | HCDN, Comisión Bicameral Permanente | https://www.hcdn.gob.ar/comisiones/especiales/cbtramite/ | HTTP 404 (también /comisiones/bicameral/tramite-legislativo/) | Sitio | Se usó la ficha del Senado (Expte. 46/25 PE) y el buscador de proyectos de la HCDN (A21–A27) |
 | 2026-10-03 | InfoLEG, buscador de normas | https://www.argentina.gob.ar/normativa/buscar | La búsqueda por texto no devuelve resultados al pedido automatizado | Sitio | Se usó la ficha "normas que modifican" del DNU 366/2025 |
+| 2026-10-03 | PJN, consulta pública de expedientes (incluye CSJ y CNE) | https://scw.pjn.gov.ar/scw/home.seam | El formulario exige captcha (captcha.pjn.gov.ar) | Protección anti-bots | No se elude; queda "no verificado" si "Yang" llegó a la CSJN |
+| 2026-10-03 | CSJN, base de jurisprudencia y novedades | https://sjconsulta.csjn.gov.ar/sjconsulta/ | El formulario exige reCAPTCHA (también /novedades/consulta.html) | Protección anti-bots | No se elude |
+| 2026-10-03 | CSJN, registro de procesos colectivos | https://servicios.csjn.gov.ar/ConsultaCausasColectivas/ | El formulario exige reCAPTCHA | Protección anti-bots | No se elude |
+| 2026-10-03 | CIJ, buscador de sentencias (tribunales federales y nacionales) | https://www.csjn.gov.ar/tribunales-federales-nacionales/sentencias.html | El formulario exige captcha (captchav3.csjn.gov.ar) | Protección anti-bots | No se elude; las sentencias siguen con la copia de Palabras del Derecho |
+| 2026-10-03 | CIJ, buscador de fallos (versión anterior) | https://www.csjn.gov.ar/tribunales-federales-nacionales/buscador-de-fallos.html | Sin resultados para "Yang" ni para el Expte. 8843/2023; la base de la CNE termina en 2009 | Cobertura | — |
+| 2026-10-03 | CIJ, portada "sentencias del día" (Wayback, capturas 20260812203222 y 20260815224603) | https://web.archive.org/web/20260812203222id_/https://www.csjn.gov.ar/tribunales-federales-nacionales/inicio.html | Las 20 sentencias listadas en cada captura no incluyen la del Juzgado Federal de Esquel | Cobertura | — |
+| 2026-10-03 | CNE, buscador de fallos, acordadas y resoluciones | https://www.electoral.gob.ar/nuevo/paginas/jurisprudencia/consulta.php | El formulario exige captcha (securimage y reCAPTCHA); la base tiene fallos del 2026-06-30 | Protección anti-bots | No se elude; no se enumeraron identificadores de recuperar.php |
+| 2026-10-03 | CNE, documentos de fallos en Wayback (CDX) | https://web.archive.org/cdx/search/cdx?url=electoral.gob.ar/nuevo/paginas/jurisprudencia/recuperar.php&matchType=prefix | Solo hay 3 identificadores archivados (6958, 11724, 13454), ninguno de 2026 | Cobertura | — |
+| 2026-10-03 | Boletín Oficial, primera sección 03/10/2026 | https://www.boletinoficial.gob.ar/seccion/primera/20261003 | Redirige a la portada; no hay edición (sábado) | Sin publicación | Se registró la edición vigente (A29) |
 
 ### Archivos
 - `src/01_normativa.py` → `data/processed/A_cronologia.csv`, `docs/claims/claims_A.csv`
+- Copias nuevas: `data/raw/A_senado_exp46-PE-2025_2026-10-03.html`, `A_hcdn_busqueda_366-2025_2026-10-03.html`, `A_bo_primera_20261002_2026-10-03.html`, `A_bo_primera_vigente_2026-10-03.html`
+- El script falla si cambian las condiciones de las afirmaciones negativas. Eso pasa si la ficha del Senado deja de decir "SIN FECHA" (A22), si algún expediente de la HCDN pasa a tener dictamen (A23) o si el sumario del BO del 02/10 menciona decretos o ciudadanía (A28).
 
 
 <div class="modulo"></div>
 
 ## Módulo B: mercado potencial
 
-**Fecha:** 2026-10-03 · **Script:** `src/02_mercado.py` · **Afirmaciones:** `docs/claims/claims_B.csv` (B01–B43)
+**Fecha:** 2026-10-03 · **Script:** `src/02_mercado.py` · **Afirmaciones:** `docs/claims/claims_B.csv` (B01–B54)
 
 ### Resumen (5 líneas)
 
 1. **ESTIMACIÓN:** en EE.UU. hay unos 4,8 M de hogares con patrimonio neto > USD 5 M y 2,1 M > USD 10 M (SCF 2022, en dólares de 2022). Para el tramo > USD 5 M, el aporte de USD 350.000 equivale al 3,8 % del patrimonio mediano (B03, B04, B07).
 2. **DATO:** el top 0,1 % de EE.UU. (136.779 hogares) tiene USD 27,9 billones, el 15,0 % del patrimonio de los hogares al 2T-2026. Con el resto del top 1 %, el grupo suma el 32,5 % (B12, B13, B15, B16). **ESTIMACIÓN:** para un hogar promedio del top 0,1 %, el aporte es el 0,17 % de su patrimonio (B18).
-3. **ESTIMACIÓN / HIPÓTESIS:** el índice millonarios × brecha de destinos sin visa × visa Schengen solo da positivo en 7 de los 34 mercados con datos de UBS. China lidera con holgura (100), seguida por India (23), Arabia Saudita (6) y Rusia (4) (B31, B40). Sin el indicador Schengen, son 10 mercados (B41).
+3. **ESTIMACIÓN / HIPÓTESIS:** el índice millonarios × brecha de destinos sin visa × visa Schengen solo da positivo en 7 de los 34 mercados con datos de UBS. China lidera con holgura (100), seguida por India (23), Arabia Saudita (6) y Rusia (4) (B31, B40). Sin el indicador Schengen, son 10 mercados (B41). **DATO:** China no reconoce la doble nacionalidad e India retira la ciudadanía a quien adquiere otra (B44, B45, B47). Esos dos mercados suman el 90,9 % del índice (B51), así que su comprador cambiaría de pasaporte en lugar de sumar uno.
 4. **Contrapeso, ESTIMACIÓN:** en 24 de esos 34 mercados, que reúnen 44,7 M de los 53,3 M de millonarios de la tabla, el pasaporte argentino no agrega destinos (B39). A un estadounidense le abre solo 7 destinos: China, Brasil, Rusia, Irán, Venezuela, Bielorrusia y Uzbekistán (B43). Además, el pasaporte argentino necesita visa para entrar a EE.UU. (B37).
 5. **Contrapeso, DATO:** desde el Reglamento (UE) 2025/2441, que un país del Anexo II tenga un programa de ciudadanía por inversión sin "vínculo genuino" es causal para suspenderle la exención de visa Schengen. Argentina está en ese anexo (B32, B33). Ese mismo argumento le costó a Vanuatu la exención (B34, B35).
 
@@ -146,9 +182,9 @@ Altrata (WUWR 2026) sí se pudo usar porque el PDF tiene enlace de descarga dire
 
 **Todo este apartado es HIPÓTESIS / ESTIMACIÓN. El índice es una heurística de dónde el pasaporte argentino agregaría movilidad; no mide demanda.**
 
-**Destinos sin visa: por qué no Henley.** **DATO:** los términos de henleyglobal.com prohíben "any robot, spider, scraper, or other automated means to access the website for any purpose" (B28), y el aviso legal prohíbe reproducir contenido sin permiso escrito (B29). Por eso **no se usó la API `api.henleypassportindex.com`**, aunque el probe la había encontrado operativa. Como alternativa abierta se usó **Passport Index Data** (`imorte/passport-index-data`, licencia MIT, actualizado al 17/02/2026, compilado de passportindex.org). Es una matriz de 199 × 199 con el requisito de entrada para cada par. Se cuenta como "sin visa previa" un número de días, `visa free`, `visa on arrival` o `eta`, definición análoga a la de Henley. Con esta fuente, el pasaporte argentino llega a **148 de 198 destinos** (B36, **ESTIMACIÓN**). La cifra no es comparable con el puntaje de Henley, que usa otra metodología y otra fecha. No se pudieron leer los términos de passportindex.org, porque el sitio devuelve 403 anti-bots (ver Fuentes fallidas); la fuente se marca como R con esa advertencia.
+**Destinos sin visa: por qué no Henley.** **DATO:** los términos de henleyglobal.com prohíben "any robot, spider, scraper, or other automated means to access the website for any purpose" (B28), y el aviso legal prohíbe reproducir contenido sin permiso escrito (B29). Por eso **no se usó la API `api.henleypassportindex.com`**, aunque el probe la había encontrado operativa. Como alternativa abierta se usó **Passport Index Data** (`imorte/passport-index-data`, licencia MIT, actualizado al 17/02/2026, compilado de passportindex.org). Es una matriz de 199 × 199 con el requisito de entrada para cada par. Se cuenta como "sin visa previa" un número de días, `visa free`, `visa on arrival` o `eta`, definición análoga a la de Henley. Con esta fuente, el pasaporte argentino llega a **148 de 198 destinos** (B36, **ESTIMACIÓN**). La cifra no es comparable con el puntaje de Henley, que usa otra metodología y otra fecha. **DATO, licencia de la fuente original:** passportindex.org sigue devolviendo 403 anti-bots, así que se revisó en la Wayback Machine. No publica términos de uso ni licencia de datos: no hay ninguna página de términos, legal o privacidad entre unas 66 mil URLs archivadas de `www.` y `discover.passportindex.org`. Su única nota legal (página About, captura del 03/07/2026) lo define como "a free tool, built with publicly available information" y aclara que "Analytics is based on proprietary research" (B52). No hay entonces una prohibición expresa de reutilización como la de Henley, pero tampoco una licencia: la licencia MIT cubre la compilación de GitHub, no necesariamente los datos de origen. La fuente sigue siendo R con esa advertencia. **Conflicto de interés a declarar:** el sitio pertenece a Arton Capital ("Invented and empowered by Arton Capital") y promociona la segunda ciudadanía (B52), igual que Henley. Los requisitos de visado son hechos públicos, pero la compilación viene de un actor de la industria.
 
-**Visa Schengen.** **DATO:** se usa el Reglamento (UE) 2018/1806, versión consolidada al **30/12/2025**, que es la vigente según EUR-Lex al 03/10/2026 (B30). El indicador vale 1 si el país está en el Anexo I. La pertenencia se verifica en el texto consolidado y los países UE/AELC, que no figuran en ningún anexo, valen 0. De los 34 mercados de UBS, están en el Anexo I China, India, Arabia Saudita, Rusia, Sudáfrica, Turquía y Qatar (B31). Argentina está en el Anexo II (B32).
+**Visa Schengen.** **DATO:** se usa el Reglamento (UE) 2018/1806, versión consolidada al **30/12/2025**, que es la vigente según EUR-Lex al 03/10/2026 (B30). El indicador vale 1 si el país está en el Anexo I. La pertenencia se verifica en el texto consolidado y los países UE/AELC, que no figuran en ningún anexo, valen 0. De los 34 mercados de UBS, están en el Anexo I China, India, Arabia Saudita, Rusia, Sudáfrica, Turquía y Qatar (B31). Argentina está en el Anexo II (B32). **DATO, novedades de 2026:** la ficha EUR-Lex registra una sola modificación posterior al 30/12/2025. Es la suspensión del art. 4(1) por el Reglamento de Ejecución (UE) 2026/496, del 06/03/2026 al 06/03/2027 (B53). Ese reglamento suspende la exención de visa para los pasaportes diplomáticos, de servicio y oficiales de Georgia, con base en el art. 8e(1), que agregó el Reg. 2025/2441 (B54). Los anexos no cambiaron, así que el indicador S sigue igual. El dato importa por otro motivo: el paquete de suspensión de 2025 ya se está aplicando (en este caso, por leyes georgianas que el reglamento considera contrarias a los derechos fundamentales, no por un programa CBI).
 
 **Variantes calculadas** (`data/processed/B_indice_mercados.csv`; M = millonarios en miles; Δ⁺ = max(0, destinos_ARG − destinos_país); S = 1{Anexo I}):
 
@@ -162,21 +198,28 @@ Altrata (WUWR 2026) sí se pudo usar porque el PDF tiene enlace de descarga dire
 
 **Ranking (máximo = 100).** Hay **10 mercados con Δ⁺ > 0**, no 15. El resto del ranking de 15 vale cero.
 
-| # | Mercado | Millonarios (miles) | Destinos sin visa | Δ vs ARG (148) | Visa Schengen | I1 | I2 | I4 (log) | I5 |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | China (cont.) | 5.305 | 77 | +71 | sí | 100 | 100 | 100 | 100 |
-| 2 | India | 944 | 55 | +93 | sí | 23,3 | 23,3 | 94,4 | 21,8 |
-| 3 | Arabia Saudita | 348 | 86 | +62 | sí | 5,7 | 5,7 | 79,8 | 5,8 |
-| 4 | Rusia | 447 | 114 | +34 | sí | 4,0 | 4,0 | 69,9 | 4,7 |
-| 5 | Sudáfrica | 97 | 94 | +54 | sí | 1,4 | 1,4 | 69,5 | 1,4 |
-| 6 | Turquía | 93 | 111 | +37 | sí | 0,9 | 0,9 | 62,8 | 1,1 |
-| 7 | Qatar | 30 | 105 | +43 | sí | 0,3 | 0,3 | 58,9 | 0,4 |
-| 8 | Taiwán | 772 | 113 | +35 | no | 0 | 7,2 | 73,4 | 7,6 |
-| 9 | México | 333 | 136 | +12 | no | 0 | 1,1 | 49,3 | 1,0 |
-| 10 | Israel | 195 | 140 | +8 | no | 0 | 0,4 | 40,4 | 0,8 |
-| — | EE.UU. | 23.627 | 153 | −5 | no | 0 | 0 | 0 | 39,5 |
+| # | Mercado | Millonarios (miles) | Destinos sin visa | Δ vs ARG (148) | Visa Schengen | I1 | I2 | I4 (log) | I5 | Nacionalidad de origen al adquirir otra |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | China (cont.) | 5.305 | 77 | +71 | sí | 100 | 100 | 100 | 100 | pierde o no reconocida (B44–B46) |
+| 2 | India | 944 | 55 | +93 | sí | 23,3 | 23,3 | 94,4 | 21,8 | pierde; puede pedir OCI (B47, B48) |
+| 3 | Arabia Saudita | 348 | 86 | +62 | sí | 5,7 | 5,7 | 79,8 | 5,8 | no verificado |
+| 4 | Rusia | 447 | 114 | +34 | sí | 4,0 | 4,0 | 69,9 | 4,7 | conserva (B49) |
+| 5 | Sudáfrica | 97 | 94 | +54 | sí | 1,4 | 1,4 | 69,5 | 1,4 | no verificado |
+| 6 | Turquía | 93 | 111 | +37 | sí | 0,9 | 0,9 | 62,8 | 1,1 | no verificado |
+| 7 | Qatar | 30 | 105 | +43 | sí | 0,3 | 0,3 | 58,9 | 0,4 | retiro discrecional (B50) |
+| 8 | Taiwán | 772 | 113 | +35 | no | 0 | 7,2 | 73,4 | 7,6 | no verificado |
+| 9 | México | 333 | 136 | +12 | no | 0 | 1,1 | 49,3 | 1,0 | no verificado |
+| 10 | Israel | 195 | 140 | +8 | no | 0 | 0,4 | 40,4 | 0,8 | no verificado |
+| — | EE.UU. | 23.627 | 153 | −5 | no | 0 | 0 | 0 | 39,5 | no verificado |
 
 Lectura (**HIPÓTESIS**). El índice base lo domina China por escala. Con logaritmos, India, Arabia Saudita, Taiwán y Rusia quedan cerca de China. La variante de doble nacionalidad (I5) pone a EE.UU. en segundo lugar solo por la cantidad de millonarios, porque la ganancia real es de 7 destinos (B43). I6 solo da positivo para China, porque los otros 14 mercados con datos de 5–100 M no tienen Δ⁺ > 0 con visa Schengen.
+
+**Qué cambia con la doble nacionalidad (DATO + ESTIMACIÓN).** China e India, los dos primeros del ranking, no admiten conservar la nacionalidad de origen:
+- **China.** La Ley de Nacionalidad "does not recognize dual nationality for any Chinese national" (art. 3, B44). El nacional radicado en el exterior que adquiere otra nacionalidad "shall automatically lose Chinese nationality" (art. 9, B45). La ley, de 1980, figura vigente y sin reformas en la base oficial del NPC (B46). Matiz: la pérdida automática del art. 9 exige estar radicado en el exterior. Para un comprador que sigue viviendo en China, la ley no prevé esa pérdida, pero China tampoco reconoce la nacionalidad argentina (art. 3) y lo sigue tratando como chino.
+- **India.** El ciudadano que adquiere voluntariamente otra ciudadanía deja de ser ciudadano indio "upon such acquisition" (Citizenship Act 1955, s. 9(1), B47). La pérdida se atenúa con la tarjeta Overseas Citizen of India, a la que puede acceder quien fue ciudadano indio (s. 7A, B48). La OCI no es ciudadanía.
+- **Rusia** permite conservar la nacionalidad: adquirir otra no extingue la rusa, aunque Rusia trata al doble nacional solo como ruso (Ley 138-FZ, art. 10, B49). **Qatar** puede retirarla por decisión del Emir (art. 11.5; pérdida discrecional, no automática, B50). **Arabia Saudita, Sudáfrica y Turquía: no verificado** (ver Fuentes fallidas).
+
+Consecuencias: (i) el índice base I1 **no se anula**. Su Δ⁺ compara los dos pasaportes como sustitutos, que es justamente la situación de quien pierde el suyo. (ii) En cambio, la variante I5, que supone que el comprador conserva su pasaporte, **no es válida para China ni para India**. (iii) China e India suman el **90,9 % del índice I1** (B51, ESTIMACIÓN). Para ese comprador, el costo real no es solo el aporte: también renuncia (India) o se expone a perder o a ver desconocida (China) la nacionalidad de origen, con sus derechos de residencia, trabajo y propiedad. **HIPÓTESIS:** eso reduce la demanda efectiva de los dos mercados que más pesan en el índice. Entre los mercados con I1 > 0 y doble nacionalidad verificada, solo Rusia conserva la nacionalidad de origen, y es justamente el mercado expuesto a sanciones y a los controles del Decreto 524/2025 (A15).
 
 ### 5. Contrapesos
 
@@ -190,7 +233,7 @@ Lectura (**HIPÓTESIS**). El índice base lo domina China por escala. Con logari
 - **DATO:** la evidencia oficial más directa es la del caso Vanuatu. La UE constató que su programa permitía a nacionales de países con visa "obtaining visa-free access to the Union" (B34). Constató también que la mayoría de los solicitantes exitosos de 2022–2023 venía de países con visa; en 2023, China 519 y Rusia 237 (B35). Ese patrón de origen es **compatible** con el motivo de movilidad, pero **no prueba** el motivo: nadie relevó las razones de los compradores.
 - **HIPÓTESIS (sin dato):** no se encontró una fuente primaria ni privada con metodología pública que releve los motivos de los compradores de CBI, como movilidad, plan B político, impuestos, educación o residencia. Henley, que publica encuestas sobre esto, quedó excluido por sus términos. Por lo tanto, que los compradores elijan por movilidad sigue siendo una **HIPÓTESIS no verificada**. Para el comprador estadounidense, el motivo de movilidad prácticamente no aplica (B43). Si existe demanda estadounidense, tendría que explicarse por otros motivos (plan B, residencia, afinidad).
 - **DATO, riesgo regulatorio que contradice la tesis:** desde el Reg. (UE) 2025/2441, el art. 8 del 2018/1806 incluye como causal de suspensión de la exención de visa "the operation, by a third country listed in Annex II, of an investor citizenship scheme … without that person having any genuine link to that third country" (B33). El DNU 366/2025 permite naturalizar "cualquiera sea el tiempo de su residencia" (A09). **HIPÓTESIS:** precisamente el activo que el índice pone en valor, el acceso Schengen para nacionales de países del Anexo I, es lo que podría poner en riesgo la exención de visa de **todos** los argentinos.
-- **HIPÓTESIS, no verificado:** China e India restringen la doble nacionalidad. Si es así, el comprador de los dos mercados que encabezan el índice perdería (de derecho) su nacionalidad de origen. No se pudo verificar en fuente primaria: npc.gov.cn redirige a la portada, e indiacode.nic.in y mha.gov.in devuelven 403. Hay que verificarlo antes de usar el ranking.
+- **DATO (verificado el 03/10/2026):** China no reconoce la doble nacionalidad y la pierde automáticamente quien, radicado en el exterior, adquiere otra (B44, B45). India retira la ciudadanía a quien adquiere voluntariamente otra (B47). Los dos mercados que encabezan el índice, con el 90,9 % de I1 (B51), son entonces de comprador "sustituto", no "acumulador". Detalle en la sección 4.
 - **HIPÓTESIS:** para compradores rusos, los controles de SIDE/UIF que prevé el Decreto 524/2025 (A15) y el entorno de sanciones pueden reducir la demanda efectiva.
 
 ### Fuentes
@@ -207,6 +250,13 @@ Lectura (**HIPÓTESIS**). El índice base lo domina China por escala. Con logari
 | Passport Index Data (MIT, 17/02/2026; datos de passportindex.org) | R | https://github.com/imorte/passport-index-data (`passport-index-tidy-iso3.csv`, README, LICENSE) |
 | EUR-Lex, Reglamento (UE) 2018/1806, ficha y versión consolidada 30/12/2025 | P | https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32018R1806 · https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02018R1806-20251230 |
 | Reglamento (UE) 2025/11 (Vanuatu), Oficina de Publicaciones (Cellar) | P | https://publications.europa.eu/resource/celex/32025R0011 |
+| Reglamento de Ejecución (UE) 2026/496 (Georgia, pasaportes diplomáticos), Oficina de Publicaciones (Cellar) | P | https://publications.europa.eu/resource/celex/32026R0496 |
+| NPC, Nationality Law of the People's Republic of China (inglés), captura Wayback del 07/08/2026 | P | https://web.archive.org/web/20260807035519id_/http://www.npc.gov.cn/zgrdw/englishnpc/Law/2007-12/13/content_1384056.htm |
+| NPC, Base Nacional de Leyes y Reglamentos, ficha de 中华人民共和国国籍法 (JSON de la API pública del sitio) | P | https://flk.npc.gov.cn/law-search/search/flfgDetails?bbbs=2c909fdd678bf17901678bf5aba10073 |
+| Ministry of Home Affairs (India), The Citizenship Act, 1955 (PDF actualizado al 02/01/2025), captura Wayback del 10/11/2025 | P | https://web.archive.org/web/20251110012137id_/https://www.mha.gov.in/sites/default/files/2025-01/CitizenshipAct1955_02012025.pdf |
+| Presidencia de Rusia, Ley Federal 138-FZ (28/04/2023) "Sobre la ciudadanía", p. 1 | P | http://www.kremlin.ru/acts/bank/49216/page/1 |
+| Al Meezan (portal legal oficial de Qatar), Ley 38/2005, art. 11 | P | https://www.almeezan.qa/LawArticles.aspx?LawArticleID=39318&LawId=2591&language=en |
+| passportindex.org, página About ("Legal notes"), captura Wayback del 03/07/2026 | R | https://web.archive.org/web/20260703044038id_/https://www.passportindex.org/about.php |
 
 ### Fuentes fallidas
 
@@ -214,21 +264,29 @@ Lectura (**HIPÓTESIS**). El índice base lo domina China por escala. Con logari
 |---|---|---|---|---|---|
 | 2026-10-03 | Fed SCF 2025 | https://www.federalreserve.gov/econres/files/scfp2025s.zip | HTTP 404 | Todavía no publicado (la página índice dice que 2022 es el último) | Se usa el SCF 2022; re-correr cuando salga el 2025 |
 | 2026-10-03 | Henley Passport Index API | https://api.henleypassportindex.com/api/v3/countries | — (responde 200) | Los términos prohíben el acceso automatizado y la reproducción (B28, B29) | No se usa; alternativa Passport Index Data (MIT). **Afecta también al Módulo D**, que planeaba usar Henley |
-| 2026-10-03 | passportindex.org (términos de la fuente original del dataset) | https://www.passportindex.org/ | HTTP 403 ("Just a moment…") | Protección anti-bots (Cloudflare) | Se intentó Wayback (captura 21/09/2026 de la portada): la conexión a web.archive.org se cortó. Se usa el dataset MIT con advertencia (tipo R) |
+| 2026-10-03 | passportindex.org (términos de la fuente original del dataset) | https://www.passportindex.org/ | HTTP 403 ("Just a moment…") | Protección anti-bots (Cloudflare) | **Resuelto vía Wayback (2026-10-03):** no hay página de términos entre ~66 mil URLs archivadas; la nota legal de About no da licencia ni prohíbe reutilizar, y el sitio es de Arton Capital (B52). Se mantiene el dataset MIT como R con advertencia |
 | 2026-10-03 | Knight Frank, The Wealth Report 2026 | https://www.knightfrank.com/wealthreport | Formulario de registro | El informe se entrega tras completar un formulario (B27) | No se usa (regla de no scrapear detrás de un registro) |
 | 2026-10-03 | UBS, databook por país | página GWR 2026 | No hay databook enlazado | UBS solo publica 34 de 56 mercados en el PDF | Se usa la tabla de la p. 22; los otros 22 mercados quedan fuera del índice |
 | 2026-10-03 | EUR-Lex, Reg. (UE) 2025/11 | https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32025R0011 | HTTP 202 con cuerpo vacío | Desafío anti-bots (AWS WAF, `x-amzn-waf-action: challenge`) | Mismo texto oficial vía la Oficina de Publicaciones (Cellar) |
-| 2026-10-03 | Ley de Nacionalidad de China (NPC) | http://www.npc.gov.cn/zgrdw/englishnpc/Law/2007-12/12/content_1383852.htm | Redirige a la portada | URL obsoleta | Restricción de doble nacionalidad marcada "no verificada" |
-| 2026-10-03 | Citizenship Act 1955 (India) | indiacode.nic.in / mha.gov.in | HTTP 403 | Protección anti-bots | Idem: "no verificado" |
+| 2026-10-03 | Ley de Nacionalidad de China (NPC) | http://www.npc.gov.cn/zgrdw/englishnpc/Law/2007-12/12/content_1383852.htm | Redirige a la portada | URL obsoleta (sin captura Wayback de esa URL) | **Resuelto (2026-10-03):** captura Wayback de la URL correcta, `.../2007-12/13/content_1384056.htm`, más la ficha de vigencia de flk.npc.gov.cn (B44–B46) |
+| 2026-10-03 | Citizenship Act 1955 (India) | indiacode.nic.in / mha.gov.in | HTTP 403 | Protección anti-bots | **Resuelto (2026-10-03):** captura Wayback del PDF oficial del MHA, `CitizenshipAct1955_02012025.pdf` (B47, B48). legislative.gov.in también da 403 |
+| 2026-10-03 | flk.npc.gov.cn, descarga del PDF/DOCX de la ley china | https://flk.npc.gov.cn/law-search/download/pc | Requiere captcha (`/law-search/index/captchaImage`) | El sitio protege la descarga con captcha | No se descargó (regla de no eludir captchas). El texto viene de la versión inglesa del NPC (Wayback) y la vigencia, de la ficha JSON pública (B46) |
+| 2026-10-03 | pravo.gov.ru, PDF oficial de la Ley 138-FZ (Rusia) | http://publication.pravo.gov.ru/file/pdf?eoNumber=0001202304280013 | PDF sin capa de texto (escaneo) | Publicación en imagen | Se usó el texto de kremlin.ru (B49). Es el texto publicado en 2023 y no se verificaron reformas posteriores del art. 10 |
+| 2026-10-03 | Al Meezan (Qatar) | https://www.almeezan.qa/LawArticles.aspx?LawArticleID=39318&LawId=2591&language=en | `SSLCertVerificationError` en Python (requests) | El servidor no envía la cadena TLS intermedia | Copia bajada con curl, con verificación TLS del sistema operativo (`ssl_verify_result=0`), y reutilizada desde `data/raw` (B50) |
+| 2026-10-03 | Ley de nacionalidad de Arabia Saudita (Bureau of Experts) | https://laws.boe.gov.sa/ | Timeout de conexión | Sitio inaccesible desde esta máquina; Wayback tiene ~2.700 fichas `LawDetails` sin título identificable | **No verificado:** queda "no verificado" en la tabla del índice |
+| 2026-10-03 | Sudáfrica y Turquía (leyes de ciudadanía) | — | No se intentó | Fuera del alcance de esta pasada (pesan el 1,4 % y el 0,9 % de I1) | **No verificado** |
+| 2026-10-03 | Fed SCF 2025 (re-chequeo) | https://www.federalreserve.gov/econres/scfindex.htm | Sigue apareciendo 2022 como "the most recent survey conducted"; `scfp2025s.zip` da 404 | No publicado | Sin cambios: se mantiene el SCF 2022 (B01–B11 no cambian) |
+| 2026-10-03 | UBS, databook (re-chequeo) | https://www.ubs.com/global/en/wealthmanagement/insights/global-wealth-report.html | La página solo enlaza los PDF del GWR 2026 y 2025 | No hay databook 2026 | Sin cambios |
 
 ### Limitaciones
 
 - El SCF 2022 está en dólares de 2022 y tiene cuatro años de antigüedad; no se calcularon errores muestrales (pesos replicados) y excluye a los Forbes 400. Hogares ≠ individuos.
 - "Sin esfuerzo" es una definición arbitraria (≤ 10 %, 5 % o 1 % del patrimonio). El patrimonio neto incluye activos ilíquidos; la variante con activos financieros es una aproximación a la liquidez.
 - El índice usa solo los 34 mercados con número de millonarios publicado. Excluye a Argentina y a vecinos como Chile, Colombia y Uruguay, y a Canadá, entre otros. No pondera la calidad de los destinos: no es lo mismo Schengen que un país pequeño.
-- La matriz de visados es una compilación privada (passportindex.org vía un dataset MIT) de febrero de 2026, sin verificación contra cada país de destino. No es comparable con el puntaje de Henley. La cobertura Schengen sí está verificada contra la fuente primaria.
+- La matriz de visados es una compilación privada (passportindex.org, de Arton Capital, vía un dataset MIT) de febrero de 2026, sin verificación contra cada país de destino y sin licencia explícita de la fuente original (B52). No es comparable con el puntaje de Henley. La cobertura Schengen sí está verificada contra la fuente primaria.
+- La doble nacionalidad está verificada solo para China, India, Rusia y Qatar. Arabia Saudita, Sudáfrica, Turquía, Taiwán, México e Israel quedan sin verificar. Para Rusia se usó el texto publicado en 2023, sin revisar reformas posteriores.
 - No hay datos sobre los motivos de los compradores de CBI. La relación entre movilidad y demanda es una **HIPÓTESIS**.
-- La versión consolidada del 2018/1806 es al 30/12/2025. Si hubo modificaciones en 2026, EUR-Lex todavía no las consolidó.
+- La versión consolidada del 2018/1806 es al 30/12/2025. La única novedad de 2026 que registra la ficha EUR-Lex es la suspensión para los pasaportes diplomáticos de Georgia (B53, B54), que no toca los anexos.
 
 
 <div class="modulo"></div>
@@ -236,10 +294,10 @@ Lectura (**HIPÓTESIS**). El índice base lo domina China por escala. Con logari
 ## Módulo C — Benchmark de programas de ciudadanía por inversión
 
 **Resumen (5 líneas)**
-1. **DATO:** En el Caribe Oriental la donación mínima vigente está entre USD 230.000 y 250.000 y cubre a una familia de hasta 4 personas. Antigua cobra USD 230.000 (NDF), Granada 235.000 (NTF), Santa Lucía 240.000 (NEF) y St Kitts 250.000 (SISC), todas vigentes desde julio–agosto de 2024. Nauru cobra USD 105.000, rebajados a 90.000 durante 2026. Turquía no tiene donación: pide un inmueble de USD 400.000 o una inversión, depósito o bono de USD 500.000 (C01–C17).
-2. **ESTIMACIÓN:** el aporte argentino (USD 350.000) cuesta entre 1,40 y 1,52 veces la donación caribeña, y la familia tipo (USD 500.000) entre 2,0 y 2,2 veces. Ningún programa del benchmark con monto verificado pide más que el bono argentino (USD 800.000). A cambio, el pasaporte argentino llega a más destinos sin visa que todos salvo Malta: 148, contra 123–136 en el Caribe y 111 en Turquía (C80–C83, A01–A05, B36).
-3. **ESTIMACIÓN:** el CBI llegó a recaudar el 38% del PBI en Dominica (año fiscal 2022) y el 26% en St Kitts (2022). Los cinco programas caribeños juntos recaudaron unos USD 2.460 M de ingreso fiscal en 2020–2024, unos USD 490 M por año. Eso equivale a ≈1.400 aportes argentinos por año (C84–C90).
-4. **DATO — contrapeso:** la UE suspendió y después eliminó la exención de visado Schengen de Vanuatu por su CBI (2022 → 2025). En 2025 hizo del CBI sin vínculo genuino una causal general de suspensión (Reg. 2025/2441, que cita lavado de dinero y corrupción). El TJUE declaró ilegal el programa maltés (C-181/23), y Malta lo derogó. EE.UU. restringió la entrada de nacionales de Antigua y Dominica por su "CBI sin residencia" (C50–C57, C18–C19).
+1. **DATO:** En el Caribe Oriental la donación mínima vigente está entre USD 200.000 y 250.000 y cubre a una familia de hasta 4 personas (Dominica pide USD 250.000 para la familia). Dominica cobra USD 200.000 (EDF), Antigua 230.000 (NDF), Granada 235.000 (NTF), Santa Lucía 240.000 (NEF) y St Kitts 250.000 (SISC), todas vigentes desde junio–agosto de 2024. Vanuatu cobra USD 130.000 (DSP) y Nauru 105.000, rebajados a 90.000 durante 2026. Turquía y Jordania no tienen donación: Turquía pide un inmueble de USD 400.000 o una inversión de 500.000; Jordania, un proyecto productivo de JOD 500.000–700.000 con empleo o acciones por JOD 1.000.000 (C01–C17, C91–C99).
+2. **ESTIMACIÓN:** el aporte argentino (USD 350.000) cuesta entre 1,40 y 1,75 veces la donación caribeña, y la familia tipo (USD 500.000) entre 2,0 y 2,2 veces. Solo Jordania, por la vía de acciones (≈ USD 1,41 M), pide más que el bono argentino (USD 800.000). A cambio, el pasaporte argentino llega a más destinos sin visa que todos salvo Malta: 148, contra 123–136 en el Caribe y 111 en Turquía (C80–C83, C99, A01–A05, B36).
+3. **ESTIMACIÓN:** el CBI llegó a recaudar el 38% del PBI en Dominica (año fiscal 2022) y el 26% en St Kitts (2022). Los cinco programas caribeños juntos recaudaron unos USD 2.460 M de ingreso fiscal en 2020–2024, unos USD 490 M por año, ≈1.400 aportes argentinos por año (C84–C90). Según los Article IV 2026, en 2025 la recaudación cae a ≈ USD 420 M (≈1.200 aportes; C77); con la serie revisada, 2021–2025 promedia ≈ USD 545 M por año (C78).
+4. **DATO — contrapeso:** la UE suspendió y después eliminó la exención de visado Schengen de Vanuatu por su CBI (2022 → 2025). En 2025 hizo del CBI sin vínculo genuino una causal general de suspensión (Reg. 2025/2441, que cita lavado de dinero y corrupción), y en diciembre de 2025 la Comisión señaló a los cinco programas caribeños por sus volúmenes y bajas tasas de rechazo (C28). El TJUE declaró ilegal el programa maltés (C-181/23), y Malta lo derogó. EE.UU. restringió la entrada de nacionales de Antigua y Dominica por su "CBI sin residencia" (C50–C57, C18–C19).
 5. **DATO + HIPÓTESIS — dependencia fiscal:** el ingreso CBI de St Kitts cayó de 22% a 8% del PBI en un año tras endurecer controles, y el de Vanuatu de ~14% a 5,4% tras perder la exención Schengen. El FMI vincula la dependencia del CBI a la menor presión tributaria de la región (C21, C22, C26). **HIPÓTESIS:** un programa argentino quedaría expuesto a los mismos instrumentos (el pasaporte argentino figura en el Anexo II de la UE, B32–B33), con el agravante de que lo que está en juego es una exención de visado más valiosa.
 
 ---
@@ -265,16 +323,20 @@ Archivo: `data/processed/C_montos_minimos.csv`. Gráfico: `outputs/charts/C_mont
 | Turquía | Inmueble (3 años sin vender) | Inmobiliario | 400.000 | n/p | Reglamento 2010/139 art. 20 (mod. 2022) | C14 |
 | Turquía | Capital fijo / depósito / bonos del Estado | Inversión / bono | 500.000 | n/p | Ídem | C15 |
 | Nauru | ECRCP (oferta 2026) | Donación a fondo | 90.000 (regular 105.000) | n/p | Oferta desde 3/2/2026 hasta 31/12/2026 | C16, C17 |
-| Dominica | EDF | Donación | **no verificado** | — | — | (piso regional MoA 2024: USD 200.000, C20) |
-| Vanuatu | DSP | Donación | **no verificado** | — | — | — |
+| Dominica | EDF | Donación a fondo | 200.000 | 250.000 (principal + 3) | S.R.O. 8/2024 (gaceta 28/6/2024); la S.R.O. 46/2025 no toca los montos | C91, C92, C94* |
+| Dominica | Inmueble en proyecto aprobado | Inmobiliario | 200.000 (+ tasa de gobierno desde 75.000) | — | S.R.O. 8/2024, Schedule 1, párr. 2 | C92, C93 |
+| Vanuatu | DSP (tasas mandadas por el Gobierno) | Donación a fondo | 130.000 | 180.000 (matrimonio + 2 hijos) | Regulation Order 33/2019; web oficial (consulta 04/10/2026) | C95, C96* |
+| Jordania | Proyecto productivo nuevo fuera de Amán (10 empleos; pasaporte temporal 3 años) | Inversión | ≈ 705.000 (JOD 500.000) | n/p | Decisión del Consejo de Ministros 4375 (2/7/2025) | C97*, C98, C99 |
+| Jordania | Acciones nuevas en empresas jordanas (3 años) | Inversión | ≈ 1.410.000 (JOD 1.000.000) | n/p | Ídem | C97*, C98, C99 |
 | Egipto | Decreto PM 876/2023 | Varios | **no verificado** | — | — | — |
-| Jordania | Criterios del Consejo de Ministros | Depósito / bono / inversión | **no verificado** | — | — | — |
 | Malta | MEIN | — | **derogado** | — | Act XXI 2025 (24/7/2025) | C18, C19, C56 |
 
-n/p = la fuente no publica el monto familiar. *C05 es una **lectura visual** de un PDF escaneado sin capa de texto (ver Limitaciones).
+n/p = la fuente no publica el monto familiar. *C05, C94 y C96 son **lecturas visuales** de PDF escaneados sin capa de texto; C97 combina una lectura visual del árabe con fragmentos literales del texto extraído (pdfplumber invierte el orden de los caracteres). Ver Limitaciones. Los montos de Jordania están en dinares; la conversión a USD (0,709 JOD/USD, C98) es ESTIMACIÓN (C99).
 
 - **DATO:** en Santa Lucía, el S.I. 57/2026 (23/3/2026) limita a 1.500 por año las solicitudes aprobadas (C27). Es el primer cupo explícito del Caribe.
-- **DATO:** St Kitts llevó en julio de 2023 la opción en efectivo de USD 125.000 a 250.000 (C24). Según el FMI, los cinco países firmaron en marzo de 2024 un Memorando de Acuerdo con un piso de USD 200.000 (C20).
+- **DATO:** St Kitts llevó en julio de 2023 la opción en efectivo de USD 125.000 a 250.000 (C24). Según el FMI, los cinco países firmaron en marzo de 2024 un Memorando de Acuerdo con un piso de USD 200.000 (C20). **Dominica cobra exactamente ese piso:** USD 200.000 para un solicitante y 250.000 para una familia de hasta 4 (EDF), o un inmueble de USD 200.000 más una tasa de gobierno desde USD 75.000 (C91–C93).
+- **DATO:** en Vanuatu, la Oficina de Ciudadanía fija para el DSP una contribución mínima al Gobierno de USD 80.000 y un precio mínimo de venta de USD 130.000 (USD 180.000 para matrimonio con 2 hijos), más USD 5.000 de debida diligencia (C95, C96). Es el programa por donación más barato del benchmark después de Nauru.
+- **DATO:** Jordania no tiene donación ni depósito: desde la decisión 4375 (2/7/2025) la nacionalidad requiere acciones nuevas por JOD 1.000.000 o un proyecto productivo con empleo para jordanos (JOD 700.000 en Amán con 20 empleos; JOD 500.000 fuera de Amán con 10 empleos), con un pasaporte temporal de 3 años antes de la nacionalidad (C97). En USD: ≈ 705.000 y ≈ 1.410.000 (ESTIMACIÓN, C99).
 - **Malta (tras el TJUE):** la sentencia C-181/23 (29/4/2025) declaró que el programa de "naturalización por servicios excepcionales por inversión directa" incumplía el art. 20 TFUE y el art. 4.3 TUE (C56). La Act XXI de 2025 eliminó la figura "individual investor programme" y reemplazó el art. 10(9) por una naturalización "por mérito" (C18, C19). **No hay hoy monto de inversión vigente en Malta.**
 
 ### 2. Recaudación CBI en USD y % del PBI (FMI)
@@ -287,17 +349,22 @@ Archivo: `data/processed/C_recaudacion_cbi.csv`. Gráfico: `outputs/charts/C_rec
 - **% del PBI (ESTIMACIÓN).** Es USD / PBI nominal de la API DataMapper (NGDPD, C70–C75). El % que publica el FMI va al lado como DATO para validar: las diferencias son menores a 2 puntos.
 - **Dos conceptos.** "Ingreso fiscal" (lo que entra al presupuesto) y "flujo BdP" (entradas totales CBI en balanza de pagos, incluido lo inmobiliario). Para Vanuatu solo hay el segundo.
 
-| País | Pico (% PBI, DataMapper) | Último año (2024, est. FMI) | Acumulado fiscal 2020–2024 (USD M) | Claims |
-|---|---|---|---:|---|
-| Dominica (año fiscal jul–jun) | 38,1% (FY2022) | 31,5% | ≈1.007 | C30–C35, C84 |
-| St Kitts y Nevis | 25,8% (2022) | 8,6% | ≈869 | C36–C39, C85 |
-| Granada (ingreso fiscal) | 12,4% (2024) | 12,4% | ≈354 | C43–C45, C87 |
-| Granada (flujo BdP) | 32,1% (2024) | 32,1% | — | C44 |
-| Antigua y Barbuda | 2,6% (2020) | 1,3% | ≈146 | C40–C41, C86 |
-| Santa Lucía (año fiscal abr–mar) | 1,0% (FY2022) | 0,8% | ≈86 | C46–C47, C88 |
-| Vanuatu (ECP, BdP) | 12,2% (2020) | 2,7% | ≈411 | C48–C49, C89 |
+| País | Pico (% PBI, DataMapper) | 2024 (est. FMI) | 2025 (informes 2026) | Acumulado fiscal 2020–2024 (USD M) | 2025 (USD M) | Claims |
+|---|---|---|---|---:|---:|---|
+| Dominica (año fiscal jul–jun) | 38,1% (FY2022) | 31,5% | 28,4% (FY2025/26, proyección) | ≈1.007 | ≈211 | C30–C35, C63, C84 |
+| St Kitts y Nevis | 25,8% (2022) | 8,6% | 5,3% (est.) | ≈869 | ≈57 | C36–C39, C64–C65, C85 |
+| Granada (ingreso fiscal) | 12,4% (2024) | 12,4% | 4,6% (est.) | ≈354 | ≈65 | C43–C45, C67, C87 |
+| Granada (flujo BdP) | 32,1% (2024) | 32,1% | — | — | — | C44 |
+| Antigua y Barbuda | 2,6% (2020) | 1,3% | 2,6% (est.) | ≈146 | ≈58 | C40–C41, C66, C86 |
+| Santa Lucía (año fiscal abr–mar) | 1,0% (FY2022) | 0,8% | 1,0% (FY2025/26, proyección) | ≈86 | ≈27 | C46–C47, C68–C69, C88 |
+| Vanuatu (ECP, BdP) | 12,2% (2020) | 2,7% | — (ingreso fiscal ECP: 5,4% previsto, C76) | ≈411 | — | C48–C49, C76, C89 |
+
+Los porcentajes de 2025 son USD / PBI DataMapper; se verifican al correr el script (ver `C_recaudacion_cbi.csv`).
 
 - **ESTIMACIÓN:** los cinco programas caribeños suman ≈ USD 2.460 M de ingreso fiscal en 2020–2024 (≈ USD 490 M por año), unos 1.400 aportes argentinos por año (C90). Esto sirve para dimensionar los escenarios del Módulo G: el techo de G (3.000 solicitantes por año) duplica lo que recauda hoy todo el Caribe.
+- **2025 (Article IV 2026, ESTIMACIÓN):** con los informes publicados entre enero y junio de 2026 (St Kitts CR 26/93, Dominica CR 26/117, Antigua CR 26/97, Granada CR 26/9, Santa Lucía CR 26/3; C63–C69) el ingreso fiscal CBI de los cinco caribeños baja a ≈ USD 419 M en 2025, ≈ 1.200 aportes argentinos (C77). Por país: Dominica 211 (proyección del ejercicio 2025/26), Granada 65, Antigua 58, St Kitts 57 (5,3% del PBI, desde 8,6% en 2024 y ≈ 26% en 2022) y Santa Lucía 27 (proyección). Es el nivel más bajo desde 2020.
+- **Revisión de la serie (ESTIMACIÓN):** los informes 2026 revisan hacia arriba 2021–2024 (≈ +7%), sobre todo por Granada, cuya nueva fila "Government CBI revenue" incluye la donación al NTF también antes de 2023, y por Dominica 2024. Con esa vintage, 2021–2025 suma ≈ USD 2.716 M, ≈ USD 543 M por año (C78). **C90 no cambia** (sigue midiendo 2020–2024 con los informes 2025), pero el Módulo G debería tener presente que el promedio anual ronda USD 490–545 M según la vintage, y que el último año observado (2025) es ≈ USD 420 M.
+- **Vanuatu, ingreso fiscal del ECP (CR 25/277):** 11,2% del PBI en 2021, 5,3% en 2023 y 5,4% previsto para 2025 (C76). Es un concepto distinto del flujo de balanza de pagos que usa el gráfico (C48).
 - **DATO:** el FMI proyecta que el ingreso CBI regional baje de 7% del PBI de la ECCU (2024) a 4% (2029) (C23).
 - **Comparabilidad:** en Santa Lucía y Antigua el ingreso que llega al presupuesto es chico (≈1–2,6% del PBI) porque el grueso va a fondos fuera del presupuesto (NEF) o a inversión inmobiliaria. En Granada, hasta 2022 la donación al NTF se registraba como "grants" y no como ingreso CBI (nota 1/ de la tabla del FMI): la serie fiscal subestima los años previos a 2023, y el flujo BdP es la medida comparable.
 
@@ -318,8 +385,9 @@ Archivo: `data/processed/C_casos_regulatorios.csv`.
 | 02/01/2025 (BOE 3/1/2025) | España | LO 1/2025, DF 21.ª: **deja sin contenido los arts. 63–67 de la Ley 14/2013**. Elimina toda la residencia para inversores, no solo la inmobiliaria. Vigencia general a los 3 meses | C59 |
 | 17/02/2022 | Reino Unido | Cierre de la ruta Tier 1 (Investor) "over security concerns". Daba "opportunities for corrupt elites" | C61 |
 | 15/02/2023 | Irlanda | Cierre del Immigrant Investor Programme, que había aprobado ≈ €1.252 M | C62 |
+| 19/12/2025 | UE → Caribe Oriental | Octavo informe del mecanismo de suspensión de visados (IP/25/3061): los CBI de los cinco Estados del Caribe Oriental "continue to raise concerns" por altos volúmenes, plazos cortos y bajas tasas de rechazo | C28 |
 
-**Presión de la UE en 2026 (no verificado en fuente primaria):** según la prensa, la Comisión pidió por carta (25/6/2026) a los cinco países caribeños eliminar su CBI hasta el 1/6/2028, bajo amenaza de aplicarles el Reg. 2025/2441. La carta no está publicada, y la CIU de Antigua no publicó ninguna declaración sobre el tema en cip.gov.ag (última actualización relevante: 19/12/2025, sobre EE.UU.). Queda como **S**, solo para fechar.
+**Presión de la UE en 2026 (sigue sin verificar en fuente primaria):** según la prensa, la Comisión pidió por carta (25/6/2026) a los cinco países caribeños eliminar su CBI hasta el 1/6/2028, bajo amenaza de aplicarles el Reg. 2025/2441. El 04/10/2026 se buscó en el press corner de la Comisión (API de búsqueda: "citizenship by investment", "investor citizenship", "Eastern Caribbean", "Saint Kitts", "Antigua", "Dominica", "Grenada", "golden passports", "visa suspension mechanism"): no hay comunicado sobre la carta. Las piezas de 2026 que aparecen (estrategia de visados y su Q&A del 29/1/2026, QANDA/26/218; suspensión para pasaportes diplomáticos de Georgia, IP/26/564) no la mencionan. La CIU de Antigua tampoco publicó nada en cip.gov.ag. La carta queda como **S**, solo para fechar. Lo verificable es el antecedente de diciembre de 2025 (C28): la Comisión ya señalaba a los cinco programas en su informe anual.
 
 ### 4. Posicionamiento de Argentina
 
@@ -332,12 +400,16 @@ Archivo: `data/processed/C_posicionamiento.csv`.
 | Santa Lucía | 240.000 | 240.000 | 125 | 1,46 | 1.920 |
 | Granada | 235.000 | 235.000 | 128 | 1,49 | 1.836 |
 | Antigua y Barbuda | 230.000 | 230.000 | 132 | 1,52 | 1.742 |
+| Dominica | 200.000 | 250.000 | 123 | 1,75 | 1.626 |
+| Vanuatu | 130.000 | 180.000 | 80 | 2,69 | 1.625 |
 | Nauru | 90.000 | — | 73 | 3,89 | 1.233 |
 | Turquía | (inmueble 400.000) | — | 111 | — | — |
+| Jordania | (proyecto ≈ 705.000; acciones ≈ 1.410.000) | — | 49 | — | — |
 | Malta (derogado) | — | — | 159 | — | — |
-| Dominica / Vanuatu / Jordania / Egipto | no verif. | — | 123 / 80 / 49 / 48 | — | — |
+| Egipto | no verif. | — | 48 | — | — |
 
-- **ESTIMACIÓN:** Argentina es el programa **más caro** del benchmark verificado en donación (+40–52%) y en familia tipo (≈2×) (C80, C81). En cambio, ofrece el **mejor pasaporte** del grupo vigente: 148 destinos frente a 136 del mejor caribeño. Aun así, por destino sin visa resulta ≈25–35% más caro que el Caribe (C82, C83).
+- **ESTIMACIÓN:** Argentina es el programa por donación **más caro** del benchmark: su aporte cuesta entre 1,40 y 1,75 veces la donación de los cinco caribeños y 2,7 veces la de Vanuatu; la familia tipo, entre 2,0 y 2,2 veces (C80, C81). En cambio, ofrece el **mejor pasaporte** del grupo vigente: 148 destinos frente a 136 del mejor caribeño. Aun así, por destino sin visa resulta ≈ 23–45% más caro que el Caribe (USD 2.365 contra 1.626–1.920; C82, C83).
+- **ESTIMACIÓN:** el bono argentino (USD 800.000) **ya no es el umbral más alto** del benchmark: Jordania pide JOD 1.000.000 (≈ USD 1,41 M) en acciones, aunque su vía más barata para un inversor nuevo (JOD 500.000, ≈ USD 705.000 fuera de Amán) queda por debajo del bono (C97, C99). Jordania no ofrece donación: exige inversión productiva con empleo.
 - **HIPÓTESIS:** el diferencial de precio solo se justifica si el comprador valora atributos que el conteo de destinos no captura (un país grande, residencia efectiva posible, Mercosur). Esa tesis la evalúa el Módulo B. Por monto, Argentina compite con las vías inmobiliarias de Turquía y St Kitts, no con las donaciones caribeñas.
 
 ### 5. Contrapesos (riesgos para un programa nuevo)
@@ -358,6 +430,12 @@ Archivo: `data/processed/C_posicionamiento.csv`.
 | Santa Lucía CIU: web; S.I. 106/2024 y 57/2026 | P | https://www.cipsaintlucia.com/citizenship-legislation |
 | Turquía, Reglamento 2010/139 (texto consolidado) | P | https://www.mevzuat.gov.tr/MevzuatMetin/21.5.2010139.pdf |
 | Nauru ECRCP: Contribution y Factsheet 03/2025 | P | https://www.ecrcp.gov.nr/contribution |
+| Dominica CBIU: EDF, Real Estate, S.R.O. 8/2024 y S.R.O. 46/2025 | P | https://www.cbiu.gov.dm/investment-options/ (PDF en https://www.cbiu.gov.dm/dominica-citizenship/legislation/) |
+| Vanuatu, Citizenship Office and Commission: Fees and Charges; directiva "Enforcement of Government Prescribed Fees" (30/4/2020) | P | https://vancitizenship.gov.vu/index.php/citizenship/fees-and-charges |
+| Jordania, Ministerio de Inversión: mecanismo de la decisión del Consejo de Ministros 4375 (2/7/2025) — copia Wayback | P | https://web.archive.org/web/20251008223025id_/https://moin.gov.jo/ebv4.0/root_storage/ar/eb_list_page/… (URL completa en `src/03_benchmark.py`) |
+| Banco Central de Jordania, Working Paper sobre el tipo de cambio fijo (paridad JOD 0,709) — copia Wayback | P | https://web.archive.org/web/20250711035218id_/https://www.cbj.gov.jo/EBV4.0/Root_Storage/AR/The_Case_of_a_Hard-Pegged_Exchange_Rate_Regime.pdf |
+| Comisión Europea, IP/25/3061 (octavo informe del mecanismo de suspensión de visados), vía API del press corner | P | https://ec.europa.eu/commission/presscorner/detail/en/ip_25_3061 |
+| FMI Article IV 2026: St Kitts CR 26/93, Dominica CR 26/117, Antigua CR 26/97, Granada CR 26/9, Santa Lucía CR 26/3; Vanuatu 2025 CR 25/277 | P | https://www.imf.org/-/media/files/publications/cr/2026/english/ (p. ej. 1knaea2026001-source-pdf.pdf) |
 | Malta, Act XXI of 2025 | P | https://legislation.mt/eli/act/2025/21/eng/pdf |
 | FMI Article IV: Dominica CR 25/130 y 22/40; St Kitts CR 25/107 y 22/351; Antigua CR 25/96; Granada CR 25/39; Santa Lucía CR 25/65; Vanuatu CR 24/278 | P | https://www.imf.org/-/media/Files/Publications/CR/… (enlaces directos en `src/03_benchmark.py`) |
 | FMI DataMapper, NGDPD | P | https://www.imf.org/external/datamapper/api/v1/NGDPD/DMA/KNA/ATG/GRD/LCA/VUT |
@@ -369,41 +447,44 @@ Archivo: `data/processed/C_posicionamiento.csv`.
 | Reino Unido, Home Office (gov.uk) | P | https://www.gov.uk/government/news/tier-1-investor-visa-route-closes-over-security-concerns |
 | Irlanda, Immigration Service Delivery | P | https://www.irishimmigration.ie/minister-harris-announces-closure-of-the-immigrant-investor-programme/ |
 | Destinos sin visa (Passport Index Data, vía Módulo B) | R | data/processed/B_pasaportes_destinos.csv |
-| Prensa (fechado de la carta de la Comisión de junio de 2026; montos de Egipto, Jordania y Vanuatu) | S | No se usa como origen de cifras |
+| Prensa (fechado de la carta de la Comisión de junio de 2026; monto de Egipto; nota de Ahram Online reproducida por el SIS egipcio, 15/9/2023) | S | No se usa como origen de cifras |
 
 ### Fuentes fallidas
 
-Detalle completo en `data/processed/C_fuentes_fallidas.csv`.
+Detalle completo en `data/processed/C_fuentes_fallidas.csv`. Resueltas el 04/10/2026 y retiradas de la tabla: Dominica (cbiu.gov.dm ya no pide captcha: C91–C94), Vanuatu (el dominio oficial es vancitizenship.gov.vu: C95–C96), Jordania (copia Wayback del Ministerio de Inversión: C97–C99), FMI Article IV 2026 (PDF en imf.org/-/media/files/…/2026/english/: C63–C69, C76) y la Wayback Machine (ahora responde).
 
 | Fecha | Fuente | URL | Error | Causa | Acción |
 |---|---|---|---|---|---|
-| 2026-10-03 | Dominica CBIU | https://www.cbiu.gov.dm/investment-options/ | 202 → /.well-known/sgcaptcha/ | Captcha anti-bots (también en los PDF) | Wayback falló (ver abajo); Dominica queda "no verificado" |
-| 2026-10-03 | Dominica, leyes (S.R.O. 1 y 8/2024) | https://www.dominica.gov.dm/laws/2024/… | 502 / connection reset | Host caído | Solo el piso regional (C20) como contexto |
-| 2026-10-03 | Wayback Machine | https://web.archive.org/web/20260916071416id_/https://www.cbiu.gov.dm/investment-options/ | Connection reset | El túnel a web.archive.org se corta (archive.org/wayback/available sí responde) | Captura identificada, no descargada |
+| 2026-10-03 | Dominica, leyes (dominica.gov.dm) | https://www.dominica.gov.dm/laws/2024/… | 502 / connection reset | Host caído | Misma S.R.O. 8/2024 desde cbiu.gov.dm (C92) |
+| 2026-10-03 | Dominica, S.R.O. 46/2025 | https://www.cbiu.gov.dm/wp-content/uploads/2025/12/CBI-Amendment-Regulation-2025.pdf | PDF escaneado sin texto | Escaneo | Lectura visual (C94): no cambia montos |
 | 2026-10-03 | Granada imm.gov.gd | https://www.imm.gov.gd/ | 502 | Host caído | Se usó laws.gov.gd |
 | 2026-10-03 | Granada IMA (imagrenada.gd) | https://imagrenada.gd/wp-content/uploads/2024/07/S.R.O.-15-of-2024-… | 202 + sgcaptcha | Anti-bots | Se usó laws.gov.gd |
-| 2026-10-03 | Vanuatu (PacLII / Citizenship Office) | https://www.paclii.org/vu/legis/num_reg/ ; https://citizenship.gov.vu/ | 403 / 502 | Anti-bots / host caído | Monto no verificado |
-| 2026-10-03 | Jordania (JIC / MOIN) | https://www.jic.gov.jo/en/ | Connection reset; MOIN redirige a la portada árabe | Host inaccesible | Monto no verificado |
-| 2026-10-03 | Egipto (decreto 876/2023) | https://www.state.gov/reports/2024-investment-climate-statements/egypt/ | 403; decreto no publicado en abierto | Anti-bots | Monto no verificado |
-| 2026-10-03 | FMI Article IV 2026 (St Kitts CR 26/93, Dominica CR 26/117) | https://www.imf.org/en/publications/cr/issues/2026/05/07/st-575691 | 403; eLibrary 202 vacío | Anti-bots; el PDF no sigue el patrón -/media | Serie cortada en 2024 (estimación) |
-| 2026-10-03 | FMI Antigua CR 23/184 | https://www.imf.org/-/media/Files/Publications/CR/2023/English/1ATGEA2023001.ashx | Tablas como imagen | Sin capa de texto | Antigua solo 2020–2024 |
-| 2026-10-03 | EUR-Lex | https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2441 | 202, cuerpo vacío | WAF | Mismo texto vía Oficina de Publicaciones |
+| 2026-10-03 | Vanuatu (PacLII / citizenship.gov.vu) | https://www.paclii.org/vu/legis/num_reg/ | 403 / 502; sin capturas Wayback | Anti-bots / dominio inexistente | Dominio oficial vancitizenship.gov.vu (C95–C96); la Order 33/2019 es un escaneo y no se usó |
+| 2026-10-03 | Jordania (JIC / MOIN en vivo) | https://www.jic.gov.jo/en/ | Connection reset / timeout | Host inaccesible | Mecanismo 2025 vía Wayback (C97) |
+| 2026-10-03 | Egipto (decreto 876/2023) | https://www.state.gov/reports/2024-investment-climate-statements/egypt/ | 403; decreto no publicado en abierto | Anti-bots / fuente no publicada | GAFI (Wayback 2026) no publica montos; el SIS solo reproduce prensa (S). Monto no verificado |
+| 2026-10-03 | FMI eLibrary | https://www.elibrary.imf.org/view/journals/002/2026/093/002.2026.issue-093-en.xml | 403 (vista); 202 vacío (PDF) | Anti-bots | PDF oficiales en imf.org/-/media/files/…/2026/english/ |
+| 2026-10-03 | FMI Vanuatu Article IV 2026 | https://www.imf.org/-/media/files/publications/cr/2026/english/1vutea2026001-source-pdf.pdf | 404 | No publicado (o con otro nombre) | Se usa CR 25/277 (C76) |
+| 2026-10-03 | FMI Antigua CR 23/184 | https://www.imf.org/-/media/Files/Publications/CR/2023/English/1ATGEA2023001.ashx | Tablas como imagen | Sin capa de texto | Antigua desde 2020 (CR 25/96 y 26/97); sin OCR |
+| 2026-10-03 | Comisión Europea, carta del 25/06/2026 | https://ec.europa.eu/commission/presscorner/api/search?language=en&text=citizenship%20by%20investment | Sin resultados en el press corner (9 búsquedas) | Carta no publicada | Queda como S; se agrega el octavo informe VSM (C28) |
+| 2026-10-03 | EUR-Lex | https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2441 | 202 vacío (03/10); timeout (04/10) | WAF / conexión inestable | Mismo texto vía Oficina de Publicaciones |
 | 2026-10-03 | Curia | https://curia.europa.eu/juris/liste.jsf?num=C-181/23&language=en | Redirige a infocuria (JS) | Contenido en JavaScript | Sentencia vía Oficina de Publicaciones |
 | 2026-10-03 | Diário da República (PT) | https://diariodarepublica.pt/dr/detalhe/lei/56-2023-221792115 | 200, 2 KB (JS) | Contenido en JavaScript | Texto consolidado de la AT |
 | 2026-10-03 | Resmî Gazete 13/05/2022 | https://www.resmigazete.gov.tr/eskiler/2022/05/20220513-20.pdf | PDF sin texto | Escaneo | Texto consolidado de mevzuat.gov.tr |
 
 ### Limitaciones
 
-- **C05 (Antigua, S.I. 2024 No. 50)** es un PDF escaneado sin capa de texto (no hay OCR en el entorno). La cita es una **lectura visual** de las pp. 7 y 9, entre corchetes; `quote()` no puede verificarla, y la auditoría automática la da por "OK" con 0 citas. El monto de USD 230.000 sí está verificado de forma literal en la web oficial (C04).
-- **Dominica, Vanuatu, Egipto y Jordania** quedan sin monto: no se reemplazaron con cifras de prensa ni de agentes. La regla de fuente gubernamental tiene una excepción parcial: para Nauru la fuente es el sitio oficial del programa (ecrcp.gov.nr, dominio del gobierno).
-- **Serie de recaudación:** los Article IV 2026 no fueron accesibles, así que 2024 es una estimación del FMI y faltan 2025–2026. St Kitts no tiene datos de 2018–2019. Antigua y Santa Lucía arrancan en 2020. Las cifras en USD salvo Dominica 2020–2024 son ESTIMACIÓN (paridad EC$ 2,70). Dominica y Santa Lucía usan año fiscal y se dividen por el PBI calendario del año de inicio. En Granada hay un quiebre contable en 2023 (NTF registrado como "grants" antes). El PBI de St Kitts 2015–2017 viene de un Article IV anterior a la revisión de 2021 de sus cuentas nacionales.
+- **Lecturas visuales (C05, C94, C96, C97):** el S.I. 2024 No. 50 de Antigua (C05), la S.R.O. 46/2025 de Dominica (C94) y la directiva DSP de Vanuatu (C96) son PDF escaneados sin capa de texto (no hay OCR en el entorno); la cita va entre corchetes y `quote()` no puede verificarla. Los montos de Antigua, Dominica y Vanuatu sí están verificados de forma literal en las webs oficiales y en la S.R.O. 8/2024 (C04, C91–C93, C95). En Jordania (C97) el PDF tiene texto, pero pdfplumber invierte el orden de los caracteres árabes: la cita combina una lectura visual en árabe con fragmentos literales del texto extraído, que sí se verifican.
+- **Jordania:** la copia es de la Wayback Machine (08/10/2025); moin.gov.jo no respondió el 04/10/2026. Los montos están en dinares; la conversión a USD usa la paridad 0,709 (C98) y es ESTIMACIÓN. La vía por proyecto exige además empleo (10–20 jordanos) y un pasaporte temporal de 3 años antes de la nacionalidad, así que no es comparable 1:1 con una donación.
+- **Vanuatu:** la tabla de la web oficial no nombra el programa, pero sus montos coinciden con el "precio mínimo de venta" del DSP fijado por la Regulation Order 33/2019 (C96). La contribución que efectivamente recibe el Gobierno es menor (USD 80.000 para un solicitante).
+- **Egipto** sigue sin monto: no se reemplazó con cifras de prensa ni de agentes. La regla de fuente gubernamental tiene una excepción parcial: para Nauru la fuente es el sitio oficial del programa (ecrcp.gov.nr, dominio del gobierno).
+- **Serie de recaudación:** 2020–2024 sale de los Article IV 2025 (C30–C49) y 2025 de los Article IV 2026 (C63–C69): St Kitts, Antigua y Granada estiman 2025; Dominica y Santa Lucía lo proyectan (ejercicio 2025/26). Los informes 2026 revisan 2021–2024 (≈ +7%, sobre todo Granada); esas revisiones están en C78 pero no reemplazan la serie publicada (C90 queda estable). St Kitts no tiene datos de 2018–2019. Antigua y Santa Lucía arrancan en 2020. Las cifras en USD salvo Dominica son ESTIMACIÓN (paridad EC$ 2,70). Dominica y Santa Lucía usan año fiscal y se dividen por el PBI calendario del año de inicio. En Granada hay un quiebre contable en 2023 (NTF registrado como "grants" antes) en la serie de los informes 2025. El PBI de St Kitts 2015–2017 viene de un Article IV anterior a la revisión de 2021 de sus cuentas nacionales. En el Article IV 2025 de Vanuatu (CR 25/277) la tabla rotula 2024 como pronóstico.
 - **Turquía:** el texto consolidado atribuye los montos de 400.000 y 500.000 al C.K. 5072 (RG 31711, 6/1/2022), con un cambio de redacción de la letra b) por el C.K. 5554 (RG 31834, 13/5/2022). Turquía no publica un monto para la familia.
 - **Nauru:** el monto de USD 90.000 es una oferta por tiempo limitado (solicitudes hasta el 31/12/2026). El regular es USD 105.000.
 - **Passport Index Data** es de tipo R (vía Módulo B): un conteo propio de destinos, no el Henley.
 - **Montos argentinos:** todavía no tienen norma publicada (A17). El ratio de precios supone que el anuncio se mantiene.
 
 ### Archivos
-- `src/03_benchmark.py` genera `data/processed/C_montos_minimos.csv`, `C_recaudacion_cbi.csv`, `C_casos_regulatorios.csv`, `C_posicionamiento.csv`, `C_fuentes_fallidas.csv`, `outputs/charts/C_montos_minimos.{png,svg}`, `outputs/charts/C_recaudacion_pbi.{png,svg}` y `docs/claims/claims_C.csv` (74 afirmaciones).
+- `src/03_benchmark.py` genera `data/processed/C_montos_minimos.csv`, `C_recaudacion_cbi.csv`, `C_casos_regulatorios.csv`, `C_posicionamiento.csv`, `C_fuentes_fallidas.csv`, `outputs/charts/C_montos_minimos.{png,svg}`, `outputs/charts/C_recaudacion_pbi.{png,svg}` y `docs/claims/claims_C.csv` (94 afirmaciones).
 
 
 <div class="modulo"></div>
@@ -414,13 +495,15 @@ Detalle completo en `data/processed/C_fuentes_fallidas.csv`.
 1. **ESTIMACIÓN (fuente R):** con datos de Passport Index Data (febrero de 2026; no es el Henley), el pasaporte argentino entra sin visa previa a 148 de 198 destinos, puesto 45 de 199. Empata con Chile (148), queda apenas detrás de Brasil (149) y por delante de Uruguay (137) y México (136). Lo que separa a Argentina de Chile es EE.UU. (visa frente a ESTA) y Canadá (visa o eTA condicional frente a eTA) (D60–D68, D41–D43). El Henley no se usó porque sus términos de uso prohíben el acceso automatizado (D01–D02).
 2. **DATO:** la ley (8 U.S.C. §1187(c)) dice que el DHS "**may** designate" (puede designar) a un país. Para eso exige una tasa de rechazo de visas de visitante del año fiscal anterior **menor al 3,0%**, o bien un promedio de dos años **menor al 2,0%** con cada año **menor al 2,5%**. Exige además pasaporte electrónico, acuerdo de intercambio de información sobre amenazas, reporte de pasaportes perdidos en 24 h, repatriación en 3 semanas y una evaluación de seguridad del DHS. El 3% es necesario, pero no suficiente (D03–D12, D14–D16).
 3. **DATO:** Chile fue nominado por el Departamento de Estado el 03/06/2013, designado el 28/02/2014 y opera en el VWP desde el 31/03/2014; es el único país latinoamericano entre los 42 del programa. Argentina fue miembro entre 1996 y 2002. La sacaron por la crisis y por el uso del programa para quedarse a trabajar; en aquella baja EE.UU. señaló que el proceso para obtener los documentos base del pasaporte "lacks integrity" (carece de integridad) (D18–D19, D23–D27, D44).
-4. **DATO:** el 28/07/2025, DHS y el Gobierno argentino firmaron una **declaración de intención** para el reingreso de Argentina al VWP. DHS habla de cumplir los criterios "in the coming years" (en los próximos años). Según DHS/CBP, el overstay de visitantes argentinos fue de 0,81% en FY2024, contra 2,32% de Chile, que ya está en el programa (D28–D33). **No se pudo verificar en fuente primaria la tasa de rechazo de Argentina en FY2025**: web.archive.org cortó todas las conexiones, aunque las 20 capturas FY2006–FY2025 existen y están registradas.
-5. **HIPÓTESIS:** la CBI puede jugar en contra de la candidatura. El DHS evalúa la integridad de la identidad de quienes viajan con el pasaporte, y hay antecedentes concretos: FinCEN 2014 sobre St. Kitts (rescindido en 2026), la visa que el Reino Unido impuso a Dominica y Vanuatu en 2023, la UE con Vanuatu (B34) y la observación de 2002 sobre los documentos argentinos. Rumania muestra que una designación ya otorgada puede revocarse por discrecionalidad (D21–D22, D27, D70–D73).
+4. **DATO — Argentina hoy NO cumple el umbral de rechazo:** la tasa ajustada de rechazo de visas B fue de **7,47% en FY2025**, 8,90% en FY2024 y 8,21% en FY2023 (D45, D46, D59). Estuvo por debajo del 3% durante once años seguidos (FY2011–FY2021, D52), pero lo superó en FY2022 (3,66%, D58) y desde entonces más que lo duplica. Para cumplir la vía (ii) necesita bajar unos 4,5 puntos (D76). Chile entró con 2,8% (FY2012) y 1,6% (FY2013) (D47–D48); Uruguay ya está por debajo del 3% (2,59% en FY2025, D50).
+5. **DATO + HIPÓTESIS:** el 28/07/2025, DHS y el Gobierno argentino firmaron una **declaración de intención** para el reingreso al VWP. DHS habló de cumplir los criterios "in the coming years" (D28–D30), con Argentina en 8,90% en el año fiscal en curso. El overstay argentino (0,81% en FY2024, contra 2,32% de Chile) juega a favor (D32–D33). **HIPÓTESIS:** la CBI puede jugar en contra, por la integridad de la identidad de los portadores (FinCEN 2014, Reino Unido 2023, UE con Vanuatu, la observación de 2002 sobre los documentos argentinos), aunque Malta mantuvo el VWP con su programa (D75). Rumania muestra que una designación puede revocarse por discrecionalidad (D21–D22, D27, D70–D73).
 
 ---
 
 ![D_destinos_sin_visa_AR_comparables](charts/D_destinos_sin_visa_AR_comparables.png)
 ![D_overstay_AR_CL](charts/D_overstay_AR_CL.png)
+![D_tasa_rechazo_B_AR_CL](charts/D_tasa_rechazo_B_AR_CL.png)
+![D_visas_B1B2_argentinos](charts/D_visas_B1B2_argentinos.png)
 
 ### 1. Valor del pasaporte argentino (pregunta 1)
 
@@ -467,12 +550,36 @@ Requisitos administrativos del DHS (página oficial):
 
 **Contrapeso (DATO + HIPÓTESIS):** el 3% es una condición *necesaria*, no *suficiente*. La designación es facultativa ("may", D03) y requiere una determinación de seguridad del DHS (D07), la evaluación de inteligencia (D15) y el acuerdo EBSP con cotejo biométrico (D16). El caso de Rumania lo confirma: fue designada el 09/01/2025 y la designación se **rescindió el 02/05/2025** sin implementarse. El motivo invocado fue "this Administration's focus on border and immigration security" (D21, D22). **HIPÓTESIS:** no está verificado si el DHS ya hizo la notificación biométrica que reactivaría la dispensa de hasta 10% (D12). La página del DHS solo menciona el umbral del 3% (D14), así que se trata ese umbral como el vigente.
 
-### 3. Serie de la tasa de rechazo ajustada de visas B (pregunta 3) — NO OBTENIDA
+### 3. Serie de la tasa de rechazo ajustada de visas B (pregunta 3)
 
-- travel.state.gov devuelve 403 a clientes automatizados. Con la API de disponibilidad de archive.org (que sí responde) se **ubicaron las 20 capturas FY2006–FY2025** del mismo PDF oficial (`RefusalRates/FY{yy}.pdf`), entre ellas la de FY25.pdf del 2026-05-01 (`20260501063449`). Las URL y timestamps están en `data/processed/D_wayback_capturas.csv` y las respuestas JSON en `data/raw/D_dos_refusal_rates_FY*_wbavail_2026-10-03.json`.
-- **La descarga falló:** web.archive.org devolvió `ConnectionResetError` en todos los intentos, del 2026-10-03 13:45 al 14:50 aprox. Un sondeo cada ~90 s dio siempre el mismo resultado. El proxy del entorno informó `ws_closed_mid_exchange` para web.archive.org:443. Otros espejos tampoco sirvieron: Library of Congress Web Archive (desafío Cloudflare), arquivo.pt (403) y archive.ph (reset). Los informes del CRS (crsreports.congress.gov) devolvieron 403.
-- **No se rellenó con prensa ni con memoria.** El script está preparado para completar la serie, el CSV `data/processed/D_tasa_rechazo_B.csv`, los claims D45–D52 y el gráfico `D_tasa_rechazo_B_AR_CL` (con la línea del 3% y la designación de Chile) en cuanto web.archive.org responda. Basta con correr `python src/04_pasaporte_vwp.py`.
-- Por la misma causa, **la pregunta "¿Argentina está hoy por debajo o por encima del 3%?" queda sin respuesta verificada.** La prensa publica cifras para FY2025, pero son S y no se usan. **HIPÓTESIS:** la frase del DHS del 28/07/2025, "as it works diligently to meet eligibility criteria in the coming years" (D30), sugiere que en ese momento Argentina no cumplía todos los criterios. No dice cuáles.
+**Fuente:** U.S. Department of State, *Adjusted Refusal Rate – B-Visas Only, by Nationality*, un PDF por año fiscal (`RefusalRates/FY{yy}.pdf`). travel.state.gov devuelve 403 a clientes automatizados, así que se usaron las **copias del mismo PDF oficial en la Wayback Machine**: 20 de 20 años (FY2006–FY2025). La URL y el timestamp de cada captura están en `data/processed/D_wayback_capturas.csv`; la serie, con la línea literal de cada PDF, en `data/processed/D_tasa_rechazo_B.csv`. En la primera corrida, web.archive.org no era accesible desde el entorno; el 03/10/2026 se re-corrió el script desde otra red y la serie se completó.
+
+| FY | Argentina | Chile | Uruguay | Brasil |
+|---|---|---|---|---|
+| 2006 | 6,7% | 7,5% | 12,6% | 13,2% |
+| 2008 | 3,1% | 8,9% | 9,5% | 5,5% |
+| 2010 | 3,1% | 5,0% | 5,6% | 5,2% |
+| 2011 | **2,5%** | 3,4% | 3,8% | 3,8% |
+| 2012 | **1,5%** | **2,8%** (D47) | **2,7%** | 3,2% |
+| 2013 | **1,7%** | **1,6%** (D48) | **2,8%** | 3,5% |
+| 2014 | **1,4%** | **2,4%** | **1,8%** | 3,2% |
+| 2016 | **2,14%** | 11,43% | 3,14% | 16,70% |
+| 2018 | **1,73%** | 11,34% | 4,11% | 12,73% |
+| 2020 | **2,79%** | 11,54% | 9,77% | 23,16% |
+| 2021 | **2,31%** (D57) | 13,42% | 8,82% | 14,25% |
+| 2022 | 3,66% (D58) | 13,75% | 5,70% | 14,48% |
+| 2023 | 8,21% (D59) | 16,12% | 3,21% | 11,94% |
+| 2024 | 8,90% (D46) | 20,15% | **2,63%** | 15,48% |
+| 2025 | **7,47%** (D45) | 16,38% (D49) | **2,59%** (D50) | 14,87% (D51) |
+
+En negrita, los valores por debajo del 3%. La serie completa, año por año, está en el CSV y en el gráfico `outputs/charts/D_tasa_rechazo_B_AR_CL.{png,svg}`.
+
+- **DATO:** Argentina estuvo por debajo del 3% en 11 de los 20 años disponibles, todos seguidos: FY2011–FY2021 (D52). Lo superó en FY2022 (3,66%) y desde FY2023 está entre 7,5% y 8,9% (D45, D46, D58, D59).
+- **ESTIMACIÓN:** para cumplir la vía (ii) del umbral (año fiscal anterior < 3,0%, D04), la tasa argentina tiene que bajar unos **4,5 puntos** desde el 7,47% de FY2025 (D76). La vía (i) (promedio de dos años < 2,0% y cada año < 2,5%, D05) está todavía más lejos. Como la designación usa el año fiscal completo anterior, ningún año fiscal anterior a FY2026 (que cerró el 30/09/2026) habilita hoy la designación.
+- **DATO:** en FY2012 el Departamento de Estado empezó a usar "a new calculation methodology" (D74). Los años FY2006–FY2011 no son estrictamente comparables con los posteriores (línea punteada en el gráfico).
+- **HIPÓTESIS (lectura de Chile y Brasil):** después de entrar al VWP en 2014, la tasa de Chile mide solo a quienes igual piden visa B (porque no califican para el ESTA o necesitan otra condición). Es un universo residual y más riesgoso: por eso su tasa saltó a 11–20%. No es comparable con la de un país fuera del programa. La suba de Brasil desde FY2016 no tiene esa explicación; no se analizó.
+- **HIPÓTESIS (por qué subió la de Argentina):** la suba coincide con la vuelta de la demanda pospandemia (visas emitidas de 32.821 en FY2021 a 273.206 en FY2023, D78, sección 5) y con la crisis macroeconómica de 2022–2023 (Módulo F). Los PDF no informan motivos de rechazo; no se verificó la causa.
+- La frase del DHS del 28/07/2025, "as it works diligently to meet eligibility criteria in the coming years" (D30), queda explicada por los datos: en ese momento Argentina venía de 8,21% (FY2023) y 8,90% (FY2024).
 
 ### 4. Precedente de Chile y candidatura argentina (pregunta 4)
 
@@ -481,7 +588,7 @@ Requisitos administrativos del DHS (página oficial):
 - designado el **28/02/2014** (D23);
 - regla vigente y viaje VWP desde el **31/03/2014** (D25, D18).
 
-La designación cae en el año fiscal FY2014; los años de referencia para el umbral son FY2012 y FY2013. Sus tasas de rechazo de esos años **no se pudieron extraer** (sección 3).
+La designación cae en el año fiscal FY2014; los años de referencia para el umbral son FY2012 y FY2013. Chile tuvo **2,8% en FY2012 y 1,6% en FY2013** (D47, D48): cumplió la vía (ii), con el año previo por debajo del 3%, pero no la vía (i), porque el promedio fue 2,2%. **ESTIMACIÓN:** FY2012 cerró el 30/09/2012; la nominación llegó ocho meses después (03/06/2013) y la designación, nueve meses más tarde (28/02/2014) (D24, D23). Argentina, con 7,47% en FY2025, está hoy más lejos que Chile en 2012.
 
 **Argentina, antecedente (DATO, 67 FR 7943, 21/02/2002):** fue país VWP entre el 08/07/1996 y el 21/02/2002 (D19). La baja se fundó en "the current economic crisis in Argentina and the increase in the number of Argentine nationals attempting to use the program to live and work illegally" (D26). El texto agrega que "the process for obtaining the documents to procure a passport lacks integrity" (D27). Uruguay salió del programa el 15/04/2003 (D20).
 
@@ -494,6 +601,7 @@ La designación cae en el año fiscal FY2014; los años de referencia para el um
 | 28/07/2025 | DHS: "Argentina now has the lowest visa overstay rate in all of Latin America"; el proceso "takes time … in the coming years" | DHS | D29, D30 |
 
 - **S (solo para fechar; no se afirma como hecho):** según la prensa (El Economista, Cadena 3, Los Andes, El Esquiú, mayo de 2026), la ministra de Seguridad, Alejandra Monteoliva, estimó que el beneficio podría estar operativo "en los primeros meses de 2027". No se encontró un comunicado oficial con esa fecha. **No hay en el DHS una nominación ni una designación de Argentina** a la fecha de consulta: la lista vigente del DHS no la incluye (D44: 42 países).
+- **HIPÓTESIS:** con 7,47% en FY2025 (D45), una designación a comienzos de 2027 por la vía del umbral exigiría que la tasa de FY2026 (cerrado el 30/09/2026, todavía sin publicar) haya caído por debajo del 3%, una baja de más de 4 puntos en un año. La dispensa de hasta 10% (D11) también la habilitaría, pero está suspendida desde 2009 salvo notificación del DHS (D12), que no se verificó.
 
 **Overstay (DATO, DHS/CBP Entry/Exit Overstay Reports), un argumento a favor de Argentina:**
 
@@ -507,9 +615,23 @@ La designación cae en el año fiscal FY2014; los años de referencia para el um
 - **ESTIMACIÓN:** el overstay argentino está por debajo del umbral del 2% que el DHS aplica a los miembros, y por debajo del de Chile en los tres años.
 - **Advertencia de comparabilidad:** para Chile se usa la Tabla 2 (visitantes VWP y B1/B2); para Argentina, la Tabla 3 (B1/B2 de países no VWP). Gráfico: `outputs/charts/D_overstay_AR_CL.{png,svg}`.
 
-### 5. Visas B1/B2 emitidas a argentinos (pregunta 5) — NO OBTENIDA
+### 5. Visas B1/B2 emitidas a argentinos (pregunta 5)
 
-Las *NIV Detail Tables* del DoS (p. ej., `FY24NIVDetailTable.xlsx`, captura `20260430115050`; `FY13NIVDetailTable.xls`, captura `20260430115053`) **están archivadas en Wayback**, pero fallaron por el mismo corte de web.archive.org. El script las procesa, con salida en `data/processed/D_visas_B1B2_argentinos.csv`, claims D53–D56 y el gráfico `D_visas_B1B2_argentinos`, cuando la conexión vuelva.
+**Fuente:** U.S. Department of State, *Nonimmigrant Visa Detail Tables*, columna B1/B2 (o "B-1,2"), fila Argentina; copias Wayback del xls/xlsx oficial de cada año. Se obtuvieron FY2006–FY2024 (19 años). FY2015–FY2018 se publicaron con otro nombre de archivo (`FY15 NIV Detail Table.xls`); se ubicaron con el índice CDX de la Wayback. **FY2025 todavía no está publicado ni archivado.**
+
+| FY | Visas B1/B2 emitidas | Claim |
+|---|---|---|
+| 2006 | 81.430 | — |
+| 2012 | 249.029 | — |
+| 2013 | 240.653 | D53 |
+| 2017 | **353.555** (máximo) | D77 |
+| 2019 | 212.011 | D54 |
+| 2021 | 32.821 (mínimo, pandemia) | D78 |
+| 2023 | 273.206 | — |
+| 2024 | 272.762 | D55 |
+
+- **ESTIMACIÓN:** la demanda de visas de turismo y negocios de argentinos se multiplicó por 4,3 entre FY2006 y FY2017. Cayó con la crisis de 2018–2019 y la pandemia, y en FY2023–FY2024 volvió a unos 273.000 por año, todavía 23% por debajo del pico. Serie completa en `data/processed/D_visas_B1B2_argentinos.csv`; gráfico `outputs/charts/D_visas_B1B2_argentinos.{png,svg}`.
+- **HIPÓTESIS:** el volumen es relevante para el VWP en dos sentidos. Con ~270.000 visas por año, un VWP argentino eliminaría un costo y una espera para muchos viajeros, lo que da peso político a la candidatura. Pero la tasa de rechazo (sección 3) se calcula sobre ese mismo volumen, y hoy está lejos del umbral.
 
 ### 6. Contrapeso obligatorio: cómo la CBI puede jugar en CONTRA del VWP — HIPÓTESIS
 
@@ -522,15 +644,16 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
    - Ninguno de estos casos es una exclusión del VWP: esos países nunca fueron miembros. Lo que muestran es la reacción de terceros Estados frente a pasaportes CBI.
 3. **Contrapeso del contrapeso (DATO):**
    - FinCEN **rescindió** el advisory sobre St. Kitts el 24/02/2026 (D72).
-   - **HIPÓTESIS, no verificada en fuente primaria en este módulo:** Malta figura en la lista VWP del DHS y tuvo un programa de ciudadanía por inversión (ver Módulo C) sin perder el VWP. Tampoco se verificó en el DHS si alguna evaluación VWP consideró explícitamente un programa CBI.
+   - **DATO:** Malta es país VWP desde el 30/12/2008 y sigue en la lista vigente del DHS (D75). Tuvo un programa de ciudadanía por inversión hasta que lo derogó en 2025, tras la sentencia C-181/23 del TJUE (Módulo C: C18, C19, C56), y nunca perdió el VWP. **No verificado:** si alguna evaluación VWP del DHS consideró explícitamente un programa CBI.
    - El decreto 524/2025 prevé informes de SIDE, UIF, Seguridad y RENAPER (Módulo A, A15). Eso podría presentarse ante el DHS como mitigación (**HIPÓTESIS**).
 4. **ESCENARIO:** si el DHS considerara el CBI como riesgo de identidad, podría pedir condiciones como el intercambio de las listas de naturalizados por inversión o ESTA reforzada, demorar la nominación o, como con Rumania, revertir una designación. No hay fuente primaria que vincule el CBI argentino con el proceso VWP. Es una conjetura que habría que contrastar con el DHS o el Departamento de Estado.
 
 ### Método
 - `src/04_pasaporte_vwp.py` descarga con `download()`/`get()` de `common.py` y verifica cada cita con `quote()` contra la copia local.
-- Wayback: usa la API de disponibilidad (archive.org) y guarda el JSON en data/raw. Descarga con `web.archive.org/web/<ts>id_/<url>`; si web.archive.org no responde, registra la falla por año en vez de reintentar.
-- El parser de los PDF de rechazo busca "País NN.NN%" con pdfplumber y descarta el archivo si el título no coincide con el año fiscal.
-- Salidas: `data/processed/D_destinos_sin_visa.csv`, `D_requisitos_destinos_clave.csv`, `D_overstay.csv`, `D_wayback_capturas.csv`, `D_tasa_rechazo_B.csv` (vacío por ahora), `D_visas_B1B2_argentinos.csv` (vacío por ahora) y `D_fuentes_fallidas.csv`.
+- Wayback: usa la API de disponibilidad (archive.org) y, si no devuelve captura, el índice CDX; guarda el JSON en data/raw. Descarga con `web.archive.org/web/<ts>id_/<url>`; si web.archive.org no responde, registra la falla por año en vez de reintentar.
+- El parser de los PDF de rechazo busca "País NN.NN%" con pdfplumber, sin distinguir mayúsculas (desde FY2014 los nombres vienen en mayúsculas), y descarta el archivo si el título no coincide con el año fiscal. Cada valor guarda la línea literal del PDF, que se re-verifica con `quote()`.
+- El parser de las NIV Detail Tables busca la fila de encabezado con la columna B1/B2 ("B-1,2" hasta FY2021) y toma la fila "Argentina".
+- Salidas: `data/processed/D_destinos_sin_visa.csv`, `D_requisitos_destinos_clave.csv`, `D_overstay.csv`, `D_wayback_capturas.csv`, `D_tasa_rechazo_B.csv` (80 filas: 4 países × 20 años), `D_visas_B1B2_argentinos.csv` (19 años) y `D_fuentes_fallidas.csv`.
 
 ### Fuentes
 
@@ -551,7 +674,9 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
 | UK HC 1715 Explanatory Memorandum (19/07/2023) | P | https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1184544/E02946704_-__HC_1715__-_EXPLANATORY_MEMORANDUM__Web_Accessible_.pdf |
 | Passport Index Data (MIT; de passportindex.org) — copia del Módulo B | R | https://raw.githubusercontent.com/imorte/passport-index-data/main/passport-index-tidy-iso3.csv |
 | Henley & Partners Terms of Use — copia del Módulo B (solo para documentar la prohibición) | R | https://www.henleyglobal.com/terms-of-use |
-| archive.org Wayback availability API (ubicación de capturas DoS) | P (copia de) | https://archive.org/wayback/available |
+| U.S. Department of State — Adjusted Refusal Rate, B-Visas Only, FY2006–FY2025 (20 PDF; copias Wayback, ver `D_wayback_capturas.csv`) | P | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/RefusalRates/FY25.pdf |
+| U.S. Department of State — Nonimmigrant Visa Detail Tables, FY2006–FY2024 (copias Wayback; URL de cada captura en `D_visas_B1B2_argentinos.csv`) | P | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/NIVDetailTables/FY24NIVDetailTable.xlsx |
+| archive.org Wayback availability API e índice CDX (ubicación de capturas DoS) | P (copia de) | https://archive.org/wayback/available ; https://web.archive.org/cdx/search/cdx |
 | Prensa sobre la fecha "primeros meses de 2027" (El Economista, Cadena 3, Los Andes, El Esquiú) | S | p. ej. https://eleconomista.com.ar/politica/estados-unidos-gobierno-revelo-cuando-argentinos-podran-viajar-visa-n95064 |
 
 ### Fuentes fallidas
@@ -560,11 +685,8 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
 |---|---|---|---|---|---|
 | 2026-10-03 | Henley Passport Index (API y web) | https://api.henleypassportindex.com/api/v3/countries | No usada | Los términos de uso lo prohíben (acceso automatizado; uso comercial sin licencia) | Sin datos de Henley; sustituto Passport Index Data (R) |
 | 2026-10-03 | Henley — serie histórica del puesto argentino | https://www.henleyglobal.com/passport-index/ranking | No usada | Los términos de uso lo prohíben | Serie histórica sin fuente |
-| 2026-10-03 | DoS Adjusted Refusal Rates B, FY2006–FY2025 (20 PDF) | `web.archive.org/web/<ts>id_/https://travel.state.gov/.../RefusalRates/FY{yy}.pdf` (ver `D_wayback_capturas.csv`) | `ConnectionResetError`; proxy: `ws_closed_mid_exchange` | web.archive.org corta la conexión desde este entorno (archive.org sí responde); travel.state.gov da 403 | Capturas ubicadas y registradas; re-correr el script cuando web.archive.org responda. Sin relleno |
-| 2026-10-03 | DoS NIV Detail Tables (B1/B2 por nacionalidad) | `web.archive.org/web/20260430115050id_/.../FY24NIVDetailTable.xlsx` y siguientes | `ConnectionResetError` | Ídem | Ídem |
-| 2026-10-03 | Library of Congress Web Archive | https://webarchive.loc.gov/all/2014*/travel.state.gov/... | HTTP 403 (Cloudflare "Just a moment") | Anti-bots | Descartado |
-| 2026-10-03 | arquivo.pt CDX | https://arquivo.pt/wayback/cdx | HTTP 403 | Acceso denegado | Descartado |
-| 2026-10-03 | CRS (crsreports.congress.gov, RL32221) | https://crsreports.congress.gov/product/pdf/RL/RL32221 | HTTP 403 | Anti-bots | Descartado |
+| 2026-10-03 | travel.state.gov (Refusal Rates y NIV Detail Tables) | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/RefusalRates/FY25.pdf | HTTP 403 | Anti-bots para clientes automatizados | **Resuelto:** copias del mismo archivo oficial en la Wayback Machine (20/20 PDF de rechazo; 19 tablas NIV). En la primera corrida web.archive.org cortaba la conexión (`ws_closed_mid_exchange`); se re-corrió desde otra red |
+| 2026-10-03 | DoS NIV Detail Table FY2025 | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/NIVDetailTables/FY25NIVDetailTable.xlsx | Sin captura 200 (API de disponibilidad ni CDX) | No publicada todavía o no archivada | Serie de visas emitidas hasta FY2024 |
 | 2026-10-03 | uscode.house.gov | https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1187 | HTTP 200 con "Under Maintenance" | Mantenimiento | Se usó Cornell LII |
 | 2026-10-03 | FederalRegister.gov (HTML/TXT) | https://www.federalregister.gov/documents/full_text/html/2014/03/31/2014-07254.html | "Request Access" (CAPTCHA) | Anti-scraping (solo la API está abierta) | API + copia oficial de govinfo.gov |
 | 2026-10-03 | EUR-Lex (Reglamento 2018/1806) | https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02018R1806-20250101 | HTTP 202 vacío | Desafío anti-bots | No necesario para este módulo (el Módulo B lo obtuvo vía Cellar) |
@@ -573,7 +695,9 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
 El detalle por año está en `data/processed/D_fuentes_fallidas.csv`.
 
 ### Limitaciones
-- **El núcleo cuantitativo del módulo, la serie de rechazo B, no se obtuvo.** Por eso no se puede afirmar si Argentina cumple hoy el umbral del 3%, ni con qué tasa entró Chile.
+- La serie de rechazo B viene de copias de archivo (Wayback) del PDF oficial, no de travel.state.gov directo; cada valor se verificó contra la línea literal del PDF archivado. Tiene un quiebre metodológico en FY2012 (D74).
+- Las tasas de Chile desde FY2015 no son comparables con las de países fuera del VWP: miden un universo residual (sección 3, HIPÓTESIS).
+- No se verificó la causa de la suba de la tasa argentina desde FY2022; los PDF no informan motivos de rechazo.
 - El dato de destinos sin visa viene de una compilación privada (R) hecha a partir de passportindex.org, propiedad de una firma de CBI. No equivale al Henley y no tiene serie histórica en este módulo.
 - Los overstay de Argentina y de Chile vienen de tablas distintas del informe del DHS (B1/B2 frente a VWP + B1/B2), y el informe cuenta eventos, no personas.
 - La frase del DHS sobre "lowest visa overstay rate in all of Latin America" (D29) es una declaración oficial. No se recalculó contra todos los países de la región.
@@ -592,9 +716,9 @@ Los claim_id remiten a `docs/claims/claims_E.csv`.
 
 1. **ESTIMACIÓN:** tras la final de Qatar hubo un escalón real de atención. Frente a Chile, Uruguay, Brasil y Colombia, el artículo "Argentina" de Wikipedia en inglés subió +22% (IC95 +10% a +36%). El mismo escalón aparece en alemán (+28%) y en español (+10%). Pero se erosiona a razón de unos 8 puntos log por año y el efecto neto se anula hacia 05/2025 (E07–E09).
 2. **ESTIMACIÓN (contrapeso):** en 2025–26 la atención volvió a la base. La atención relativa en inglés pasó de +19% en 2023 a −2% en ago–sep 2026. En valores absolutos, las vistas de ago–sep 2026 están 25% por debajo de ene–oct 2022. En español, la atención relativa cae 12% (E03, E05, E06). Messi-Miami y el balotaje no dejan escalón positivo, y el período posterior a la salida del cepo (14/04/2025) muestra −10% (E08, E28).
-3. **ESTIMACIÓN (a favor):** en Google EE.UU. el interés relativo por "Argentina" siguió por encima de la base: +27% en 2025 y +15% en ago–sep 2026, fuera de los meses de torneo. Los picos son de torneo: dic-2022 = 49 y jul-2026 = 100 en el índice 0–100 (E11, E12).
+3. **ESTIMACIÓN (a favor):** en Google EE.UU. el interés relativo por "Argentina" siguió por encima de la base: +27% en 2025 y +15% en ago–sep 2026, fuera de los meses de torneo. Los picos son de torneo: dic-2022 = 49 y jul-2026 = 100 en el índice 0–100 (E11, E12). **DATO:** en el Mundial 2026, jugado en EE.UU., Argentina fue subcampeón: perdió la final 1-0 ante España en la prórroga, el 19/07/2026 (E34–E36).
 4. **ESTIMACIÓN (contrapeso):** las llegadas de residentes de EE.UU. y Canadá superaron a 2019 en sólo +5% en 2025, contra +41% de los viajes aéreos de ciudadanos de EE.UU. a Sudamérica. Cayeron −9,9% en 2025, y CABA registró 284.609 estadounidenses (−11% i.a.). En 2026 rebotan: +17% en ene–ago y +34% en el 2T en Ezeiza+Aeroparque. La elasticidad al tipo de cambio real bilateral es 0,38, pero la apreciación explica sólo −3,5 de los −9,9 puntos de 2025 (E13–E15, E20, E21, E23, E31).
-5. **HIPÓTESIS (veredicto):** la tesis **se sostiene parcialmente**. Qatar dejó un pico enorme y un escalón de atención de 1 a 2 años, que en Wikipedia ya se disipó y en Google persiste moderado. El turismo norteamericano crece menos que su mercado regional y es sensible al precio. Ningún indicador muestra un salto sostenido atribuible a Messi-Miami o a Milei sobre "Argentina" como país (E32).
+5. **HIPÓTESIS (veredicto):** la tesis **se sostiene parcialmente**. Qatar dejó un pico enorme y un escalón de atención de 1 a 2 años, que en Wikipedia ya se disipó y en Google persiste moderado. La final del Mundial 2026 repitió el pico, pero no el escalón (al menos hasta sep-2026). El turismo norteamericano crece menos que su mercado regional y es sensible al precio. Ningún indicador muestra un salto sostenido atribuible a Messi-Miami o a Milei sobre "Argentina" como país (E32).
 
 ![E_argentina_vs_controles](charts/E_argentina_vs_controles.png)
 ![E_diaspora_eeuu](charts/E_diaspora_eeuu.png)
@@ -614,7 +738,7 @@ Los claim_id remiten a `docs/claims/claims_E.csv`.
 | **Messi-Miami (07/2023)** | El artículo "Lionel Messi" (en) se duplicó en 2023 (media geométrica 43.503 vs 22.867 vistas diarias en la base; `E_atencion_ventanas.csv`). | Sin escalón en "Argentina": −10% (p=0,23) en inglés, −9% (p=0,03) en español (E08). La atención va a Messi, no al país. |
 | **Milei (balotaje y asunción)** | El artículo "Javier Milei" (en) pasó de ~200 a ~4.300 vistas diarias en 2025. En alemán el escalón del balotaje es +8%, no significativo (p=0,15). | Escalón en "Argentina" (en) de −3% (p=0,46); en español, −9% (p=0,01) (E08). Binseg ubica un quiebre a la baja 4 semanas después de la asunción: 07/01/2024, −11% en inglés y −16% en español (E10). En turismo, `post_milei` da −4% (p=0,15) (E23). |
 | **Tipo de cambio / cepo** | Elasticidad de las llegadas EE.UU.+Canadá al ITCR bilateral (t−1) de 0,38 (IC95 0,17–0,59) (E23). EE.UU.+Canadá ganó participación en el total de turistas no residentes: del 7,2% en 2019 al 9,9% en 2025 (E33). | La salida (parcial) del cepo (14/04/2025, E28) llegó con un peso real más apreciado: ITCRB EE.UU. de 146,6 en ene-2024 a 95,4 en abr-2025 y 93,2 en sep-2026 (E22). La atención relativa cae −10% después de esa fecha (E08). La apreciación explica sólo un tercio de la caída del turismo en 2025 (E31). |
-| **Mundial 2026** | 2.º mayor día de la serie: 218.272 vistas el 19/07/2026 (E02). En Google EE.UU., jul-2026 = 100, máximo histórico desde 2004 (E11). | Un mes después las vistas vuelven a su piso: ago–sep 2026 está 25% por debajo de 2022 (E03). El torneo se jugó en EE.UU., lo que infla la búsqueda local. **El resultado de Argentina en el Mundial 2026 no está verificado en fuente primaria descargable** (ver Fuentes fallidas). |
+| **Mundial 2026** | Argentina llegó a la final y la perdió 1-0 ante España en la prórroga (19/07/2026; DATO, E34–E36). 2.º mayor día de la serie: 218.272 vistas el 19/07/2026, el día de esa final (E02). En Google EE.UU., jul-2026 = 100, máximo histórico desde 2004 (E11). | Un mes después las vistas vuelven a su piso: ago–sep 2026 está 25% por debajo de 2022 (E03), y la atención relativa queda en −2% (E05), aun con una final jugada en el país de los turistas que importan. El torneo se jugó en EE.UU., lo que infla la búsqueda local. **HIPÓTESIS:** a diferencia de Qatar (título), el subcampeonato 2026 no deja escalón visible; pero hay sólo 2,5 meses de datos post-torneo y no se estimó un escalón formal. |
 
 **Lo que va en contra de la tesis, con el mismo énfasis:**
 - **ESTIMACIÓN:** en valores absolutos, el artículo "Argentina" (en) tuvo en 2025 un 11% menos de vistas diarias que en ene–oct 2022, y en ago–sep 2026 un 25% menos (E03). Parte de la caída es general: los controles también caen −15% (E04), una tendencia de toda Wikipedia en inglés.
@@ -649,7 +773,7 @@ Los claim_id remiten a `docs/claims/claims_E.csv`.
 
 #### 3. Turismo receptivo
 - **DNM total país** (yvera, `turistas-no-residentes-serie.csv`): llegadas mensuales de "EE.UU. y Canadá" por medio de transporte, de ene-2010 a ago-2026. 2025–26 son datos provisorios. Es la serie principal porque cubre todos los pasos.
-- **ETI** (INDEC/SECTUR, yvera): turistas y estadía de "EE.UU. y Canadá" en Ezeiza+Aeroparque, de 2014 a dic-2025. El gasto por residencia sale de los informes técnicos trimestrales de INDEC (1T-2025, 3T-2025, 1T-2026 y 2T-2026), verificado con cita literal (E17–E20). Yvera publica el gasto sólo por paso, no por residencia.
+- **ETI** (INDEC/SECTUR, yvera): turistas y estadía de "EE.UU. y Canadá" en Ezeiza+Aeroparque, de 2014 a dic-2025. El gasto por residencia sale de los informes técnicos trimestrales de INDEC (1T-2025, 3T-2025, 1T-2026 y 2T-2026), verificado con cita literal (E17–E20). Yvera publica el gasto sólo por paso, no por residencia. La página oficial de la ETI en INDEC (`Nivel4-Tema-3-13-55`) publica además cuadros por paso hasta 2026 (`eti26_ezeyaerop_cuadros.xls`), que quedan como fuente para ampliar la serie si hiciera falta.
 - **Advertencias:** la ETI cubre sólo aeropuertos y pasos seleccionados (Ezeiza, Aeroparque, Córdoba, Mendoza, Puerto de Buenos Aires y Cristo Redentor), no el total del país. **EE.UU. viene agregado con Canadá** en todas las series oficiales argentinas. Desde ene-2026, INDEC reagrupa Bolivia, Paraguay y Uruguay en "Resto de América" en algunas tablas.
 - **Modelo** (`E_turismo_modelo.csv`): `log(llegadas EE.UU.+Can) ~ log(ITCRB EE.UU. t−1) + tendencia + post_qatar(2023-01) + post_milei(2023-12) + post_cepo(2025-04) + mundial26 + dummies de mes`. Muestra de 2014-01 a 2026-08, sin 2020-03..2022-03 (cierre de fronteras y reapertura), con HAC de 12 rezagos. T2 usa el ITCRM multilateral (elasticidad 0,34). T3 agrega log(viajes de EE.UU. a Sudamérica, NTTO) como control de demanda. Los coeficientes son **ESTIMACIÓN**.
 - **NTTO:** sólo publica gratis el agregado por regiones ("South America"). El detalle I-92/APIS por país es de pago (E29). Por eso no hay serie pública de viajes EE.UU.→Argentina.
@@ -670,7 +794,7 @@ BCRA `ITCRMSerie.xlsx`, hoja de promedios mensuales: ITCRM y bilateral EE.UU., b
 | 10/12/2023 | Asunción de Milei | S |
 | 20/06–14/07/2024 | Copa América 2024 | S |
 | 14/04/2025 | Salida del cepo para personas humanas: Com. "A" 8226 del 11/04/2025, "con vigencia a partir del 14/04/25" | **P, confirmada** (E28). Es una apertura **parcial**: habilita a personas humanas; no es la liberación total del mercado de cambios |
-| 11/06–19/07/2026 | Mundial 2026 | S (fechas). **Resultado de Argentina: no verificado** |
+| 11/06–19/07/2026 | Mundial 2026: **Argentina subcampeón** (final 19/07/2026: España 1-0 Argentina, en la prórroga) | Resultado y fecha de la final: **P, confirmados** con cita literal en CONMEBOL, AFA y RFEF, vía Wayback (E34–E36). Inicio del torneo (11/06): S |
 | 02/10/2026 | Anuncio del Programa CBI | P (Módulo A) |
 
 ### Fuentes
@@ -690,18 +814,27 @@ BCRA `ITCRMSerie.xlsx`, hoja de promedios mensuales: ITCRM y bilateral EE.UU., b
 | U.S. Census Bureau — ACS 1-year Summary File, B05006 (2010–2024) | P | https://www2.census.gov/programs-surveys/acs/summary_file/ |
 | DHS OHSS — Yearbook FY2024, LPR (Tabla 3) | P | https://ohss.dhs.gov/system/files/2026-06/2026_0604_ohss_yearbook_lawful_permanent_residents_fy2024.xlsx |
 | DHS OHSS — Yearbook FY2024, Naturalizations (Tabla 22) | P | https://ohss.dhs.gov/system/files/2026-06/2026_0604_ohss_yearbook_naturalizations_fy2024.xlsx |
-| FIFA / prensa (solo para fechar eventos deportivos y políticos) | S | — |
+| CONMEBOL — "¡Gracias, Argentina!" (19/07/2026), captura Wayback 23/07/2026 | P | https://web.archive.org/web/20260723035212id_/https://www.conmebol.com/noticias/gracias-argentina/ |
+| AFA — "Hasta el último aliento: Argentina cayó de pie en la final del Mundial", captura Wayback 20/07/2026 | P | https://web.archive.org/web/20260720110542id_/https://www.afa.com.ar/es/posts/hasta-el-ultimo-aliento-argentina-cayo-de-pie-en-la-final-del-mundial |
+| RFEF — "España, bicampeona del mundo", captura Wayback 20/07/2026 | P | https://web.archive.org/web/20260720000045id_/https://rfef.es/es/noticias/espana-bicampeona-del-mundo |
+| INDEC — página de la Encuesta de Turismo Internacional (cuadros y series) | P | https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-13-55 (contenido: https://www.indec.gob.ar/Nivel4/Tema/3/13/55) |
+| Prensa (solo para fechar eventos deportivos y políticos) | S | — |
 
 ### Fuentes fallidas
+
+Fuentes que siguen sin poder usarse (el script las vuelca en `data/processed/E_fuentes_fallidas.csv`):
 
 | Fecha | Fuente | URL | Error | Causa | Acción |
 |---|---|---|---|---|---|
 | 2026-10-03 | Census API ACS B05006 | https://api.census.gov/data/2023/acs/acs1?get=NAME,B05006_001E&for=us:1 | HTTP 302 → `missing_key.html` | La API exige una key, y la key requiere un formulario de registro. **Ojo:** `docs/probe_fuentes.csv` marca esta fuente como OK, pero su URL final es `missing_key.html` (falso positivo del probe) | Se usó el ACS Summary File oficial (mismas estimaciones) |
-| 2026-10-03 | Wikimedia Pageviews API | https://wikimedia.org/api/rest_v1/metrics/pageviews/… | HTTP 429 intermitente (envoy rate limit, `retry-after: 1`) | Límite por IP compartida del proxy | Reintentos espaciados (`download_retry`); las 19 series se bajaron completas |
-| 2026-10-03 | DHS OHSS (ohss.dhs.gov) con curl | https://ohss.dhs.gov/topics/immigration/yearbook | HTTP 403 (Akamai) | Anti-bots que bloquea a curl; con `requests` (src/common.py) responde 200 | Se descargaron los xlsx con `download()`. La Wayback Machine (web.archive.org) cortaba la conexión vía el proxy (`ws_closed_mid_exchange`) y no hizo falta |
-| 2026-10-03 | FIFA (resultado del Mundial 2026) | https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/spain-argentina-final-report-highlights | El HTML no trae contenido (se renderiza con JavaScript); la captura Wayback no se pudo bajar | Sitio JS; el endpoint `cxm-api.fifa.com` es una API no documentada y no se usó | **Resultado de Argentina: no verificado.** Los buscadores (S) indican que Argentina fue finalista, pero no se usa como dato |
 | 2026-10-03 | NTTO I-92 / APIS por país de destino | https://www.trade.gov/us-international-air-travel-statistics-i-92-data | Producto de pago (USD 150 a USD 5.795) | Licencia comercial | Se usó el agregado gratuito "South America" como control de demanda (E29) |
-| 2026-10-03 | INDEC, página de la ETI | https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-13-56 | La página no lista cuadros xls (se carga por JavaScript) | Sitio dinámico | Se usaron yvera (CKAN) y los PDF de informes técnicos ubicados por buscador |
+
+**Resueltas (revisión del 2026-10-03, con la Wayback Machine ya accesible):**
+- **FIFA, resultado del Mundial 2026** (https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/spain-argentina-final-report-highlights). El índice CDX tiene capturas desde el 19/07/2026 (p. ej. `20260720115443`), pero todas son el cascarón JS de fifa.com: unos 4,5 KB con `<div id="root"></div>` y sin contenido ni JSON embebido. No se usó `cxm-api.fifa.com` (API no documentada). **Se resolvió con las notas oficiales de CONMEBOL, AFA y RFEF**, archivadas en la Wayback Machine (E34–E36). La nota de AFA lleva fecha 17/07/2026 (anterior al partido; parece ser la fecha de alta de la nota). La fecha de la final sale de CONMEBOL ("julio 19, 2026").
+- **INDEC, página de la ETI.** El registro anterior apuntaba a `Nivel4-Tema-3-13-56`, que es la Encuesta de Ocupación Hotelera. La página de la ETI es `Nivel4-Tema-3-13-55`. El propio sitio carga su contenido desde el fragmento HTML `/Nivel4/Tema/3/13/55`, que es el mismo HTML que ve el navegador (no es una API). Ese fragmento lista los cuadros por paso (p. ej. `eti26_ezeyaerop_cuadros.xls`), las series (`series_eti_via_aerea.xlsx`, `series_mensual_aeroparque_ezeiza_2026.xlsx`) y el último informe técnico. Está guardado en `data/raw/E_indec_eti_pagina_nivel4_2026-10-03.html`. Los cuatro informes trimestrales usados (E17–E20) son PDF de indec.gob.ar verificados con cita literal; el buscador sólo sirvió para ubicarlos.
+- **Wikimedia Pageviews API:** daba HTTP 429 intermitente (rate limit por IP compartida del proxy). Se resolvió con reintentos espaciados (`download_retry`), y las 19 series se bajaron completas.
+- **DHS OHSS con curl:** daba HTTP 403 (Akamai). Con `requests` (`src/common.py`) responde 200, y los xlsx se bajaron con `download()`.
+- **Ente de Turismo CABA (E21)** y **Com. "A" 8226 / salida del cepo el 14/04/2025 (E28):** ya estaban verificadas con cita literal en la fuente oficial. No quedaban pendientes.
 
 ### Limitaciones
 - **Pageviews ≠ intención de inversión ni de residencia.** Wikipedia mide curiosidad, mayormente deportiva y noticiosa. Los picos son torneos, y los escalones son modestos y transitorios. Ninguna de estas series mide demanda de ciudadanía por inversión.
@@ -710,7 +843,7 @@ BCRA `ITCRMSerie.xlsx`, hoja de promedios mensuales: ITCRM y bilateral EE.UU., b
 - **Google Trends:** el índice es relativo (0–100) y redondeado a enteros. Con valores bajos (Uruguay = 1), el cociente es ruidoso y está dominado por Colombia. Google cambió su recolección el 01/01/2016 y el 01/01/2022; la base pre-Qatar (ene–oct 2022) queda después del último cambio. El Mundial 2026 se jugó en EE.UU., lo que infla las búsquedas locales de jun–jul 2026.
 - **Turismo:** EE.UU. viene agregado con Canadá. La ETI cubre sólo pasos seleccionados. Los datos de 2025–26 de la DNM son provisorios. NTTO mide salidas aéreas de ciudadanos de EE.UU. (incluye escalas y otro universo), por lo que la comparación con la DNM es de tendencias (índice 2019 = 100), no de niveles. El modelo omite variables como conectividad aérea, precios relativos de pasajes y seguridad percibida.
 - **ACS:** es una muestra, con MOE de ±10–13 mil personas. Las variaciones interanuales en general no son significativas (E25). Las LPR y naturalizaciones miden emigración argentina, no "popularidad" entre estadounidenses.
-- **Mundial 2026:** el resultado de Argentina no está verificado en fuente primaria. El análisis usa sólo la ventana del torneo (11/06–19/07/2026), que también es S.
+- **Mundial 2026:** el resultado (Argentina subcampeón, final del 19/07/2026) está verificado en notas oficiales de CONMEBOL, AFA y RFEF archivadas en la Wayback Machine (E34–E36), no en fifa.com, que sólo sirve un cascarón JavaScript. El inicio del torneo (11/06/2026), que define la ventana de pulso del ITS, sigue siendo S. El resultado no entra en ninguna regresión: el pulso del Mundial 2026 es una ventana de torneo, igual que la de los demás torneos, gane o pierda Argentina.
 
 
 <div class="modulo"></div>
@@ -721,14 +854,14 @@ Google Trends da índices **relativos** de 0 a 100 dentro de cada consulta, no v
 
 **Resumen (5 líneas)**
 1. **DATO / ESTIMACIÓN:** en EE.UU., el interés por "argentina passport" fue plano entre 2021 y mediados de 2025, con un promedio anual de 2 a 4. En 2026 promedia 32,5, y "argentina citizenship" pasó de 0,3 a 19,7 en el mismo período (E51, E52). El máximo de 5 años es la semana del 28/06/2026 (E50).
-2. **HIPÓTESIS:** el primer salto (semana del 27/07/2025, índice 57) coincide con la declaración de intención del 28/07/2025 para el reingreso de Argentina al Visa Waiver Program (D28). El pico de junio y julio de 2026 coincide con el Mundial en EE.UU. La suba sostenida desde noviembre de 2025 no tiene una causa identificada en fuente primaria. Que coincidan en fecha no prueba la causa.
+2. **HIPÓTESIS:** el primer salto (semana del 27/07/2025, índice 57) coincide con la declaración de intención del 28/07/2025 para el reingreso de Argentina al Visa Waiver Program (D28). El pico de junio y julio de 2026 coincide con el Mundial en EE.UU., en el que Argentina llegó a la final y la perdió 1-0 ante España el 19/07/2026 (DATO, E34–E36 del Módulo E). La suba sostenida desde noviembre de 2025 no tiene una causa identificada en fuente primaria. Que coincidan en fecha no prueba la causa.
 3. **ESTIMACIÓN:** el anuncio del 02/10/2026 tuvo reacción inmediata. En EE.UU., el índice horario de "argentina citizenship" pasó de 0,1 a 13,2 de promedio, y en el mundo de 0,7 a 30,5. El máximo fue a las 19:00 UTC del 02/10 en los dos casos (E53, E54, E63, E64). Las consultas relacionadas en mayor ascenso de la semana son "argentina citizenship by investment program" (+1.300%) y "argentina citizenship by investment" (+450%) (E62).
 4. **ESTIMACIÓN:** en las últimas 52 semanas, en EE.UU., "argentina citizenship" (26,1) superó a "portugal golden visa" (21,2) y quintuplicó a "dominica citizenship" (5,2), "st kitts citizenship" (3,2) y "turkey citizenship by investment" (3,4) (E70). **Contrapeso:** "argentina citizenship" también captura la ciudadanía por descendencia, por matrimonio y por residencia, que no tienen nada que ver con el programa CBI.
 5. **DATO (con cautela):** fuera de EE.UU., el interés relativo por "argentina citizenship" más alto en 12 meses está en Suiza (44), Rusia (43), Finlandia (42), Suecia, Hungría y Portugal (E57). En español, "pasaporte argentino" pesa más en España (92), México (88) y Chile (87) (E60). **HIPÓTESIS:** que Rusia aparezca coincide con el índice de movilidad del Módulo B (B31). Los rankings de términos de bajo volumen son ruidosos: la primera corrida, que incluía países de bajo volumen, ponía a Guinea Ecuatorial y St. Kitts en 100, y en portugués aparece Sri Lanka.
 
+![E2_paises](charts/E2_paises.png)
 ![E2_Q2_7dias](charts/E2_Q2_7dias.png)
 ![E2_Q3_7dias](charts/E2_Q3_7dias.png)
-![E2_paises](charts/E2_paises.png)
 ![E2_us_pasaporte_5y](charts/E2_us_pasaporte_5y.png)
 
 ### Gráficos
@@ -759,14 +892,14 @@ Google Trends da índices **relativos** de 0 a 100 dentro de cada consulta, no v
 
 ## Módulo F — "Refugio austral": Argentina frente a Nueva Zelanda, Uruguay, Chile, Portugal y Canadá
 
-**Fecha de corte:** 2026-10-03 · **Script:** `src/06_refugio.py` · **Ledger:** `docs/claims/claims_F.csv` (F001–F122)
+**Fecha de corte:** 2026-10-03 · **Script:** `src/06_refugio.py` · **Ledger:** `docs/claims/claims_F.csv` (F001–F149)
 
 ### Resumen (5 líneas)
 
 1. **DATO / ESTIMACIÓN — a favor:** Argentina produce 2,7 veces los cereales que consume (promedio 2019–2023), y es la única de las seis cuya producción cubre el 100% de las calorías de su dieta en los 15 grupos de FAOSTAT. Además tiene 11,9% de las reservas mundiales de litio y los mayores recursos del listado del USGS (28 Mt). Desde 2025 es exportadora neta de energía: Vaca Muerta ya aporta 72% del petróleo y 62% del gas del país (F036, F037, F064, F070–F072, F057, F062).
 2. **DATO — en contra (instituciones y paz):** Argentina está **última de las seis** en los cuatro indicadores WGI 2025: Rule of Law −0,10, Control of Corruption −0,39, Government Effectiveness 0,28 y Political Stability 0,16. También queda última en el WJP 2025 (0,54, puesto 65 de 143) y en el Global Peace Index 2026 (puesto 72 de 163, el mayor deterioro de Sudamérica) (F001–F030, F032, F113–F118).
-3. **DATO / ESTIMACIÓN — en contra (macro):** según la base BoC–BoE, Argentina tuvo deuda soberana en default en 47 de los 65 años entre 1960 y 2024, más que los otros cinco juntos (28). La inflación fue de 219,9% en 2024 (WB) y de ~41,9% promedio en 2025 (INDEC). En agosto de 2026 sigue en 33,5% interanual, frente al 2–5% de los comparables (F079–F084, F089–F102).
-4. **DATO — controles de capital:** el corralito de 2001 (Dec. 1570/2001: tope de USD 250 semanales en efectivo) y dos cepos cambiarios (11/11/2011–17/12/2015 y 01/09/2019–14/04/2025) suman ~9,7 años de cepo para personas humanas en 2011–2025. La salida de 2025 rige desde el 14/04/2025 (Com. "A" 8226) y es parcial: las empresas mantienen restricciones (F103–F112).
+3. **DATO / ESTIMACIÓN — en contra (macro y crédito):** según la base BoC–BoE, Argentina tuvo deuda soberana en default en 47 de los 65 años entre 1960 y 2024, más que los otros cinco juntos (28). La inflación fue de 219,9% en 2024 (WB) y de ~41,9% promedio en 2025 (INDEC); en agosto de 2026 sigue en 33,5% interanual, frente al 2–5% de los comparables. Es la única de las seis sin grado de inversión: B-/B3/B- (15 escalones bajo AAA, contra 0,3–7,3 de los demás), con un riesgo país de 434 p.b. a fines de julio de 2026 según el BCRA, el más bajo desde 2018 (F079–F084, F089–F102, F123–F138).
+4. **DATO — controles de capital:** el corralito de 2001 (Dec. 1570/2001: tope de USD 250 semanales en efectivo) y dos cepos cambiarios (11/11/2011–17/12/2015 y 01/09/2019–14/04/2025) suman ~9,7 años de cepo para personas humanas en 2011–2025. La salida de 2025 (Com. "A" 8226, 14/04/2025) sigue siendo parcial en el texto ordenado vigente al 14/09/2026: las personas compran sin límite (con restricción cruzada de 90 días), pero las empresas necesitan conformidad previa del BCRA para formar activos externos y solo giran dividendos de ejercicios iniciados desde 2025 (F103–F112, F143–F148).
 5. **HIPÓTESIS — veredicto:** el relato del "refugio austral" se sostiene **solo en la dimensión de recursos** (alimentos, energía, litio y, en menor medida, naturaleza). En las dimensiones que deciden si un patrimonio está a salvo (estabilidad macro, Estado de derecho, convertibilidad de la moneda), Argentina es la peor de las seis, sin excepción. Un comprador de ciudadanía como "seguro" compra un activo que tiene una ventaja real y una debilidad, también real, que no se anulan entre sí.
 
 ![Small multiples por dimensión](../../outputs/charts/F_small_multiples.png)
@@ -797,12 +930,16 @@ Google Trends da índices **relativos** de 0 a 100 dentro de cada consulta, no v
 | **Contrapesos** | Años con deuda en default, 1960–2024 (de 65) | **47** | 0* | 9 | 18 | 1** | 0* | ESTIMACIÓN F079–F084 |
 | | Inflación 2024, % promedio anual (WB) | **219,9** | 2,9 | 4,8 | 4,3 | 2,4 | 2,4 | DATO F089–F098 |
 | | Inflación 2025, % promedio anual | **41,9 (INDEC)** | 2,8 | 4,7 | 4,2 | 2,3 | 2,1 | DATO F091–F099; ARG ESTIMACIÓN F102 |
-| | Riesgo país (EMBI) | s/d | s/d | s/d | s/d | s/d | s/d | sin fuente pública abierta |
+| | Riesgo país: spread EMBI, p.b. (fines de jul-2026) | **434** | s/d | s/d | s/d | s/d | s/d | DATO F123 (BCRA, IPOM); otros: sin fuente pública por país |
+| | Calificación soberana LP m/e: S&P / Moody's / Fitch | **B- / B3 / B-** (jul-2026) | AA+ / Aaa / AA+ (abr-2026) | BBB+ / Baa1 / BBB (sep-2026) | A / A2 / A- (oct-2024)*** | A+ / A3 / A+ (sep-2026) | AAA / Aaa / AA+ (mar-2025) | DATO F127, F129, F131, F133, F135, F137 |
+| | ídem, escalones bajo AAA (promedio; grado de inversión ≤ 9) | **15,0** | 0,7 | 7,3 | 5,3 | 4,7 | 0,3 | ESTIMACIÓN F128, F130, F132, F134, F136, F138 |
+| | Tasa de largo plazo, bono del gobierno ~10 años en moneda local, % (OCDE) | s/d | 4,71 (ago-26) | s/d | 5,55 (jul-26) | 3,44 (jul-26) | 3,68 (ago-26) | DATO F139–F142; ARG y URY no son miembros de la OCDE |
 | | Años con cepo cambiario (personas), 2011–2025 | **9,7** | n/r | n/r | n/r | n/r | n/r | ESTIMACIÓN F112 |
 | | WJP Rule of Law Index 2025 (puesto/143) | **0,54 (65)** | 0,83 (5) | 0,72 (23) | 0,66 (35) | 0,67 (29) | 0,79 (13) | DATO F113–F119 |
 
 \* HIPÓTESIS: Nueva Zelanda y Canadá **no figuran** en la base BoC–BoE (166 soberanos/territorios con algún default desde 1960); se interpreta como cero (F080, F084).
 \*\* Portugal 2013: la base computa como default la extensión de plazos de los préstamos oficiales de la UE, porque implicó pérdida en valor presente para los acreedores, aunque no se interrumpió ningún pago (F088).
+\*\*\* Chile: la tabla de Hacienda ("Ratings históricos") tiene como últimas entradas S&P 16/10/2024, Moody's 15/09/2022 y Fitch 15/10/2020; se toma la última calificación de cada agencia.
 n/r = no relevado en este módulo (no se asume que los comparables no tuvieron controles).
 
 ### Hallazgos y método
@@ -835,19 +972,27 @@ n/r = no relevado en este módulo (no se asume que los comparables no tuvieron c
 #### 6. Contrapesos
 - **Defaults (ESTIMACIÓN sobre DATO, BoC–BoE 2025):** Argentina registra deuda en default en 47 de 65 años (1960–2024): 1960–63, 1965, 1976, 1982–97 y 2000–2024 de forma ininterrumpida. Chile suma 18 años (concentrados en 1961–1990) y Uruguay 9 (el último, 2003). En el criterio se cuenta todo año con un stock en default mayor que cero, incluidos montos chicos y holdouts. **DATO:** bonos en moneda extranjera en default por USD 84.830 millones en 2001 y USD 70.503 millones en 2020. En 2024 todavía quedaban USD 2.687 millones clasificados en default (F079–F087).
 - **Inflación:** **DATO:** el IPC Nacional de INDEC marcó 1,7% mensual y 33,5% interanual en agosto de 2026. Diciembre 2025 contra diciembre 2024: 31,5% (F100, F101). **ESTIMACIÓN:** el promedio anual de 2025, comparable con FP.CPI.TOTL.ZG, fue 41,9% (F102). Gráfico `F_inflacion_arg`. **HIPÓTESIS:** la desinflación desde el pico (25,5% mensual en diciembre de 2023) es real, pero la inflación interanual de agosto de 2026 está por encima de la de diciembre de 2025: el proceso se estancó.
-- **Riesgo país:** no hay serie pública abierta. Se buscó en la API de Series de Tiempo de datos.gob.ar ("riesgo país", "embi", "spread", "prima de riesgo") y en las 1.610 variables de la API v4.0 del BCRA. Las series de rendimientos de bonos soberanos de datos.gob.ar terminan en 2019–2020. Queda como **s/d** (ver Fuentes fallidas).
+- **Riesgo país y calificación (cerrado el 2026-10-03):** el EMBI de JP Morgan es propietario y no hay serie pública abierta (se buscó en la API de Series de Tiempo de datos.gob.ar, cuyas series de bonos terminan en 2019–2020, y en las 1.610 variables de la API v4.0 del BCRA). Se resolvió así:
+  - **DATO (solo Argentina):** el BCRA cita textualmente el riesgo país en el IPOM del segundo trimestre de 2026 (publicado el 06/08/2026): bajó 122 p.b. en tres meses, de 556 a **434 p.b.** a fines de julio de 2026, cerca del promedio de los soberanos calificados B- (322 p.b.), y alcanzó el nivel más bajo desde principios de 2018. Como referencia regional, el EMBI Latam estaba en torno a 260 p.b. (F123–F126). Para los otros cinco no hay una cifra oficial por país: quedan **s/d**.
+  - **Comparable para los seis — calificación soberana de largo plazo en moneda extranjera (S&P / Moody's / Fitch), tomada de la fuente oficial de cada país** (BCRA para Argentina; oficinas de deuda o ministerios de finanzas para el resto). Se eligió porque es la única medida de riesgo de crédito soberano con el mismo criterio para los seis y publicada por fuentes primarias; las metodologías de las agencias son públicas. **DATO:** Argentina B- / B3 / B- (Fitch subió de CCC+ a B- en mayo de 2026, S&P de CCC a B- un mes después y Moody's de Caa1 a B3 a mediados de julio). Los otros cinco tienen grado de inversión: Canadá AAA / Aaa / AA+, Nueva Zelanda AA+ / Aaa / AA+, Portugal A+ / A3 / A+, Chile A / A2 / A- y Uruguay BBB+ / Baa1 / BBB (F127–F137, impares). **ESTIMACIÓN:** en escalones por debajo de AAA (promedio de las tres agencias), Argentina está en 15, seis escalones por debajo del último nivel de grado de inversión (9); el siguiente peor es Uruguay, con 7,3 (F128–F138, pares; `data/processed/F_calificaciones_soberanas.csv`).
+  - **DATO complementario (OCDE):** tasa de largo plazo de bonos del gobierno (~10 años, moneda local): Chile 5,55% (jul-2026), Nueva Zelanda 4,71% (ago-2026), Canadá 3,68% (ago-2026) y Portugal 3,44% (jul-2026) (F139–F142). Argentina y Uruguay no son miembros de la OCDE y la consulta no devuelve serie. **No es un spread de riesgo:** incluye la inflación esperada de cada moneda; por eso no se compara con el EMBI ni se grafica.
 - **Controles de capital (DATO, normativa):**
   - Dec. 1570/2001, del 01/12/2001: retiros en efectivo limitados a $250 o USD 250 por semana y prohibición de transferencias al exterior (F103, F104).
   - Com. "A" 5245: validación de la AFIP, vigente desde el 11/11/2011. Se levanta con la Com. "A" 5850, el 17/12/2015 (F105, F106).
   - DNU 609/2019 y Com. "A" 6770 (01/09/2019): conformidad previa del BCRA por encima de USD 10.000 mensuales. La Com. "A" 6815 (28/10/2019) baja el tope a USD 200 (F107–F109).
   - Com. "A" 8226: vigente desde el 14/04/2025, permite a las personas humanas comprar divisas sin conformidad previa. Las empresas solo pueden girar dividendos de ejercicios iniciados desde el 01/01/2025 (F110, F111).
   - **ESTIMACIÓN:** 9,7 años de cepo para personas entre 2011 y 2025 (F112).
-  - **No verificado:** si después del 14/04/2025 hubo nuevas restricciones o una liberalización total para empresas. No se revisó la normativa posterior.
+  - **Normativa vigente (cerrado el 2026-10-03):** se revisó el texto ordenado "Exterior y Cambios" del BCRA al 14/09/2026, cuya última comunicación incorporada es la A 8481 (F143). Las comunicaciones A 8482 a A 8488 (la última publicada al 03/10/2026) no son circulares CAMEX: tratan sobre proveedores de pago, financiamiento al sector público, cajeros, feriados, etc. No hubo nuevas restricciones ni una liberalización total:
+    - **DATO:** las personas jurídicas siguen necesitando **conformidad previa del BCRA** para formar activos externos (punto 3.10) (F144).
+    - **DATO:** los dividendos a no residentes siguen limitados a utilidades de ejercicios iniciados desde el 01/01/2025, salvo excepciones como BOPREAL, RIGI o aportes de inversión directa desde el 17/01/2020 (punto 3.4.4) (F145).
+    - **DATO:** las personas humanas pueden comprar **sin límite** billetes o depósitos con débito en cuenta, pero asumen una restricción cruzada: 90 días sin operar títulos con liquidación en moneda extranjera (punto 3.8.5). Para otras modalidades de formación de activos externos, el tope sigue en USD 200 mensuales (punto 3.9.1). Los no residentes también requieren conformidad previa (F146, F147).
+    - **DATO:** según el BCRA, la flexibilización permitió a las empresas, "luego de seis años", girar unos USD 2.800 millones en dividendos en el primer semestre de 2026 (F148).
 - **Estado de derecho (DATO):** WJP 2025: Argentina 0,54 (puesto 65 de 143, −1,0%). Es la peor de las seis; la siguiente es Chile, con 0,66 (F113–F119).
 
 #### 7. Geopolítica (solo hechos con fuente primaria)
 - **DATO:** Argentina y EE.UU. firmaron el Acuerdo sobre Comercio e Inversiones Recíprocos el 05/02/2026, anunciado el 13/11/2025 (Cancillería, F120).
 - **DATO:** el Exchange Stabilization Fund del Tesoro de EE.UU. tiene un acuerdo de estabilización por USD 20.000 millones con el BCRA. En octubre de 2025 se ejecutó un swap por USD 2.500 millones (U.S. Treasury, F121, F122).
+- **DATO:** Argentina es uno de los 19 países designados por EE.UU. como Major Non-NATO Ally; Nueva Zelanda también figura en la lista (State Department, captura de la Wayback Machine del 24/09/2026, F149).
 - **HIPÓTESIS:** el alineamiento con EE.UU. reduce el riesgo de aislamiento. Pero un rescate cambiario externo en 2025 es, en sí mismo, evidencia de fragilidad macro, no de "refugio".
 
 #### Veredicto
@@ -856,10 +1001,11 @@ n/r = no relevado en este módulo (no se asume que los comparables no tuvieron c
 | **DATO/ESTIMACIÓN:** autosuficiencia alimentaria máxima de las seis (cereales 267%, cobertura calórica 100%) | **DATO:** última en los 4 indicadores WGI, en WJP y en GPI |
 | **ESTIMACIÓN:** exportadora neta de energía en 2025 (−13,2%); Vaca Muerta con 72% del petróleo nacional | **ESTIMACIÓN:** 47 de 65 años con deuda en default; hay deuda en default en todos los años desde 2000 |
 | **DATO:** 2.ª en reservas de litio (4,4 Mt) y 1.ª en recursos (28 Mt) | **DATO:** inflación de 219,9% (2024) y 33,5% interanual (agosto de 2026), contra 2–5% de los comparables |
-| **DATO:** 2.ª en sitios UNESCO naturales (5) | **DATO:** corralito de 2001 y ~9,7 años de cepo en 2011–2025; salida parcial en abril de 2025 |
+| **DATO:** riesgo país en mínimos desde 2018 (434 p.b.) y tres subas de calificación en 2026 | **DATO:** única sin grado de inversión (B-/B3/B-; 15 escalones bajo AAA, ESTIMACIÓN) |
+| **DATO:** 2.ª en sitios UNESCO naturales (5) | **DATO:** corralito de 2001 y ~9,7 años de cepo en 2011–2025; salida parcial en abril de 2025 que, a septiembre de 2026, sigue exigiendo conformidad previa a las empresas |
 | | **DATO:** el mayor deterioro de Sudamérica en el GPI 2026 |
 
-**HIPÓTESIS:** el "refugio austral" describe bien a un país que podría alimentarse y abastecerse de energía solo. No describe un lugar donde un patrimonio financiero esté protegido de la expropiación monetaria, los defaults o los controles de capital, que son justamente los riesgos que un comprador de CBI suele querer cubrir. Los comparables ofrecen las instituciones sin tener los recursos de Argentina (salvo Canadá, que tiene ambos). La mejora reciente es real pero corta y todavía no aparece en los rankings de largo plazo: Rule of Law −0,27 → −0,10 entre 2023 y 2025, inflación en baja desde 2023 y salida del cepo en 2025.
+**HIPÓTESIS:** el "refugio austral" describe bien a un país que podría alimentarse y abastecerse de energía solo. No describe un lugar donde un patrimonio financiero esté protegido de la expropiación monetaria, los defaults o los controles de capital, que son justamente los riesgos que un comprador de CBI suele querer cubrir. Los comparables ofrecen las instituciones sin tener los recursos de Argentina (salvo Canadá, que tiene ambos). La mejora reciente es real pero corta y todavía no aparece en los rankings de largo plazo: Rule of Law −0,27 → −0,10 entre 2023 y 2025, inflación en baja desde 2023, salida del cepo en 2025 y subas de calificación en 2026.
 
 ### Fuentes
 
@@ -881,18 +1027,29 @@ n/r = no relevado en este módulo (no se asume que los comparables no tuvieron c
 | InfoLEG, Decreto 1570/2001 y DNU 609/2019 | P | https://servicios.infoleg.gob.ar/infolegInternet/anexos/70000-74999/70355/norma.htm |
 | Cancillería, acuerdo comercial con EE.UU. (05/02/2026) | P | https://www.cancilleria.gob.ar/es/actualidad/noticias/argentina-y-estados-unidos-firmaron-un-acuerdo-sobre-comercio-e-inversiones |
 | U.S. Treasury, ESF octubre 2025 | P | https://home.treasury.gov/system/files/206/ESF-October-2025-FS_Trunc_Notes.pdf |
+| BCRA, Informe de Política Monetaria 2T-2026 (06/08/2026) | P | https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/informes/informe-politica-monetaria-2026-T2.pdf |
+| BCRA, Texto ordenado "Exterior y Cambios" al 14/09/2026 (A 8481) | P | https://www.bcra.gob.ar/archivos/Pdfs/Texord/t-excbio.pdf |
+| BCRA, página "Normativa de Exterior y Cambios" | P | https://www.bcra.gob.ar/normativa-de-exterior-y-cambios/ |
+| OCDE, Long-term interest rates (SDMX, DF_FINMARK, IRLT) | P | https://sdmx.oecd.org/public/rest/data/OECD.SDD.STES,DSD_STES@DF_FINMARK,/ARG+URY+NZL+CHL+PRT+CAN.M.IRLT......?startPeriod=2024-01&format=csvfile |
+| New Zealand Debt Management (Treasury), Credit ratings (captura Wayback 09/04/2026) | P | https://web.archive.org/web/20260409193619id_/https://debtmanagement.treasury.govt.nz/investor-resources/credit-ratings |
+| MEF Uruguay, Unidad de Gestión de Deuda, Calificación Crediticia | P | https://deuda.mef.gub.uy/6475/14/areas/calificacion-crediticia.html |
+| Ministerio de Hacienda de Chile, Oficina de la Deuda Pública, Ratings históricos | P | https://www.hacienda.cl/areas-de-trabajo/finanzas-internacionales/oficina-de-la-deuda-publica/estadisticas/ratings-historicos |
+| IGCP (Portugal), Investor Presentation, septiembre de 2026 | P | https://www.igcp.pt/sites/default/files/2026-09/IGCP_Investor_Presentation.pdf |
+| Department of Finance Canada, Debt Management Report 2024–25 | P | https://www.canada.ca/en/department-finance/services/publications/debt-management-report/2024-2025.html |
+| U.S. Department of State, Major Non-NATO Ally Status (captura Wayback 24/09/2026) | P | https://web.archive.org/web/20260924124444id_/https://www.state.gov/major-non-nato-ally-status |
 | WebSearch (solo para ubicar URLs oficiales) | S | — |
 
 ### Fuentes fallidas
 
 | Fecha | Fuente | URL | Error | Causa | Acción |
 |---|---|---|---|---|---|
-| 2026-10-03 | Banco Mundial API v2 | https://api.worldbank.org/v2/country/…/indicator/… | Primero, timeouts sin respuesta; después, HTTP 502 con página `waf-block` | Bloqueo anti-bots (WAF) del Banco Mundial tras pocas consultas | Se usó la **API Data360** del Banco Mundial (mismas bases WGI y WDI). El valor de prueba ARG RL 2025 = −0,1024 coincide en ambas APIs |
-| 2026-10-03 | Wayback Machine (UNESCO XML, captura 20250716131746) | https://web.archive.org/web/20250716131746id_/https://whc.unesco.org/en/list/xml | `Connection reset by peer` (5 intentos) | El túnel del proxy de egreso se cierra (`ws_closed_mid_exchange`) | Se usó **UNESCO Open Data, dataset whc001** (fuente primaria, modificado el 2026-10-02, incluye las inscripciones de 2026) |
-| 2026-10-03 | whc.unesco.org | /en/list/xml/ | HTTP 403 | Anti-bots (ya registrado en el probe) | Ídem |
+| 2026-10-03 | whc.unesco.org | /en/list/xml/ | HTTP 403 (en el reintento, HTTP 503) | Anti-bots / servicio no disponible | Se usó **UNESCO Open Data, dataset whc001** (fuente primaria, modificado el 2026-10-02, incluye las inscripciones de 2026). La captura de Wayback 20250716131746, que antes fallaba, ahora responde, pero es más vieja que whc001 |
 | 2026-10-03 | www.energia.gob.ar (https) | balance_2025_v0_h.xlsx | `CERTIFICATE_VERIFY_FAILED` (unable to get local issuer certificate) | Cadena de certificados incompleta en el servidor | Se descargó por http (los enlaces del CKAN apuntan a http); el sha256 queda en el ledger. No se desactivó TLS |
-| 2026-10-03 | Riesgo país (EMBI) | apis.datos.gob.ar/series/api/search; api.bcra.gob.ar/estadisticas/v4.0/monetarias | Sin resultados | El EMBI de JP Morgan es propietario; no hay serie pública oficial vigente | Celda "s/d"; no se rellenó con datos de prensa |
-| 2026-10-03 | U.S. State Department | https://www.state.gov/u-s-relations-with-argentina/ ; https://2021-2025.state.gov/major-non-nato-ally-status/ | HTTP 403 / página "Technical Difficulties" | Anti-bots | Se usó U.S. Treasury (ESF) como fuente primaria del gobierno de EE.UU. |
+| 2026-10-03 | Riesgo país (EMBI) por país: NZL, URY, CHL, PRT, CAN | apis.datos.gob.ar/series/api/search; api.bcra.gob.ar/estadisticas/v4.0/monetarias; OCDE DF_FINMARK | Sin resultados | El EMBI de JP Morgan es propietario; ninguna fuente oficial publica el spread por país de los cinco comparables | Celdas "s/d". Argentina: dato del BCRA (IPOM, F123). Comparable para los seis: calificación soberana (F127–F138). No se rellenó con datos de prensa |
+| 2026-10-03 | OCDE, tasa de largo plazo de ARG y URY | sdmx.oecd.org (DF_FINMARK, IRLT) | La consulta no devuelve series para ARG ni URY | No son miembros de la OCDE | Celdas "s/d" en esa fila |
+| 2026-10-03 | U.S. State Department, relación bilateral | https://www.state.gov/u-s-relations-with-argentina/ (en vivo y captura Wayback 20260218075946) | HTTP 403; la captura de Wayback guardó la página "Technical Difficulties / Exception: forbidden" | Anti-bots (también al archivar) | La lista de aliados extra-OTAN se obtuvo vía Wayback (F149); el resto, con U.S. Treasury (ESF) |
+| 2026-10-03 | NZ Treasury / NZ Debt Management | https://debtmanagement.treasury.govt.nz/investor-resources/credit-ratings | HTTP 403 | Anti-bots | Se usó la captura de Wayback del 09/04/2026 (F129); un cambio de calificación posterior no quedaría reflejado |
+| 2026-10-03 | BCRA, buscador de WordPress | https://www.bcra.gob.ar/wp-json/wp/v2/search | HTTP 403 | WAF del sitio | No se eludió; el texto ordenado y el IPOM se ubicaron por la navegación pública del sitio |
 | 2026-10-03 | Reinhart-Rogoff (Varieties of Crises) | carmenreinhart.com | No se encontró un enlace directo a datos descargables | — | Se usó la base BoC–BoE 2025 (pública y con metodología documentada) |
 
 ### Limitaciones
@@ -904,11 +1061,14 @@ n/r = no relevado en este módulo (no se asume que los comparables no tuvieron c
 - **GPI/WJP:** las cifras se extrajeron del texto de los PDF y se verificaron con cita literal. No se usaron los archivos de datos (no hizo falta registro).
 - **Inflación 2025 de Argentina:** el Banco Mundial todavía no publica el dato; se estimó con el IPC de INDEC (promedio anual).
 - **Controles de capital de los comparables:** no relevados (n/r). No se asume que no existieron.
+- **Calificaciones:** son opiniones de agencias privadas con metodología pública, citadas desde la fuente oficial de cada país. Las fechas difieren: Canadá al 31/03/2025, Chile con últimas entradas entre 2020 y 2024 y Nueva Zelanda según la captura de abril de 2026. La conversión a escalones (AAA/Aaa = 0 … B-/B3 = 15) es una ESTIMACIÓN ordinal: un escalón no equivale a una diferencia fija de riesgo.
+- **Riesgo país:** 434 p.b. es el dato de fines de julio de 2026 citado por el BCRA, no una serie. El spread no es comparable con la tasa de largo plazo de la OCDE, que está en moneda local e incluye inflación.
+- **Banco Mundial API v2:** el 2026-10-03 respondió desde otra máquina (ARG FP.CPI.TOTL.ZG 2024 = 219,88, igual que vía Data360). La falla anterior (WAF) queda resuelta; se mantuvo la API Data360, ya usada para todos los indicadores WGI y WDI.
 - El texto de los PDF se cachea en `data/raw/*.txt` (como en el Módulo A).
 
 ### Archivos
 - `src/06_refugio.py`
-- `data/processed/F_tabla_resumen.csv`, `F_tabla_resumen_ancha.csv`, `F_wgi_serie.csv`, `F_fao_autosuficiencia.csv`, `F_fao_fbs_6paises.csv`, `F_energia_importaciones_wb.csv`, `F_vaca_muerta_mensual.csv`, `F_litio_usgs.csv`, `F_unesco_sitios.csv`, `F_defaults_anios.csv`, `F_inflacion_wb.csv`, `F_ipc_arg_mensual.csv`
+- `data/processed/F_tabla_resumen.csv`, `F_tabla_resumen_ancha.csv`, `F_wgi_serie.csv`, `F_fao_autosuficiencia.csv`, `F_fao_fbs_6paises.csv`, `F_energia_importaciones_wb.csv`, `F_vaca_muerta_mensual.csv`, `F_litio_usgs.csv`, `F_unesco_sitios.csv`, `F_defaults_anios.csv`, `F_inflacion_wb.csv`, `F_ipc_arg_mensual.csv`, `F_calificaciones_soberanas.csv`, `F_oecd_tasa_largo_plazo.csv`
 - `outputs/charts/F_small_multiples`, `F_wgi_rule_of_law`, `F_vaca_muerta`, `F_inflacion_arg`, `F_defaults` (.png y .svg)
 - `docs/claims/claims_F.csv`
 
@@ -919,7 +1079,7 @@ n/r = no relevado en este módulo (no se asume que los comparables no tuvieron c
 
 **Resumen (5 líneas)**
 1. **ESCENARIO:** con 1.000 solicitantes principales por año (70% aporte / 30% bono), los aportes al Tesoro suman ≈ USD 345 M/año. Eso es el 2,9% de los vencimientos de capital de deuda externa de 2027 y el 0,75% de las reservas brutas (G04).
-2. **ESCENARIO:** el techo del rango analizado (3.000 solicitantes por año, todos por aporte) daría USD 1.350 M al año, el 11% de los vencimientos de capital externo de 2027 (G05). Como referencia, los cinco programas del Caribe juntos recaudaron unos USD 492 M al año en 2020–2024 (C90). Igualar esa cifra exigiría unos 1.430 solicitantes argentinos por año (G06). El escenario de 3.000 equivale a más del doble de todo el Caribe.
+2. **ESCENARIO:** el techo del rango analizado (3.000 solicitantes por año, todos por aporte) daría USD 1.350 M al año, el 11% de los vencimientos de capital externo de 2027 (G05). Como referencia, los cinco programas del Caribe juntos recaudaron unos USD 492 M al año en 2020–2024 (C90). Igualar esa cifra exigiría unos 1.430 solicitantes argentinos por año (G06). El escenario de 3.000 equivale a más del doble de todo el Caribe. Con los Article IV 2026 del FMI, el Caribe recaudó ≈ USD 419 M en 2025 (C77) y promedia ≈ USD 543 M por año en 2021–2025 con la serie revisada (C78); la referencia de 2020–2024 queda en el medio de ese rango.
 3. **DATO:** reservas brutas del BCRA de USD 46.092 M al 30/09/2026 (G01); vencimientos de capital de la deuda externa de la Administración Central en 2027: USD 12.125 M (G02). Servicios totales de la deuda (todas las monedas) entre jul-2026 y jun-2027: USD 147.930 M (G03).
 4. **HIPÓTESIS:** el bono de USD 800.000 no es ingreso, es financiamiento. Su valor fiscal neto depende de la tasa y el plazo, que no se publicaron. Solo los aportes (y los de los dependientes) son recursos no reembolsables.
 5. **HIPÓTESIS:** el programa puede ser relevante como señal o como fuente de divisas marginal, pero no cambia por sí solo la ecuación de deuda. Además, su flujo está expuesto al riesgo judicial del DNU 366/2025 (Módulo A).

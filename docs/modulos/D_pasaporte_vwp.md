@@ -4,8 +4,8 @@
 1. **ESTIMACIÓN (fuente R):** con datos de Passport Index Data (febrero de 2026; no es el Henley), el pasaporte argentino entra sin visa previa a 148 de 198 destinos, puesto 45 de 199. Empata con Chile (148), queda apenas detrás de Brasil (149) y por delante de Uruguay (137) y México (136). Lo que separa a Argentina de Chile es EE.UU. (visa frente a ESTA) y Canadá (visa o eTA condicional frente a eTA) (D60–D68, D41–D43). El Henley no se usó porque sus términos de uso prohíben el acceso automatizado (D01–D02).
 2. **DATO:** la ley (8 U.S.C. §1187(c)) dice que el DHS "**may** designate" (puede designar) a un país. Para eso exige una tasa de rechazo de visas de visitante del año fiscal anterior **menor al 3,0%**, o bien un promedio de dos años **menor al 2,0%** con cada año **menor al 2,5%**. Exige además pasaporte electrónico, acuerdo de intercambio de información sobre amenazas, reporte de pasaportes perdidos en 24 h, repatriación en 3 semanas y una evaluación de seguridad del DHS. El 3% es necesario, pero no suficiente (D03–D12, D14–D16).
 3. **DATO:** Chile fue nominado por el Departamento de Estado el 03/06/2013, designado el 28/02/2014 y opera en el VWP desde el 31/03/2014; es el único país latinoamericano entre los 42 del programa. Argentina fue miembro entre 1996 y 2002. La sacaron por la crisis y por el uso del programa para quedarse a trabajar; en aquella baja EE.UU. señaló que el proceso para obtener los documentos base del pasaporte "lacks integrity" (carece de integridad) (D18–D19, D23–D27, D44).
-4. **DATO:** el 28/07/2025, DHS y el Gobierno argentino firmaron una **declaración de intención** para el reingreso de Argentina al VWP. DHS habla de cumplir los criterios "in the coming years" (en los próximos años). Según DHS/CBP, el overstay de visitantes argentinos fue de 0,81% en FY2024, contra 2,32% de Chile, que ya está en el programa (D28–D33). **No se pudo verificar en fuente primaria la tasa de rechazo de Argentina en FY2025**: web.archive.org cortó todas las conexiones, aunque las 20 capturas FY2006–FY2025 existen y están registradas.
-5. **HIPÓTESIS:** la CBI puede jugar en contra de la candidatura. El DHS evalúa la integridad de la identidad de quienes viajan con el pasaporte, y hay antecedentes concretos: FinCEN 2014 sobre St. Kitts (rescindido en 2026), la visa que el Reino Unido impuso a Dominica y Vanuatu en 2023, la UE con Vanuatu (B34) y la observación de 2002 sobre los documentos argentinos. Rumania muestra que una designación ya otorgada puede revocarse por discrecionalidad (D21–D22, D27, D70–D73).
+4. **DATO — Argentina hoy NO cumple el umbral de rechazo:** la tasa ajustada de rechazo de visas B fue de **7,47% en FY2025**, 8,90% en FY2024 y 8,21% en FY2023 (D45, D46, D59). Estuvo por debajo del 3% durante once años seguidos (FY2011–FY2021, D52), pero lo superó en FY2022 (3,66%, D58) y desde entonces más que lo duplica. Para cumplir la vía (ii) necesita bajar unos 4,5 puntos (D76). Chile entró con 2,8% (FY2012) y 1,6% (FY2013) (D47–D48); Uruguay ya está por debajo del 3% (2,59% en FY2025, D50).
+5. **DATO + HIPÓTESIS:** el 28/07/2025, DHS y el Gobierno argentino firmaron una **declaración de intención** para el reingreso al VWP. DHS habló de cumplir los criterios "in the coming years" (D28–D30), con Argentina en 8,90% en el año fiscal en curso. El overstay argentino (0,81% en FY2024, contra 2,32% de Chile) juega a favor (D32–D33). **HIPÓTESIS:** la CBI puede jugar en contra, por la integridad de la identidad de los portadores (FinCEN 2014, Reino Unido 2023, UE con Vanuatu, la observación de 2002 sobre los documentos argentinos), aunque Malta mantuvo el VWP con su programa (D75). Rumania muestra que una designación puede revocarse por discrecionalidad (D21–D22, D27, D70–D73).
 
 ---
 
@@ -54,12 +54,36 @@ Requisitos administrativos del DHS (página oficial):
 
 **Contrapeso (DATO + HIPÓTESIS):** el 3% es una condición *necesaria*, no *suficiente*. La designación es facultativa ("may", D03) y requiere una determinación de seguridad del DHS (D07), la evaluación de inteligencia (D15) y el acuerdo EBSP con cotejo biométrico (D16). El caso de Rumania lo confirma: fue designada el 09/01/2025 y la designación se **rescindió el 02/05/2025** sin implementarse. El motivo invocado fue "this Administration's focus on border and immigration security" (D21, D22). **HIPÓTESIS:** no está verificado si el DHS ya hizo la notificación biométrica que reactivaría la dispensa de hasta 10% (D12). La página del DHS solo menciona el umbral del 3% (D14), así que se trata ese umbral como el vigente.
 
-## 3. Serie de la tasa de rechazo ajustada de visas B (pregunta 3) — NO OBTENIDA
+## 3. Serie de la tasa de rechazo ajustada de visas B (pregunta 3)
 
-- travel.state.gov devuelve 403 a clientes automatizados. Con la API de disponibilidad de archive.org (que sí responde) se **ubicaron las 20 capturas FY2006–FY2025** del mismo PDF oficial (`RefusalRates/FY{yy}.pdf`), entre ellas la de FY25.pdf del 2026-05-01 (`20260501063449`). Las URL y timestamps están en `data/processed/D_wayback_capturas.csv` y las respuestas JSON en `data/raw/D_dos_refusal_rates_FY*_wbavail_2026-10-03.json`.
-- **La descarga falló:** web.archive.org devolvió `ConnectionResetError` en todos los intentos, del 2026-10-03 13:45 al 14:50 aprox. Un sondeo cada ~90 s dio siempre el mismo resultado. El proxy del entorno informó `ws_closed_mid_exchange` para web.archive.org:443. Otros espejos tampoco sirvieron: Library of Congress Web Archive (desafío Cloudflare), arquivo.pt (403) y archive.ph (reset). Los informes del CRS (crsreports.congress.gov) devolvieron 403.
-- **No se rellenó con prensa ni con memoria.** El script está preparado para completar la serie, el CSV `data/processed/D_tasa_rechazo_B.csv`, los claims D45–D52 y el gráfico `D_tasa_rechazo_B_AR_CL` (con la línea del 3% y la designación de Chile) en cuanto web.archive.org responda. Basta con correr `python src/04_pasaporte_vwp.py`.
-- Por la misma causa, **la pregunta "¿Argentina está hoy por debajo o por encima del 3%?" queda sin respuesta verificada.** La prensa publica cifras para FY2025, pero son S y no se usan. **HIPÓTESIS:** la frase del DHS del 28/07/2025, "as it works diligently to meet eligibility criteria in the coming years" (D30), sugiere que en ese momento Argentina no cumplía todos los criterios. No dice cuáles.
+**Fuente:** U.S. Department of State, *Adjusted Refusal Rate – B-Visas Only, by Nationality*, un PDF por año fiscal (`RefusalRates/FY{yy}.pdf`). travel.state.gov devuelve 403 a clientes automatizados, así que se usaron las **copias del mismo PDF oficial en la Wayback Machine**: 20 de 20 años (FY2006–FY2025). La URL y el timestamp de cada captura están en `data/processed/D_wayback_capturas.csv`; la serie, con la línea literal de cada PDF, en `data/processed/D_tasa_rechazo_B.csv`. En la primera corrida, web.archive.org no era accesible desde el entorno; el 03/10/2026 se re-corrió el script desde otra red y la serie se completó.
+
+| FY | Argentina | Chile | Uruguay | Brasil |
+|---|---|---|---|---|
+| 2006 | 6,7% | 7,5% | 12,6% | 13,2% |
+| 2008 | 3,1% | 8,9% | 9,5% | 5,5% |
+| 2010 | 3,1% | 5,0% | 5,6% | 5,2% |
+| 2011 | **2,5%** | 3,4% | 3,8% | 3,8% |
+| 2012 | **1,5%** | **2,8%** (D47) | **2,7%** | 3,2% |
+| 2013 | **1,7%** | **1,6%** (D48) | **2,8%** | 3,5% |
+| 2014 | **1,4%** | **2,4%** | **1,8%** | 3,2% |
+| 2016 | **2,14%** | 11,43% | 3,14% | 16,70% |
+| 2018 | **1,73%** | 11,34% | 4,11% | 12,73% |
+| 2020 | **2,79%** | 11,54% | 9,77% | 23,16% |
+| 2021 | **2,31%** (D57) | 13,42% | 8,82% | 14,25% |
+| 2022 | 3,66% (D58) | 13,75% | 5,70% | 14,48% |
+| 2023 | 8,21% (D59) | 16,12% | 3,21% | 11,94% |
+| 2024 | 8,90% (D46) | 20,15% | **2,63%** | 15,48% |
+| 2025 | **7,47%** (D45) | 16,38% (D49) | **2,59%** (D50) | 14,87% (D51) |
+
+En negrita, los valores por debajo del 3%. La serie completa, año por año, está en el CSV y en el gráfico `outputs/charts/D_tasa_rechazo_B_AR_CL.{png,svg}`.
+
+- **DATO:** Argentina estuvo por debajo del 3% en 11 de los 20 años disponibles, todos seguidos: FY2011–FY2021 (D52). Lo superó en FY2022 (3,66%) y desde FY2023 está entre 7,5% y 8,9% (D45, D46, D58, D59).
+- **ESTIMACIÓN:** para cumplir la vía (ii) del umbral (año fiscal anterior < 3,0%, D04), la tasa argentina tiene que bajar unos **4,5 puntos** desde el 7,47% de FY2025 (D76). La vía (i) (promedio de dos años < 2,0% y cada año < 2,5%, D05) está todavía más lejos. Como la designación usa el año fiscal completo anterior, ningún año fiscal anterior a FY2026 (que cerró el 30/09/2026) habilita hoy la designación.
+- **DATO:** en FY2012 el Departamento de Estado empezó a usar "a new calculation methodology" (D74). Los años FY2006–FY2011 no son estrictamente comparables con los posteriores (línea punteada en el gráfico).
+- **HIPÓTESIS (lectura de Chile y Brasil):** después de entrar al VWP en 2014, la tasa de Chile mide solo a quienes igual piden visa B (porque no califican para el ESTA o necesitan otra condición). Es un universo residual y más riesgoso: por eso su tasa saltó a 11–20%. No es comparable con la de un país fuera del programa. La suba de Brasil desde FY2016 no tiene esa explicación; no se analizó.
+- **HIPÓTESIS (por qué subió la de Argentina):** la suba coincide con la vuelta de la demanda pospandemia (visas emitidas de 32.821 en FY2021 a 273.206 en FY2023, D78, sección 5) y con la crisis macroeconómica de 2022–2023 (Módulo F). Los PDF no informan motivos de rechazo; no se verificó la causa.
+- La frase del DHS del 28/07/2025, "as it works diligently to meet eligibility criteria in the coming years" (D30), queda explicada por los datos: en ese momento Argentina venía de 8,21% (FY2023) y 8,90% (FY2024).
 
 ## 4. Precedente de Chile y candidatura argentina (pregunta 4)
 
@@ -68,7 +92,7 @@ Requisitos administrativos del DHS (página oficial):
 - designado el **28/02/2014** (D23);
 - regla vigente y viaje VWP desde el **31/03/2014** (D25, D18).
 
-La designación cae en el año fiscal FY2014; los años de referencia para el umbral son FY2012 y FY2013. Sus tasas de rechazo de esos años **no se pudieron extraer** (sección 3).
+La designación cae en el año fiscal FY2014; los años de referencia para el umbral son FY2012 y FY2013. Chile tuvo **2,8% en FY2012 y 1,6% en FY2013** (D47, D48): cumplió la vía (ii), con el año previo por debajo del 3%, pero no la vía (i), porque el promedio fue 2,2%. **ESTIMACIÓN:** FY2012 cerró el 30/09/2012; la nominación llegó ocho meses después (03/06/2013) y la designación, nueve meses más tarde (28/02/2014) (D24, D23). Argentina, con 7,47% en FY2025, está hoy más lejos que Chile en 2012.
 
 **Argentina, antecedente (DATO, 67 FR 7943, 21/02/2002):** fue país VWP entre el 08/07/1996 y el 21/02/2002 (D19). La baja se fundó en "the current economic crisis in Argentina and the increase in the number of Argentine nationals attempting to use the program to live and work illegally" (D26). El texto agrega que "the process for obtaining the documents to procure a passport lacks integrity" (D27). Uruguay salió del programa el 15/04/2003 (D20).
 
@@ -81,6 +105,7 @@ La designación cae en el año fiscal FY2014; los años de referencia para el um
 | 28/07/2025 | DHS: "Argentina now has the lowest visa overstay rate in all of Latin America"; el proceso "takes time … in the coming years" | DHS | D29, D30 |
 
 - **S (solo para fechar; no se afirma como hecho):** según la prensa (El Economista, Cadena 3, Los Andes, El Esquiú, mayo de 2026), la ministra de Seguridad, Alejandra Monteoliva, estimó que el beneficio podría estar operativo "en los primeros meses de 2027". No se encontró un comunicado oficial con esa fecha. **No hay en el DHS una nominación ni una designación de Argentina** a la fecha de consulta: la lista vigente del DHS no la incluye (D44: 42 países).
+- **HIPÓTESIS:** con 7,47% en FY2025 (D45), una designación a comienzos de 2027 por la vía del umbral exigiría que la tasa de FY2026 (cerrado el 30/09/2026, todavía sin publicar) haya caído por debajo del 3%, una baja de más de 4 puntos en un año. La dispensa de hasta 10% (D11) también la habilitaría, pero está suspendida desde 2009 salvo notificación del DHS (D12), que no se verificó.
 
 **Overstay (DATO, DHS/CBP Entry/Exit Overstay Reports), un argumento a favor de Argentina:**
 
@@ -94,9 +119,23 @@ La designación cae en el año fiscal FY2014; los años de referencia para el um
 - **ESTIMACIÓN:** el overstay argentino está por debajo del umbral del 2% que el DHS aplica a los miembros, y por debajo del de Chile en los tres años.
 - **Advertencia de comparabilidad:** para Chile se usa la Tabla 2 (visitantes VWP y B1/B2); para Argentina, la Tabla 3 (B1/B2 de países no VWP). Gráfico: `outputs/charts/D_overstay_AR_CL.{png,svg}`.
 
-## 5. Visas B1/B2 emitidas a argentinos (pregunta 5) — NO OBTENIDA
+## 5. Visas B1/B2 emitidas a argentinos (pregunta 5)
 
-Las *NIV Detail Tables* del DoS (p. ej., `FY24NIVDetailTable.xlsx`, captura `20260430115050`; `FY13NIVDetailTable.xls`, captura `20260430115053`) **están archivadas en Wayback**, pero fallaron por el mismo corte de web.archive.org. El script las procesa, con salida en `data/processed/D_visas_B1B2_argentinos.csv`, claims D53–D56 y el gráfico `D_visas_B1B2_argentinos`, cuando la conexión vuelva.
+**Fuente:** U.S. Department of State, *Nonimmigrant Visa Detail Tables*, columna B1/B2 (o "B-1,2"), fila Argentina; copias Wayback del xls/xlsx oficial de cada año. Se obtuvieron FY2006–FY2024 (19 años). FY2015–FY2018 se publicaron con otro nombre de archivo (`FY15 NIV Detail Table.xls`); se ubicaron con el índice CDX de la Wayback. **FY2025 todavía no está publicado ni archivado.**
+
+| FY | Visas B1/B2 emitidas | Claim |
+|---|---|---|
+| 2006 | 81.430 | — |
+| 2012 | 249.029 | — |
+| 2013 | 240.653 | D53 |
+| 2017 | **353.555** (máximo) | D77 |
+| 2019 | 212.011 | D54 |
+| 2021 | 32.821 (mínimo, pandemia) | D78 |
+| 2023 | 273.206 | — |
+| 2024 | 272.762 | D55 |
+
+- **ESTIMACIÓN:** la demanda de visas de turismo y negocios de argentinos se multiplicó por 4,3 entre FY2006 y FY2017. Cayó con la crisis de 2018–2019 y la pandemia, y en FY2023–FY2024 volvió a unos 273.000 por año, todavía 23% por debajo del pico. Serie completa en `data/processed/D_visas_B1B2_argentinos.csv`; gráfico `outputs/charts/D_visas_B1B2_argentinos.{png,svg}`.
+- **HIPÓTESIS:** el volumen es relevante para el VWP en dos sentidos. Con ~270.000 visas por año, un VWP argentino eliminaría un costo y una espera para muchos viajeros, lo que da peso político a la candidatura. Pero la tasa de rechazo (sección 3) se calcula sobre ese mismo volumen, y hoy está lejos del umbral.
 
 ## 6. Contrapeso obligatorio: cómo la CBI puede jugar en CONTRA del VWP — HIPÓTESIS
 
@@ -109,15 +148,16 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
    - Ninguno de estos casos es una exclusión del VWP: esos países nunca fueron miembros. Lo que muestran es la reacción de terceros Estados frente a pasaportes CBI.
 3. **Contrapeso del contrapeso (DATO):**
    - FinCEN **rescindió** el advisory sobre St. Kitts el 24/02/2026 (D72).
-   - **HIPÓTESIS, no verificada en fuente primaria en este módulo:** Malta figura en la lista VWP del DHS y tuvo un programa de ciudadanía por inversión (ver Módulo C) sin perder el VWP. Tampoco se verificó en el DHS si alguna evaluación VWP consideró explícitamente un programa CBI.
+   - **DATO:** Malta es país VWP desde el 30/12/2008 y sigue en la lista vigente del DHS (D75). Tuvo un programa de ciudadanía por inversión hasta que lo derogó en 2025, tras la sentencia C-181/23 del TJUE (Módulo C: C18, C19, C56), y nunca perdió el VWP. **No verificado:** si alguna evaluación VWP del DHS consideró explícitamente un programa CBI.
    - El decreto 524/2025 prevé informes de SIDE, UIF, Seguridad y RENAPER (Módulo A, A15). Eso podría presentarse ante el DHS como mitigación (**HIPÓTESIS**).
 4. **ESCENARIO:** si el DHS considerara el CBI como riesgo de identidad, podría pedir condiciones como el intercambio de las listas de naturalizados por inversión o ESTA reforzada, demorar la nominación o, como con Rumania, revertir una designación. No hay fuente primaria que vincule el CBI argentino con el proceso VWP. Es una conjetura que habría que contrastar con el DHS o el Departamento de Estado.
 
 ## Método
 - `src/04_pasaporte_vwp.py` descarga con `download()`/`get()` de `common.py` y verifica cada cita con `quote()` contra la copia local.
-- Wayback: usa la API de disponibilidad (archive.org) y guarda el JSON en data/raw. Descarga con `web.archive.org/web/<ts>id_/<url>`; si web.archive.org no responde, registra la falla por año en vez de reintentar.
-- El parser de los PDF de rechazo busca "País NN.NN%" con pdfplumber y descarta el archivo si el título no coincide con el año fiscal.
-- Salidas: `data/processed/D_destinos_sin_visa.csv`, `D_requisitos_destinos_clave.csv`, `D_overstay.csv`, `D_wayback_capturas.csv`, `D_tasa_rechazo_B.csv` (vacío por ahora), `D_visas_B1B2_argentinos.csv` (vacío por ahora) y `D_fuentes_fallidas.csv`.
+- Wayback: usa la API de disponibilidad (archive.org) y, si no devuelve captura, el índice CDX; guarda el JSON en data/raw. Descarga con `web.archive.org/web/<ts>id_/<url>`; si web.archive.org no responde, registra la falla por año en vez de reintentar.
+- El parser de los PDF de rechazo busca "País NN.NN%" con pdfplumber, sin distinguir mayúsculas (desde FY2014 los nombres vienen en mayúsculas), y descarta el archivo si el título no coincide con el año fiscal. Cada valor guarda la línea literal del PDF, que se re-verifica con `quote()`.
+- El parser de las NIV Detail Tables busca la fila de encabezado con la columna B1/B2 ("B-1,2" hasta FY2021) y toma la fila "Argentina".
+- Salidas: `data/processed/D_destinos_sin_visa.csv`, `D_requisitos_destinos_clave.csv`, `D_overstay.csv`, `D_wayback_capturas.csv`, `D_tasa_rechazo_B.csv` (80 filas: 4 países × 20 años), `D_visas_B1B2_argentinos.csv` (19 años) y `D_fuentes_fallidas.csv`.
 
 ## Fuentes
 
@@ -138,7 +178,9 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
 | UK HC 1715 Explanatory Memorandum (19/07/2023) | P | https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1184544/E02946704_-__HC_1715__-_EXPLANATORY_MEMORANDUM__Web_Accessible_.pdf |
 | Passport Index Data (MIT; de passportindex.org) — copia del Módulo B | R | https://raw.githubusercontent.com/imorte/passport-index-data/main/passport-index-tidy-iso3.csv |
 | Henley & Partners Terms of Use — copia del Módulo B (solo para documentar la prohibición) | R | https://www.henleyglobal.com/terms-of-use |
-| archive.org Wayback availability API (ubicación de capturas DoS) | P (copia de) | https://archive.org/wayback/available |
+| U.S. Department of State — Adjusted Refusal Rate, B-Visas Only, FY2006–FY2025 (20 PDF; copias Wayback, ver `D_wayback_capturas.csv`) | P | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/RefusalRates/FY25.pdf |
+| U.S. Department of State — Nonimmigrant Visa Detail Tables, FY2006–FY2024 (copias Wayback; URL de cada captura en `D_visas_B1B2_argentinos.csv`) | P | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/NIVDetailTables/FY24NIVDetailTable.xlsx |
+| archive.org Wayback availability API e índice CDX (ubicación de capturas DoS) | P (copia de) | https://archive.org/wayback/available ; https://web.archive.org/cdx/search/cdx |
 | Prensa sobre la fecha "primeros meses de 2027" (El Economista, Cadena 3, Los Andes, El Esquiú) | S | p. ej. https://eleconomista.com.ar/politica/estados-unidos-gobierno-revelo-cuando-argentinos-podran-viajar-visa-n95064 |
 
 ## Fuentes fallidas
@@ -147,11 +189,8 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
 |---|---|---|---|---|---|
 | 2026-10-03 | Henley Passport Index (API y web) | https://api.henleypassportindex.com/api/v3/countries | No usada | Los términos de uso lo prohíben (acceso automatizado; uso comercial sin licencia) | Sin datos de Henley; sustituto Passport Index Data (R) |
 | 2026-10-03 | Henley — serie histórica del puesto argentino | https://www.henleyglobal.com/passport-index/ranking | No usada | Los términos de uso lo prohíben | Serie histórica sin fuente |
-| 2026-10-03 | DoS Adjusted Refusal Rates B, FY2006–FY2025 (20 PDF) | `web.archive.org/web/<ts>id_/https://travel.state.gov/.../RefusalRates/FY{yy}.pdf` (ver `D_wayback_capturas.csv`) | `ConnectionResetError`; proxy: `ws_closed_mid_exchange` | web.archive.org corta la conexión desde este entorno (archive.org sí responde); travel.state.gov da 403 | Capturas ubicadas y registradas; re-correr el script cuando web.archive.org responda. Sin relleno |
-| 2026-10-03 | DoS NIV Detail Tables (B1/B2 por nacionalidad) | `web.archive.org/web/20260430115050id_/.../FY24NIVDetailTable.xlsx` y siguientes | `ConnectionResetError` | Ídem | Ídem |
-| 2026-10-03 | Library of Congress Web Archive | https://webarchive.loc.gov/all/2014*/travel.state.gov/... | HTTP 403 (Cloudflare "Just a moment") | Anti-bots | Descartado |
-| 2026-10-03 | arquivo.pt CDX | https://arquivo.pt/wayback/cdx | HTTP 403 | Acceso denegado | Descartado |
-| 2026-10-03 | CRS (crsreports.congress.gov, RL32221) | https://crsreports.congress.gov/product/pdf/RL/RL32221 | HTTP 403 | Anti-bots | Descartado |
+| 2026-10-03 | travel.state.gov (Refusal Rates y NIV Detail Tables) | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/RefusalRates/FY25.pdf | HTTP 403 | Anti-bots para clientes automatizados | **Resuelto:** copias del mismo archivo oficial en la Wayback Machine (20/20 PDF de rechazo; 19 tablas NIV). En la primera corrida web.archive.org cortaba la conexión (`ws_closed_mid_exchange`); se re-corrió desde otra red |
+| 2026-10-03 | DoS NIV Detail Table FY2025 | https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/NIVDetailTables/FY25NIVDetailTable.xlsx | Sin captura 200 (API de disponibilidad ni CDX) | No publicada todavía o no archivada | Serie de visas emitidas hasta FY2024 |
 | 2026-10-03 | uscode.house.gov | https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title8-section1187 | HTTP 200 con "Under Maintenance" | Mantenimiento | Se usó Cornell LII |
 | 2026-10-03 | FederalRegister.gov (HTML/TXT) | https://www.federalregister.gov/documents/full_text/html/2014/03/31/2014-07254.html | "Request Access" (CAPTCHA) | Anti-scraping (solo la API está abierta) | API + copia oficial de govinfo.gov |
 | 2026-10-03 | EUR-Lex (Reglamento 2018/1806) | https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02018R1806-20250101 | HTTP 202 vacío | Desafío anti-bots | No necesario para este módulo (el Módulo B lo obtuvo vía Cellar) |
@@ -160,7 +199,9 @@ El mecanismo propuesto es una **HIPÓTESIS**; los hechos de apoyo son **DATO**.
 El detalle por año está en `data/processed/D_fuentes_fallidas.csv`.
 
 ## Limitaciones
-- **El núcleo cuantitativo del módulo, la serie de rechazo B, no se obtuvo.** Por eso no se puede afirmar si Argentina cumple hoy el umbral del 3%, ni con qué tasa entró Chile.
+- La serie de rechazo B viene de copias de archivo (Wayback) del PDF oficial, no de travel.state.gov directo; cada valor se verificó contra la línea literal del PDF archivado. Tiene un quiebre metodológico en FY2012 (D74).
+- Las tasas de Chile desde FY2015 no son comparables con las de países fuera del VWP: miden un universo residual (sección 3, HIPÓTESIS).
+- No se verificó la causa de la suba de la tasa argentina desde FY2022; los PDF no informan motivos de rechazo.
 - El dato de destinos sin visa viene de una compilación privada (R) hecha a partir de passportindex.org, propiedad de una firma de CBI. No equivale al Henley y no tiene serie histórica en este módulo.
 - Los overstay de Argentina y de Chile vienen de tablas distintas del informe del DHS (B1/B2 frente a VWP + B1/B2), y el informe cuenta eventos, no personas.
 - La frase del DHS sobre "lowest visa overstay rate in all of Latin America" (D29) es una declaración oficial. No se recalculó contra todos los países de la región.

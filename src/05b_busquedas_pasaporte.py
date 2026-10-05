@@ -98,7 +98,7 @@ def _file(qid: str):
 
 def analyze(res: dict) -> None:
     ledger = []
-    rel = lambda p: str(p.relative_to(p.parents[2]))
+    rel = lambda p: p.relative_to(p.parents[2]).as_posix()
 
     def add(cid, etiqueta, afirm, valor, qid, cita):
         p = _file(qid)

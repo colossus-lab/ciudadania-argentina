@@ -27,6 +27,7 @@ img { max-width: 100%; height: auto; display: block; margin: 10px 0; page-break-
 code { font-size: 8.5pt; background: #f4f4f2; padding: 0 2px; word-break: break-all; }
 .meta { color: #52514e; font-size: 9pt; }
 .modulo { page-break-before: always; }
+@media print { table { display: table; } th, td { word-break: normal; overflow-wrap: break-word; } }
 """
 
 
@@ -43,7 +44,7 @@ def consolidate_sources() -> None:
           "## General (probe de fuentes)", "",
           "| Fecha | Fuente | Error | Causa | Acción |", "|---|---|---|---|---|",
           "| 2026-10-03 | 52 URLs de 39 dominios (primer probe) | ProxyError 403 al CONNECT | Política de red del primer entorno | Resuelto: red habilitada; probe 48/55 OK |",
-          "| 2026-10-03 | web.archive.org | Conexión reseteada por el proxy de egreso (ws_closed_mid_exchange) durante toda la sesión | Red del entorno | Afecta a D (serie de tasas de rechazo) y a fallbacks de C y F; reintentar con `python src/04_pasaporte_vwp.py` |",
+          "| 2026-10-03 | web.archive.org | Conexión reseteada por el proxy de egreso (ws_closed_mid_exchange) durante toda la primera sesión | Red del primer entorno | **Resuelto:** el mismo día se re-corrieron los módulos desde otra red; la Wayback respondió y se completaron la serie de rechazo de visas (D) y los respaldos de los demás módulos |",
           "| 2026-10-03 | api.census.gov | El probe lo marcó OK pero redirige a missing_key.html | La API exige key con registro | E usó el ACS Summary File oficial |", ""]
     for m, path in module_docs():
         md = path.read_text(encoding="utf-8")
@@ -114,7 +115,34 @@ def main() -> None:
         HTML(string=html, base_url=str(OUT)).write_pdf(OUT / "informe.pdf")
         print("-> outputs/informe.{md,html,pdf}")
     except Exception as e:  # noqa: BLE001
-        print(f"PDF no generado ({type(e).__name__}: {e}); quedan outputs/informe.md y .html")
+        # WeasyPrint necesita Pango/GTK (en Windows no viene instalado): respaldo con Chromium/Edge headless.
+        if headless_pdf(OUT / "informe.html", OUT / "informe.pdf"):
+            print(f"-> outputs/informe.{{md,html,pdf}} (PDF con navegador headless; WeasyPrint: {type(e).__name__})")
+        else:
+            print(f"PDF no generado ({type(e).__name__}: {e}); quedan outputs/informe.md y .html")
+
+
+def headless_pdf(src, dst) -> bool:
+    """Imprime `src` a PDF con Edge/Chrome headless, con un perfil temporal (no toca el navegador del usuario)."""
+    import shutil
+    import subprocess
+    import tempfile
+    from pathlib import Path
+    cands = [shutil.which(n) for n in ("msedge", "chrome", "google-chrome", "chromium", "chromium-browser")]
+    cands += [r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+              r"C:\Program Files\Google\Chrome\Application\chrome.exe"]
+    exe = next((c for c in cands if c and Path(c).exists()), None)
+    if not exe:
+        return False
+    Path(dst).unlink(missing_ok=True)  # que un PDF viejo no pase por recién generado
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as prof:
+        try:
+            subprocess.run([exe, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--user-data-dir={prof}",
+                            f"--print-to-pdf={dst}", Path(src).resolve().as_uri()],
+                           capture_output=True, timeout=180, check=False)
+        except (OSError, subprocess.TimeoutExpired):
+            return False
+    return Path(dst).exists() and Path(dst).stat().st_size > 0
 
 
 if __name__ == "__main__":

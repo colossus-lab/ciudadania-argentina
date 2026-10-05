@@ -395,7 +395,7 @@ def metodologia_md() -> str:
 - **Toda cifra sale de una fuente primaria (P) o de una referencia privada con metodología pública (R).** La prensa y los buscadores (S) solo sirven para fechar eventos.
 - **Nada se completa "a ojo".** Si una fuente falla, se registra en [Fuentes fallidas](/fuentes#fallidas) y el trabajo sigue con lo que hay.
 - **No se scrapea nada que esté detrás de un formulario de registro**, y no se usan fuentes cuyos términos prohíben el acceso automatizado (por ejemplo, Henley Passport Index).
-- **No se asumen hechos no confirmados**, como el resultado de Argentina en el Mundial 2026.
+- **No se asumen hechos no confirmados.** Por ejemplo, el resultado de Argentina en el Mundial 2026 se dio por cierto recién cuando se verificó en notas oficiales de CONMEBOL, AFA y RFEF (E34–E36).
 - **Cuatro etiquetas:** DATO, ESTIMACIÓN, HIPÓTESIS y ESCENARIO. Los contrapesos se presentan con el mismo cuidado que la evidencia a favor.
 
 ## Cómo se verifica

@@ -18,6 +18,7 @@ Todo corre desde las copias de data/raw (descarga solo si faltan).
 from __future__ import annotations
 
 import io
+import json
 import math
 import re
 import zipfile
@@ -36,6 +37,7 @@ UBS_PDF = ("https://www.ubs.com/global/en/wealthmanagement/insights/global-wealt
            "mainpar/gridcontrol_copy/col_1/inner/col_2/actionbutton.1527090767.file/"
            "PS9jb250ZW50L2RhbS9hc3NldHMvd20vc3RhdGljL25vaW5kZXgvZ3dyLTIwMjYtZGlnaXRhbC5wZGY=/gwr-2026-digital.pdf")
 PI_BASE = "https://raw.githubusercontent.com/imorte/passport-index-data/main/"
+WB = "https://web.archive.org/web/"  # capturas Wayback (id_ = bytes originales); válidas para documentos oficiales
 
 SOURCES = {
     # id: (url, nombre local, ext, descripción, tipo, kwargs de descarga)
@@ -69,6 +71,31 @@ SOURCES = {
     "eu_vanuatu": ("https://publications.europa.eu/resource/celex/32025R0011", "B_eu_reg2025_11_vanuatu", "html",
                    "Reglamento (UE) 2025/11 (Vanuatu pasa al Anexo I), vía Oficina de Publicaciones (Cellar)", "P",
                    {"headers": EU_HEADERS}),
+    "eu_georgia": ("https://publications.europa.eu/resource/celex/32026R0496", "B_eu_reg2026_496_georgia", "html",
+                   "Reglamento de Ejecución (UE) 2026/496 (suspensión de la exención de visa, pasaportes diplomáticos de "
+                   "Georgia), vía Oficina de Publicaciones (Cellar)", "P", {"headers": EU_HEADERS}),
+    # Doble nacionalidad en los mercados que encabezan el índice (fuentes oficiales; Wayback donde el sitio bloquea)
+    "cn_nat": (WB + "20260807035519id_/http://www.npc.gov.cn/zgrdw/englishnpc/Law/2007-12/13/content_1384056.htm",
+               "B_cn_nationality_law_npc_wayback", "html",
+               "NPC (Congreso Nacional del Pueblo), Nationality Law of the People's Republic of China, versión oficial en "
+               "inglés; captura Wayback del 07/08/2026", "P", {}),
+    "cn_flk": ("https://flk.npc.gov.cn/law-search/search/flfgDetails?bbbs=2c909fdd678bf17901678bf5aba10073",
+               "B_cn_flk_nationality_law", "json",
+               "NPC, Base Nacional de Leyes y Reglamentos (flk.npc.gov.cn), ficha de 中华人民共和国国籍法 (respuesta JSON)",
+               "P", {}),
+    "in_cit": (WB + "20251110012137id_/https://www.mha.gov.in/sites/default/files/2025-01/CitizenshipAct1955_02012025.pdf",
+               "B_in_citizenship_act_1955_mha_wayback", "pdf",
+               "Ministry of Home Affairs (India), The Citizenship Act, 1955 (texto actualizado, PDF del 02/01/2025); "
+               "captura Wayback del 10/11/2025", "P", {}),
+    "ru_cit": ("http://www.kremlin.ru/acts/bank/49216/page/1", "B_ru_138fz_kremlin_p1", "html",
+               "Presidencia de Rusia (kremlin.ru), Ley Federal 138-FZ del 28/04/2023 'Sobre la ciudadanía de la Federación "
+               "de Rusia', texto publicado (p. 1)", "P", {}),
+    "qa_nat": ("https://www.almeezan.qa/LawArticles.aspx?LawArticleID=39318&LawId=2591&language=en", "B_qa_law38_2005_art11",
+               "html", "Al Meezan (portal legal oficial de Qatar), Ley 38/2005 sobre la nacionalidad qatarí, art. 11 (inglés)",
+               "P", {}),  # el servidor no envía la cadena TLS completa: requests falla; la copia se bajó con curl
+                          # (verificación TLS del sistema operativo, ssl_verify_result=0) y se reutiliza desde data/raw
+    "pi_about": (WB + "20260703044038id_/https://www.passportindex.org/about.php", "B_passportindex_about_wayback", "html",
+                 "passportindex.org, página About (incluye 'Legal notes'); captura Wayback del 03/07/2026", "R", {}),
 }
 
 # UBS GWR 2026, p. 22 "The UBS Millionaire Index": nombre UBS -> (ISO3, nombre en el Reglamento 2018/1806 si es tercer país)
@@ -101,6 +128,18 @@ UBS_5_100M = {"United States": "4,122,000", "Mainland China": "516,000", "German
 
 SIN_VISA = {"visa free", "visa on arrival", "eta"}  # + cualquier número de días (estadía sin visa)
 
+# Qué pasa con la nacionalidad de origen si un nacional adquiere voluntariamente otra (verificado en fuente oficial
+# solo donde se indica el claim; el resto queda "no verificado").
+DOBLE_NAC = {
+    "CHN": ("pierde / no reconocida", "no reconoce la doble nacionalidad (art. 3); pérdida automática si está radicado "
+            "en el exterior (art. 9)", "B44 B45 B46"),
+    "IND": ("pierde", "cesa la ciudadanía india al adquirir otra voluntariamente (s. 9(1)); puede pedir la tarjeta OCI "
+            "(s. 7A)", "B47 B48"),
+    "RUS": ("conserva", "la adquisición de otra ciudadanía no extingue la rusa; Rusia lo trata solo como ruso (art. 10)",
+            "B49"),
+    "QAT": ("puede perderla (discrecional)", "la nacionalidad puede retirarse por decisión del Emir (art. 11.5)", "B50"),
+}
+
 
 # ------------------------------------------------------------------------------------------------- utilidades
 def fetch(sid: str):
@@ -113,7 +152,7 @@ def fetch(sid: str):
 
 
 def rel(p) -> str:
-    return str(p.relative_to(RAW.parents[1]))
+    return p.relative_to(RAW.parents[1]).as_posix()
 
 
 def fmt(x: float, nd: int = 0) -> str:
@@ -282,6 +321,9 @@ def indice(ubs_df, cnt, status):
         df[c + "_n100"] = 100 * df[c] / mx if mx and mx > 0 else 0.0
         df["rank_" + c] = df[c].rank(ascending=False, method="min").where(df[c] > 0)
     df["destinos_ARG"] = arg_n
+    df["doble_nac_origen"] = df["iso3"].map(lambda i: DOBLE_NAC.get(i, ("no verificado",))[0])
+    df["doble_nac_detalle"] = df["iso3"].map(lambda i: DOBLE_NAC[i][1] if i in DOBLE_NAC else "")
+    df["doble_nac_claims"] = df["iso3"].map(lambda i: DOBLE_NAC[i][2] if i in DOBLE_NAC else "")
     df = df.sort_values(["I1_base", "I2_sin_schengen"], ascending=False).reset_index(drop=True)
     df.to_csv(PROCESSED / "B_indice_mercados.csv", index=False, float_format="%.4f")
     return df, arg_n
@@ -399,8 +441,10 @@ def main() -> None:
     PROCESSED.mkdir(parents=True, exist_ok=True)
     files = {sid: fetch(sid) for sid in SOURCES}
     texts = {sid: local_text(files[sid]) for sid in ("scf_index", "ubs", "altrata", "kf", "henley_terms",
-                                                     "henley_disc", "eurlex_all", "eurlex_cons", "eu_vanuatu")}
+                                                     "henley_disc", "eurlex_all", "eurlex_cons", "eu_vanuatu",
+                                                     "eu_georgia", "cn_nat", "in_cit", "ru_cit", "qa_nat", "pi_about")}
     texts["pi_readme"] = norm_ws(files["pi_readme"].read_text(encoding="utf-8"))
+    flk = json.loads(files["cn_flk"].read_text(encoding="utf-8"))["data"]
 
     # ¿Salió el SCF 2025? (la página índice enlaza los archivos del último relevamiento)
     idx_html = files["scf_index"].read_text(encoding="utf-8", errors="ignore")
@@ -587,6 +631,70 @@ def main() -> None:
     add("B43", "ESTIMACIÓN", "Para un ciudadano estadounidense, destinos que abre el pasaporte argentino y no el propio "
         "(ganancia de movilidad de la doble nacionalidad)", f"{len(gan_us)}: {', '.join(gan_us)}", "pi_tidy",
         "passport-index-tidy-iso3.csv: destinos sin visa (definición B36) de ARG menos los de USA, sin USA ni ARG")
+
+    # Doble nacionalidad en los mercados que encabezan el índice
+    add("B44", "DATO", "China no reconoce la doble nacionalidad de sus nacionales (Ley de Nacionalidad de la RPC, art. 3)",
+        "No reconoce", "cn_nat", q("cn_nat", "Article 3 The People's Republic of China does not recognize dual nationality "
+                                   "for any Chinese national."))
+    add("B45", "DATO", "Un nacional chino radicado en el exterior que adquiere voluntariamente otra nacionalidad pierde "
+        "automáticamente la china (art. 9); el art. 9 exige estar radicado en el exterior",
+        "Pérdida automática (si está radicado en el exterior)", "cn_nat",
+        q("cn_nat", "Article 9 Any Chinese national who has settled abroad and who has been naturalized as a foreign national "
+          "or has acquired foreign nationality of his own free will shall automatically lose Chinese nationality."))
+    assert flk["title"] == "中华人民共和国国籍法" and flk["sxx"] == 3 and flk["gbrq"] == "1980-09-10" and not flk["xgwj"] and flk["lsyg"] is None
+    add("B46", "DATO", "La Ley de Nacionalidad de la RPC (10/09/1980) figura vigente y sin modificaciones en la base oficial "
+        "de leyes del NPC (estado sxx=3, que el sitio rotula 有效, 'vigente')", "Vigente (1980, sin reformas)", "cn_flk",
+        f"flfgDetails (JSON); bbbs={flk['bbbs']}; title={flk['title']}; gbrq={flk['gbrq']}; lsyg=null; xgwj=[]; sxx={flk['sxx']}")
+    add("B47", "DATO", "Un ciudadano indio que adquiere voluntariamente otra ciudadanía deja de ser ciudadano indio "
+        "(Citizenship Act 1955, s. 9(1))", "Cesa la ciudadanía india", "in_cit",
+        q("in_cit", "Any citizen of India who by naturalisation, registration otherwise voluntarily acquires, or has at any "
+          "time between the 26th January, 1950 and the commencement of this Act, voluntarily acquired, the citizenship of "
+          "another country shall, upon such acquisition or, as the case may be, such commencement, cease to be a citizen of India")
+        + " [en el PDF oficial falta la palabra 'or' entre 'registration' y 'otherwise']")
+    add("B48", "DATO", "Quien fue ciudadano indio y tiene otra ciudadanía puede registrarse como Overseas Citizen of India "
+        "(OCI; s. 7A): atenúa, sin anular, la pérdida", "Elegible para OCI", "in_cit",
+        q("in_cit", "who is a citizen of another country, but was a citizen of India at the time of, or at any time after the "
+          "commencement of the Constitution"))
+    add("B49", "DATO", "Rusia: adquirir otra ciudadanía no extingue la rusa; el doble nacional es tratado solo como ruso "
+        "(Ley 138-FZ de 2023, art. 10, texto publicado)", "Conserva la nacionalidad rusa", "ru_cit",
+        q("ru_cit", "Приобретение гражданином Российской Федерации гражданства (подданства) иностранного государства не "
+          "влечет за собой прекращение гражданства Российской Федерации") + " | " +
+        q("ru_cit", "рассматривается Российской Федерацией только как гражданин Российской Федерации вне зависимости от "
+          "места его проживания"))
+    add("B50", "DATO", "Qatar: la nacionalidad qatarí puede retirarse por decisión del Emir a quien adquiera otra "
+        "nacionalidad (Ley 38/2005, art. 11.5; pérdida discrecional, no automática)", "Retiro discrecional", "qa_nat",
+        q("qa_nat", "By an Emiri decision, Qatari nationality may be removed from a Qatari national if such person:") + " | " +
+        q("qa_nat", "11.5 Acquires the nationality of another country.") + " | " + q("qa_nat", "Status: In force"))
+    pos = idx[idx["I1_base"] > 0]
+    pierde = pos[pos["iso3"].isin(["CHN", "IND"])]
+    sh = 100 * pierde["I1_base"].sum() / pos["I1_base"].sum()
+    nover = pos[pos["doble_nac_origen"] == "no verificado"]["nombre"].tolist()
+    add("B51", "ESTIMACIÓN", "Peso, dentro del índice base I1, de los mercados donde adquirir la ciudadanía argentina "
+        "implica perder (o no ver reconocida) la nacionalidad de origen (China e India); mercados con I1 > 0 sin verificar",
+        f"{fmt(sh, 1)} % de la suma de I1; sin verificar: {', '.join(nover)}", "pi_tidy",
+        "suma de I1_base de CHN e IND / suma de I1_base de los mercados con I1 > 0 (B40); estado de la doble nacionalidad: "
+        "B44, B45, B47, B49, B50; columna doble_nac_origen de B_indice_mercados.csv",
+        fuente="Cálculo propio sobre B40 y las leyes de nacionalidad citadas", tipo="R")
+
+    # Licencia / términos de la fuente original de la matriz de visados
+    add("B52", "DATO", "passportindex.org no publica términos de uso ni licencia de datos (ninguna página de términos, legal o "
+        "privacidad entre ~66 mil URLs únicas archivadas en Wayback de www. y discover.passportindex.org); su nota legal lo define como herramienta gratuita con información pública y "
+        "análisis propietario, y el sitio pertenece a Arton Capital", "Sin licencia explícita; Arton Capital", "pi_about",
+        q("pi_about", "Passport Index is a free tool, built with publicly available information and with content contributed "
+          "by fans and government agencies around the world. Analytics is based on proprietary research.") + " | " +
+        q("pi_about", "Invented and empowered by Arton Capital") + " | " +
+        q("pi_about", "Having a second citizenship is a liberating and empowering privilege"))
+
+    # Novedades 2026 del Reglamento 2018/1806
+    add("B53", "DATO", "Única novedad de 2026 registrada en la ficha EUR-Lex del 2018/1806: suspensión del art. 4(1) "
+        "por el Reg. 2026/496, del 06/03/2026 al 06/03/2027; los Anexos I y II no cambiaron después del 30/12/2025",
+        "Reg. 2026/496", "eurlex_all", q("eurlex_all", "Suspended by 32026R0496 article 4 paragraph 1 06/03/2026 06/03/2027")
+        + " | " + q("eurlex_all", "Modified by 32025R2441 Addition article 8e 30/12/2025"))
+    add("B54", "DATO", "El Reg. 2026/496 suspende la exención de visa para pasaportes diplomáticos, de servicio y oficiales "
+        "de Georgia; se apoya en el art. 8e(1), agregado por el Reg. 2025/2441 (B53), el mismo que creó la causal CBI (B33)",
+        "Georgia (pasaportes diplomáticos)", "eu_georgia",
+        q("eu_georgia", "on the temporary suspension of the visa exemption for nationals of Georgia holding diplomatic, "
+          "service and official passports") + " | " + q("eu_georgia", "and in particular Article 8e(1), thereof"))
 
     write_ledger(MODULO, rows)
 

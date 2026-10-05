@@ -1,16 +1,43 @@
 """Módulo A — Marco normativo del Programa de Ciudadanía por Inversión.
 
-Descarga las normas y sentencias, verifica citas textuales contra las copias locales y escribe:
+Descarga normas, sentencias, fichas parlamentarias (Senado, HCDN) y sumarios del Boletín Oficial;
+verifica citas textuales contra las copias locales y escribe:
   data/processed/A_cronologia.csv   línea de tiempo normativa y judicial
   docs/claims_ledger.csv            afirmaciones del módulo con su cita literal
 """
 from __future__ import annotations
 
 import csv
+from pathlib import Path
 
-from common import PROCESSED, download, local_text, quote, sha256, write_ledger
+from common import PROCESSED, RAW, _session, _throttle, download, local_text, quote, raw_path, sha256, write_ledger
 
 GDRIVE = "https://drive.google.com/uc?export=download&id={}"
+HCDN_BUSCADOR = "https://www.hcdn.gob.ar/proyectos/resultado.html"
+
+# Fuentes que solo se obtienen enviando un formulario público de búsqueda (POST, sin registro ni captcha).
+POST_DATA = {
+    "hcdn_366": dict(zezion="true", strTipo="todos", strNumExp="", strNumExpAnio="", strNumExpOrig="", strCamIni="",
+                     strFirmante="", strTipoFirmante="", strComision="", strFechaInicio="", strFechaFin="",
+                     strPalabras="366/2025", strOrdenDelDiaNro="", strOrdenDelDiaAnio="", strLey="", strCantPagina="100",
+                     strMostrarTramites="on", strMostrarDictamenes="on", strMostrarFirmantes="on",
+                     strMostrarComisiones="on"),
+}
+
+
+def download_post(url: str, data: dict, name: str, ext: str = "html") -> Path:
+    """Como common.download, pero para un formulario de búsqueda público (POST). Reutiliza la copia existente."""
+    existing = [p for p in sorted(RAW.glob(f"{name}_*.{ext}")) if p.stat().st_size > 0]
+    if existing:
+        return existing[-1]
+    _throttle(url)
+    r = _session.post(url, data=data, timeout=90)
+    r.raise_for_status()
+    if not r.content:
+        raise ValueError(f"Respuesta vacía (HTTP {r.status_code}) para {url}")
+    p = raw_path(name, ext)
+    p.write_bytes(r.content)
+    return p
 
 SOURCES = {
     # id: (url, nombre local, ext, descripción, tipo)
@@ -32,6 +59,19 @@ SOURCES = {
                   "A_fallo_JFEsquel_DNU366", "pdf",
                   "Juzgado Federal de Esquel, Expte. 10640/2025, sentencia definitiva 12/08/2026 "
                   "(copia difundida por Palabras del Derecho)", "P"),
+    "senado_46pe25": ("https://www.senado.gob.ar/parlamentario/comisiones/verExp/46.25/PE/DC",
+                      "A_senado_exp46-PE-2025", "html",
+                      "Senado de la Nación, ficha del Expte. 46/25 PE (Mensaje 52/25: comunica el DNU 366/25), consulta 03/10/2026",
+                      "P"),
+    "hcdn_366": (HCDN_BUSCADOR, "A_hcdn_busqueda_366-2025", "html",
+                 "HCDN, buscador de proyectos (Diputados y Senado), palabras '366/2025', consulta 03/10/2026 "
+                 "(formulario público, POST strPalabras=366/2025)", "P"),
+    "bo_20261002": ("https://www.boletinoficial.gob.ar/seccion/primera/20261002",
+                    "A_bo_primera_20261002", "html",
+                    "Boletín Oficial, primera sección, sumario de la edición del 02/10/2026", "P"),
+    "bo_vigente": ("https://www.boletinoficial.gob.ar/seccion/primera",
+                   "A_bo_primera_vigente", "html",
+                   "Boletín Oficial, primera sección, edición vigente al consultar (03/10/2026)", "P"),
 }
 
 # (claim_id, etiqueta, afirmación, valor, fuente, cita literal que debe estar en la copia local)
@@ -76,30 +116,65 @@ CLAIMS = [
      "Poner en conocimiento de la presente a los señores jueces federales con competencia electoral de todo el país"),
     ("A20", "DATO", "El Juzgado Federal de Esquel declaró inconstitucionales e inaplicables al caso los arts. 4, 37 y 39 del DNU 366/2025 (el art. 37 crea la vía por inversión)", "12/08/2026", "jf_esquel",
      "DECLARAR la INCONSTITUCIONALIDAD e INAPLICABILIDAD a su respecto de los artículos 4, 37 y 39 del Decreto de Necesidad y Urgencia 366/2025"),
+    # --- Control parlamentario (Ley 26.122) ---
+    ("A21", "DATO", "El Mensaje 52/25 que comunica el DNU 366/25 (Senado, Expte. 46/25 PE) fue girado a la Comisión Bicameral Permanente de Trámite Legislativo (Ley 26.122)", "10/06/2025", "senado_46pe25",
+     "BICAMERAL PERMANENTE DE TRÁMITE LEGISLATIVO (LEY 26.122) ORDEN DE GIRO: 1 10-06-2025"),
+    ("A22", "DATO", "La ficha del Senado no registra dictamen de la Comisión Bicameral sobre el DNU 366/25 ni fecha de egreso del giro (consulta 03/10/2026)", "Sin dictamen", "senado_46pe25",
+     "INGRESO DEL DICTAMEN A LA MESA DE ENTRADAS 10-06-2025 SIN FECHA"),
+    ("A23", "DATO", "El buscador de proyectos de la HCDN devuelve 5 expedientes que mencionan el DNU 366/2025; ninguno registra dictamen de comisión ni sanción (consulta 03/10/2026)", "5 expedientes", "hcdn_366",
+     "Resultados de Búsqueda: 5 Proyectos Encontrados"),
+    ("A24", "DATO", "Proyecto de ley 3176-D-2025 (bloques del FIT-U) para anular el DNU 366/2025; girado a Asuntos Constitucionales y Población, sin dictamen", "17/06/2025", "hcdn_366",
+     "Expediente Diputados: 3176-D-2025 Publicado en: Trámite Parlamentario N° 75 Fecha: 17/06/2025 ANULESE EL DECRETO DE NECESIDAD Y URGENCIA 366/2025"),
+    ("A25", "DATO", "Proyecto de resolución 4025-D-2025 (Unión por la Patria) de repudio al DNU 366/2025, sin dictamen", "24/07/2025", "hcdn_366",
+     "Expediente Diputados: 4025-D-2025 Publicado en: Trámite Parlamentario N° 100 Fecha: 24/07/2025 EXPRESAR REPUDIO AL DECRETO N° 366/2025"),
+    ("A26", "DATO", "Proyecto de resolución 3233-D-2026 (Coalición Cívica) para declarar la nulidad absoluta del DNU 366/2025; sin dictamen", "02/07/2026", "hcdn_366",
+     "Expediente Diputados: 3233-D-2026 Publicado en: Trámite Parlamentario N° 84 Fecha: 02/07/2026 DECLARAR DE NULIDAD ABSOLUTA E INSANABLE EL DNU 366/2025"),
+    ("A27", "DATO", "Proyecto de ley 1441-S-2026 (sen. Capitanich): prohíbe la ciudadanía por inversión, deroga los arts. 2 inc. 2, 2 bis, 6 bis–6 quater de la Ley 346 (texto DNU 366/2025) y disuelve la Agencia; sin dictamen", "20/08/2026", "hcdn_366",
+     "Expediente Senado: 1441-S-2026 Publicado en: Diario de Asuntos Entrados N° 63 Fecha: 20/08/2026 ESTABLECER UN REGIMEN DE PROTECCION DE LA CIUDADANIA ARGENTINA Y PROHIBICION DE SU OTORGAMIENTO POR INVERSION"),
+    # --- ¿Norma que fije los montos anunciados? ---
+    ("A28", "DATO", "La primera sección del Boletín Oficial del 02/10/2026 (día del anuncio) no publica decretos: solo resoluciones, disposiciones y avisos, ninguno sobre ciudadanía por inversión", "0 normas sobre el programa", "bo_20261002",
+     "Avisos oficiales Avisos oficiales (29) Convenciones colectivas de trabajo (20) Disposiciones Disposiciones (2) Resoluciones Resolucion sintetizada (1) Resoluciones (17) Resolución general (1)"),
+    ("A29", "DATO", "Al 03/10/2026 la edición vigente de la primera sección del Boletín Oficial es la del 02/10/2026 (no hubo edición el sábado 03/10)", "02/10/2026", "bo_vigente",
+     "Edición del 2 de Octubre de 2026"),
 ]
 
 # Hitos sin cita literal en una sola fuente o que son inferencias: van al informe con su etiqueta, no al ledger como DATO.
 CRONOLOGIA = [
     ("2025-05-29", "DNU 366/2025 publicado: crea la vía 'inversión relevante' (Ley 346 art. 2 inc. 2) y la Agencia", "dnu366"),
+    ("2025-06-10", "Senado, Expte. 46/25 PE: el DNU 366/25 se gira a la Comisión Bicameral Permanente (Ley 26.122); sin dictamen al 03/10/2026", "senado_46pe25"),
+    ("2025-06-17", "Diputados, proyecto de ley 3176-D-2025 para anular el DNU 366/2025 (sin dictamen)", "hcdn_366"),
+    ("2025-07-24", "Diputados, proyecto de resolución 4025-D-2025 de repudio al DNU 366/2025 (sin dictamen)", "hcdn_366"),
     ("2025-07-31", "Decreto 524/2025: procedimiento de solicitud y evaluación", "dec524"),
     ("2026-04-28", "Decreto 285/2026: designación de la directora ejecutiva (desde 22/04/2026)", "dec285"),
     ("2026-06-30", "CNE, causa 'Yang': declara nulo el DNU 366/2025", "cne_yang"),
+    ("2026-07-02", "Diputados, proyecto de resolución 3233-D-2026 para declarar la nulidad del DNU 366/2025 (sin dictamen)", "hcdn_366"),
     ("2026-08-12", "Juzgado Federal de Esquel: inconstitucionalidad de arts. 4, 37 y 39 (efecto para el caso)", "jf_esquel"),
+    ("2026-08-20", "Senado, proyecto de ley 1441-S-2026 que prohíbe la ciudadanía por inversión (sin dictamen)", "hcdn_366"),
     ("2026-10-02", "Anuncio MECON: USD 350.000 aporte / USD 800.000 bono; operativo en 4T-2026", "anuncio"),
+    ("2026-10-02", "Boletín Oficial (1.ª sección): ninguna norma fija los montos anunciados", "bo_20261002"),
 ]
 
 
 def main() -> None:
     files, texts = {}, {}
     for sid, (url, name, ext, _desc, _t) in SOURCES.items():
-        files[sid] = download(url, name, ext)
+        files[sid] = download_post(url, POST_DATA[sid], name, ext) if sid in POST_DATA else download(url, name, ext)
         texts[sid] = local_text(files[sid])
+
+    # Chequeos de las afirmaciones negativas (A22, A23, A28): si cambian las copias locales, el script falla.
+    if "SIN FECHA" not in texts["senado_46pe25"]:
+        raise ValueError("A22: la ficha del Senado ya registra fecha de dictamen; revisar")
+    if "DICTÁMENES DE COMISIÓN" in texts["hcdn_366"]:
+        raise ValueError("A23: algún expediente sobre el DNU 366/2025 registra dictamen; revisar")
+    bo = texts["bo_20261002"].upper()
+    if "CIUDADAN" in bo or "DECRETO" in bo:
+        raise ValueError("A28: el sumario del BO 02/10/2026 menciona decretos o ciudadanía; revisar")
 
     rows = []
     for cid, label, claim, value, sid, needle in CLAIMS:
         url, _name, _ext, desc, tipo = SOURCES[sid]
         rows.append(dict(claim_id=cid, etiqueta=label, afirmacion=claim, valor=value, fuente=desc, tipo_fuente=tipo,
-                         url=url, archivo_local=str(files[sid].relative_to(files[sid].parents[2])),
+                         url=url, archivo_local=files[sid].relative_to(files[sid].parents[2]).as_posix(),
                          sha256=sha256(files[sid]), cita_textual=quote(texts[sid], needle)))
     write_ledger("A", rows)
 

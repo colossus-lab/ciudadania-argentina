@@ -33,7 +33,7 @@ ESTADO: list[dict] = []      # estado de todas las fuentes
 
 
 def rel(p: Path) -> str:
-    return str(p.relative_to(ROOT))
+    return p.relative_to(ROOT).as_posix()
 
 
 def ok(fuente: str, url: str, archivo: Path | str, nota: str = "") -> None:
@@ -60,9 +60,9 @@ EVENTOS = [
     ("copa24", "2024-06-20", "Copa Am. 2024", "Copa América 2024 (20/06–14/07/2024)", "S (fecha del evento)"),
     ("cepo", "2025-04-14", "Fin cepo (PH)", "Com. BCRA \"A\" 8226 (11/04/2025), vigente desde 14/04/2025: acceso al MLC "
      "para personas humanas sin conformidad previa", "P (BCRA, verificado con cita literal)"),
-    ("mundial26", "2026-06-11", "Mundial 2026", "Mundial 2026 (EE.UU./México/Canadá), 11/06–19/07/2026. Resultado de "
-     "Argentina NO verificado en fuente primaria descargable (fifa.com se renderiza con JavaScript)",
-     "S (fechas); resultado: no verificado"),
+    ("mundial26", "2026-06-11", "Mundial 2026 (ARG 2.º)", "Mundial 2026 (EE.UU./México/Canadá), 11/06–19/07/2026. Argentina "
+     "subcampeón: perdió la final 1-0 ante España en la prórroga (19/07/2026)",
+     "Resultado y fecha de la final: P (CONMEBOL, AFA y RFEF vía Wayback; cita literal, E34–E36); inicio del torneo: S"),
     ("cbi", "2026-10-02", "Anuncio CBI", "Anuncio del Programa de Ciudadanía por Inversión (Módulo A)", "P (Módulo A)"),
 ]
 EV = {e[0]: pd.Timestamp(e[1]) for e in EVENTOS}
@@ -200,6 +200,35 @@ INDEC_ETI = {
 URL_CABA_EEUU = "https://turismo.buenosaires.gob.ar/sites/turismo/files/eeuu_perfiles_internacionales_2025.pdf"
 URL_NTTO = "https://www.trade.gov/sites/default/files/2024-02/US-Outbound-to-World-Regions.xlsx"
 URL_NTTO_I92 = "https://www.trade.gov/us-international-air-travel-statistics-i-92-data"
+URL_INDEC_ETI_PAG = "https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-13-55"
+URL_INDEC_ETI_FRAG = "https://www.indec.gob.ar/Nivel4/Tema/3/13/55"
+
+# ----------------------------------------------------------------------------------------------------
+# Mundial 2026: resultado de Argentina. fifa.com (y sus capturas en la Wayback Machine) son un cascarón JS sin el
+# texto (`<div id="root"></div>`, sin JSON embebido); cxm-api.fifa.com no se usa (API no documentada). Se usan las
+# notas oficiales de la confederación (CONMEBOL) y de las dos federaciones finalistas (AFA, RFEF), en capturas de la
+# Wayback Machine (id_ = HTML original sin la barra de archive.org).
+# ----------------------------------------------------------------------------------------------------
+WB = "https://web.archive.org/web/{ts}id_/{url}"
+MUNDIAL26 = {  # clave: (timestamp de la captura, URL original, nombre en data/raw)
+    "conmebol": ("20260723035212", "https://www.conmebol.com/noticias/gracias-argentina/", "E_mundial26_conmebol_gracias_argentina"),
+    "afa": ("20260720110542", "https://www.afa.com.ar/es/posts/hasta-el-ultimo-aliento-argentina-cayo-de-pie-en-la-final-del-mundial",
+            "E_mundial26_afa_final"),
+    "rfef": ("20260720000045", "https://rfef.es/es/noticias/espana-bicampeona-del-mundo", "E_mundial26_rfef_bicampeona"),
+}
+
+
+def load_mundial26() -> dict:
+    out = {}
+    for k, (ts, url, name) in MUNDIAL26.items():
+        wb = WB.format(ts=ts, url=url)
+        try:
+            p = download(wb, name, "html")
+            out[k] = (p, wb)
+            ok(f"Mundial 2026 — nota oficial {k.upper()} (Wayback {ts})", wb, rel(p))
+        except Exception as e:  # noqa: BLE001
+            falla(f"Mundial 2026 — nota oficial {k.upper()} (Wayback)", wb, str(e)[:120], "descarga", "Resultado sin esta fuente")
+    return out
 
 
 def load_turismo() -> dict:
@@ -236,6 +265,22 @@ def load_turismo() -> dict:
     out["ntto_path"] = p
     p = download(URL_NTTO_I92, "E_ntto_i92_pagina", "html")
     out["i92_path"] = p
+    # La página del programa se lee bien (E29), pero el dato por país es de pago: se registra como fuente no accesible.
+    falla("NTTO I-92 / APIS por país de destino", URL_NTTO_I92, "Producto de pago (USD 150 a USD 5.795)", "Licencia comercial",
+          "Se usa el agregado gratuito 'South America' como control de demanda (E29)")
+    # Página de la ETI en INDEC: el registro anterior apuntaba a Nivel4-Tema-3-13-56 (que es la Encuesta de Ocupación
+    # Hotelera). La de la ETI es Nivel4-Tema-3-13-55; su contenido lo carga el propio sitio desde el fragmento HTML
+    # /Nivel4/Tema/3/13/55 (el mismo HTML que ve el navegador; no es una API). Se guarda para documentar los cuadros.
+    try:
+        p = download(URL_INDEC_ETI_FRAG, "E_indec_eti_pagina_nivel4", "html")
+        tx = p.read_text(encoding="utf-8", errors="ignore")
+        if "Encuesta de Turismo Internacional" not in tx or "eti26_ezeyaerop_cuadros.xls" not in tx:
+            raise ValueError("el fragmento no contiene la ETI ni los cuadros 2026")
+        out["indec_pag"] = p
+        ok("INDEC — página de la ETI (cuadros y series)", URL_INDEC_ETI_PAG, rel(p),
+           f"fragmento {URL_INDEC_ETI_FRAG}; lista cuadros por paso (p. ej. eti26_ezeyaerop_cuadros.xls) y series_eti_via_aerea.xlsx")
+    except Exception as e:  # noqa: BLE001
+        falla("INDEC — página de la ETI", URL_INDEC_ETI_PAG, str(e)[:120], "sitio dinámico", "Se usan yvera (CKAN) y los PDF de informes")
     return out
 
 
@@ -862,6 +907,7 @@ def main() -> None:
     ohss = load_ohss()
     p_a8226 = download(URL_A8226, "E_bcra_com_A8226", "pdf")
     ok("BCRA Comunicación A 8226", URL_A8226, rel(p_a8226))
+    m26 = load_mundial26()
 
     # --- Atención ---
     dd = build_daily(pv)
@@ -1072,15 +1118,46 @@ def main() -> None:
         f"Δlog ITCRB EE.UU. (t−1) 2025 vs 2024 = {fmt(dlog, 3)} → efecto {pct(100 * (np.exp(e1.coef * dlog) - 1))} vs caída observada "
         f"{pct(100 * (np.exp(obs) - 1))}", "Cálculo propio (BCRA, DNM)", "P", URL_ITCRM, "data/processed/E_turismo_modelo.csv",
         "exp(elasticidad_T1 × (media 2025 − media 2024 de log ITCRB_EEUU t−1)) − 1; insumos E22, E23, E13")
+    # --- Mundial 2026: resultado de Argentina (notas oficiales, capturas Wayback) ---
+    if "conmebol" in m26:
+        pm, um = m26["conmebol"]
+        tm_ = local_text(pm)
+        add("E34", "DATO", "Mundial 2026: resultado de Argentina (CONMEBOL, nota oficial del 19/07/2026)",
+            "Subcampeón: perdió la final 1-0 ante España, en la prórroga (19/07/2026)",
+            "CONMEBOL, nota '¡Gracias, Argentina!' (captura Wayback del 23/07/2026)", "P", um, pm,
+            quote(tm_, "julio 19, 2026") + " | "
+            + quote(tm_, "Argentina cerró su participación en la Copa Mundial de la FIFA 2026™ con el subcampeonato tras ceder 1-0 "
+                         "frente a España en la Gran Final") + " | "
+            + quote(tm_, "Luego de igualar sin goles durante el tiempo reglamentario, la definición llegó en la prórroga"))
+    if "afa" in m26:
+        pa, ua = m26["afa"]
+        ta_ = local_text(pa)
+        add("E35", "DATO", "Mundial 2026: resultado de la final según la AFA (federación argentina)",
+            "Argentina 0-1 España en la final, con un jugador menos en el alargue",
+            "AFA, sitio oficial (captura Wayback del 20/07/2026)", "P", ua, pa,
+            quote(ta_, "Hasta el último aliento: Argentina cayó de pie en la final del Mundial") + " | "
+            + quote(ta_, "con un hombre menos durante el alargue") + " | "
+            + quote(ta_, "Argentina cayó 1-0 frente a España en la final de la Copa del Mundo"))
+    if "rfef" in m26:
+        pr, ur = m26["rfef"]
+        tr_ = local_text(pr)
+        add("E36", "DATO", "Mundial 2026: resultado de la final según la RFEF (federación del campeón)",
+            "España campeón (1-0 a Argentina en la final, en Nueva Jersey)",
+            "RFEF, sitio oficial (captura Wayback del 20/07/2026)", "P", ur, pr,
+            quote(tr_, "España, bicampeona del mundo") + " | "
+            + quote(tr_, "esta vez ha sido Nueva Jersey el lugar en el que se han hecho realidad los sueños de la Selección") + " | "
+            + quote(tr_, "tras vencer a Argentina en la gran final (1-0)"))
+
     rel26 = vt.loc["2026 ago–sep (post-Mundial)", "relativo_en_vs_base_pct"]
     gt25 = gtw.loc["2025", "ratio_vs_base_pct"] if gtw is not None else float("nan")
     add("E32", "HIPÓTESIS", "Veredicto sobre la tesis 'Argentina es más popular desde Qatar 2022'",
         f"SE SOSTIENE PARCIALMENTE. A favor: escalón post-Qatar en la atención relativa (E07–E09) e interés relativo en Google EE.UU. "
         f"todavía {pct(gt25, 0)} sobre la base en 2025 (E12). En contra: en Wikipedia (en) la atención relativa volvió a la base "
-        f"({pct(rel26)} en ago–sep 2026, E05) y en valores absolutos está por debajo de 2022 (E03); el turismo EE.UU.+Canadá creció "
+        f"({pct(rel26)} en ago–sep 2026, E05) y en valores absolutos está por debajo de 2022 (E03), aun después de que Argentina "
+        f"llegara a la final del Mundial 2026 en EE.UU. (E34); el turismo EE.UU.+Canadá creció "
         f"{pct(anual.loc[2025, 'dnm_eeuu_can_total_vs2019_pct'], 0)} vs 2019 contra {pct(anual.loc[2025, 'ntto_us_a_sudamerica_vs2019_pct'], 0)} "
         f"del viaje de EE.UU. a Sudamérica (E15) y cayó en 2025 (E13, E21)",
-        "Síntesis de E03–E31", "—", "", "", "Síntesis de E03, E05, E07, E08, E09, E10, E12, E13, E15, E21, E23, E31, E33; "
+        "Síntesis de E03–E34", "—", "", "", "Síntesis de E03, E05, E07, E08, E09, E10, E12, E13, E15, E21, E23, E31, E33, E34; "
         "ver docs/modulos/E_popularidad.md, sección Veredicto")
     write_ledger(MODULO, claims)
 

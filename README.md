@@ -25,7 +25,7 @@ Prensa y buscadores (tipo S) se usan solo para fechar eventos, nunca como fuente
 
 ## Reproducir
 ```bash
-python3 -m pip install -r requirements.txt   # Python 3.11
+python3 -m pip install -r requirements.txt   # Python 3.11 o 3.12 (ruptures 1.1.10 no tiene wheel para 3.13+)
 make all            # corre los módulos, la auditoría y genera el informe
 # sin make:
 python3 run_all.py
@@ -36,7 +36,10 @@ python3 run_all.py
 - Google Trends (E y E2) puede responder 429: los scripts reintentan una vez, espaciado, y si falla lo registran. Los CSV crudos ya descargados se reutilizan.
 
 ## Pendientes conocidos
-- **Módulo D:** falta la serie de tasas de rechazo de visas B (FY2006–FY2025). travel.state.gov bloquea a los clientes automatizados y web.archive.org no fue accesible desde el entorno de ejecución. Con acceso, `python src/04_pasaporte_vwp.py` la completa.
-- Las sentencias judiciales del Módulo A se obtuvieron de copias publicadas por *Palabras del Derecho*: los PDF tienen firma digital del PJN, pero conviene contrastarlos con el sistema de consulta del PJN.
+- **Módulo A:** las sentencias "Yang" (CNE) y del Juzgado Federal de Esquel vienen de copias publicadas por *Palabras del Derecho* (con firma digital del PJN). Los buscadores oficiales (PJN, CSJN, CNE, CIJ) exigen captcha y no se eludió; tampoco se pudo saber si "Yang" llegó a la Corte.
+- **Módulo B:** la SCF 2025 de la Fed no se publicó; al salir, re-correr `src/02_mercado.py`. Falta verificar la doble nacionalidad en Arabia Saudita, Sudáfrica y Turquía.
+- **Módulo C:** el monto de Egipto y la carta de la Comisión Europea del 25/06/2026 siguen sin fuente primaria.
+- **Módulo D:** la tasa de rechazo FY2026 y la tabla NIV FY2025 todavía no están publicadas o archivadas; `python src/04_pasaporte_vwp.py` las suma cuando aparezcan.
+- **Entorno:** en Windows, WeasyPrint necesita GTK; si falta, `src/08_informe.py` imprime el PDF con Edge o Chrome headless. El archivo `.gitattributes` evita que git cambie los fines de línea de `data/` (los hashes del ledger dependen de los bytes exactos).
 
 Contacto: Colossus Lab.

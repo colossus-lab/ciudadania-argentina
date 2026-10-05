@@ -1,0 +1,7 @@
+pais,sp,moodys,fitch,fecha,escalones_sp,escalones_moodys,escalones_fitch,escalones_prom,grado_inversion,fuente,claim_dato,claim_estimacion
+ARG,B-,B3,B-,jul-2026,15,15,15,15.0,False,"BCRA, Informe de Política Monetaria, segundo trimestre de 2026 (publicado el 06/08/2026)",F127,F128
+NZL,AA+,Aaa,AA+,abr-2026,1,0,1,0.67,True,"New Zealand Debt Management (Treasury), ""Credit ratings"" (captura Wayback del 09/04/2026)",F129,F130
+URY,BBB+,Baa1,BBB,sep-2026,7,7,8,7.33,True,"MEF Uruguay, Unidad de Gestión de Deuda, ""Calificación Crediticia""",F131,F132
+CHL,A,A2,A-,última entrada: oct-2024,5,5,6,5.33,True,"Ministerio de Hacienda de Chile, Oficina de la Deuda Pública, ""Ratings históricos""",F133,F134
+PRT,A+,A3,A+,sep-2026,4,6,4,4.67,True,"IGCP (agencia de deuda de Portugal), Investor Presentation, septiembre de 2026",F135,F136
+CAN,AAA,Aaa,AA+,31/03/2025,0,0,1,0.33,True,"Department of Finance Canada, Debt Management Report 2024–25",F137,F138

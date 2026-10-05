@@ -39,7 +39,7 @@ Columnas: **Tipo** = P (primaria) / R (referencia privada con metodología públ
 | Decreto 524/2025 (BO 31/07/2025) | boletinoficial.gob.ar/detalleAviso/primera/329061/20250731 | P | Reglamentación | Verificar qué reglamenta exactamente |
 | Decreto 285/2026 (BO 28/04/2026) | boletinoficial.gob.ar/pdf/aviso/primera/341227/20260428 | P | Designación de la directora ejecutiva | — |
 | Resolución que fija USD 350.000 / 800.000 | Búsqueda en BO, sección primera, oct-2026 | P | Fuente normativa de los montos | **Puede no estar publicada aún** → se deja explícito |
-| Comisión Bicameral Ley 26.122 | hcdn.gob.ar/comisiones/especiales/cbtramite | P | Dictámenes sobre el DNU 366 | Información dispersa en órdenes del día |
+| Comisión Bicameral Ley 26.122 | hcdn.gob.ar/comisiones/especiales/cbtramite (da 404); se usó la ficha del Senado senado.gob.ar/parlamentario/comisiones/verExp/46.25/PE/DC | P | Dictámenes sobre el DNU 366 | Información dispersa en órdenes del día |
 | Proyectos de ley de derogación | hcdn.gob.ar / senado.gob.ar (buscador de proyectos) | P | Proyectos que rechazan el DNU | — |
 | Causas judiciales | cij.gov.ar / csjn.gov.ar | P | Amparos contra el DNU | Sentencias de primera instancia no siempre publicadas → prensa solo para fechar |
 
@@ -96,7 +96,7 @@ la cola). Se calcula aporte / patrimonio por tramo. Para la hipótesis de compra
 | Residencias y naturalizaciones | DHS OHSS Yearbook | Anual | Tablas en xlsx por año |
 
 **Eventos marcados:** 18/12/2022 · 07/2023 · 19/11/2023 · 10/12/2023 · Copa América 2024 · salida del cepo (fecha a verificar en BCRA,
-se espera 14/04/2025 por Com. "A" 8226 — **no confirmado**) · Mundial 2026 (resultado de Argentina **a verificar, no se supone**) · 02/10/2026.
+se espera 14/04/2025 por Com. "A" 8226 — confirmado después, E28) · Mundial 2026 (resultado de Argentina: subcampeón, verificado después en E34–E36) · 02/10/2026.
 
 **Método:** (1) gráficos con eventos; (2) ITS con regresión segmentada sobre log-pageviews, dummies de mes/día de semana y diferencia
 contra el promedio de controles (Chile, Uruguay, Brasil, Colombia), errores HAC Newey-West; (3) quiebres con `ruptures` (PELT/Binseg,

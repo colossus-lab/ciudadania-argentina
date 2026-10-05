@@ -31,7 +31,7 @@ FAILS: list[dict] = []  # fuentes fallidas de esta corrida (se vuelcan a data/pr
 
 
 def rel(p: Path) -> str:
-    return str(p.relative_to(ROOT))
+    return p.relative_to(ROOT).as_posix()
 
 
 def fail(fuente: str, url: str, error: str, causa: str, accion: str) -> None:
@@ -83,8 +83,10 @@ SOURCES = {
 
 WB_AVAIL = "https://archive.org/wayback/available?url={url}&timestamp={ts}"
 WB_RAW = "https://web.archive.org/web/{ts}id_/{url}"
+WB_CDX = "https://web.archive.org/cdx/search/cdx?url={url}&output=json&fl=timestamp,original&filter=statuscode:200"
 REFUSAL_URL = "https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/RefusalRates/FY{yy:02d}.pdf"
 NIV_URL = "https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/NIVDetailTables/FY{yy:02d}NIVDetailTable.{ext}"
+NIV_URL_ESP = "https://travel.state.gov/content/dam/visas/Statistics/Non-Immigrant-Statistics/NIVDetailTables/FY{yy:02d}%20NIV%20Detail%20Table.{ext}"
 FY_RANGE = range(2006, 2026)
 COUNTRIES = {"Argentina": "AR", "Chile": "CL", "Uruguay": "UY", "Brazil": "BR"}
 
@@ -109,6 +111,18 @@ def wayback_lookup(url: str, name: str, ts_hints: list[str]) -> dict | None:
         if snap and snap.get("status") == "200":
             raw_path(f"{name}_wbavail", "json").write_text(json.dumps(j, indent=1))
             return snap
+    # Respaldo: índice CDX (la API de disponibilidad a veces no devuelve capturas que el CDX sí lista)
+    try:
+        r = get(WB_CDX.format(url=url.replace("https://", "")), timeout=60, retries=2)
+        caps = r.json()[1:] if r.text.strip() else []
+    except Exception:  # noqa: BLE001
+        caps = []
+    if caps:
+        ts, orig = caps[-1][0], caps[-1][1]  # captura 200 más reciente
+        j = {"url": url, "fuente": "cdx", "archived_snapshots": {"closest": {
+            "status": "200", "available": True, "timestamp": ts, "url": f"http://web.archive.org/web/{ts}/{orig}"}}}
+        raw_path(f"{name}_wbavail", "json").write_text(json.dumps(j, indent=1))
+        return j["archived_snapshots"]["closest"]
     return None
 
 
@@ -136,7 +150,8 @@ def wayback_download(url: str, name: str, ext: str, ts_hints: list[str]) -> tupl
     ts = snap["timestamp"]
     orig = snap["url"].split(f"/web/{ts}/", 1)[1]
     cap = WB_RAW.format(ts=ts, url=orig)
-    existing = sorted(RAW.glob(f"{name}_*.{ext}"))
+    alt = {"xls": "xlsx", "xlsx": "xls"}.get(ext)
+    existing = sorted(RAW.glob(f"{name}_2*.{ext}")) or (sorted(RAW.glob(f"{name}_2*.{alt}")) if alt else [])
     if existing:
         return existing[-1], cap, ts
     if not wayback_up():
@@ -151,6 +166,12 @@ def wayback_download(url: str, name: str, ext: str, ts_hints: list[str]) -> tupl
              "web.archive.org resetea la conexión (TCP reset) desde este entorno", "Reintentar más tarde; el año queda vacío")
         return None, cap, ts
     head = p.read_bytes()[:5]
+    if ext in ("xls", "xlsx"):
+        # La API de disponibilidad puede devolver la captura del .xls al pedir el .xlsx: la extensión local
+        # sigue al formato real (xlsx = ZIP "PK"; xls = OLE2), para que pandas/openpyxl y la auditoría lo lean bien.
+        real = "xlsx" if head[:2] == b"PK" else "xls"
+        if real != ext:
+            p = p.rename(p.with_suffix(f".{real}"))
     if ext == "pdf" and head != b"%PDF-":
         p.unlink()
         fail(f"Wayback: {name}", cap, "la respuesta no es un PDF", "Captura inválida", "Se omite")
@@ -173,8 +194,9 @@ def parse_refusal_pdf(p: Path) -> dict[str, tuple[float, str]]:
             for line in (page.extract_text() or "").split("\n"):
                 line = norm_ws(line)
                 for c in COUNTRIES:
-                    # Formato habitual "Argentina 2.53%"; a veces varias columnas por línea.
-                    for m in re.finditer(rf"(?<![A-Za-z]){c}\s+(\d{{1,3}}\.\d{{1,2}})\s?%?", line):
+                    # Formato habitual "Argentina 2.53%" (desde FY2014 en mayúsculas: "ARGENTINA 1.4%");
+                    # a veces varias columnas por línea.
+                    for m in re.finditer(rf"(?<![A-Za-z]){c}\s+(\d{{1,3}}\.\d{{1,2}})\s?%?", line, flags=re.I):
                         if c not in out:
                             out[c] = (float(m.group(1)), norm_ws(m.group(0)))
     return out
@@ -193,7 +215,7 @@ def refusal_series() -> tuple[list[dict], dict]:
             continue
         vals = parse_refusal_pdf(p)
         txt = local_text(p)
-        title = re.search(r"Fiscal Year (\d{4})", txt)
+        title = re.search(r"Fiscal Year (\d{4})", txt, flags=re.I)  # desde FY2013: "FISCAL YEAR 2013*"
         if title and int(title.group(1)) != fy:
             fail(f"DoS refusal FY{yy:02d}", cap, f"el PDF dice 'Fiscal Year {title.group(1)}'", "Archivo inesperado",
                  "Se omite")
@@ -217,8 +239,10 @@ def niv_series() -> list[dict]:
     for fy in FY_RANGE:
         yy = fy % 100
         got = None
-        for ext in ("xlsx", "xls"):
-            url = NIV_URL.format(yy=yy, ext=ext)
+        # FY2015–FY2018 se publicaron como "FY15 NIV Detail Table.xls" (con espacios; ver índice CDX de la Wayback)
+        cands = [(NIV_URL.format(yy=yy, ext=ext), ext) for ext in ("xlsx", "xls")]
+        cands += [(NIV_URL_ESP.format(yy=yy, ext=ext), ext) for ext in ("xlsx", "xls")]
+        for url, ext in cands:
             name = f"D_dos_niv_detail_FY{yy:02d}"
             if not sorted(RAW.glob(f"{name}_*.{ext}")):
                 snap = wayback_lookup(url, name, [f"{fy + 1}1231", "2026"])
@@ -229,6 +253,10 @@ def niv_series() -> list[dict]:
                 got = (p, cap, ts, url)
             break  # hay captura para esta extensión: no se prueba la otra
         if not got:
+            fail(f"DoS NIV Detail Table FY{yy:02d}", NIV_URL.format(yy=yy, ext="xlsx"),
+                 "Sin captura 200 (API de disponibilidad ni índice CDX)",
+                 "No publicada todavía o no archivada; travel.state.gov da 403 a clientes automatizados",
+                 "Año sin dato en la serie (no se rellena)")
             continue
         p, cap, ts, url = got
         try:
@@ -237,7 +265,7 @@ def niv_series() -> list[dict]:
             fail(f"NIV detail FY{yy:02d}", cap, f"{type(e).__name__}: {str(e)[:80]}", "Formato no legible", "Se omite")
             continue
         for sheet, df in xl.items():
-            df = df.astype(str)
+            df = df.fillna("").astype(str)  # pandas 3: astype(str) conserva NaN como float
             hdr_idx = None
             for i in range(min(15, len(df))):
                 vals = [v.strip() for v in df.iloc[i].tolist()]
@@ -503,7 +531,9 @@ def chart_refusal(rows: list[dict]) -> None:
         ax.annotate(f"{ES[c]} {ys[-1]:.1f}%".replace(".", ","), (xs[-1], ys[-1]), xytext=(6, 0),
                     textcoords="offset points", va="center", fontsize=8.5, color=INK)
     ax.axhline(3.0, color=INK2, lw=1, ls=(0, (4, 3)), zorder=1)
-    ax.text(FY_RANGE.start - 0.3, 3.0, "Umbral legal VWP: 3%", fontsize=8, color=INK2, va="bottom")
+    ax.text(FY_RANGE.start - 0.3, 2.85, "Umbral legal VWP: 3%", fontsize=8, color=INK2, va="top")
+    ax.axvline(2011.5, color=GRID, lw=1, ls=(0, (2, 2)), zorder=1)  # D74: nueva metodología del DoS desde FY2012
+    ax.text(2011.6, max(ymax, 4) * 0.5, "Nueva metodología\nDoS (FY2012)", fontsize=7, color=MUTED, va="bottom")
     ax.axvline(2014, color=MUTED, lw=1, zorder=1)
     ax.text(2014.1, ymax * 1.02 if ymax else 10, "Chile designado\n28/02/2014 (FY2014)", fontsize=8, color=INK2, va="top")
     ax.set_xlim(FY_RANGE.start - 0.5, FY_RANGE.stop - 0.5)
@@ -724,6 +754,51 @@ def main() -> None:
                              tipo_fuente="P", url=r["captura_wayback"], archivo_local=r["archivo_local"], sha256=r["sha256"],
                              cita_textual=f"hoja={r['hoja']}; fila_índice={r['fila']}; país=Argentina; columna={r['clase']}; valor={r['emitidas']}"))
         n += 1
+
+    # 5) Agregados de la corrida con web.archive.org accesible (IDs libres D57–D59, D74+)
+    def rate_claim(cid, c, fy, txt):
+        r = rr(c, fy)
+        if r:
+            rows.append(dict(claim_id=cid, etiqueta="DATO", afirmacion=txt, valor=f"{r['tasa_rechazo_ajustada_B']:.2f}%",
+                             fuente=f"U.S. Department of State, Adjusted Refusal Rate - B-Visas Only, FY{fy} (captura Wayback {r['timestamp_captura']})",
+                             tipo_fuente="P", url=r["captura_wayback"], archivo_local=r["archivo_local"], sha256=r["sha256"],
+                             cita_textual=quote(local_text(ROOT / r["archivo_local"]), r["cita"])))
+
+    rate_claim("D57", "Argentina", 2021, "Tasa ajustada de rechazo de visas B, Argentina, FY2021 (último año por debajo del 3%)")
+    rate_claim("D58", "Argentina", 2022, "Tasa ajustada de rechazo de visas B, Argentina, FY2022 (primer año por encima del 3% desde FY2010)")
+    rate_claim("D59", "Argentina", 2023, "Tasa ajustada de rechazo de visas B, Argentina, FY2023")
+    m13 = meta.get(2013, {})
+    if m13.get("archivo"):
+        p13 = ROOT / m13["archivo"]
+        rows.append(dict(claim_id="D74", etiqueta="DATO",
+                         afirmacion="El Departamento de Estado cambió la metodología de cálculo de la tasa en FY2012: la serie FY2006–FY2011 no es estrictamente comparable con la posterior",
+                         valor="Quiebre metodológico FY2012",
+                         fuente=f"U.S. Department of State, Adjusted Refusal Rate - B-Visas Only, FY2013 (captura Wayback {m13['ts']})",
+                         tipo_fuente="P", url=m13["captura"], archivo_local=m13["archivo"], sha256=sha256(p13),
+                         cita_textual=quote(local_text(p13), "the Department began utilizing a new calculation methodology in fiscal year 2012")))
+    if "dhs_vwp" in texts:
+        url, _n, _e, desc, tipo = SOURCES["dhs_vwp"]
+        rows.append(dict(claim_id="D75", etiqueta="DATO",
+                         afirmacion="Malta es país VWP desde el 30/12/2008 y sigue en la lista vigente del DHS (su programa de ciudadanía por inversión, Módulo C, no le costó el VWP)",
+                         valor="30/12/2008", fuente=desc, tipo_fuente=tipo, url=url, archivo_local=rel(files["dhs_vwp"]),
+                         sha256=sha256(files["dhs_vwp"]), cita_textual=quote(texts["dhs_vwp"], "Malta Dec. 30, 2008")))
+    r25 = rr("Argentina", 2025)
+    if r25:
+        gap = r25["tasa_rechazo_ajustada_B"] - 3.0
+        rows.append(dict(claim_id="D76", etiqueta="ESTIMACIÓN",
+                         afirmacion="Reducción de la tasa de rechazo que Argentina necesita para cumplir la vía (ii) del umbral (< 3,0% en el año fiscal anterior)",
+                         valor=f"{gap:.2f} puntos porcentuales (de {r25['tasa_rechazo_ajustada_B']:.2f}% a menos de 3,00%)".replace(".", ","),
+                         fuente="Cálculo propio sobre D45 y D04", tipo_fuente="P", url="",
+                         archivo_local="data/processed/D_tasa_rechazo_B.csv", sha256=sha256(PROCESSED / "D_tasa_rechazo_B.csv"),
+                         cita_textual="D45 − 3,0 (umbral de D04); insumos D45, D04"))
+    for cid, fy, txt in [("D77", 2017, "Visas B1/B2 emitidas a argentinos, FY2017 (máximo de la serie FY2006–FY2024)"),
+                         ("D78", 2021, "Visas B1/B2 emitidas a argentinos, FY2021 (mínimo de la serie, pandemia)")]:
+        r = next((x for x in niv if x["fy"] == fy), None)
+        if r:
+            rows.append(dict(claim_id=cid, etiqueta="DATO", afirmacion=txt, valor=r["emitidas"],
+                             fuente=f"U.S. Department of State, FY{fy} NIV Detail Table (captura Wayback {r['timestamp_captura']})",
+                             tipo_fuente="P", url=r["captura_wayback"], archivo_local=r["archivo_local"], sha256=r["sha256"],
+                             cita_textual=f"hoja={r['hoja']}; fila_índice={r['fila']}; país=Argentina; columna={r['clase']}; valor={r['emitidas']}"))
 
     write_ledger(MODULO, rows)
 
