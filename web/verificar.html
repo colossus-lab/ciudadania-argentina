@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es-AR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verificá cada dato — Ciudadanía por Inversión</title>
+<meta name="description" content="Investigación de Colossus Lab sobre el Programa de Ciudadanía por Inversión de Argentina: base legal, mercado, comparación internacional, pasaporte y escenarios fiscales, con cada dato verificado contra su fuente.">
+<meta property="og:title" content="Verificá cada dato — Ciudadanía por Inversión">
+<meta property="og:description" content="Investigación de Colossus Lab sobre el Programa de Ciudadanía por Inversión de Argentina: base legal, mercado, comparación internacional, pasaporte y escenarios fiscales, con cada dato verificado contra su fuente.">
+<meta property="og:locale" content="es_AR">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306090f'/%3E%3Crect y='10' width='32' height='12' fill='%2374acdf'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23f6b40e'/%3E%3C/svg%3E">
+<script>try{var t=localStorage.getItem("cxi-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+<header>
+<span class="ed-flagstripe" aria-hidden="true"></span>
+<div class="ed-topbar">
+  <a class="ed-topbar-mark" href="/"><span class="ed-topbar-mark-name">Ciudadanía por Inversión</span><span class="ed-topbar-mark-sub">por Colossus Lab</span></a>
+  <nav class="ed-topbar-nav" aria-label="Principal"><a href="/">Inicio</a><a href="/#respuestas">Respuestas</a><a href="/#modulos">Módulos</a><a href="/verificar" aria-current="page">Verificá</a><a href="/fuentes">Fuentes</a><a href="/metodologia">Metodología</a></nav>
+  <div class="ed-topbar-right">
+    <button class="ed-theme-toggle" type="button" aria-label="Cambiar tema">☀</button>
+    <a class="ed-topbar-cta" href="/descargas/informe.pdf">Informe PDF</a>
+  </div>
+</div>
+</header>
+<main>
+
+<section class="ed-hero" style="padding-bottom:1rem"><div class="ed-container">
+  <p class="ed-eyebrow"><span class="ed-eyebrow-num">Verificá</span> Registro de afirmaciones</p>
+  <h1 class="ed-display" style="margin:1rem 0">Cada dato, con su fuente y su cita</h1>
+  <p class="ed-lead">Las 458 afirmaciones del estudio, con la fuente, la cita literal (o el localizador de la celda) y el resultado de la auditoría automática contra la copia descargada. Buscá por código (A18), por tema o por fuente.</p>
+</div></section>
+<section class="ed-section" style="padding-top:2rem"><div class="ed-container">
+  <div class="ed-filters" role="search">
+    <input id="f-q" type="search" placeholder="Buscar: código, tema, fuente…" aria-label="Buscar afirmaciones">
+    <select id="f-mod" aria-label="Módulo"><option value="">Todos los módulos</option><option value="A">Módulo A</option><option value="B">Módulo B</option><option value="C">Módulo C</option><option value="D">Módulo D</option><option value="E">Módulo E</option><option value="E2">Módulo E2</option><option value="F">Módulo F</option><option value="G">Módulo G</option></select>
+    <select id="f-et" aria-label="Etiqueta"><option value="">Todas las etiquetas</option><option>DATO</option><option>ESTIMACIÓN</option><option>HIPÓTESIS</option><option>ESCENARIO</option></select>
+    <select id="f-st" aria-label="Estado de auditoría"><option value="">Todos los estados</option><option>OK</option><option>REVISAR</option><option>FALLA</option></select>
+  </div>
+  <p class="ed-count" id="claims-count"></p>
+  <div class="ed-table-wrap"><table class="ed-table"><thead><tr><th>Código</th><th>Etiqueta</th><th>Afirmación y valor</th><th>Fuente y cita</th><th>Auditoría</th></tr></thead>
+    <tbody id="claims-body"></tbody></table></div>
+  <p class="ed-meta" style="margin-top:1rem">Descargas: <a href="/descargas/claims_ledger.csv">claims_ledger.csv</a> · <a href="/descargas/auditoria.csv">auditoria.csv</a></p>
+</div></section>
+</main>
+<footer class="ed-colophon">
+<div class="ed-container">
+  <div class="ed-colophon-grid">
+    <div><span class="ed-colophon-brand-name">Ciudadanía por Inversión</span><span class="ed-meta">por Colossus Lab · en la línea editorial de OpenArg</span>
+      <p class="ed-lead" style="margin-top:.8rem;font-size:.85rem">Investigación con fuentes oficiales. Cada dato tiene su cita literal y se verifica de forma automática contra la copia descargada.</p></div>
+    <div><span class="ed-colophon-col-title">Módulos</span><a href="/modulos/marco-normativo">A · Marco normativo</a><a href="/modulos/mercado-potencial">B · Mercado potencial</a><a href="/modulos/benchmark-cbi">C · Otros programas</a><a href="/modulos/pasaporte-y-visa-waiver">D · Pasaporte y Visa Waiver</a><a href="/modulos/popularidad-post-qatar">E · ¿Más popular desde Qatar?</a><a href="/modulos/busquedas-del-pasaporte">E2 · Búsquedas del pasaporte</a><a href="/modulos/refugio-austral">F · ¿Refugio austral?</a><a href="/modulos/escenarios-fiscales">G · Escenarios fiscales</a></div>
+    <div><span class="ed-colophon-col-title">Verificación</span><a href="/verificar">Explorador de afirmaciones</a><a href="/fuentes">Fuentes</a><a href="/fuentes#fallidas">Fuentes fallidas</a><a href="/metodologia">Metodología</a></div>
+    <div><span class="ed-colophon-col-title">Descargas</span><a href="/descargas/informe.pdf">Informe completo (PDF)</a><a href="/descargas/claims_ledger.csv">Registro de afirmaciones (CSV)</a><a href="/descargas/auditoria.csv">Auditoría (CSV)</a><a href="https://openarg.org" rel="noopener">OpenArg</a></div>
+  </div>
+  <div class="ed-colophon-bottom"><span>Colossus Lab · Buenos Aires · MMXXVI</span><span>Corte de datos: 2026-10-04</span></div>
+</div>
+</footer>
+<script src="/assets/claims.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+pasaporte,nombre,destino,destino_nombre,requisito
+ARG,Argentina,USA,EE.UU.,visa required
+ARG,Argentina,CAN,Canadá,visa required
+ARG,Argentina,GBR,Reino Unido,eta
+ARG,Argentina,DEU,Alemania (Schengen),90
+ARG,Argentina,JPN,Japón,90
+ARG,Argentina,AUS,Australia,e-visa
+ARG,Argentina,CHN,China,30
+ARG,Argentina,IND,India,e-visa
+ARG,Argentina,RUS,Rusia,90
+ARG,Argentina,ZAF,Sudáfrica,90
+CHL,Chile,USA,EE.UU.,eta
+CHL,Chile,CAN,Canadá,eta
+CHL,Chile,GBR,Reino Unido,eta
+CHL,Chile,DEU,Alemania (Schengen),90
+CHL,Chile,JPN,Japón,90
+CHL,Chile,AUS,Australia,e-visa
+CHL,Chile,CHN,China,30
+CHL,Chile,IND,India,e-visa
+CHL,Chile,RUS,Rusia,90
+CHL,Chile,ZAF,Sudáfrica,90
+URY,Uruguay,USA,EE.UU.,visa required
+URY,Uruguay,CAN,Canadá,visa required
+URY,Uruguay,GBR,Reino Unido,eta
+URY,Uruguay,DEU,Alemania (Schengen),90
+URY,Uruguay,JPN,Japón,90
+URY,Uruguay,AUS,Australia,e-visa
+URY,Uruguay,CHN,China,30
+URY,Uruguay,IND,India,e-visa
+URY,Uruguay,RUS,Rusia,90
+URY,Uruguay,ZAF,Sudáfrica,90
+BRA,Brasil,USA,EE.UU.,visa required
+BRA,Brasil,CAN,Canadá,visa required
+BRA,Brasil,GBR,Reino Unido,eta
+BRA,Brasil,DEU,Alemania (Schengen),90
+BRA,Brasil,JPN,Japón,90
+BRA,Brasil,AUS,Australia,e-visa
+BRA,Brasil,CHN,China,30
+BRA,Brasil,IND,India,e-visa
+BRA,Brasil,RUS,Rusia,90
+BRA,Brasil,ZAF,Sudáfrica,90
+MEX,México,USA,EE.UU.,visa required
+MEX,México,CAN,Canadá,visa required
+MEX,México,GBR,Reino Unido,eta
+MEX,México,DEU,Alemania (Schengen),90
+MEX,México,JPN,Japón,90
+MEX,México,AUS,Australia,e-visa
+MEX,México,CHN,China,visa required
+MEX,México,IND,India,e-visa
+MEX,México,RUS,Rusia,e-visa
+MEX,México,ZAF,Sudáfrica,e-visa

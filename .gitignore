@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Descargas crudas > 20 MB: no se versionan (límite de GitHub). Se re-descargan con los scripts; ver docs/raw_grandes.csv
+data/raw/F_energia_pozos_no_convencional_2026-10-03.csv
+data/raw/F_faostat_fbs_normalized_2026-10-03.zip
+.venv/

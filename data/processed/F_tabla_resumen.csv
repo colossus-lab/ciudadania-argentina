@@ -1,0 +1,128 @@
+dimension,indicador,pais,valor,anio,unidad,etiqueta,claim_id,mejor,nota
+1 Paz y gobernanza,WGI Rule of Law (estimación),ARG,-0.1,2025,"−2,5 a +2,5",DATO,F001,mayor,
+1 Paz y gobernanza,WGI Rule of Law (estimación),NZL,1.66,2025,"−2,5 a +2,5",DATO,F002,mayor,
+1 Paz y gobernanza,WGI Rule of Law (estimación),URY,0.94,2025,"−2,5 a +2,5",DATO,F003,mayor,
+1 Paz y gobernanza,WGI Rule of Law (estimación),CHL,0.68,2025,"−2,5 a +2,5",DATO,F004,mayor,
+1 Paz y gobernanza,WGI Rule of Law (estimación),PRT,1.05,2025,"−2,5 a +2,5",DATO,F005,mayor,
+1 Paz y gobernanza,WGI Rule of Law (estimación),CAN,1.48,2025,"−2,5 a +2,5",DATO,F006,mayor,
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),ARG,0.16,2025,"−2,5 a +2,5",DATO,F007,mayor,
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),NZL,1.18,2025,"−2,5 a +2,5",DATO,F008,mayor,
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),URY,1.3,2025,"−2,5 a +2,5",DATO,F009,mayor,
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),CHL,0.17,2025,"−2,5 a +2,5",DATO,F010,mayor,
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),PRT,0.7,2025,"−2,5 a +2,5",DATO,F011,mayor,
+1 Paz y gobernanza,WGI Political Stability and Absence of Violence (estimación),CAN,0.81,2025,"−2,5 a +2,5",DATO,F012,mayor,
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),ARG,0.28,2025,"−2,5 a +2,5",DATO,F013,mayor,
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),NZL,1.87,2025,"−2,5 a +2,5",DATO,F014,mayor,
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),URY,0.86,2025,"−2,5 a +2,5",DATO,F015,mayor,
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),CHL,1.04,2025,"−2,5 a +2,5",DATO,F016,mayor,
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),PRT,1.02,2025,"−2,5 a +2,5",DATO,F017,mayor,
+1 Paz y gobernanza,WGI Government Effectiveness (estimación),CAN,1.76,2025,"−2,5 a +2,5",DATO,F018,mayor,
+1 Paz y gobernanza,WGI Control of Corruption (estimación),ARG,-0.39,2025,"−2,5 a +2,5",DATO,F019,mayor,
+1 Paz y gobernanza,WGI Control of Corruption (estimación),NZL,1.89,2025,"−2,5 a +2,5",DATO,F020,mayor,
+1 Paz y gobernanza,WGI Control of Corruption (estimación),URY,1.56,2025,"−2,5 a +2,5",DATO,F021,mayor,
+1 Paz y gobernanza,WGI Control of Corruption (estimación),CHL,1.1,2025,"−2,5 a +2,5",DATO,F022,mayor,
+1 Paz y gobernanza,WGI Control of Corruption (estimación),PRT,0.77,2025,"−2,5 a +2,5",DATO,F023,mayor,
+1 Paz y gobernanza,WGI Control of Corruption (estimación),CAN,1.59,2025,"−2,5 a +2,5",DATO,F024,mayor,
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),ARG,1.922,2026,1 a 5,DATO,F025,menor,puesto 72 de 163
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),NZL,1.343,2026,1 a 5,DATO,F026,menor,puesto 2 de 163
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),URY,1.754,2026,1 a 5,DATO,F027,menor,puesto 43 de 163
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),CHL,1.826,2026,1 a 5,DATO,F028,menor,puesto 52 de 163
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),PRT,1.427,2026,1 a 5,DATO,F029,menor,puesto 7 de 163
+1 Paz y gobernanza,Global Peace Index: puntaje (menor = más pacífico),CAN,1.525,2026,1 a 5,DATO,F030,menor,puesto 14 de 163
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),ARG,267,2019–2023,%,ESTIMACIÓN,F036,mayor,2023: 214%
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",ARG,100,2019–2023,%,ESTIMACIÓN,F037,mayor,
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),NZL,53,2019–2023,%,ESTIMACIÓN,F038,mayor,2023: 52%
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",NZL,59,2019–2023,%,ESTIMACIÓN,F039,mayor,
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),URY,169,2019–2023,%,ESTIMACIÓN,F040,mayor,2023: 171%
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",URY,81,2019–2023,%,ESTIMACIÓN,F041,mayor,
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),CHL,40,2019–2023,%,ESTIMACIÓN,F042,mayor,2023: 38%
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",CHL,54,2019–2023,%,ESTIMACIÓN,F043,mayor,
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),PRT,19,2019–2023,%,ESTIMACIÓN,F044,mayor,2023: 18%
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",PRT,57,2019–2023,%,ESTIMACIÓN,F045,mayor,
+2 Alimentos,Autosuficiencia en cereales (prod./suministro interno),CAN,185,2019–2023,%,ESTIMACIÓN,F046,mayor,2023: 194%
+2 Alimentos,"Cobertura calórica doméstica (kcal ponderadas, SSR tope 100%)",CAN,82,2019–2023,%,ESTIMACIÓN,F047,mayor,
+3 Energía,Importaciones netas de energía (% del uso),ARG,0.4,2023,%,DATO,F048,menor,
+3 Energía,Importaciones netas de energía (% del uso),NZL,31.6,2023,%,DATO,F049,menor,
+3 Energía,Importaciones netas de energía (% del uso),URY,46.2,2022,%,DATO,F050,menor,
+3 Energía,Importaciones netas de energía (% del uso),CHL,62.3,2023,%,DATO,F051,menor,
+3 Energía,Importaciones netas de energía (% del uso),PRT,77.2,2023,%,DATO,F052,menor,
+3 Energía,Importaciones netas de energía (% del uso),CAN,-89.6,2023,%,DATO,F053,menor,
+3 Energía,Importaciones netas de energía (% del uso),ARG,-13.2,2025,%,ESTIMACIÓN,F057,menor,BEN 2025 provisorio (fila adicional; no comparable 1:1 con el WB)
+4 Litio,Reservas de litio (t de Li contenido),ARG,4400000,2025,t,DATO,F064,mayor,
+4 Litio,Producción minera de litio 2025e (t de Li),ARG,23000,2025,t,DATO,F064,mayor,
+4 Litio,Reservas de litio (t de Li contenido),CHL,9200000,2025,t,DATO,F065,mayor,
+4 Litio,Producción minera de litio 2025e (t de Li),CHL,56000,2025,t,DATO,F065,mayor,
+4 Litio,Reservas de litio (t de Li contenido),CAN,1600000,2025,t,DATO,F066,mayor,
+4 Litio,Producción minera de litio 2025e (t de Li),CAN,5600,2025,t,DATO,F066,mayor,
+4 Litio,Reservas de litio (t de Li contenido),PRT,60000,2025,t,DATO,F067,mayor,
+4 Litio,Producción minera de litio 2025e (t de Li),PRT,380,2025,t,DATO,F067,mayor,
+4 Litio,Reservas de litio (t de Li contenido),NZL,0,2025,t,DATO,F068,mayor,no figura en USGS (se grafica como 0)
+4 Litio,Producción minera de litio 2025e (t de Li),NZL,0,2025,t,DATO,F068,mayor,no figura en USGS
+4 Litio,Reservas de litio (t de Li contenido),URY,0,2025,t,DATO,F069,mayor,no figura en USGS (se grafica como 0)
+4 Litio,Producción minera de litio 2025e (t de Li),URY,0,2025,t,DATO,F069,mayor,no figura en USGS
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),ARG,12,2026,sitios,DATO,F073,mayor,
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,ARG,5,2026,sitios,DATO,F073,mayor,
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),NZL,3,2026,sitios,DATO,F074,mayor,
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,NZL,3,2026,sitios,DATO,F074,mayor,
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),URY,3,2026,sitios,DATO,F075,mayor,
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,URY,0,2026,sitios,DATO,F075,mayor,
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),CHL,7,2026,sitios,DATO,F076,mayor,
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,CHL,0,2026,sitios,DATO,F076,mayor,
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),PRT,17,2026,sitios,DATO,F077,mayor,
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,PRT,1,2026,sitios,DATO,F077,mayor,
+5 Atractivo natural,Sitios UNESCO Patrimonio Mundial (total),CAN,22,2026,sitios,DATO,F078,mayor,
+5 Atractivo natural,Sitios UNESCO naturales + mixtos,CAN,12,2026,sitios,DATO,F078,mayor,
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",ARG,47,1960–2024,años,ESTIMACIÓN,F079,menor,
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",NZL,0,1960–2024,años,HIPÓTESIS,F080,menor,no figura en la base
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",URY,9,1960–2024,años,ESTIMACIÓN,F081,menor,
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",CHL,18,1960–2024,años,ESTIMACIÓN,F082,menor,
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",PRT,1,1960–2024,años,ESTIMACIÓN,F083,menor,
+6 Contrapesos,"Años con deuda soberana en default, 1960–2024 (de 65)",CAN,0,1960–2024,años,HIPÓTESIS,F084,menor,no figura en la base
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",ARG,219.9,2024,%,DATO,F089,menor,
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",NZL,2.9,2024,%,DATO,F090,menor,
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",NZL,2.8,2025,%,DATO,F091,menor,
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",URY,4.8,2024,%,DATO,F092,menor,
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",URY,4.7,2025,%,DATO,F093,menor,
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",CHL,4.3,2024,%,DATO,F094,menor,
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",CHL,4.2,2025,%,DATO,F095,menor,
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",PRT,2.4,2024,%,DATO,F096,menor,
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",PRT,2.3,2025,%,DATO,F097,menor,
+6 Contrapesos,"Inflación 2024 (IPC, % promedio anual)",CAN,2.4,2024,%,DATO,F098,menor,
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",CAN,2.1,2025,%,DATO,F099,menor,
+6 Contrapesos,"Inflación 2025 (IPC, % promedio anual)",ARG,41.9,2025,%,ESTIMACIÓN,F102,menor,INDEC vía datos.gob.ar; WB sin dato 2025
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",ARG,9.7,2011–2025,años,ESTIMACIÓN,F112,menor,
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",NZL,,,años,n/r,,menor,no relevado en este módulo
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",URY,,,años,n/r,,menor,no relevado en este módulo
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",CHL,,,años,n/r,,menor,no relevado en este módulo
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",PRT,,,años,n/r,,menor,no relevado en este módulo
+6 Contrapesos,"Años con cepo cambiario (personas), 2011–2025",CAN,,,años,n/r,,menor,no relevado en este módulo
+6 Contrapesos,WJP Rule of Law Index (0–1),ARG,0.54,2025,0 a 1,DATO,F113,mayor,puesto 65 de 143
+6 Contrapesos,WJP Rule of Law Index (0–1),NZL,0.83,2025,0 a 1,DATO,F114,mayor,puesto 5 de 143
+6 Contrapesos,WJP Rule of Law Index (0–1),URY,0.72,2025,0 a 1,DATO,F115,mayor,puesto 23 de 143
+6 Contrapesos,WJP Rule of Law Index (0–1),CHL,0.66,2025,0 a 1,DATO,F116,mayor,puesto 35 de 143
+6 Contrapesos,WJP Rule of Law Index (0–1),PRT,0.67,2025,0 a 1,DATO,F117,mayor,puesto 29 de 143
+6 Contrapesos,WJP Rule of Law Index (0–1),CAN,0.79,2025,0 a 1,DATO,F118,mayor,puesto 13 de 143
+6 Contrapesos,Riesgo país: spread EMBI (p.b.),ARG,434,jul-2026,p.b.,DATO,F123,menor,BCRA IPOM 2T-2026; promedio de soberanos B-: 322 p.b. (F124); EMBI Latam ≈260 p.b. (F125)
+6 Contrapesos,Riesgo país: spread EMBI (p.b.),NZL,,,p.b.,s/d,,menor,sin fuente pública/oficial con el dato por país (EMBI de JP Morgan es propietario)
+6 Contrapesos,Riesgo país: spread EMBI (p.b.),URY,,,p.b.,s/d,,menor,sin fuente pública/oficial con el dato por país (EMBI de JP Morgan es propietario)
+6 Contrapesos,Riesgo país: spread EMBI (p.b.),CHL,,,p.b.,s/d,,menor,sin fuente pública/oficial con el dato por país (EMBI de JP Morgan es propietario)
+6 Contrapesos,Riesgo país: spread EMBI (p.b.),PRT,,,p.b.,s/d,,menor,sin fuente pública/oficial con el dato por país (EMBI de JP Morgan es propietario)
+6 Contrapesos,Riesgo país: spread EMBI (p.b.),CAN,,,p.b.,s/d,,menor,sin fuente pública/oficial con el dato por país (EMBI de JP Morgan es propietario)
+6 Contrapesos,Calificación soberana LP m/e (S&P / Moody's / Fitch),ARG,B- / B3 / B-,jul-2026,letras,DATO,F127,mayor,
+6 Contrapesos,Calificación soberana: escalones bajo AAA (prom. 3 agencias),ARG,15.0,jul-2026,escalones,ESTIMACIÓN,F128,menor,grado de inversión ≤ 9
+6 Contrapesos,Calificación soberana LP m/e (S&P / Moody's / Fitch),NZL,AA+ / Aaa / AA+,abr-2026,letras,DATO,F129,mayor,
+6 Contrapesos,Calificación soberana: escalones bajo AAA (prom. 3 agencias),NZL,0.7,abr-2026,escalones,ESTIMACIÓN,F130,menor,grado de inversión ≤ 9
+6 Contrapesos,Calificación soberana LP m/e (S&P / Moody's / Fitch),URY,BBB+ / Baa1 / BBB,sep-2026,letras,DATO,F131,mayor,
+6 Contrapesos,Calificación soberana: escalones bajo AAA (prom. 3 agencias),URY,7.3,sep-2026,escalones,ESTIMACIÓN,F132,menor,grado de inversión ≤ 9
+6 Contrapesos,Calificación soberana LP m/e (S&P / Moody's / Fitch),CHL,A / A2 / A-,última entrada: oct-2024,letras,DATO,F133,mayor,
+6 Contrapesos,Calificación soberana: escalones bajo AAA (prom. 3 agencias),CHL,5.3,última entrada: oct-2024,escalones,ESTIMACIÓN,F134,menor,grado de inversión ≤ 9
+6 Contrapesos,Calificación soberana LP m/e (S&P / Moody's / Fitch),PRT,A+ / A3 / A+,sep-2026,letras,DATO,F135,mayor,
+6 Contrapesos,Calificación soberana: escalones bajo AAA (prom. 3 agencias),PRT,4.7,sep-2026,escalones,ESTIMACIÓN,F136,menor,grado de inversión ≤ 9
+6 Contrapesos,Calificación soberana LP m/e (S&P / Moody's / Fitch),CAN,AAA / Aaa / AA+,31/03/2025,letras,DATO,F137,mayor,
+6 Contrapesos,Calificación soberana: escalones bajo AAA (prom. 3 agencias),CAN,0.3,31/03/2025,escalones,ESTIMACIÓN,F138,menor,grado de inversión ≤ 9
+6 Contrapesos,"Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)",ARG,,,%,s/d,,menor,no es miembro de la OCDE: la consulta no devuelve serie
+6 Contrapesos,"Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)",NZL,4.71,2026-08,%,DATO,F139,menor,no es un spread: incluye inflación esperada
+6 Contrapesos,"Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)",URY,,,%,s/d,,menor,no es miembro de la OCDE: la consulta no devuelve serie
+6 Contrapesos,"Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)",CHL,5.55,2026-07,%,DATO,F140,menor,no es un spread: incluye inflación esperada
+6 Contrapesos,"Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)",PRT,3.44,2026-07,%,DATO,F141,menor,no es un spread: incluye inflación esperada
+6 Contrapesos,"Tasa de largo plazo, bonos del gobierno ~10 años en moneda local (% anual, OCDE)",CAN,3.68,2026-08,%,DATO,F142,menor,no es un spread: incluye inflación esperada

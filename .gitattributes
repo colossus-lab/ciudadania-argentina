@@ -1,0 +1,2 @@
+# Los datos se verifican por hash (docs/claims_ledger.csv, docs/auditoria.csv): git no debe tocar sus fines de línea.
+data/** -text

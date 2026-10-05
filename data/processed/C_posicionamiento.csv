@@ -1,0 +1,13 @@
+pais,iso3,donacion_min_usd,inversion_min_usd,familia_tipo_usd,destinos_sin_visa,ratio_aporte_AR_vs_donacion,usd_por_destino_sin_visa
+Argentina,ARG,350000,800000,500000,148,1.0,2365
+St Kitts y Nevis,KNA,250000,325000,250000,136,1.4,1838
+Antigua y Barbuda,ATG,230000,300000,230000,132,1.52,1742
+Granada,GRD,235000,270000,235000,128,1.49,1836
+Santa Lucía,LCA,240000,,240000,125,1.46,1920
+Turquía,TUR,,400000,,111,,
+Nauru,NRU,90000,,,73,3.89,1233
+Dominica,DMA,200000,200000,250000,123,1.75,1626
+Vanuatu,VUT,130000,,180000,80,2.69,1625
+Egipto,EGY,,,,48,,
+Jordania,JOR,,705000,,49,,
+Malta,MLT,,,,159,,
