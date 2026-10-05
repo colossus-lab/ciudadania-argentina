@@ -72,6 +72,15 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
 
 
+def find_browser() -> str | None:
+    """Edge/Chrome/Chromium para tareas headless (PDF del informe, imágenes Open Graph del sitio)."""
+    import shutil
+    cands = [shutil.which(n) for n in ("msedge", "chrome", "google-chrome", "chromium", "chromium-browser")]
+    cands += [r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+              r"C:\Program Files\Google\Chrome\Application\chrome.exe"]
+    return next((c for c in cands if c and Path(c).exists()), None)
+
+
 # --- Extracción de texto y registro de afirmaciones (claims ledger) ---------------------------------
 
 import csv
