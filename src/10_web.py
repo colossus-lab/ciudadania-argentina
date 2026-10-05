@@ -11,6 +11,7 @@ import html
 import json
 import re
 import shutil
+from pathlib import Path
 
 import markdown
 import pandas as pd
@@ -23,6 +24,10 @@ SITE = "Ciudadanía por Inversión"
 FONTS = ("https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700"
          "&family=JetBrains+Mono:wght@400;500;700&display=swap")
 CHARTJS = "/assets/chart.umd.min.js"  # Chart.js 4.4.1 (MIT), copia local
+BASE_URL = "https://ciudadania.openarg.org"  # dominio público (Vercel; DNS en Route 53, zona openarg.org)
+DEFAULT_DESC = ("Investigación de Colossus Lab sobre el Programa de Ciudadanía por Inversión de Argentina: base legal, "
+                "mercado, comparación internacional, pasaporte y escenarios fiscales, con cada dato verificado contra su fuente.")
+OG_DIR, OG_W, OG_H = SRC / "og", 1200, 630  # tarjetas Open Graph (se versionan en web_src/og y se copian a web/og)
 
 MODULES = [
     # (código, archivo, slug, título, bajada, etiquetas)
@@ -83,12 +88,14 @@ def inline_md(t: str, claim_ids: set) -> str:
     return re.sub(r"^<p>(.*)</p>$", r"\1", h.strip(), flags=re.S)
 
 
-def page(title: str, body: str, active: str = "", description: str = "", extra_head: str = "", scripts: str = "") -> str:
+def page(title: str, body: str, active: str = "", description: str = "", extra_head: str = "", scripts: str = "",
+         path: str = "/", og_image: str = "/og/inicio.png", og_type: str = "article") -> str:
     nav = [("/", "Inicio"), ("/#respuestas", "Respuestas"), ("/#modulos", "Módulos"), ("/verificar", "Verificá"),
            ("/fuentes", "Fuentes"), ("/metodologia", "Metodología")]
     cur = ' aria-current="page"'
     nav_html = "".join(f'<a href="{u}"{cur if active == u else ""}>{t}</a>' for u, t in nav)
-    desc = esc(description or "Investigación de Colossus Lab sobre el Programa de Ciudadanía por Inversión de Argentina: base legal, mercado, comparación internacional, pasaporte y escenarios fiscales, con cada dato verificado contra su fuente.")
+    desc = esc(description or DEFAULT_DESC)
+    url, img = esc(BASE_URL + path), esc(BASE_URL + og_image)
     return f"""<!doctype html>
 <html lang="es-AR" data-theme="dark">
 <head>
@@ -96,10 +103,22 @@ def page(title: str, body: str, active: str = "", description: str = "", extra_h
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">
+<meta property="og:site_name" content="{esc(SITE)} — Colossus Lab">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{desc}">
+<meta property="og:url" content="{url}">
 <meta property="og:locale" content="es_AR">
-<meta property="og:type" content="article">
+<meta property="og:type" content="{og_type}">
+<meta property="og:image" content="{img}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="{OG_W}">
+<meta property="og:image:height" content="{OG_H}">
+<meta property="og:image:alt" content="{esc(title)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{img}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306090f'/%3E%3Crect y='10' width='32' height='12' fill='%2374acdf'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23f6b40e'/%3E%3C/svg%3E">
 <script>try{{var t=localStorage.getItem("cxi-theme");if(t)document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
@@ -411,6 +430,72 @@ El código y los datos están en el repositorio `colossus-lab/ciudadania-argenti
 """
 
 
+# ------------------------------------------------------------------ tarjetas Open Graph (1200×630)
+OG_CSS = """
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #06090f; }
+.c { position: relative; box-sizing: border-box; width: 1200px; height: 630px; padding: 70px 76px 54px; display: flex;
+     flex-direction: column; color: #e8ecf4; font-family: "Inter", sans-serif;
+     background: radial-gradient(900px 520px at 88% 0%, #74acdf26, transparent 62%),
+                 radial-gradient(700px 420px at 0% 100%, #f6b40e14, transparent 60%),
+                 linear-gradient(#74acdf0d 1px, transparent 1px) 0 0 / 48px 48px,
+                 linear-gradient(90deg, #74acdf0d 1px, transparent 1px) 0 0 / 48px 48px, #06090f; }
+.stripe { position: absolute; top: 0; left: 0; right: 0; height: 10px;
+          background: linear-gradient(90deg, #74acdf 0 33.3%, #ffffff 33.3% 66.6%, #74acdf 66.6% 100%); }
+.eyebrow { font-family: "JetBrains Mono", monospace; font-size: 22px; letter-spacing: .14em; text-transform: uppercase; color: #8892a8; }
+.eyebrow b { color: #f6b40e; font-weight: 500; }
+h1 { font-family: "Familjen Grotesk", sans-serif; font-weight: 700; letter-spacing: -.035em; line-height: 1.0;
+     margin: 30px 0 0; max-width: 1040px; }
+h1 em { font-style: normal; color: #74acdf; }
+p { font-size: 29px; line-height: 1.38; color: #a3acc0; margin: 28px 0 0; max-width: 980px; }
+.foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; padding-top: 22px;
+        border-top: 1px solid #e8ecf429; font-family: "JetBrains Mono", monospace; font-size: 22px; color: #8892a8; }
+.foot .url { color: #e8ecf4; }
+.foot .n { font-family: "Familjen Grotesk", sans-serif; font-weight: 700; font-size: 46px; letter-spacing: -.03em;
+           color: #74acdf; margin-right: 12px; vertical-align: -4px; }
+"""
+
+
+def og_card(eyebrow: str, title_html: str, subtitle: str, n_claims: int, size: int) -> str:
+    fonts = (SRC / "fonts" / "fonts.css").read_text(encoding="utf-8").replace(
+        "/assets/fonts/", (SRC / "fonts").resolve().as_uri() + "/")
+    return f"""<!doctype html><html lang="es-AR"><head><meta charset="utf-8"><style>{fonts}{OG_CSS}</style></head>
+<body><div class="c"><span class="stripe"></span>
+<div class="eyebrow">{eyebrow}</div>
+<h1 style="font-size:{size}px">{title_html}</h1>
+<p>{esc(subtitle)}</p>
+<div class="foot"><span class="url">ciudadania.openarg.org</span>
+<span><span class="n">{n_claims}</span>afirmaciones verificadas contra su fuente</span></div>
+</div></body></html>"""
+
+
+def build_og_images(n_claims: int) -> None:
+    """Renderiza las tarjetas con Edge/Chrome headless a web_src/og/*.png. Sin navegador, conserva las existentes."""
+    import subprocess
+    import tempfile
+
+    from common import find_browser
+    exe = find_browser()
+    if not exe:
+        print("Sin navegador headless: se reutilizan las tarjetas Open Graph de web_src/og/")
+        return
+    cards = {"inicio": og_card("<b>Informe</b> · Colossus Lab · Octubre 2026",
+                               "Ciudadanía por inversión,<br><em>¿momento Argentina?</em>",
+                               "Base legal, mercado, otros programas, pasaporte, popularidad y escenarios fiscales "
+                               "del programa anunciado el 02/10/2026.", n_claims, 96)}
+    for code, _f, slug, title, sub, _tags in MODULES:
+        cards[slug] = og_card(f"<b>Módulo {code}</b> · Ciudadanía por inversión", esc(title), sub, n_claims, 104)
+    OG_DIR.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+        for name, card in cards.items():
+            src = Path(tmp) / f"{name}.html"
+            src.write_text(card, encoding="utf-8")
+            out = OG_DIR / f"{name}.png"
+            subprocess.run([exe, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
+                            f"--window-size={OG_W},{OG_H}", "--virtual-time-budget=4000", f"--user-data-dir={Path(tmp) / 'perfil'}",
+                            f"--screenshot={out}", src.resolve().as_uri()], capture_output=True, timeout=120, check=False)
+    print(f"Tarjetas Open Graph: {len(cards)} en web_src/og/")
+
+
 def main() -> None:
     claims = load_claims()
     ids = {c["id"] for c in claims}
@@ -424,6 +509,9 @@ def main() -> None:
     shutil.copy(SRC / "app.js", WEB / "assets" / "app.js")
     shutil.copy(SRC / "chart.umd.min.js", WEB / "assets" / "chart.umd.min.js")
     shutil.copytree(SRC / "fonts", WEB / "assets" / "fonts")
+    build_og_images(len(claims))
+    if OG_DIR.exists():
+        shutil.copytree(OG_DIR, WEB / "og")
     for p in CHARTS.glob("*"):
         if p.suffix in (".svg", ".png"):
             shutil.copy(p, WEB / "charts" / p.name)
@@ -435,20 +523,22 @@ def main() -> None:
     (WEB / "assets" / "claims.js").write_text("window.CXI_CLAIMS=" + json.dumps(claims, ensure_ascii=False) + ";", encoding="utf-8")
 
     chart_scripts = f'<script src="{CHARTJS}"></script><script src="/assets/data.js"></script>'
-    (WEB / "index.html").write_text(page(f"{SITE}, ¿momento Argentina? — Colossus Lab", build_index(claims, ids), "/", scripts=chart_scripts), encoding="utf-8")
+    (WEB / "index.html").write_text(page(f"{SITE}, ¿momento Argentina? — Colossus Lab", build_index(claims, ids), "/", scripts=chart_scripts,
+                                          path="/", og_type="website"), encoding="utf-8")
     for i, mod in enumerate(MODULES):
         (WEB / "modulos" / f"{mod[2]}.html").write_text(
-            page(f"{mod[3]} — {SITE} — Colossus Lab", build_module(i, mod, ids), "/#modulos", description=mod[4]), encoding="utf-8")
-    (WEB / "verificar.html").write_text(page(f"Verificá cada dato — {SITE}", build_verificar(claims), "/verificar",
+            page(f"{mod[3]} — {SITE} — Colossus Lab", build_module(i, mod, ids), "/#modulos", description=mod[4],
+                 path=f"/modulos/{mod[2]}", og_image=f"/og/{mod[2]}.png"), encoding="utf-8")
+    (WEB / "verificar.html").write_text(page(f"Verificá cada dato — {SITE}", build_verificar(claims), "/verificar", path="/verificar",
                                              scripts='<script src="/assets/claims.js"></script>'), encoding="utf-8")
     fu = (DOCS / "fuentes.md").read_text(encoding="utf-8").split("\n", 1)[1]
     ff = (DOCS / "fuentes_fallidas.md").read_text(encoding="utf-8").split("\n", 1)[1]
     fuentes_md = fu + '\n\n<h2 id="fallidas">Fuentes fallidas</h2>\n\n' + ff
     (WEB / "fuentes.html").write_text(page(f"Fuentes — {SITE}", build_simple(
         "Fuentes", "Fuentes", "Todas las fuentes usadas, por módulo, con su tipo (P primaria · R referencia con metodología pública · S secundaria, solo para fechar), y las que fallaron con su causa.",
-        fuentes_md, ids), "/fuentes"), encoding="utf-8")
+        fuentes_md, ids), "/fuentes", path="/fuentes"), encoding="utf-8")
     (WEB / "metodologia.html").write_text(page(f"Metodología — {SITE}", build_simple(
-        "Metodología", "Metodología", "Cómo se armó el estudio, cómo se verifica cada dato y qué quedó sin verificar.", metodologia_md(), ids), "/metodologia"), encoding="utf-8")
+        "Metodología", "Metodología", "Cómo se armó el estudio, cómo se verifica cada dato y qué quedó sin verificar.", metodologia_md(), ids), "/metodologia", path="/metodologia"), encoding="utf-8")
     (WEB / "404.html").write_text(page(f"No encontrado — {SITE}", build_simple("Página no encontrada", "404", 'Volvé al <a class="ed-textlink" href="/">inicio</a>.', "", ids)), encoding="utf-8")
     (WEB / "vercel.json").write_text(json.dumps({
         "cleanUrls": True, "trailingSlash": False,

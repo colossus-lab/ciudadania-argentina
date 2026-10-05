@@ -124,14 +124,12 @@ def main() -> None:
 
 def headless_pdf(src, dst) -> bool:
     """Imprime `src` a PDF con Edge/Chrome headless, con un perfil temporal (no toca el navegador del usuario)."""
-    import shutil
     import subprocess
     import tempfile
     from pathlib import Path
-    cands = [shutil.which(n) for n in ("msedge", "chrome", "google-chrome", "chromium", "chromium-browser")]
-    cands += [r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-              r"C:\Program Files\Google\Chrome\Application\chrome.exe"]
-    exe = next((c for c in cands if c and Path(c).exists()), None)
+
+    from common import find_browser
+    exe = find_browser()
     if not exe:
         return False
     Path(dst).unlink(missing_ok=True)  # que un PDF viejo no pase por recién generado
